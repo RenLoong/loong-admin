@@ -1,0 +1,28 @@
+[
+    {
+        "title": "控制台",
+        "icon": "ElementPlus",//填入element-plus中的Icon名称，如：ElementPlus
+        "path": "Index/console",
+        "component":"",//table：表格列表，form：表单，images：图片列表
+        "show": 1,
+        "sort":9999,
+        "query": {
+            //携带地址栏参数
+            "id":1
+        },
+        "params":{
+            //携带post参数
+        },
+        "children":[
+            {
+                ...参数与父级一致
+            }
+        ],
+        "permission": [
+            "Create",
+            "Delete",
+            "UpdateState",
+            "Update"
+        ]
+    }
+]

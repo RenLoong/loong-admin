@@ -1,0 +1,30 @@
+{
+  "name": "shopwwi/filesystem-oss",
+  "description": "AliYun OSS adapter for flysystem V2. aliyuncs/oss-sdk-php ~2.4",
+  "homepage": "https://github.com/phcent/filesystem-oss",
+  "keywords": ["flysystem-aliyun-oss", "aliyun-oss", "flysystem"],
+  "type": "library",
+  "require": {
+    "php": ">=7.3",
+    "league/flysystem": "^2.1|^3.0",
+    "aliyuncs/oss-sdk-php": "^2.4"
+  },
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "Shopwwi\\FilesystemOss\\": "src/"
+    }
+  },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "1.x-dev"
+    }
+  },
+  "minimum-stability": "dev",
+  "authors": [
+    {
+      "name": "Tycoon Song",
+      "email": "8988354@qq.com"
+    }
+  ]
+}

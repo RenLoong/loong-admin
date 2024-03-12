@@ -1,0 +1,135 @@
+[
+    {
+        "title": "首页",
+        "icon": "House",
+        "path": "Index",
+        "sort": 0,
+        "children": [
+            {
+                "title": "控制台",
+                "icon": "ElementPlus",
+                "path": "Index/control"
+            },
+            {
+                "title": "Data",
+                "icon": "ElementPlus",
+                "path": "Index/data",
+                "children": [
+                    {
+                        "title": "Data1",
+                        "path": "Index/data/data1"
+                    },
+                    {
+                        "title": "Data2",
+                        "show": false,
+                        "path": "Index/data/data2"
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "title": "职能",
+        "icon": "Stopwatch",
+        "path": "Functional",
+        "children": [
+            {
+                "title": "管理员",
+                "icon": "User",
+                "path": "Admin/index",
+                "component": "table",
+                "children": [
+                    {
+                        "title": "人员列表",
+                        "path": "Admin/index",
+                        "component": "table"
+                    },
+                    {
+                        "title": "创建管理员",
+                        "path": "Admin/create",
+                        "show": false,
+                        "component": "form"
+                    },
+                    {
+                        "title": "编辑管理员",
+                        "show": false,
+                        "path": "Admin/update",
+                        "component": "form"
+                    },
+                    {
+                        "title": "删除管理员",
+                        "show": false,
+                        "path": "Admin/delete",
+                        "component": ""
+                    },
+                    {
+                        "title": "修改自己的信息",
+                        "show": false,
+                        "path": "Admin/updateSelf",
+                        "component": "form"
+                    }
+                ]
+            },
+            {
+                "title": "权限",
+                "icon": "Lock",
+                "path": "Functional/permission",
+                "component": "table"
+            }
+        ]
+    },
+    {
+        "title": "系统",
+        "icon": "Setting",
+        "path": "System",
+        "children": [
+            {
+                "title": "基本配置",
+                "icon": "Setting",
+                "path": "System/basic",
+                "component": "form"
+            },
+            {
+                "title": "上传配置",
+                "icon": "UploadFilled",
+                "path": "System/upload",
+                "component": "form"
+            },
+            {
+                "title": "支付管理",
+                "icon": "Wallet",
+                "path": "Payment/index",
+                "children": [
+                    {
+                        "title": "支付配置",
+                        "path": "Payment/index",
+                        "component": "payment-form"
+                    },
+                    {
+                        "title": "支付模板",
+                        "path": "PaymentTemplate/index",
+                        "component": "table"
+                    },
+                    {
+                        "title": "新增支付模板",
+                        "path": "PaymentTemplate/create",
+                        "show": false,
+                        "component": "form"
+                    },
+                    {
+                        "title": "编辑支付模板",
+                        "path": "PaymentTemplate/update",
+                        "show": false,
+                        "component": "form"
+                    },
+                    {
+                        "title": "删除支付模板",
+                        "path": "PaymentTemplate/delete",
+                        "show": false,
+                        "component": ""
+                    }
+                ]
+            }
+        ]
+    }
+]
