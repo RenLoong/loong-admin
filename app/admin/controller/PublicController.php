@@ -19,12 +19,14 @@ class PublicController extends Basic
      * @var string[]
      */
     protected $notNeedLogin = ['config', 'menus'];
+    protected $notNeedAuth = ['config', 'menus'];
     public function config(Request $request)
     {
         $config = Config::get('basic');
         $config = new Web($config);
         $config->useLogin([
             'title' => '管理员登录',
+            'url' => 'Login/login',
             'user_agreement' => ''
         ]);
         $config->useApis([
@@ -48,7 +50,7 @@ class PublicController extends Basic
         $config->useToolbar($toolbar->toArray());
         $userDropdownMenu = new Action();
         $userDropdownMenu->add(EnumAction::DIALOG['value'], [
-            'path' => '/Admin/updateSelf',
+            'path' => 'Admin/updateSelf',
             'label' => '管理员信息',
             'icon' => 'User',
             'props' => [

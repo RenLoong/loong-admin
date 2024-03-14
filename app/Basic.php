@@ -2,7 +2,6 @@
 
 namespace app;
 
-use app\expose\enum\State;
 use app\expose\utils\Json;
 use support\Request;
 

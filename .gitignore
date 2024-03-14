@@ -8,3 +8,5 @@
 /tests/.phpunit.result.cache
 *.pem
 /uploads
+/config/plugin/shopwwi/filesystem/app.json
+/public/uploads

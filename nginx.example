@@ -1,0 +1,20 @@
+upstream loong {
+  server 127.0.0.1:36999;
+}
+server
+{
+    location ^~ / {
+      # 接口QPS插件，nginx版本需要选择：nginx openresty
+      # 如需使用接口QPS插件，取消注释
+      # access_by_lua_file $document_root/lua/qps.lua;
+
+      proxy_set_header X-Real-IP $remote_addr;
+      proxy_set_header Host $http_host;
+      proxy_set_header X-Forwarded-Proto $scheme;
+      proxy_http_version 1.1;
+      proxy_set_header Connection "";
+      if (!-f $request_filename){
+          proxy_pass http://loong;
+      }
+    }
+}

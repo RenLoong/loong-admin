@@ -11,7 +11,7 @@ class Password
      * @param [type] $algo
      * @return string
      */
-    public static function passwordHash(string $password, string $algo = PASSWORD_DEFAULT): string
+    public static function encrypt(string $password, string $algo = PASSWORD_DEFAULT): string
     {
         return password_hash($password, $algo);
     }
@@ -23,7 +23,7 @@ class Password
      * @param string $hash
      * @return boolean
      */
-    public static function passwordVerify(string $password, string $hash): bool
+    public static function verify(string $password, string $hash): bool
     {
         return password_verify($password, $hash);
     }

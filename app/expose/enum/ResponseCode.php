@@ -47,4 +47,8 @@ class ResponseCode extends Enum
      * 确认重定向
      */
     const REDIRECT_CONFIRM = 303;
+    /**
+     * 无权限
+     */
+    const NO_PERMISSION = 403;
 }

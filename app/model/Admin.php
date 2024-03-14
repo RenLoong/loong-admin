@@ -30,7 +30,7 @@ class Admin extends Basic
     }
     public function setPasswordAttr($value)
     {
-        return Password::passwordHash($value);
+        return Password::encrypt($value);
     }
     public static function getTokenInfo(Admin $Admin)
     {
@@ -51,7 +51,10 @@ class Admin extends Basic
         $data->allow_week = $Admin->allow_week;
         $AdminRole = AdminRole::where(['id' => $Admin->role_id])->find();
         $data->is_system = $AdminRole->is_system;
-        $AdminUser->role_name = $AdminRole->name;
+        $data->permissions = $AdminRole->rule;
+        $AdminUser->role_name = $AdminRole['name'];
+        $AdminUser->is_system = $AdminRole->is_system;
+        $AdminUser->permissions = $AdminRole->rule;
         $AdminUser->token = Auth::setPrefix('ADMIN')->encrypt($data);
         return $AdminUser;
     }

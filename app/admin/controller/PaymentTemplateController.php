@@ -25,7 +25,7 @@ class PaymentTemplateController extends Basic
             'fixed' => 'right'
         ]);
         $builder->addTableAction('编辑', [
-            'path' => '/PaymentTemplate/update',
+            'path' => 'PaymentTemplate/update',
             'props' => [
                 'type' => 'primary',
                 'title' => '编辑《{title}》支付模板'
@@ -40,7 +40,7 @@ class PaymentTemplateController extends Basic
         ]);
         $builder->addTableAction('删除', [
             'model' => Action::COMFIRM['value'],
-            'path' => '/PaymentTemplate/delete',
+            'path' => 'PaymentTemplate/delete',
             'props' => [
                 'type' => 'error',
                 'message' => '确定要删除《{title}》支付模板吗？',
@@ -56,7 +56,7 @@ class PaymentTemplateController extends Basic
         ]);
         $builder->addHeader();
         $builder->addHeaderAction('新增模板', [
-            'path' => '/PaymentTemplate/create',
+            'path' => 'PaymentTemplate/create',
             'props' => [
                 'type' => 'success',
                 'title' => '新增支付模板'
@@ -138,7 +138,7 @@ class PaymentTemplateController extends Basic
             $model->channels = $D['channels'];
             unset($D['channels']);
             $model->state = State::YES['value'];
-            $model->value = $D;
+            $model->value = $this->getValue($model->channels, $D);
             if ($model->save()) {
                 return $this->success('新增成功');
             }
@@ -161,7 +161,7 @@ class PaymentTemplateController extends Basic
             $model->channels = $D['channels'];
             unset($D['channels']);
             $model->state = State::YES['value'];
-            $model->value = $D;
+            $model->value = $this->getValue($model->channels, $D);
             if ($model->save()) {
                 return $this->success('更新成功');
             }
@@ -174,6 +174,7 @@ class PaymentTemplateController extends Basic
         }
         $builder = $this->formBuilder(true);
         $data = [
+            'id' => $model->id,
             'title' => $model->title,
             'channels' => $model->channels
         ];
@@ -182,6 +183,43 @@ class PaymentTemplateController extends Basic
         }
         $builder->setData($data);
         return $this->resData($builder);
+    }
+    public function getValue($channels, $D)
+    {
+        $value = [];
+        switch ($channels) {
+            case PaymentChannels::WXPAY['value']:
+                $value = [
+                    'api_version' => $D['api_version'],
+                    'mch_type' => $D['mch_type'],
+                    'appid' => $D['appid'],
+                    'mch_id' => $D['mch_id'],
+                    'mch_key' => $D['mch_key'],
+                    'ssl_cert' => $D['ssl_cert'],
+                    'ssl_key' => $D['ssl_key']
+                ];
+                break;
+            case PaymentChannels::ALIPAY['value']:
+                $value = [
+                    'appid' => $D['appid'],
+                    'ras_model' => $D['ras_model'],
+                    'app_public_cert' => $D['app_public_cert'],
+                    'alipay_public_cert' => $D['alipay_public_cert'],
+                    'alipay_root_cert' => $D['alipay_root_cert'],
+                    'alipay_public_key' => $D['alipay_public_key'],
+                    'private_key' => $D['private_key']
+                ];
+                break;
+            case PaymentChannels::INTEGRAL['value']:
+                $value = [
+                    'display_name' => $D['display_name'],
+                    'proportion' => $D['proportion'],
+                    'is_integer' => $D['is_integer'],
+                    'integer' => $D['integer']
+                ];
+                break;
+        }
+        return $value;
     }
     public function formBuilder($update = false)
     {
@@ -573,7 +611,8 @@ class PaymentTemplateController extends Basic
         $builder->add('integer', '整数', 'input-number', null, [
             'required' => true,
             'where' => [
-                ['channels', '=', PaymentChannels::INTEGRAL['value']]
+                ['channels', '=', PaymentChannels::INTEGRAL['value']],
+                ['is_integer', '=', State::YES['value']]
             ],
             'prompt' => [
                 $Component->add('text', ['default' => '整数的倍数使用'], ['type' => 'info', 'size' => 'small'])

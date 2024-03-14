@@ -25,7 +25,7 @@ class AdminController extends Basic
             'fixed' => 'right'
         ]);
         $builder->addTableAction('编辑', [
-            'path' => '/Admin/update',
+            'path' => 'Admin/update',
             'props' => [
                 'type' => 'primary',
                 'title' => '编辑《{nickname}》管理员'
@@ -40,7 +40,7 @@ class AdminController extends Basic
         ]);
         $builder->addTableAction('删除', [
             'model' => Action::COMFIRM['value'],
-            'path' => '/Admin/delete',
+            'path' => 'Admin/delete',
             'where' => [
                 ['is_system', '!=', 1]
             ],
@@ -60,7 +60,7 @@ class AdminController extends Basic
         $builder->addFooter();
         $builder->addFooterAction('移动到', [
             'model' => Action::DIALOG['value'],
-            'path' => '/Admin/moveRole',
+            'path' => 'Admin/moveRole',
             'props' => [
                 'type' => 'primary',
                 'title' => '移动到',
@@ -77,7 +77,7 @@ class AdminController extends Basic
         ]);
         $builder->addHeader();
         $builder->addHeaderAction('创建管理员', [
-            'path' => '/Admin/create',
+            'path' => 'Admin/create',
             'props' => [
                 'type' => 'success',
                 'title' => '创建管理员'

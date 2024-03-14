@@ -18,6 +18,7 @@ class LoginController extends Basic
      * @var string[]
      */
     protected $notNeedLogin = ['login'];
+    protected $notNeedAuth = ['login'];
     public function login(Request $request)
     {
         try {
@@ -32,7 +33,7 @@ class LoginController extends Basic
             if (!$Admin) {
                 throw new Exception('密码错误');
             }
-            if (!Password::passwordVerify($D['password'], $Admin->password)) {
+            if (!Password::verify($D['password'], $Admin->password)) {
                 throw new Exception('密码错误');
             }
             if (!$Admin->state) {

@@ -25,10 +25,10 @@ class AdminAuth implements MiddlewareInterface
         $this->isWehcatBrowser($request);
         // 鉴权检测
         try {
-            $this->canAccess($request);
+            $this->Authorization($request);
             $response = $next($request);
         } catch (\Throwable $th) {
-            if ($request->isAjax()) {
+            if ($request->expectsJson()) {
                 $response = $this->exception($th);
             } else {
                 throw $th;
@@ -47,7 +47,7 @@ class AdminAuth implements MiddlewareInterface
      * @Email 416716328@qq.com
      * @DateTime 2023-03-11
      */
-    public function canAccess(Request $request): bool
+    public function Authorization(Request $request)
     {
         # 无控制器地址
         if (!$request->controller) {
@@ -98,6 +98,24 @@ class AdminAuth implements MiddlewareInterface
         if (in_array($request->action, $notNeedAuth)) {
             return true;
         }
-        return true;
+        if (empty($user)) {
+            throw new Exception('请先登录', ResponseCode::NEED_LOGIN);
+        }
+        if (empty($user['permissions'])) {
+            throw new Exception('您没有权限访问', ResponseCode::NO_PERMISSION);
+        }
+        $plugin = $request->plugin;
+        // plugin\api\app\admin\controller\IndexController,只取Index
+        $controllers = explode('\\', $request->controller);
+        $controller = str_replace('Controller', '', end($controllers));
+        $action = str_replace('GetTable', '', $request->action);
+        $rule = $controller . '/' . $action;
+        if ($plugin) {
+            $app = $request->app;
+            $rule = "/app/{$plugin}/{$app}/{$rule}";
+        }
+        if (!in_array($rule, $user['permissions'])) {
+            throw new Exception('您没有权限访问', ResponseCode::NO_PERMISSION);
+        }
     }
 }

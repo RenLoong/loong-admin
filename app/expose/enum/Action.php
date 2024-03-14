@@ -18,6 +18,10 @@ class Action extends Enum
         'label' => '弹窗操作',
         'value' => 'dialog'
     ];
+    const DIALOG_TABLE = [
+        'label' => '弹窗表格',
+        'value' => 'dialogTable'
+    ];
     const LOCK = [
         'label' => '锁屏',
         'value' => 'Lock'

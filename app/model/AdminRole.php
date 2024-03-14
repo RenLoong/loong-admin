@@ -4,12 +4,14 @@ namespace app\model;
 
 class AdminRole extends Basic
 {
-    public static function getOptions($pid = null)
+    public $json = ['rule'];
+    public $jsonAssoc = true;
+    public static function getOptions($pid = null, $where = [])
     {
         if ($pid) {
-            $data = self::where(['pid' => $pid])->select();
+            $data = self::where($where)->where(['pid' => $pid])->select();
         } else {
-            $data = self::whereNull('pid')->select();
+            $data = self::where($where)->whereNull('pid')->select();
         }
         $options = [];
         if ($data->isEmpty()) {
@@ -20,7 +22,7 @@ class AdminRole extends Basic
                 'value' => $item->id,
                 'label' => $item['name']
             ];
-            $children = self::getOptions($item->id);
+            $children = self::getOptions($item->id, $where);
             if (!empty($children)) {
                 $temp['children'] = $children;
             }

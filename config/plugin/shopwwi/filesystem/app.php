@@ -100,16 +100,19 @@ $origin = [
         ],
     ],
 ];
-$user = file_get_contents(config_path("plugin/shopwwi/filesystem/app.json"));
-$user = json_decode($user, true);
-foreach ($user as $key => $value) {
-    if ($key !== 'storage') {
-        $origin[$key] = $value;
+$filePath = config_path("plugin/shopwwi/filesystem/app.json");
+if (file_exists($filePath)) {
+    $user = file_get_contents($filePath);
+    $user = json_decode($user, true);
+    foreach ($user as $key => $value) {
+        if ($key !== 'storage') {
+            $origin[$key] = $value;
+        }
     }
-}
-foreach ($origin['storage'] as $key => $value) {
-    if (isset($user['storage'][$key])) {
-        $origin['storage'][$key] = array_merge($origin['storage'][$key], $user['storage'][$key]);
+    foreach ($origin['storage'] as $key => $value) {
+        if (isset($user['storage'][$key])) {
+            $origin['storage'][$key] = array_merge($origin['storage'][$key], $user['storage'][$key]);
+        }
     }
 }
 return $origin;
