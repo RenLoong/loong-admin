@@ -57,6 +57,11 @@ class Web extends DataModel
         $this->data['register']        = new Login($data);
         return $this;
     }
+    public function useQrcodeLogin(array $data = [])
+    {
+        $this->data['qrcode_login']        = new Login($data);
+        return $this;
+    }
     public function useApis(array $data = [])
     {
         $this->data['apis']        = new Apis($data);

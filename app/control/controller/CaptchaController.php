@@ -1,6 +1,6 @@
 <?php
 
-namespace app\admin\controller;
+namespace app\control\controller;
 
 use app\Basic;
 use app\expose\helper\Captcha;
@@ -18,8 +18,9 @@ class CaptchaController extends Basic
      * 不需要登录的方法
      * @var string[]
      */
-    protected $notNeedLogin = ['captcha', 'captchaCode'];
-    protected $notNeedAuth = ['captcha', 'captchaCode'];
+    protected $notNeedLogin = [
+        'captcha', 'captchaCode'
+    ];
 
     /**
      * 获取图像验证码

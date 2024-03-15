@@ -20,6 +20,10 @@ class SystemController extends Basic
     {
         return $this->builder();
     }
+    public function sms(Request $request)
+    {
+        return $this->tabsBuilder();
+    }
     public function upload(Request $request)
     {
         $request = request();

@@ -120,7 +120,7 @@ return [
                 'type' => 'text',
                 'placeholder' => '请输入公安备案号'
             ],
-            'children' => SoltBuilder::solt('prepend')->add('el-image', ['style' => 'display:flex;', 'src' => './static/beian.gov.png', 'width' => '15px', 'height' => '15px'])
+            'children' => SoltBuilder::solt('prepend')->add('el-image', ['style' => 'display:flex;', 'src' => '/static/beian.gov.png', 'width' => '15px', 'height' => '15px'])
         ]
     ],
     [
@@ -137,7 +137,7 @@ return [
                 'type' => 'text',
                 'placeholder' => '请输入公安备案号文本'
             ],
-            'children' => SoltBuilder::solt('prepend')->add('el-image', ['style' => 'display:flex;', 'src' => './static/beian.gov.png', 'width' => '15px', 'height' => '15px'])
+            'children' => SoltBuilder::solt('prepend')->add('el-image', ['style' => 'display:flex;', 'src' => '/static/beian.gov.png', 'width' => '15px', 'height' => '15px'])
         ]
     ],
     [

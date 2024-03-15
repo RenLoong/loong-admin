@@ -16,6 +16,10 @@ class ResponseCode extends Enum
      */
     const SUCCESS = 200;
     /**
+     * 等待
+     */
+    const WAIT = 202;
+    /**
      * 有事件通知
      */
     const SUCCESS_EVENT_PUSH = 201;

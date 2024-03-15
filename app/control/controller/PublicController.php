@@ -1,14 +1,16 @@
 <?php
 
-namespace app\admin\controller;
+namespace app\control\controller;
 
 use app\Basic;
 use app\expose\build\config\Action;
 use app\expose\build\config\Web;
 use app\expose\enum\Action as EnumAction;
 use app\expose\enum\Filesystem;
+use app\expose\helper\Captcha;
 use app\expose\helper\Config;
 use app\expose\helper\Menus;
+use app\expose\helper\Vcode;
 use loong\oauth\facade\Auth;
 use support\Request;
 
@@ -18,46 +20,44 @@ class PublicController extends Basic
      * 不需要登录的方法
      * @var string[]
      */
-    protected $notNeedLogin = ['config', 'menus'];
-    protected $notNeedAuth = ['config', 'menus'];
+    protected $notNeedLogin = ['config', 'menus', 'vcode', 'outLogin'];
+    protected $notNeedAuth = ['config', 'menus', 'vcode', 'outLogin'];
     public function config(Request $request)
     {
         $config = Config::get('basic');
         $config = new Web($config);
+
         $captcha_state = Config::get('captcha', 'state');
         $config->useLogin([
-            'title' => '管理员登录',
             'url' => 'Login/login',
-            'user_agreement' => '',
             'captcha' => $captcha_state
         ]);
+        $config->useVcode([
+            'url' => 'Login/vcode',
+            'title' => '验证码登录'
+        ]);
+        $config->useRegister([
+            'url' => 'Login/register',
+            'title' => '注册' . $config['web_name']
+        ]);
+        $config->useQrcodeLogin([
+            'url' => 'Login/qrcode',
+            'title' => '请使用微信“扫一扫”扫码登录'
+        ]);
         $config->useApis([
-            'userinfo' => 'Admin/getSelfInfo',
+            'userinfo' => 'User/getInfo',
             'menus' => 'Public/menus',
+            'vcode' => 'Public/vcode',
             'outLogin' => 'Public/outLogin'
         ]);
-        $toolbar = new Action();
-        $toolbar->add(EnumAction::LOCK['value'], [
-            'icon' => 'Lock'
-        ]);
-        $toolbar->add(EnumAction::SEARCH['value'], [
-            'icon' => 'Search'
-        ]);
-        $toolbar->add(EnumAction::NOTIFICATION['value'], [
-            'icon' => 'Notification'
-        ]);
-        $toolbar->add(EnumAction::FULL_SCREEN['value'], [
-            'icon' => 'FullScreen'
-        ]);
-        $config->useToolbar($toolbar->toArray());
         $userDropdownMenu = new Action();
         $userDropdownMenu->add(EnumAction::DIALOG['value'], [
-            'path' => 'Admin/updateSelf',
-            'label' => '管理员信息',
+            'path' => 'User/info',
+            'label' => '个人中心',
             'icon' => 'User',
             'props' => [
                 'type' => 'primary',
-                'title' => '管理员信息'
+                'title' => '个人中心'
             ]
         ]);
         $config->useUserDropdownMenu($userDropdownMenu->toArray());
@@ -74,8 +74,23 @@ class PublicController extends Basic
     {
         $token = $request->header('Authorization');
         if ($token) {
-            Auth::setPrefix('ADMIN')->delete($token);
+            Auth::setPrefix('CONTROL')->delete($token);
         }
         return $this->success('退出成功');
+    }
+    public function vcode(Request $request)
+    {
+        $username = $request->post('username');
+        $token = $request->post('token');
+        $captcha = $request->post('captcha');
+        if (!Captcha::check($captcha, $token)) {
+            return $this->fail('验证码不正确');
+        }
+        try {
+            Vcode::send($username);
+            return $this->success('验证码发送成功');
+        } catch (\Throwable $th) {
+            return $this->exception($th);
+        }
     }
 }

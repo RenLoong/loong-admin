@@ -149,6 +149,12 @@
                 "component": "form"
             },
             {
+                "title": "短信配置",
+                "icon": "Message",
+                "path": "System/sms",
+                "component": "form"
+            },
+            {
                 "title": "支付管理",
                 "icon": "Wallet",
                 "path": "Payment/index",

@@ -13,7 +13,7 @@ use Webman\Captcha\CaptchaBuilder;
  * 
  * @method static Response captcha()
  * @method static array captchaCode()
- * @method static bool checkScode(string $captcha)
+ * @method static bool check(string $captcha)
  * 
  */
 class Captcha
@@ -23,9 +23,12 @@ class Captcha
      * @param  string  $captcha
      * @return boolean
      */
-    public static function checkScode(string $captcha): bool
+    public static function check(string $captcha, string $token = null): bool
     {
         $request = request();
+        if ($token) {
+            $request->sessionId($token);
+        }
         // 对比session中的captcha值
         if (strtolower($captcha) !== $request->session()->get('captcha')) {
             throw new Exception('图像验证码不正确');

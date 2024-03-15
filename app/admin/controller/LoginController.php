@@ -7,6 +7,7 @@ use app\model\Admin;
 use app\model\AdminRole;
 use app\expose\utils\Password;
 use app\expose\enum\ResponseCode;
+use app\expose\helper\Captcha;
 use app\expose\helper\Config;
 use Exception;
 use support\Request;
@@ -25,7 +26,7 @@ class LoginController extends Basic
             $D = $request->post();
             $captcha_state = Config::get('captcha', 'state');
             if ($captcha_state) {
-                if ($request->session()->get('captcha') !== $D['captcha']) {
+                if (!Captcha::check($D['captcha'], $D['token'])) {
                     throw new Exception("验证码不正确", ResponseCode::CAPTCHA);
                 }
             }
