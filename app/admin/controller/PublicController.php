@@ -74,7 +74,10 @@ class PublicController extends Basic
     {
         $token = $request->header('Authorization');
         if ($token) {
-            Auth::setPrefix('ADMIN')->delete($token);
+            try {
+                Auth::setPrefix('ADMIN')->delete($token);
+            } catch (\Throwable $th) {
+            }
         }
         return $this->success('退出成功');
     }

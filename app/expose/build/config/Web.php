@@ -8,7 +8,7 @@ class Web extends DataModel
 {
     protected $data = [
         # 应用名称
-        'web_name'          => '星火API',
+        'web_name'          => 'Loong',
         # LOGO展示方式
         'logo_use'          => 'svg',
         # 应用浅色LOGO
@@ -64,17 +64,27 @@ class Web extends DataModel
     }
     public function useApis(array $data = [])
     {
-        $this->data['apis']        = new Apis($data);
+        $apis = new Apis($data);
+        if (!isset($this->data['apis'])) {
+            $this->data['apis'] = [];
+        }
+        $this->data['apis']        = array_merge($this->data['apis'], $apis->toArray());
         return $this;
     }
     public function useToolbar(array $data = [])
     {
-        $this->data['toolbar']        = $data;
+        if (!isset($this->data['toolbar'])) {
+            $this->data['toolbar'] = [];
+        }
+        $this->data['toolbar']        = array_merge($this->data['toolbar'], $data);
         return $this;
     }
     public function useUserDropdownMenu(array $data = [])
     {
-        $this->data['user_dropdown_menu']        = $data;
+        if (!isset($this->data['user_dropdown_menu'])) {
+            $this->data['user_dropdown_menu'] = [];
+        }
+        $this->data['user_dropdown_menu']        = array_merge($this->data['user_dropdown_menu'], $data);
         return $this;
     }
 }

@@ -45,9 +45,20 @@ trait Uploads
     public function upload(Request $request)
     {
         $dir_name = $request->post('dir_name');
+        $dir_title = $request->post('dir_title');
         $UploadsClassify = UploadsClassify::where('dir_name', $dir_name)->find();
         if (!$UploadsClassify) {
-            return $this->fail('分类不存在');
+            $UploadsClassify = UploadsClassify::where(['dir_name' => 'uploads/default', 'is_system' => 1])->find();
+            if (!$UploadsClassify) {
+                if (empty($dir_title)) {
+                    return $this->fail('分类不存在');
+                }
+                $UploadsClassify = new UploadsClassify;
+                $UploadsClassify->title = $dir_title;
+                $UploadsClassify->dir_name = $dir_name;
+                $UploadsClassify->channels = Filesystem::PUBLIC['value'];
+                $UploadsClassify->save();
+            }
         }
         $channels = $request->post('channels');
         if (!$channels) {

@@ -1,0 +1,28 @@
+[
+    {
+        "title": "首页",
+        "icon": "House",
+        "path": "Index",
+        "sort": 0,
+        "children": [
+            {
+                "title": "控制台",
+                "icon": "ElementPlus",
+                "path": "Index/control"
+            }
+        ]
+    },
+    {
+        "title": "公共权限",
+        "path": "Public",
+        "show": false,
+        "children": [
+            {
+                "title": "更新用户信息",
+                "path": "User/update",
+                "show": false,
+                "component": "form"
+            }
+        ]
+    }
+]

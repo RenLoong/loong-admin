@@ -9,7 +9,7 @@ use app\expose\enum\Action as EnumAction;
 use app\expose\enum\Filesystem;
 use app\expose\helper\Captcha;
 use app\expose\helper\Config;
-use app\expose\helper\Menus;
+use app\expose\helper\Control;
 use app\expose\helper\Vcode;
 use loong\oauth\facade\Auth;
 use support\Request;
@@ -50,9 +50,23 @@ class PublicController extends Basic
             'vcode' => 'Public/vcode',
             'outLogin' => 'Public/outLogin'
         ]);
+        $toolbar = new Action();
+        $toolbar->add(EnumAction::LOCK['value'], [
+            'icon' => 'Lock'
+        ]);
+        $toolbar->add(EnumAction::SEARCH['value'], [
+            'icon' => 'Search'
+        ]);
+        $toolbar->add(EnumAction::NOTIFICATION['value'], [
+            'icon' => 'Notification'
+        ]);
+        $toolbar->add(EnumAction::FULL_SCREEN['value'], [
+            'icon' => 'FullScreen'
+        ]);
+        $config->useToolbar($toolbar->toArray());
         $userDropdownMenu = new Action();
         $userDropdownMenu->add(EnumAction::DIALOG['value'], [
-            'path' => 'User/info',
+            'path' => 'User/update',
             'label' => '个人中心',
             'icon' => 'User',
             'props' => [
@@ -62,19 +76,30 @@ class PublicController extends Basic
         ]);
         $config->useUserDropdownMenu($userDropdownMenu->toArray());
         $config->storage = Filesystem::getOptions();
+
+        $pluginConfig = glob(base_path('plugin/*/api/PublicController.php'));
+        foreach ($pluginConfig as $path) {
+            $plugin_name = basename(dirname(dirname($path)));
+            $class = 'plugin\\' . $plugin_name . '\\api\\PublicController';
+            $plugin = new $class;
+            $plugin->config($config);
+        }
         return $this->resData($config);
     }
     public function menus(Request $request)
     {
-        $Install = new \app\admin\api\Install;
-        $menus = new Menus($Install);
+        $Control = new \app\control\api\Control;
+        $menus = new Control($Control);
         return $this->resData($menus);
     }
     public function outLogin(Request $request)
     {
         $token = $request->header('Authorization');
         if ($token) {
-            Auth::setPrefix('CONTROL')->delete($token);
+            try {
+                Auth::setPrefix('CONTROL')->delete($token);
+            } catch (\Throwable $th) {
+            }
         }
         return $this->success('退出成功');
     }
@@ -86,8 +111,12 @@ class PublicController extends Basic
         if (!Captcha::check($captcha, $token)) {
             return $this->fail('验证码不正确');
         }
+        $scene = $request->post('scene');
+        if (!$scene) {
+            return $this->fail('场景不能为空');
+        }
         try {
-            Vcode::send($username);
+            Vcode::send($username, $scene, $token);
             return $this->success('验证码发送成功');
         } catch (\Throwable $th) {
             return $this->exception($th);

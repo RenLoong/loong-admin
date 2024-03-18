@@ -25,16 +25,12 @@ use app\expose\utils\DataModel;
 class FormBuilder extends DataModel
 {
     protected $data = [];
-    protected $formTitle = '基础信息';
-    protected $formName = null;
     protected $url = '';
-    public function __construct($formName = null, $formTitle = '基础信息', $props = [])
+    public function __construct($formName = null, $formTitle = null, $props = [])
     {
-        $this->formName = $formName;
-        $this->formTitle = $formTitle;
         $this->data['props'] = $props;
         $this->data['name'] = $formName ?? 'basic';
-        $this->data['title'] = $formTitle;
+        $this->data['title'] = $formTitle ?? '基础信息';
         $this->data['rule'] = [];
         $this->data['form'] = [];
         $this->data['group'] = [];
@@ -112,7 +108,7 @@ class FormBuilder extends DataModel
      */
     public function getFormName(): string
     {
-        return $this->formName;
+        return $this->data['name'];
     }
     /**
      * 获取表单标题
@@ -121,7 +117,7 @@ class FormBuilder extends DataModel
      */
     public function getFormTitle(): string
     {
-        return $this->formTitle;
+        return $this->data['title'];
     }
     /**
      * 向表单中添加分组

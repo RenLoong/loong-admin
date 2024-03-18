@@ -2,8 +2,6 @@
 
 namespace app\expose\helper;
 
-use app\expose\enum\State;
-use app\expose\utils\Password;
 use app\expose\utils\Rsa;
 use app\model\User as ModelUser;
 
@@ -68,6 +66,12 @@ class User
         if (!empty($data['activation_time'])) {
             $insterData['activation_time'] = $data['activation_time'];
         }
+        if (!empty($data['nickname'])) {
+            $insterData['nickname'] = $data['nickname'];
+        }
+        if (!empty($data['headimg'])) {
+            $insterData['headimg'] = $data['headimg'];
+        }
         $model = new ModelUser();
         $model->save($insterData);
         return $model;
@@ -88,44 +92,6 @@ class User
     {
         $data['activation_time'] = date('Y-m-d H:i:s');
         return self::create($data);
-    }
-    /**
-     * 登录
-     *
-     * @param array $data
-     * @param string $data['username'] 用户名
-     * @param string $data['mobile'] 手机号
-     * @param string $data['password'] 密码
-     * @return ModelUser
-     */
-    public static function login($data)
-    {
-        $where = [];
-        if (!empty($data['username'])) {
-            $where['username'] = $data['username'];
-        }
-        if (!empty($data['mobile'])) {
-            $where['mobile'] = $data['mobile'];
-        }
-        if (empty($where)) {
-            throw new \Exception('用户名、手机号至少填写一项');
-        }
-        $User = ModelUser::where($where)->find();
-        if (!$User) {
-            throw new \Exception('用户不存在');
-        }
-        if (!empty($data['password'])) {
-            if (!Password::verify($data['password'], $User->password)) {
-                throw new \Exception('密码错误');
-            }
-        }
-        if ($User->state === State::NO['value']) {
-            throw new \Exception('账号已被禁用');
-        }
-        if (!$User->activation_time) {
-            ModelUser::where(['id' => $User->id])->update(['activation_time' => date('Y-m-d H:i:s')]);
-        }
-        return $User;
     }
     /**
      * 更新
@@ -162,6 +128,12 @@ class User
         }
         if (!empty($data['email'])) {
             $user->email = $data['email'];
+        }
+        if (!empty($data['nickname'])) {
+            $user->nickname = $data['nickname'];
+        }
+        if (!empty($data['headimg'])) {
+            $user->headimg = $data['headimg'];
         }
         $user->save();
         return $user;

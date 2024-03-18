@@ -3,6 +3,7 @@
 namespace app\expose\helper;
 
 use app\expose\build\builder\FormBuilder;
+use app\expose\enum\SubmitEvent;
 use app\model\Config as ModelConfig;
 use app\expose\utils\DataModel;
 
@@ -77,7 +78,9 @@ class ConfigGroup extends DataModel
     public static function formBuilder($group)
     {
         $self = new self($group);
-        $builder = new FormBuilder;
+        $builder = new FormBuilder(null, null, [
+            'submitEvent' => SubmitEvent::SILENT
+        ]);
         $groupData = $self->getGroupData();
         foreach ($groupData as $key => $item) {
             if ($key != 'group') {

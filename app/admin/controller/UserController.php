@@ -78,10 +78,49 @@ class UserController extends Basic
                 'width' => '80px'
             ]
         ]);
-        $builder->add('username', '账户');
-        $builder->add('mobile', '手机号');
-        $builder->add('email', '邮箱');
-        $builder->add('state', '总账号状态', [
+        $builder->add('userinfo', '用户', [
+            'component' => [
+                'name' => 'table-userinfo',
+                'props' => [
+                    'nickname' => 'nickname',
+                    'avatar' => 'headimg',
+                    'info' => 'username',
+                    'nicknameTags' => [
+                        [
+                            'field' => 'new_text',
+                            'props' => [
+                                'type' => 'danger',
+                                'size' => 'small'
+                            ]
+                        ]
+                    ]
+                ]
+            ],
+            'props' => [
+                'minWidth' => '300px'
+            ]
+        ]);
+        $builder->add('contact', '联系方式', [
+            'props' => [
+                'width' => '280px'
+            ],
+            'component' => [
+                'name' => 'table-times',
+                'props' => [
+                    'group' => [
+                        [
+                            'field' => 'mobile',
+                            'label' => '手机号'
+                        ],
+                        [
+                            'field' => 'email',
+                            'label' => '邮箱'
+                        ]
+                    ]
+                ]
+            ]
+        ]);
+        $builder->add('state', '状态', [
             'component' => [
                 'name' => 'switch',
                 'api' => 'User/indexUpdateState',
@@ -92,6 +131,34 @@ class UserController extends Basic
             ],
             'props' => [
                 'width' => '160px'
+            ]
+        ]);
+        $builder->add('online_time', '活动', [
+            'props' => [
+                'width' => '200px'
+            ],
+            'component' => [
+                'name' => 'table-times',
+                'props' => [
+                    'group' => [
+                        [
+                            'field' => 'activation_time',
+                            'label' => '激活'
+                        ],
+                        [
+                            'field' => 'login_time',
+                            'label' => '登录'
+                        ],
+                        [
+                            'component' => 'tag',
+                            'field' => 'login_ip',
+                            'label' => '登录IP',
+                            'props' => [
+                                'size' => 'small',
+                            ]
+                        ]
+                    ]
+                ]
             ]
         ]);
         $builder->add('create_time', '时间', [
@@ -109,10 +176,6 @@ class UserController extends Basic
                         [
                             'field' => 'update_time',
                             'label' => '更新'
-                        ],
-                        [
-                            'field' => 'activation_time',
-                            'label' => '激活'
                         ]
                     ]
                 ]
@@ -189,6 +252,17 @@ class UserController extends Basic
     public function getFormBuilder()
     {
         $builder = new FormBuilder;
+        $builder->add('nickname', '昵称', 'input', '', [
+            'required' => true,
+            'maxlength' => 30,
+            'show-word-limit' => true
+        ]);
+        $builder->add('headimg', '头像', 'bundle', '', [
+            'props' => [
+                'accept' => 'image/*',
+                'multiple' => 1
+            ]
+        ]);
         $builder->add('username', '账号', 'input', '', [
             'props' => [
                 'maxlength' => 30,

@@ -6,6 +6,7 @@ use app\Basic;
 use app\expose\build\builder\ComponentBuilder;
 use app\expose\build\builder\FormBuilder;
 use app\expose\enum\Filesystem;
+use app\expose\enum\SubmitEvent;
 use app\expose\trait\Config;
 use support\Request;
 
@@ -69,7 +70,9 @@ class SystemController extends Basic
             return $this->fail('保存失败');
         }
         $config = config('plugin.shopwwi.filesystem.app');
-        $builder = new FormBuilder;
+        $builder = new FormBuilder(null, null, [
+            'submitEvent' => SubmitEvent::SILENT
+        ]);
         $defaultOptions = Filesystem::getOptions();
         $builder->add('default', '默认存储渠道商', 'select', $config['default'], [
             'options' => $defaultOptions

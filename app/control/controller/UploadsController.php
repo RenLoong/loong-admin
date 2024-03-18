@@ -1,6 +1,6 @@
 <?php
 
-namespace app\admin\controller;
+namespace app\control\controller;
 
 use app\Basic;
 use app\expose\trait\Uploads;
@@ -11,6 +11,6 @@ class UploadsController extends Basic
     public function __construct()
     {
         $request = request();
-        $this->admin_uid = $request->admin_uid;
+        $this->uid = $request->uid;
     }
 }
