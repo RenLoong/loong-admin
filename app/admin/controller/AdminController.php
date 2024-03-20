@@ -91,12 +91,26 @@ class AdminController extends Basic
         ]);
         $formBuilder = new FormBuilder;
         $formBuilder->add('username', '账号', 'input', '', [
+            'col' => [
+                'xs' => 24,
+                'sm' => 12,
+                'md' => 8,
+                'lg' => 6,
+                'xl' => 4
+            ],
             'props' => [
                 'placeholder' => '账号搜索',
                 'clearable' => true
             ]
         ]);
         $formBuilder->add('mobile', '手机号', 'input', '', [
+            'col' => [
+                'xs' => 24,
+                'sm' => 12,
+                'md' => 8,
+                'lg' => 6,
+                'xl' => 4
+            ],
             'props' => [
                 'placeholder' => '手机号搜索',
                 'clearable' => true

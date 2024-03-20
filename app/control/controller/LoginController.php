@@ -24,38 +24,34 @@ class LoginController extends Basic
     protected $notNeedAuth = ['login', 'vcode', 'qrcode'];
     public function login(Request $request)
     {
-        try {
-            $D = $request->post();
-            $captcha_state = Config::get('captcha', 'state');
-            if ($captcha_state) {
-                if (!Captcha::check($D['captcha'], $D['token'])) {
-                    throw new Exception("验证码不正确", ResponseCode::CAPTCHA);
-                }
+        $D = $request->post();
+        $captcha_state = Config::get('captcha', 'state');
+        if ($captcha_state) {
+            if (!Captcha::check($D['captcha'], $D['token'])) {
+                throw new Exception("验证码不正确", ResponseCode::CAPTCHA);
             }
-            $where = [];
-            $where[] = ['mobile|username', '=', $D['username']];
-            $User = User::where($where)->find();
-            if (!$User) {
-                throw new Exception('用户不存在');
-            }
-            if (!Password::verify($D['password'], $User->password)) {
-                throw new Exception('密码错误');
-            }
-            if (!$User->state) {
-                throw new Exception('用户已被禁用');
-            }
-            if (!$User->activation_time) {
-                $User->activation_time = date('Y-m-d H:i:s');
-            }
-            $User->login_ip = $request->getRemoteIp(true);
-            $User->login_time = date('Y-m-d H:i:s');
-            if ($User->save()) {
-                return $this->success('登录成功', User::getTokenInfo($User));
-            } else {
-                throw new Exception("登录失败");
-            }
-        } catch (Exception $e) {
-            return $this->fail($e);
+        }
+        $where = [];
+        $where[] = ['mobile|username', '=', $D['username']];
+        $User = User::where($where)->find();
+        if (!$User) {
+            throw new Exception('用户不存在');
+        }
+        if (!Password::verify($D['password'], $User->password)) {
+            throw new Exception('密码错误');
+        }
+        if (!$User->state) {
+            throw new Exception('用户已被禁用');
+        }
+        if (!$User->activation_time) {
+            $User->activation_time = date('Y-m-d H:i:s');
+        }
+        $User->login_ip = $request->getRemoteIp(true);
+        $User->login_time = date('Y-m-d H:i:s');
+        if ($User->save()) {
+            return $this->success('登录成功', User::getTokenInfo($User));
+        } else {
+            throw new Exception("登录失败");
         }
     }
     public function vcode(Request $request)
