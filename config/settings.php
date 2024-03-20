@@ -8,7 +8,7 @@ foreach ($rootConfig as $path) {
 }
 $pluginConfig = glob(base_path('plugin/*/config/settings/*.php'));
 foreach ($pluginConfig as $path) {
-    $plugin_name = basename(dirname(dirname($path)));
+    $plugin_name = basename(dirname(dirname(dirname($path))));
     $group = basename($path, '.php');
     $data[$plugin_name . '.' . $group] = require $path;
 }
