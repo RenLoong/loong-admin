@@ -3,4 +3,4 @@
 #### 联系我
 
 - QQ群：
-[826867889](http://qm.qq.com/cgi-bin/qm/qr?_wv=1027&k=GZSRikF23e1-uwhj94JowbXuN4K0Kr8H&authKey=jDp1Sp7zsYrSfQUG%2BAKRQBBOQRZMKCaf2dnIUy8a9%2BqXTVIvDx9df3pwiHITkwbU&noverify=0&group_code=826867889)
+[826867889](https://h5.qun.qq.com/h5/qun-share-page/?_wv=1027&k=FhjcGB-hY66iJSPySAoJs-vxtT0zqbtR&authKey=qdPxxwMiApBT4tU8mk5dubgDODo8tSYemfW36kY6k0uT5lPFgS9nQCSQn4niYJlm&market_channel_source=826867889_1&noverify=0&group_code=826867889)
