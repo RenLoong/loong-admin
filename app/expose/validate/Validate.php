@@ -36,8 +36,7 @@ class Validate extends ThinkValidate
         if (isset($data[$field])) {
             $map[] = [$field, '=', $data[$field]];
         }
-
-        if (strpos($rule[1], '^')) {
+        if (!empty($rule[1]) && strpos($rule[1], '^')) {
             // 支持多个字段验证
             $fields = explode('^', $rule[1]);
             foreach ($fields as $key) {
