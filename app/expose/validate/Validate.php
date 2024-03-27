@@ -32,26 +32,22 @@ class Validate extends ThinkValidate
         } else {
             $db = $this->db::name($rule[0]);
         }
-
-        $key = $rule[1] ?? $field;
         $map = [];
+        if (isset($data[$field])) {
+            $map[] = [$field, '=', $data[$field]];
+        }
 
-        if (strpos($key, '^')) {
+        if (strpos($rule[1], '^')) {
             // 支持多个字段验证
-            $fields = explode('^', $key);
+            $fields = explode('^', $rule[1]);
             foreach ($fields as $key) {
                 if (isset($data[$key])) {
                     $map[] = [$key, '=', $data[$key]];
                 }
             }
-        } elseif (isset($data[$field])) {
-            $map[] = [$key, '=', $data[$field]];
-        } else {
-            $map = [];
         }
 
         $pk = !empty($rule[3]) ? $rule[3] : $db->getPk();
-
         if (is_string($pk)) {
             if (isset($rule[2])) {
                 $map[] = [$pk, '<>', $rule[2]];
