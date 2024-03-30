@@ -20,8 +20,8 @@ class LoginController extends Basic
      * 不需要登录的方法
      * @var string[]
      */
-    protected $notNeedLogin = ['login', 'vcode', 'qrcode'];
-    protected $notNeedAuth = ['login', 'vcode', 'qrcode'];
+    protected $notNeedLogin = ['login', 'vcode', 'qrcode', 'register'];
+    protected $notNeedAuth = ['login', 'vcode', 'qrcode', 'register'];
     public function login(Request $request)
     {
         $D = $request->post();
@@ -110,7 +110,6 @@ class LoginController extends Basic
     }
     public function check(Request $request)
     {
-        sleep(2);
         return $this->fail();
     }
 }
