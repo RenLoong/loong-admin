@@ -64,7 +64,14 @@ class LoginController extends Basic
         }
         $User = User::where(['mobile' => $username])->find();
         if (empty($User)) {
-            return $this->fail('用户不存在');
+            try {
+                HelperUser::register([
+                    'mobile' => $username
+                ]);
+                $User = User::where(['mobile' => $username])->find();
+            } catch (\Throwable $th) {
+                return $this->exception($th);
+            }
         }
         if ($User->state != State::YES['value']) {
             return $this->fail('用户已被禁用');
@@ -85,13 +92,13 @@ class LoginController extends Basic
         $vcode = $request->post('vcode');
         $username = $request->post('username');
         $token = $request->post('token');
-        if (!Vcode::check($username, $vcode, 'login', $token)) {
+        if (!Vcode::check($username, $vcode, 'register', $token)) {
             return $this->fail('验证码不正确');
         }
         $password = $request->post('password');
         try {
             HelperUser::register([
-                'username' => $username,
+                'mobile' => $username,
                 'password' => $password
             ]);
             return $this->success('注册成功');
