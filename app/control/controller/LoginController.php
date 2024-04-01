@@ -37,6 +37,9 @@ class LoginController extends Basic
         if (!$User) {
             throw new Exception('用户不存在');
         }
+        if (!$User->password) {
+            throw new Exception('当前用户不支持密码登录，请使用验证码登录');
+        }
         if (!Password::verify($D['password'], $User->password)) {
             throw new Exception('密码错误');
         }
