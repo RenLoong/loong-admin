@@ -30,16 +30,17 @@ class User extends Basic
     }
     public static function getTokenInfo($model)
     {
+        $request = request();
         /* 重组用户信息 */
         $User = new \stdClass;
         $User->nickname = $model->nickname;
         $User->headimg = $model->headimg;
         $User->username = $model->username;
 
-        $pluginConfig = glob(base_path('plugin/*/api/PublicController.php'));
+        $pluginConfig = glob(base_path("plugin/*/api/{$request->app}/PublicController.php"));
         foreach ($pluginConfig as $path) {
-            $plugin_name = basename(dirname(dirname($path)));
-            $class = 'plugin\\' . $plugin_name . '\\api\\PublicController';
+            $plugin_name = basename(dirname(dirname(dirname($path))));
+            $class = 'plugin\\' . $plugin_name . "\\api\\{$request->app}\\PublicController";
             $plugin = new $class;
             $plugin->appendUserInfo($User, $model);
         }

@@ -7,6 +7,7 @@ use app\expose\build\builder\FormBuilder;
 use app\expose\enum\ResponseEvent;
 use app\model\User;
 use app\validate\User as ValidateUser;
+use loong\oauth\facade\Auth;
 use support\Request;
 
 class UserController extends Basic
@@ -95,5 +96,22 @@ class UserController extends Basic
     public function refresh()
     {
         return $this->event(ResponseEvent::UPDATE_USERINFO, '刷新成功');
+    }
+    public function lock(Request $request)
+    {
+        try {
+            $password = $request->post('password');
+            if (!$password) {
+                return $this->fail('PIN码不能为空');
+            }
+            if (mb_strlen($password) != 6) {
+                return $this->fail('请输入6位PIN码');
+            }
+            $token = $request->header('Authorization');
+            Auth::setPrefix('CONTROL')->lock($token, $password);
+            return $this->event(ResponseEvent::UPDATE_USERINFO, '锁定成功');
+        } catch (\Throwable $th) {
+            return $this->exception($th);
+        }
     }
 }

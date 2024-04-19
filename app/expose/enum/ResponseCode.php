@@ -55,4 +55,8 @@ class ResponseCode extends Enum
      * 无权限
      */
     const NO_PERMISSION = 403;
+    /**
+     * 锁定
+     */
+    const LOCK = 423;
 }

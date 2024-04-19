@@ -7,6 +7,7 @@ use app\expose\build\config\Action;
 use app\expose\build\config\Web;
 use app\expose\enum\Action as EnumAction;
 use app\expose\enum\Filesystem;
+use app\expose\enum\ResponseEvent;
 use app\expose\helper\Config;
 use app\expose\helper\Menus;
 use loong\oauth\facade\Auth;
@@ -18,8 +19,8 @@ class PublicController extends Basic
      * 不需要登录的方法
      * @var string[]
      */
-    protected $notNeedLogin = ['config', 'menus'];
-    protected $notNeedAuth = ['config', 'menus'];
+    protected $notNeedLogin = ['config', 'menus', 'unlock'];
+    protected $notNeedAuth = ['config', 'menus', 'unlock'];
     public function config(Request $request)
     {
         $config = Config::get('basic');
@@ -33,6 +34,8 @@ class PublicController extends Basic
         ]);
         $config->useApis([
             'userinfo' => 'Admin/getSelfInfo',
+            'lock' => 'Public/lock',
+            'unlock' => 'Public/unlock',
             'menus' => 'Public/menus',
             'outLogin' => 'Public/outLogin'
         ]);
@@ -80,5 +83,33 @@ class PublicController extends Basic
             }
         }
         return $this->success('退出成功');
+    }
+    public function lock(Request $request)
+    {
+        try {
+            $password = $request->post('password');
+            if (!$password) {
+                return $this->fail('PIN码不能为空');
+            }
+            if (mb_strlen($password) != 6) {
+                return $this->fail('请输入6位PIN码');
+            }
+            $token = $request->header('Authorization');
+            Auth::setPrefix('CONTROL')->lock($token, $password);
+            return $this->event(ResponseEvent::UPDATE_USERINFO, '锁定成功');
+        } catch (\Throwable $th) {
+            return $this->exception($th);
+        }
+    }
+    public function unlock(Request $request)
+    {
+        $password = $request->post('password');
+        try {
+            $token = $request->header('Authorization');
+            Auth::setPrefix('CONTROL')->unlock($token, $password);
+            return $this->success('解锁成功');
+        } catch (\Throwable $th) {
+            return $this->exception($th);
+        }
     }
 }

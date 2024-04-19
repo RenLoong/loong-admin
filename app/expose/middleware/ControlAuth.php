@@ -5,6 +5,7 @@ namespace app\expose\middleware;
 use app\expose\enum\ResponseCode;
 use app\expose\utils\Json;
 use Exception;
+use loong\oauth\exception\LockException;
 use Webman\MiddlewareInterface;
 use Webman\Http\Response;
 use Webman\Http\Request;
@@ -74,6 +75,11 @@ class ControlAuth implements MiddlewareInterface
                 throw new Exception('登录已过期，请重新登录', ResponseCode::NEED_LOGIN);
             }
             $request->uid           = $user['uid'];
+            $request->token         = $token;
+        } catch (LockException $e) {
+            if ($isForceLogin) {
+                throw new Exception($e->getMessage(), ResponseCode::LOCK);
+            }
         } catch (\Throwable $th) {
             if ($isForceLogin) {
                 throw new \Exception($th->getMessage(), ResponseCode::NEED_LOGIN);

@@ -20,7 +20,7 @@ class PublicController extends Basic
      * 不需要登录的方法
      * @var string[]
      */
-    protected $notNeedLogin = ['config', 'menus', 'vcode', 'outLogin'];
+    protected $notNeedLogin = ['config', 'menus', 'vcode', 'outLogin', 'unlock'];
     protected $notNeedAuth = ['config', 'menus', 'vcode', 'outLogin'];
     public function config(Request $request)
     {
@@ -46,9 +46,11 @@ class PublicController extends Basic
         ]);
         $config->useApis([
             'userinfo' => 'User/getInfo',
+            'lock' => 'User/lock',
+            'unlock' => 'Public/unlock',
             'menus' => 'Public/menus',
             'vcode' => 'Public/vcode',
-            'outLogin' => 'Public/outLogin'
+            'outLogin' => 'Public/outLogin',
         ]);
         $toolbar = new Action();
         $toolbar->add(EnumAction::LOCK['value'], [
@@ -76,11 +78,10 @@ class PublicController extends Basic
         ]);
         $config->useUserDropdownMenu($userDropdownMenu->toArray());
         $config->storage = Filesystem::getOptions();
-
-        $pluginConfig = glob(base_path('plugin/*/api/PublicController.php'));
+        $pluginConfig = glob(base_path("plugin/*/api/{$request->app}/PublicController.php"));
         foreach ($pluginConfig as $path) {
-            $plugin_name = basename(dirname(dirname($path)));
-            $class = 'plugin\\' . $plugin_name . '\\api\\PublicController';
+            $plugin_name = basename(dirname(dirname(dirname($path))));
+            $class = 'plugin\\' . $plugin_name . "\\api\\{$request->app}\\PublicController";
             $plugin = new $class;
             $plugin->config($config);
         }
@@ -118,6 +119,17 @@ class PublicController extends Basic
         try {
             Vcode::send($username, $scene, $token);
             return $this->success('验证码发送成功');
+        } catch (\Throwable $th) {
+            return $this->exception($th);
+        }
+    }
+    public function unlock(Request $request)
+    {
+        $password = $request->post('password');
+        try {
+            $token = $request->header('Authorization');
+            Auth::setPrefix('CONTROL')->unlock($token, $password);
+            return $this->success('解锁成功');
         } catch (\Throwable $th) {
             return $this->exception($th);
         }

@@ -8,7 +8,8 @@
             {
                 "title": "控制台",
                 "icon": "ElementPlus",
-                "path": "Index/control"
+                "path": "Index/control",
+                "component": "data"
             }
         ]
     },
