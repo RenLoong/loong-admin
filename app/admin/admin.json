@@ -9,7 +9,7 @@
                 "title": "控制台",
                 "icon": "ElementPlus",
                 "path": "Index/control",
-                "component": "data"
+                "component": "databoard"
             }
         ]
     },

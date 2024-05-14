@@ -3,6 +3,7 @@
 namespace app\control\controller;
 
 use app\Basic;
+use app\expose\enum\EventName;
 use app\expose\utils\Password;
 use app\expose\enum\ResponseCode;
 use app\expose\enum\State;
@@ -13,6 +14,7 @@ use app\expose\helper\Vcode;
 use app\model\User;
 use Exception;
 use support\Request;
+use Webman\Event\Event;
 
 class LoginController extends Basic
 {
@@ -52,6 +54,7 @@ class LoginController extends Basic
         $User->login_ip = $request->getRemoteIp(true);
         $User->login_time = date('Y-m-d H:i:s');
         if ($User->save()) {
+            Event::emit(EventName::USER_LOGIN['value'], $User);
             return $this->success('登录成功', User::getTokenInfo($User));
         } else {
             throw new Exception("登录失败");
@@ -85,6 +88,7 @@ class LoginController extends Basic
         $User->login_ip = $request->getRemoteIp(true);
         $User->login_time = date('Y-m-d H:i:s');
         if ($User->save()) {
+            Event::emit(EventName::USER_LOGIN['value'], $User);
             return $this->success('登录成功', User::getTokenInfo($User));
         } else {
             throw new Exception("登录失败");

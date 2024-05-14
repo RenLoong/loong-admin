@@ -14,6 +14,10 @@ class Action extends Enum
         'label' => '重定向',
         'value' => 'redirect'
     ];
+    const LINK= [
+        'label' => '链接跳转',
+        'value' => 'link'
+    ];
     const COMFIRM = [
         'label' => '确认操作',
         'value' => 'comfirm'

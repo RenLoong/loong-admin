@@ -41,16 +41,36 @@ class PublicController extends Basic
         ]);
         $toolbar = new Action();
         $toolbar->add(EnumAction::LOCK['value'], [
-            'icon' => 'Lock'
+            'icon' => 'Lock',
+            'tips'=>'锁屏'
         ]);
         $toolbar->add(EnumAction::SEARCH['value'], [
-            'icon' => 'Search'
+            'icon' => 'Search',
+            'tips'=>'搜索菜单'
         ]);
         $toolbar->add(EnumAction::NOTIFICATION['value'], [
-            'icon' => 'Notification'
+            'icon' => 'Notification',
+            'tips'=>'查看通知'
         ]);
         $toolbar->add(EnumAction::FULL_SCREEN['value'], [
-            'icon' => 'FullScreen'
+            'icon' => 'FullScreen',
+            'tips'=>'全屏/退出全屏'
+        ]);
+        $toolbar->add(EnumAction::LINK['value'], [
+            'icon' => 'House',
+            'tips'=>'网站首页',
+            'props'=>[
+                'url'=>'/',
+                'target'=>'_blank'
+            ]
+        ]);
+        $toolbar->add(EnumAction::LINK['value'], [
+            'icon' => 'ElementPlus',
+            'tips'=>'网站前台控制台',
+            'props'=>[
+                'url'=>'/control/',
+                'target'=>'_blank'
+            ]
         ]);
         $config->useToolbar($toolbar->toArray());
         $userDropdownMenu = new Action();

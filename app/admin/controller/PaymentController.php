@@ -25,6 +25,22 @@ class PaymentController extends Basic
         foreach ($Platform as $key => $item) {
             $channels = [];
             switch ($item['value']) {
+                case Platform::PC['value']:
+                    $channels = [
+                        PaymentChannels::WXPAY,
+                        PaymentChannels::ALIPAY,
+                        PaymentChannels::BALANCE,
+                        PaymentChannels::INTEGRAL
+                    ];
+                    break;
+                case Platform::H5['value']:
+                    $channels = [
+                        PaymentChannels::WXPAY,
+                        PaymentChannels::ALIPAY,
+                        PaymentChannels::BALANCE,
+                        PaymentChannels::INTEGRAL
+                    ];
+                    break;
                 case Platform::WECHAT_MINIAPP['value']:
                     $channels = [
                         PaymentChannels::WXPAY,
@@ -39,14 +55,6 @@ class PaymentController extends Basic
                         PaymentChannels::INTEGRAL
                     ];
                     break;
-                case Platform::H5['value']:
-                    $channels = [
-                        PaymentChannels::WXPAY,
-                        PaymentChannels::ALIPAY,
-                        PaymentChannels::BALANCE,
-                        PaymentChannels::INTEGRAL
-                    ];
-                    break;
                 case Platform::APP['value']:
                     $channels = [
                         PaymentChannels::WXPAY,
@@ -56,11 +64,11 @@ class PaymentController extends Basic
                     ];
                     break;
             }
-            $tabs[] = $this->builder($PaymentConfig, $item, $channels);
+            $tabs[] = $this->getFormBuilder($PaymentConfig, $item, $channels);
         }
         return $this->resData($tabs);
     }
-    public function builder($PaymentConfig, $Platform, $channels)
+    public function getFormBuilder($PaymentConfig, $Platform, $channels)
     {
         $builder = new TableBuilder([
             'border' => false,

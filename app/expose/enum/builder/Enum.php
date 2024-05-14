@@ -52,4 +52,14 @@ class Enum
         }
         return $values;
     }
+    public static function has($value)
+    {
+        $options = static::getOptions();
+        foreach ($options as $option) {
+            if ($option['value'] == $value) {
+                return true;
+            }
+        }
+        return false;
+    }
 }

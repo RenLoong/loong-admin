@@ -2,12 +2,14 @@
 
 namespace app\controller;
 
+use app\expose\helper\Config;
 use support\Request;
 
 class IndexController
 {
     public function index(Request $request)
     {
-        return view('index/index');
+        $config=new Config('basic');
+        return view(public_path('template/index.html'), $config->toArray());
     }
 }

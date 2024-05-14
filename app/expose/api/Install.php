@@ -62,6 +62,6 @@ trait Install
         if (is_file($menu_file = $this->path . '/../admin.json')) {
             return json_decode(file_get_contents($menu_file), true);
         }
-        return [];
+        return false;
     }
 }

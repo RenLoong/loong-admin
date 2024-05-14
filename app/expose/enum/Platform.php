@@ -6,6 +6,14 @@ use app\expose\enum\builder\Enum;
 
 class Platform extends Enum
 {
+    const PC = [
+        'label' => 'PC',
+        'value' => 'pc'
+    ];
+    const H5 = [
+        'label' => 'H5',
+        'value' => 'h5'
+    ];
     const WECHAT_MINIAPP = [
         'label' => '微信小程序',
         'value' => 'wechat_miniapp'
@@ -13,10 +21,6 @@ class Platform extends Enum
     const WECHAT_OFFICIAL_ACCOUNT = [
         'label' => '微信公众号',
         'value' => 'wechat_official_account'
-    ];
-    const H5 = [
-        'label' => 'H5',
-        'value' => 'h5'
     ];
     const APP = [
         'label' => 'APP',

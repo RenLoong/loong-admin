@@ -40,10 +40,10 @@ class PublicController extends Basic
             'url' => 'Login/register',
             'title' => '注册' . $config['web_name']
         ]);
-        $config->useQrcodeLogin([
+        /* $config->useQrcodeLogin([
             'url' => 'Login/qrcode',
             'title' => '请使用微信“扫一扫”扫码登录'
-        ]);
+        ]); */
         $config->useApis([
             'userinfo' => 'User/getInfo',
             'lock' => 'User/lock',
@@ -54,16 +54,20 @@ class PublicController extends Basic
         ]);
         $toolbar = new Action();
         $toolbar->add(EnumAction::LOCK['value'], [
-            'icon' => 'Lock'
+            'icon' => 'Lock',
+            'tips'=>'锁屏'
         ]);
         $toolbar->add(EnumAction::SEARCH['value'], [
-            'icon' => 'Search'
+            'icon' => 'Search',
+            'tips'=>'搜索菜单'
         ]);
         $toolbar->add(EnumAction::NOTIFICATION['value'], [
-            'icon' => 'Notification'
+            'icon' => 'Notification',
+            'tips'=>'查看通知'
         ]);
         $toolbar->add(EnumAction::FULL_SCREEN['value'], [
-            'icon' => 'FullScreen'
+            'icon' => 'FullScreen',
+            'tips'=>'全屏/退出全屏'
         ]);
         $config->useToolbar($toolbar->toArray());
         $userDropdownMenu = new Action();
@@ -82,8 +86,13 @@ class PublicController extends Basic
         foreach ($pluginConfig as $path) {
             $plugin_name = basename(dirname(dirname(dirname($path))));
             $class = 'plugin\\' . $plugin_name . "\\api\\{$request->app}\\PublicController";
+            if (!class_exists($class)) {
+                continue;
+            }
             $plugin = new $class;
-            $plugin->config($config);
+            if (method_exists($plugin, 'config')) {
+                $plugin->config($config);
+            }
         }
         return $this->resData($config);
     }

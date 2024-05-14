@@ -8,7 +8,8 @@
             {
                 "title": "控制台",
                 "icon": "ElementPlus",
-                "path": "Index/control"
+                "path": "Index/control",
+                "component":"databoard"
             }
         ]
     },
@@ -22,6 +23,48 @@
                 "path": "User/update",
                 "show": false,
                 "component": "form"
+            },
+            {
+                "title": "获取自己的信息",
+                "show": false,
+                "path": "User/getInfo",
+                "component": ""
+            },
+            {
+                "title": "退出登录",
+                "show": false,
+                "path": "Public/outLogin",
+                "component": ""
+            },
+            {
+                "title": "获取上传分类",
+                "path": "Uploads/getUploadClassify",
+                "show": false,
+                "component": ""
+            },
+            {
+                "title": "上传文件",
+                "path": "Uploads/upload",
+                "show": false,
+                "component": ""
+            },
+            {
+                "title": "删除上传文件",
+                "path": "Uploads/deleteUploads",
+                "show": false,
+                "component": ""
+            },
+            {
+                "title": "编辑上传文件",
+                "path": "Uploads/updateUploads",
+                "show": false,
+                "component": ""
+            },
+            {
+                "title": "获取上传文件列表",
+                "path": "Uploads/getList",
+                "show": false,
+                "component": ""
             }
         ]
     }

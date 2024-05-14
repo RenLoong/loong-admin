@@ -196,7 +196,8 @@ class PaymentTemplateController extends Basic
                     'mch_id' => $D['mch_id'],
                     'mch_key' => $D['mch_key'],
                     'ssl_cert' => $D['ssl_cert'],
-                    'ssl_key' => $D['ssl_key']
+                    'ssl_key' => $D['ssl_key'],
+                    'notify_url' => $D['notify_url'],
                 ];
                 break;
             case PaymentChannels::ALIPAY['value']:
@@ -207,7 +208,8 @@ class PaymentTemplateController extends Basic
                     'alipay_public_cert' => $D['alipay_public_cert'],
                     'alipay_root_cert' => $D['alipay_root_cert'],
                     'alipay_public_key' => $D['alipay_public_key'],
-                    'private_key' => $D['private_key']
+                    'private_key' => $D['private_key'],
+                    'notify_url' => $D['notify_url'],
                 ];
                 break;
             case PaymentChannels::INTEGRAL['value']:
@@ -258,7 +260,7 @@ class PaymentTemplateController extends Basic
         ]);
 
         # 微信支付开始
-        $builder->add('api_version', '微信支付接口版本', 'radio', WxpayVersion::V3['value'], [
+        /* $builder->add('api_version', '微信支付接口版本', 'radio', WxpayVersion::V3['value'], [
             'required' => true,
             'where' => [
                 ['channels', '=', PaymentChannels::WXPAY['value']]
@@ -267,7 +269,7 @@ class PaymentTemplateController extends Basic
             'subProps' => [
                 'border' => true
             ]
-        ]);
+        ]); */
         $builder->add('mch_type', '微信商户号类型', 'radio', WxpayMchType::NORMAL['value'], [
             'required' => true,
             'where' => [
@@ -315,7 +317,7 @@ class PaymentTemplateController extends Basic
                 ['mch_type', '=', WxpayMchType::NORMAL['value']]
             ],
             'prompt' => [
-                $Component->add('text', ['default' => '微信支付商户平台 - 账户中心 - API安全 - 设置API密钥'], ['type' => 'info', 'size' => 'small'])
+                $Component->add('text', ['default' => '微信支付商户平台 - 账户中心 - API安全 - 设置APIv3密钥'], ['type' => 'info', 'size' => 'small'])
                     ->builder()
             ],
             'props' => [
@@ -330,7 +332,6 @@ class PaymentTemplateController extends Basic
                 ['mch_type', '=', WxpayMchType::NORMAL['value']]
             ],
             'props' => [
-                'accept' => 'application/octet-stream',
                 'view' => 'file',
                 'multiple' => 1
             ]
@@ -342,7 +343,6 @@ class PaymentTemplateController extends Basic
                 ['mch_type', '=', WxpayMchType::NORMAL['value']]
             ],
             'props' => [
-                'accept' => 'application/octet-stream',
                 'view' => 'file',
                 'multiple' => 1
             ]
@@ -432,7 +432,6 @@ class PaymentTemplateController extends Basic
                 ['mch_type', '=', WxpayMchType::SERVICE['value']]
             ],
             'props' => [
-                'accept' => 'application/octet-stream',
                 'view' => 'file',
                 'multiple' => 1
             ]
@@ -491,7 +490,6 @@ class PaymentTemplateController extends Basic
                     ->builder()
             ],
             'props' => [
-                'accept' => 'application/octet-stream',
                 'view' => 'file',
                 'multiple' => 1
             ]
@@ -507,7 +505,6 @@ class PaymentTemplateController extends Basic
                     ->builder()
             ],
             'props' => [
-                'accept' => 'application/octet-stream',
                 'view' => 'file',
                 'multiple' => 1
             ]
@@ -523,7 +520,6 @@ class PaymentTemplateController extends Basic
                     ->builder()
             ],
             'props' => [
-                'accept' => 'application/octet-stream',
                 'view' => 'file',
                 'multiple' => 1
             ]
@@ -622,6 +618,20 @@ class PaymentTemplateController extends Basic
                 'controls' => false,
                 'min' => 1,
                 'max' => 1000000
+            ]
+        ]);
+        $builder->add('notify_url', '支付通知', 'input', null, [
+            'required' => true,
+            'where' => [
+                ['channels', 'in', [PaymentChannels::WXPAY['value'],PaymentChannels::ALIPAY['value']]]
+            ],
+            'prompt' => [
+                $Component->add('text', ['default' => '只需要填写域名，不需要填写路径，如：https://www.baidu.com'], ['type' => 'info', 'size' => 'small'])
+                    ->builder()
+            ],
+            'props' => [
+                'type' => 'text',
+                'placeholder' => '支付通知接口域名'
             ]
         ]);
         return $builder;

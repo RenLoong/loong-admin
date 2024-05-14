@@ -2,8 +2,10 @@
 
 namespace app\expose\helper;
 
+use app\expose\enum\EventName;
 use app\expose\utils\Rsa;
 use app\model\User as ModelUser;
+use Webman\Event\Event;
 
 /**
  * 用户助手类
@@ -38,7 +40,7 @@ class User
     {
         $insterData = [];
         if (!empty($data['icode'])) {
-            $insterData['puid'] = Rsa::decryptNumber($data['icode']);
+            $insterData['puid'] = self::getUidByIcode($data['icode']);
         }
         if (empty($data['username']) && empty($data['mobile'])) {
             throw new \Exception('用户名、手机号至少填写一项');
@@ -74,6 +76,7 @@ class User
         }
         $model = new ModelUser();
         $model->save($insterData);
+        Event::emit(EventName::USER_REGISTER['value'], $model);
         return $model;
     }
     /**
@@ -91,6 +94,10 @@ class User
     public static function register($data)
     {
         $data['activation_time'] = date('Y-m-d H:i:s');
+        $request=request();
+        if($request->icode){
+            $data['icode'] = $request->icode;
+        }
         return self::create($data);
     }
     /**
@@ -136,6 +143,7 @@ class User
             $user->headimg = $data['headimg'];
         }
         $user->save();
+        Event::emit(EventName::USER_UPDATE['value'], $user);
         return $user;
     }
     /**

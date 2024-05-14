@@ -13,10 +13,12 @@ class Config extends DataModel
     protected $groupData = [];
     protected $data = [];
     protected $group = '';
-    public function __construct($group)
+    public function __construct($group, $plugin = null)
     {
-        $request = request();
-        $plugin = $request->plugin;
+        if(!$plugin){
+            $request = request();
+            $plugin = $request->plugin;
+        }
         $this->group = $plugin ? $plugin . '.' . $group : $group;
         $this->configData = config('settings');
         $this->groupData = $this->configData[$this->group] ?? [];

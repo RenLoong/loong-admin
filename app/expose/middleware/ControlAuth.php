@@ -22,10 +22,9 @@ class ControlAuth implements MiddlewareInterface
         if ($request->method() == 'OPTIONS') {
             return response('', 204);
         }
-        # 微信浏览器
-        $this->isWehcatBrowser($request);
         // 鉴权检测
         try {
+            $this->Icode($request);
             $this->Authorization($request);
             $response = $next($request);
         } catch (\Throwable $th) {
@@ -37,9 +36,13 @@ class ControlAuth implements MiddlewareInterface
         }
         return $response;
     }
-    public function isWehcatBrowser($request)
+    public function Icode(Request $request)
     {
-        $request->isWehcatBrowser = strpos(strtolower($request->header('user-agent')), 'micromessenger') !== false;
+        $icode = $request->header('x-icode');
+        if (!$icode) {
+            return true;
+        }
+        $request->icode = $icode;
     }
 
     /**
