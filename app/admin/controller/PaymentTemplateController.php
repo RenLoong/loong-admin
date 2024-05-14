@@ -190,7 +190,6 @@ class PaymentTemplateController extends Basic
         switch ($channels) {
             case PaymentChannels::WXPAY['value']:
                 $value = [
-                    'api_version' => $D['api_version'],
                     'mch_type' => $D['mch_type'],
                     'appid' => $D['appid'],
                     'mch_id' => $D['mch_id'],
