@@ -22,7 +22,9 @@ trait Control
     public function getPermissions(){
         $menus = $this->getMenus();
         $permissions = [];
-        $this->getPath($menus,$permissions);
+        if($menus){
+            $this->getPath($menus,$permissions);
+        }
         return $permissions;
     }
     public function getPath($arr,&$data)
