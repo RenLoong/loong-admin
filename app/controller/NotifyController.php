@@ -4,7 +4,6 @@ namespace app\controller;
 
 use app\expose\helper\Uploads;
 use app\expose\utils\Json;
-use app\model\PaymentConfig;
 use app\model\PaymentNotifyWechat;
 use app\model\PaymentTemplate;
 use Exception;
@@ -68,7 +67,7 @@ class NotifyController
             try {
                 $PaymentNotifyWechat=new PaymentNotifyWechat;
                 $PaymentNotifyWechat->notify_id=$D['id'];
-                $PaymentNotifyWechat->create_time=$D['create_time'];
+                // $PaymentNotifyWechat->create_time=$D['create_time'];
                 $PaymentNotifyWechat->resource_type=$D['resource_type'];
                 $PaymentNotifyWechat->event_type=$D['event_type'];
                 $PaymentNotifyWechat->summary=$D['summary'];
