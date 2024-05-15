@@ -15,7 +15,7 @@ class Config extends DataModel
     protected $group = '';
     public function __construct($group, $plugin = null)
     {
-        if(!$plugin){
+        if($plugin===null){
             $request = request();
             $plugin = $request->plugin;
         }

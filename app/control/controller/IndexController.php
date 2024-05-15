@@ -40,6 +40,17 @@ class IndexController extends Basic
                 $plugin->control($builder);
             }
         }
+        foreach ($pluginConfig as $path) {
+            $plugin_name = basename(dirname(dirname(dirname($path))));
+            $class = 'plugin\\' . $plugin_name . "\\api\\{$request->app}\\IndexController";
+            if (!class_exists($class)) {
+                continue;
+            }
+            $plugin = new $class;
+            if (method_exists($plugin, 'echarts')) {
+                $plugin->echarts($builder);
+            }
+        }
         return $this->resData($builder);
     }
 }
