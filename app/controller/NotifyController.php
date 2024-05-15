@@ -94,6 +94,7 @@ class NotifyController
                 $obj->finish();
             }
         } catch (\Throwable $th) {
+            Log::error('微信支付回调错误:'.$th->getMessage(),$th->getTrace());
             return $this->json(['code'=>'FAIL','message'=>$th->getMessage()],JSON_UNESCAPED_UNICODE,400);
         }
         return $this->code('SUCCESS','成功');
