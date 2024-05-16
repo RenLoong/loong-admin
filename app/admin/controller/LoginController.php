@@ -57,6 +57,7 @@ class LoginController extends Basic
                 }
             }
             $Admin->login_time = date('Y-m-d H:i:s');
+            $Admin->login_ip = $request->getRealIp(true);
             if ($Admin->save()) {
                 return $this->success('登录成功', Admin::getTokenInfo($Admin));
             } else {

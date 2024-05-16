@@ -15,7 +15,7 @@ class Config extends DataModel
     protected $group = '';
     public function __construct($group, $plugin = null)
     {
-        if($plugin===null){
+        if ($plugin === null) {
             $request = request();
             $plugin = $request->plugin;
         }
@@ -27,14 +27,24 @@ class Config extends DataModel
     public function builder()
     {
         $d = [];
+        $request = request();
+        $domain = $request->header('x-forwarded-proto') . '://' . $request->host();
         if (!empty($this->groupData)) {
             foreach ($this->groupData as $key => $item) {
-                $d[$item['field']] = $item['value'];
+                if (is_string($item['value'])&&strpos($item['value'], '{DOMAIN}') !== false) {
+                    $d[$item['field']] = str_replace('{DOMAIN}', $domain, $item['value']);
+                } else {
+                    $d[$item['field']] = $item['value'];
+                }
             }
             $ConfigModel = ModelConfig::where(['group' => $this->group])->find();
             if ($ConfigModel) {
                 foreach ($ConfigModel->value as $field => $value) {
-                    $d[$field] = $value;
+                    if (is_string($value)&&strpos($value, '{DOMAIN}') !== false) {
+                        $d[$field] =  str_replace('{DOMAIN}', $domain, $value);
+                    } else {
+                        $d[$field] = $value;
+                    }
                 }
             }
         }

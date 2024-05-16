@@ -11,8 +11,12 @@ use app\expose\helper\Captcha;
 use app\expose\helper\Config;
 use app\expose\helper\User as HelperUser;
 use app\expose\helper\Vcode;
+use app\expose\helper\Wechat;
+use app\expose\utils\wechat\OfficialAccount;
 use app\model\User;
 use Exception;
+use GuzzleHttp\Client;
+use support\Redis;
 use support\Request;
 use Webman\Event\Event;
 
@@ -22,8 +26,8 @@ class LoginController extends Basic
      * 不需要登录的方法
      * @var string[]
      */
-    protected $notNeedLogin = ['login', 'vcode', 'qrcode', 'register'];
-    protected $notNeedAuth = ['login', 'vcode', 'qrcode', 'register'];
+    protected $notNeedLogin = ['login', 'vcode', 'qrcode', 'register','checkQrcode'];
+    protected $notNeedAuth = ['login', 'vcode', 'qrcode', 'register','checkQrcode'];
     public function login(Request $request)
     {
         $D = $request->post();
@@ -51,7 +55,7 @@ class LoginController extends Basic
         if (!$User->activation_time) {
             $User->activation_time = date('Y-m-d H:i:s');
         }
-        $User->login_ip = $request->getRemoteIp(true);
+        $User->login_ip = $request->getRealIp(true);
         $User->login_time = date('Y-m-d H:i:s');
         if ($User->save()) {
             Event::emit(EventName::USER_LOGIN['value'], $User);
@@ -85,7 +89,7 @@ class LoginController extends Basic
         if (!$User->activation_time) {
             $User->activation_time = date('Y-m-d H:i:s');
         }
-        $User->login_ip = $request->getRemoteIp(true);
+        $User->login_ip = $request->getRealIp(true);
         $User->login_time = date('Y-m-d H:i:s');
         if ($User->save()) {
             Event::emit(EventName::USER_LOGIN['value'], $User);
@@ -115,15 +119,46 @@ class LoginController extends Basic
     }
     public function qrcode(Request $request)
     {
+        try {
+            $OfficialAccount=new OfficialAccount;
+            $expire=5*60;
+            $params=[];
+            if($request->icode){
+                $params['puid'] = HelperUser::getUidByIcode($request->icode);
+            }
+            $id=$OfficialAccount->createSCANScene($expire,[\app\control\event\WechatOfficialAccount::class,'login',$params]);
+            $data=[
+                'expire_seconds'=>$expire,
+                'action_name'=>'QR_STR_SCENE',
+                'action_info'=>[
+                    'scene'=>[
+                        'scene_str'=>$id
+                    ]
+                ]
+            ];
+            $res=Wechat::createQrCode($data);
+        } catch (\Throwable $th) {
+            return $this->exception($th);
+        }
         $data = [
-            'id' => $request->sessionId(),
-            'qrcode' => 'https://www.baidu.com/img/PCtm_d9c8750bed0b3c7d089fa7d55720d6cf.png?t=' . time(),
-            'expire' => 180
+            'id' => $id,
+            'qrcode' => $res['url'],
+            'expire' => $expire
         ];
         return $this->resData($data);
     }
-    public function check(Request $request)
+    public function checkQrcode(Request $request)
     {
-        return $this->fail();
+        $id=$request->post('id');
+        $uid=Redis::get($id.'_callback');
+        if($uid){
+            $User=User::where('id',$uid)->find();
+            if($User){
+                return $this->success('登录成功', User::getTokenInfo($User));
+            }else{
+                return $this->fail('登录失败');
+            }
+        }
+        return $this->code(ResponseCode::WAIT);
     }
 }

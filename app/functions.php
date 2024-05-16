@@ -11,3 +11,16 @@ function p()
     print_r($data);
     echo '</pre>';
 }
+function arrayToXml($data, $root = 'xml')
+{
+    $xml = "<{$root}>";
+    foreach ($data as $key => $value) {
+        if (is_array($value)) {
+            $xml .= arrayToXml($value, $key);
+        } else {
+            $xml .= "<{$key}>{$value}</{$key}>";
+        }
+    }
+    $xml .= "</{$root}>";
+    return $xml;
+}

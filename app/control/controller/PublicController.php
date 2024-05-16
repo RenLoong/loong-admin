@@ -40,10 +40,14 @@ class PublicController extends Basic
             'url' => 'Login/register',
             'title' => '注册' . $config['web_name']
         ]);
-        /* $config->useQrcodeLogin([
-            'url' => 'Login/qrcode',
-            'title' => '请使用微信“扫一扫”扫码登录'
-        ]); */
+        $wechat_official_account = Config::get('wechat_official_account');
+        if($wechat_official_account['state']&&$wechat_official_account['message_state']){
+            $config->useQrcodeLogin([
+                'url' => 'Login/qrcode',
+                'check' => 'Login/checkQrcode',
+                'title' => '请使用微信“扫一扫”扫码登录'
+            ]);
+        }
         $config->useApis([
             'userinfo' => 'User/getInfo',
             'lock' => 'User/lock',

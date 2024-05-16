@@ -69,4 +69,11 @@ class EventName extends Enum
             'type' => 'success'
         ]
     ];
+    const WECHAT_OFFICIAL_ACCOUNT_SCAN = [
+        'label' => '微信公众号扫码',
+        'value' => 'WECHAT_OFFICIAL_ACCOUNT.SCAN',
+        'props' => [
+            'type' => 'primary'
+        ]
+    ];
 }

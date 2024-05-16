@@ -189,6 +189,48 @@
                         "component": ""
                     }
                 ]
+            },
+            {
+                "title": "平台管理",
+                "icon": "Monitor",
+                "path": "Platform/index",
+                "children": [
+                    {
+                        "title": "微信小程序",
+                        "path": "Platform/wechat_miniproject",
+                        "component": "form"
+                    },
+                    {
+                        "title": "微信公众号",
+                        "path": "Platform/wechat_official_account",
+                        "component": "form"
+                    },
+                    {
+                        "title": "支付宝小程序",
+                        "path": "Platform/alipay_miniproject",
+                        "component": "form"
+                    },
+                    {
+                        "title": "微信开放平台",
+                        "path": "Platform/wechat_open_platform",
+                        "component": "form"
+                    },
+                    {
+                        "title":"APP",
+                        "path":"Platform/app_platform",
+                        "component":"form"
+                    },
+                    {
+                        "title":"H5",
+                        "path":"Platform/h5_platform",
+                        "component":"form"
+                    },
+                    {
+                        "title":"PC",
+                        "path":"Platform/pc_platform",
+                        "component":"form"
+                    }
+                ]
             }
         ]
     },

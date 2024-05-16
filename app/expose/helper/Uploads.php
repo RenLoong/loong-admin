@@ -2,8 +2,11 @@
 
 namespace app\expose\helper;
 
+use app\expose\enum\Filesystem;
 use app\model\Uploads as ModelUploads;
+use app\model\UploadsClassify;
 use Exception;
+use GuzzleHttp\Client;
 use Shopwwi\WebmanFilesystem\Facade\Storage;
 
 class Uploads
@@ -57,5 +60,36 @@ class Uploads
             $data     = ltrim($parseUrl['path'], '/');
             return $data;
         }
+    }
+    public static function download($url)
+    {
+        $dir_name = 'uploads/remote';
+        $UploadsClassify = UploadsClassify::where(['dir_name' => $dir_name, 'is_system' => 1])->find();
+        if (!$UploadsClassify) {
+            $UploadsClassify = new UploadsClassify;
+            $UploadsClassify->title = '远程下载';
+            $UploadsClassify->dir_name = $dir_name;
+            $UploadsClassify->channels = Filesystem::PUBLIC['value'];
+            $UploadsClassify->sort = 0;
+            $UploadsClassify->is_system = 1;
+            $UploadsClassify->save();
+        }
+        $channels =  Filesystem::PUBLIC['value'];
+        $date_path = date('Ymd');
+        $client = new Client();
+        $response = $client->get($url);
+        $body = $response->getBody();
+        $file = $body->getContents();
+        $result = Storage::adapter($channels)->path($dir_name . '/' . $date_path)->upload($file);
+        $Uploads = new ModelUploads;
+        $Uploads->classify_id = $UploadsClassify->id;
+        $Uploads->filename = $result->origin_name;
+        $Uploads->path = $result->file_name;
+        $Uploads->ext = $result->extension;
+        $Uploads->mime = $result->mime_type;
+        $Uploads->size = $result->size;
+        $Uploads->channels = $channels;
+        $Uploads->save();
+        return $result->file_name;
     }
 }
