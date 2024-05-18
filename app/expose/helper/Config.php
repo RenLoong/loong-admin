@@ -13,7 +13,13 @@ class Config extends DataModel
     protected $groupData = [];
     protected $data = [];
     protected $group = '';
-    public function __construct($group, $plugin = null)
+    /**
+     * 获取配置
+     *
+     * @param string $group 配置分组，settings目录下的文件名
+     * @param string|null $plugin 如若要获取全局配置，请传入''
+     */
+    public function __construct(string $group,string $plugin = null)
     {
         if ($plugin === null) {
             $request = request();
@@ -24,6 +30,22 @@ class Config extends DataModel
         $this->groupData = $this->configData[$this->group] ?? [];
         $this->builder();
     }
+    /**
+     * 获取当前应用指定配置，如需获取全局配置请new Config('group','');
+     *
+     * @param string $group 配置分组，settings目录下的文件名
+     * @param string|null $field 获取自定字段配置
+     * @param mixed $default 默认数据
+     * @return array|mixed
+     */
+    public static function get(string $group, string $field = null, mixed $default = null)
+    {
+        $self = new self($group);
+        if ($field) {
+            return isset($self->{$field}) ? $self->{$field} : $default;
+        }
+        return $self->toArray();
+    }
     public function builder()
     {
         $d = [];
@@ -31,7 +53,7 @@ class Config extends DataModel
         $domain = $request->header('x-forwarded-proto') . '://' . $request->host();
         if (!empty($this->groupData)) {
             foreach ($this->groupData as $key => $item) {
-                if (is_string($item['value'])&&strpos($item['value'], '{DOMAIN}') !== false) {
+                if (is_string($item['value']) && strpos($item['value'], '{DOMAIN}') !== false) {
                     $d[$item['field']] = str_replace('{DOMAIN}', $domain, $item['value']);
                 } else {
                     $d[$item['field']] = $item['value'];
@@ -40,7 +62,7 @@ class Config extends DataModel
             $ConfigModel = ModelConfig::where(['group' => $this->group])->find();
             if ($ConfigModel) {
                 foreach ($ConfigModel->value as $field => $value) {
-                    if (is_string($value)&&strpos($value, '{DOMAIN}') !== false) {
+                    if (is_string($value) && strpos($value, '{DOMAIN}') !== false) {
                         $d[$field] =  str_replace('{DOMAIN}', $domain, $value);
                     } else {
                         $d[$field] = $value;
@@ -57,14 +79,6 @@ class Config extends DataModel
     public function getGrop()
     {
         return $this->group;
-    }
-    public static function get($group, $field = null, $default = null)
-    {
-        $self = new self($group);
-        if ($field) {
-            return isset($self->{$field}) ? $self->{$field} : $default;
-        }
-        return $self->toArray();
     }
     public static function set($group, $field, $value)
     {

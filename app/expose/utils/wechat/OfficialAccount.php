@@ -3,7 +3,6 @@ namespace app\expose\utils\wechat;
 
 use app\expose\utils\wechat\modules\Event;
 use app\expose\utils\wechat\modules\Reply;
-use support\Redis;
 
 class OfficialAccount
 {
@@ -32,13 +31,6 @@ class OfficialAccount
             return true;
         }
         throw new \Exception('signature error');
-    }
-    public function createSCANScene($expire,$data)
-    {
-        $request=request();
-        $id=$request->sessionId();
-        Redis::set($id,json_encode($data,JSON_UNESCAPED_UNICODE),'EX',$expire+60);
-        return $id;
     }
     private function getData($request,$config)
     {

@@ -17,6 +17,11 @@ class Sms
     protected $template;
     public function setTemplate($template)
     {
+        # 判断$template是否已经new过
+        if (is_object($template)) {
+            $this->template = $template;
+            return $this;
+        }
         $this->template = new $template;
         return $this;
     }

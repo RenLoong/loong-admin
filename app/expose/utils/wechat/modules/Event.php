@@ -12,7 +12,6 @@ trait Event
 {
     private function handleEvent($data)
     {
-        p($data);
         switch($data['Event'])
         {
             case 'subscribe':

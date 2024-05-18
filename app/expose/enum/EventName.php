@@ -76,4 +76,18 @@ class EventName extends Enum
             'type' => 'primary'
         ]
     ];
+    const NOTIFICATION_LIMIT= [
+        'label' => '有限通知',
+        'value' => 'NOTIFICATION.LIMIT',
+        'props' => [
+            'type' => 'info'
+        ]
+    ];
+    const NOTIFICATION_UNLIMIT= [
+        'label' => '无限通知',
+        'value' => 'NOTIFICATION.UNLIMIT',
+        'props' => [
+            'type' => 'info'
+        ]
+    ];
 }

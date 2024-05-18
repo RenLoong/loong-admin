@@ -10,7 +10,7 @@ class Basic extends DataModel
     protected $data;
     public function __construct()
     {
-        $config = ConfigGroup::get('sms');
+        $config = new ConfigGroup('sms','');
         $this->data['channels'] = $config['channels'];
         $this->data['config'] = $config[$config['channels']];
     }

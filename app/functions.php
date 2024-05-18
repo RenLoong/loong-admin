@@ -24,3 +24,10 @@ function arrayToXml($data, $root = 'xml')
     $xml .= "</{$root}>";
     return $xml;
 }
+function growth_rate($a, $b)
+{
+    if (!$a || !$b || ($a - $b == 0)) {
+        return 0;
+    }
+    return round(($a - $b) / $b * 100, 2);
+}

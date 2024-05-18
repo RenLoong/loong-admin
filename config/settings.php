@@ -1,15 +1,15 @@
 <?php
 
-$data = [];
-$rootConfig = glob(config_path('settings') . '/*.php');
-foreach ($rootConfig as $path) {
+$dsgcVZysogZwsgLtyLSzismIYhJiKmGtHwKNuTBOJGpColEtPdAfBpZLeEeMnqWo = [];
+$cxtRRqIkAoqStnQpBEQBMFWInZDEHhUjgkHQmcwJjDMcGfHtePbWjuTEnLFLpGNk = glob(config_path('settings') . '/*.php');
+foreach ($cxtRRqIkAoqStnQpBEQBMFWInZDEHhUjgkHQmcwJjDMcGfHtePbWjuTEnLFLpGNk as $path) {
     $group = basename($path, '.php');
-    $data[$group] = require $path;
+    $dsgcVZysogZwsgLtyLSzismIYhJiKmGtHwKNuTBOJGpColEtPdAfBpZLeEeMnqWo[$group] = include $path;
 }
-$pluginConfig = glob(base_path('plugin/*/config/settings/*.php'));
-foreach ($pluginConfig as $path) {
+$cxtRRqIkAoqStnQpBEQBMFWInZDEHhUjgkHQmcwJjDMcGfHtePbWjuTEnLFLpGNk = glob(base_path('plugin/*/config/settings/*.php'));
+foreach ($cxtRRqIkAoqStnQpBEQBMFWInZDEHhUjgkHQmcwJjDMcGfHtePbWjuTEnLFLpGNk as $path) {
     $plugin_name = basename(dirname(dirname(dirname($path))));
     $group = basename($path, '.php');
-    $data[$plugin_name . '.' . $group] = require $path;
+    $dsgcVZysogZwsgLtyLSzismIYhJiKmGtHwKNuTBOJGpColEtPdAfBpZLeEeMnqWo[$plugin_name . '.' . $group] = include $path;
 }
-return $data;
+return $dsgcVZysogZwsgLtyLSzismIYhJiKmGtHwKNuTBOJGpColEtPdAfBpZLeEeMnqWo;

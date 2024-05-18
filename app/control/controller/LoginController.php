@@ -120,30 +120,19 @@ class LoginController extends Basic
     public function qrcode(Request $request)
     {
         try {
-            $OfficialAccount=new OfficialAccount;
             $expire=5*60;
             $params=[];
             if($request->icode){
                 $params['puid'] = HelperUser::getUidByIcode($request->icode);
             }
-            $id=$OfficialAccount->createSCANScene($expire,[\app\control\event\WechatOfficialAccount::class,'login',$params]);
-            $data=[
-                'expire_seconds'=>$expire,
-                'action_name'=>'QR_STR_SCENE',
-                'action_info'=>[
-                    'scene'=>[
-                        'scene_str'=>$id
-                    ]
-                ]
-            ];
-            $res=Wechat::createQrCode($data);
+            $res=Wechat::createQrCode(Wechat::QR_STR_SCENE,$expire,[\app\control\event\WechatOfficialAccount::class,'login',$params]);
         } catch (\Throwable $th) {
             return $this->exception($th);
         }
         $data = [
-            'id' => $id,
+            'id' => $res['id'],
             'qrcode' => $res['url'],
-            'expire' => $expire
+            'expire' => $res['expire_seconds']
         ];
         return $this->resData($data);
     }

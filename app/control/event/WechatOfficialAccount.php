@@ -41,12 +41,14 @@ class WechatOfficialAccount
                 if(isset($data['params'])&&isset($data['params']['puid'])){
                     $User->puid=$data['params']['puid'];
                 }
+                $User->activation_time=date('Y-m-d H:i:s');
                 $User->save();
             }else{
                 $User=new User();
                 if(isset($data['params'])&&isset($data['params']['puid'])){
                     $User->puid=$data['params']['puid'];
                 }
+                $User->activation_time=date('Y-m-d H:i:s');
                 $User->save();
                 $UserWechat=new UserWechat();
                 $UserWechat->openid=$data['FromUserName'];
