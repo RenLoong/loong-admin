@@ -9,7 +9,7 @@ class PaymentChannels extends Enum
     const WXPAY = [
         'label' => '微信支付',
         'value' => 'wxpay',
-        'icon' => './static/image/wxpay.png',
+        'icon' => '/static/image/wxpay.png',
         'props' => [
             'type' => 'success'
         ]
@@ -17,7 +17,7 @@ class PaymentChannels extends Enum
     const ALIPAY = [
         'label' => '支付宝支付',
         'value' => 'alipay',
-        'icon' => './static/image/alipay.png',
+        'icon' => '/static/image/alipay.png',
         'props' => [
             'type' => 'primary'
         ]
@@ -25,7 +25,7 @@ class PaymentChannels extends Enum
     const BALANCE = [
         'label' => '余额支付',
         'value' => 'balance',
-        'icon' => './static/image/balance.png',
+        'icon' => '/static/image/balance.png',
         'props' => [
             'type' => 'info'
         ]
@@ -33,7 +33,7 @@ class PaymentChannels extends Enum
     const INTEGRAL = [
         'label' => '积分支付',
         'value' => 'integral',
-        'icon' => './static/image/integral.png',
+        'icon' => '/static/image/integral.png',
         'props' => [
             'type' => 'warning'
         ]
