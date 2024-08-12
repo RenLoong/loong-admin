@@ -41,7 +41,7 @@
     "league/flysystem-aws-s3-v3": "^3.0",
     "overtrue/flysystem-qiniu": "^3.0",
     "overtrue/flysystem-cos": "^5.0",
-    "loong/oauth": "^1.0",
+    "loong/oauth": "^1.1",
     "alibabacloud/dysmsapi-20170525": "^2.0",
     "tencentcloud/tencentcloud-sdk-php": "^3.0",
     "yansongda/pay": "~3.7.0",
