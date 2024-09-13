@@ -8,6 +8,7 @@ use app\model\UploadsClassify;
 use Exception;
 use GuzzleHttp\Client;
 use Shopwwi\WebmanFilesystem\Facade\Storage;
+use Webman\Http\UploadFile;
 
 class Uploads
 {
@@ -61,6 +62,42 @@ class Uploads
             return $data;
         }
     }
+    public static function save($path)
+    {
+        $dir_name = 'uploads/save';
+        $UploadsClassify = UploadsClassify::where(['dir_name' => $dir_name, 'is_system' => 1])->find();
+        if (!$UploadsClassify) {
+            $UploadsClassify = new UploadsClassify;
+            $UploadsClassify->title = '本地保存';
+            $UploadsClassify->dir_name = $dir_name;
+            $UploadsClassify->channels = Filesystem::PUBLIC['value'];
+            $UploadsClassify->sort = 0;
+            $UploadsClassify->is_system = 1;
+            $UploadsClassify->save();
+        }
+        $channels =  Filesystem::PUBLIC['value'];
+        $date_path = date('Ymd');
+        $originName=basename($path);
+        //单文件上传
+        $file = new UploadFile($path, $originName, mime_content_type($path), filesize($path));
+        $result = Storage::adapter($channels)->path($dir_name . '/' . $date_path)->upload($file);
+        $Uploads = new ModelUploads;
+        $Uploads->classify_id = $UploadsClassify->id;
+        $Uploads->filename = $result->origin_name;
+        $Uploads->path = $result->file_name;
+        $Uploads->ext = $result->extension;
+        $Uploads->mime = $result->mime_type;
+        $Uploads->size = $result->size;
+        $Uploads->channels = $channels;
+        $Uploads->save();
+        return [
+            'id' => $Uploads->id,
+            'url' => $result->file_url,
+            'path' => $result->file_name,
+            'mime' => $result->mime_type,
+            'dir_name' => $dir_name
+        ];
+    }
     public static function download($url)
     {
         $dir_name = 'uploads/remote';
@@ -80,7 +117,14 @@ class Uploads
         $response = $client->get($url);
         $body = $response->getBody();
         $file = $body->getContents();
+        $urlPath = parse_url($url, PHP_URL_PATH);
+        $ext = pathinfo($urlPath, PATHINFO_EXTENSION);
+        $fileName = uniqid() . '.' . $ext;
+        $temp = tempnam(sys_get_temp_dir(), '') . $fileName;
+        file_put_contents($temp, $file);
+        $file = new UploadFile($temp, $temp, $response->getHeaderLine('Content-Type'),  0);
         $result = Storage::adapter($channels)->path($dir_name . '/' . $date_path)->upload($file);
+        \unlink($temp);
         $Uploads = new ModelUploads;
         $Uploads->classify_id = $UploadsClassify->id;
         $Uploads->filename = $result->origin_name;
