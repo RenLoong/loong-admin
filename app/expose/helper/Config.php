@@ -50,10 +50,13 @@ class Config extends DataModel
     {
         $d = [];
         $request = request();
-        $domain = $request->header('x-forwarded-proto') . '://' . $request->host();
+        $domain='';
+        if($request){
+            $domain = $request->header('x-forwarded-proto') . '://' . $request->host();
+        }
         if (!empty($this->groupData)) {
             foreach ($this->groupData as $key => $item) {
-                if (is_string($item['value']) && strpos($item['value'], '{DOMAIN}') !== false) {
+                if (is_string($item['value']) && strpos($item['value'], '{DOMAIN}') !== false&&$domain) {
                     $d[$item['field']] = str_replace('{DOMAIN}', $domain, $item['value']);
                 } else {
                     $d[$item['field']] = $item['value'];
@@ -62,7 +65,7 @@ class Config extends DataModel
             $ConfigModel = ModelConfig::where(['group' => $this->group])->find();
             if ($ConfigModel) {
                 foreach ($ConfigModel->value as $field => $value) {
-                    if (is_string($value) && strpos($value, '{DOMAIN}') !== false) {
+                    if (is_string($value) && strpos($value, '{DOMAIN}') !== false&&$domain) {
                         $d[$field] =  str_replace('{DOMAIN}', $domain, $value);
                     } else {
                         $d[$field] = $value;
