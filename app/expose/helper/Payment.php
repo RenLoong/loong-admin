@@ -9,6 +9,7 @@ use app\model\PaymentConfig;
 use app\model\PaymentTemplate;
 use Exception;
 use Yansongda\Pay\Pay;
+use support\Log;
 
 class Payment
 {
