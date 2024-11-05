@@ -148,6 +148,7 @@ class Payment
             'description' => $model->title,
             'time_expire'=>date('c', strtotime($model->expire_time)),
         ];
+        Log::info('wxPayPc',['order'=>$order,'config'=>$config]);
         $Pay = Pay::wechat($config)->scan($order);
         return [
             'trade' => $model->trade,
