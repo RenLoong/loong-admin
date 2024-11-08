@@ -106,8 +106,7 @@ class Payment
         if(substr($notify_url,-1)=='/'){
             $notify_url=substr($notify_url,0,-1);
         }
-        $request=request();
-        $notify_url.='/notify/wechat/'.$request->plugin.'/'.$PaymentTemplate->id;
+        $notify_url.='/notify/wechat/'.$model->plugin.'/'.$PaymentTemplate->id;
         $config = [
             'wechat' => [
                 'default' => [
@@ -130,9 +129,9 @@ class Payment
                 ]
             ],
             'logger' => [
-                'enable' => false,
-                'file' => runtime_path('logs/wechat.log'),
-                'level' => 'debug', // 建议生产环境等级调整为 info，开发环境为 debug
+                'enable' => true,
+                'file' => runtime_path('logs/wechat-pay-'.date('Y-m-d').'.log'),
+                'level' => 'info', // 建议生产环境等级调整为 info，开发环境为 debug
                 'type' => 'single', // optional, 可选 daily.
                 'max_file' => 30, // optional, 当 type 为 daily 时有效，默认 30 天
             ],
@@ -152,6 +151,7 @@ class Payment
         Log::info('wxPayPc',['order'=>$order,'config'=>$config]);
         $Pay = Pay::wechat($config)->scan($order);
         return [
+            'plugin' => $model->plugin,
             'trade' => $model->trade,
             'qrcode' => $Pay->code_url,
         ];
