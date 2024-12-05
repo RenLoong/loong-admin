@@ -23,7 +23,9 @@ class Statistic extends Basic implements DataboardBuilderInterface
     public function __construct()
     {
         $this->data['name'] = 'statistic';
-        $this->data['props'] = [];
+        $this->data['props'] = [
+            'yesterday_label'=>'昨日',
+        ];
     }
     public function __call($name, $arguments)
     {
