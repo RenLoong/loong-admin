@@ -12,6 +12,11 @@ use Webman\Http\UploadFile;
 
 class Uploads
 {
+    /**
+     * 获取文件URL
+     * @param string|array|null $path 文件路径
+     * @return string|array
+     */
     public static function url(string|array|null $path)
     {
         if (is_null($path)) {
@@ -35,6 +40,11 @@ class Uploads
         }
         return Storage::adapter($model->channels)->url($model->path);
     }
+    /**
+     * 获取文件路径
+     * @param string|array|null $url URL地址
+     * @return string|array
+     */
     public static function path(string|array|null $url)
     {
         if (is_null($url)) {
@@ -62,7 +72,13 @@ class Uploads
             return $data;
         }
     }
-    public static function save($path)
+    /**
+     * 保存文件
+     * @param string $path 文件路径
+     * @param string $channels 文件存储通道
+     * @return array
+     */
+    public static function save(string $path,$channels=Filesystem::PUBLIC['value'])
     {
         $dir_name = 'uploads/save';
         $UploadsClassify = UploadsClassify::where(['dir_name' => $dir_name, 'is_system' => 1])->find();
@@ -70,12 +86,11 @@ class Uploads
             $UploadsClassify = new UploadsClassify;
             $UploadsClassify->title = '本地保存';
             $UploadsClassify->dir_name = $dir_name;
-            $UploadsClassify->channels = Filesystem::PUBLIC['value'];
+            $UploadsClassify->channels = $channels;
             $UploadsClassify->sort = 0;
             $UploadsClassify->is_system = 1;
             $UploadsClassify->save();
         }
-        $channels =  Filesystem::PUBLIC['value'];
         $date_path = date('Ymd');
         $originName=basename($path);
         //单文件上传
@@ -98,7 +113,7 @@ class Uploads
             'dir_name' => $dir_name
         ];
     }
-    public static function download($url)
+    public static function download(string $url, $channels = Filesystem::PUBLIC['value'])
     {
         $dir_name = 'uploads/remote';
         $UploadsClassify = UploadsClassify::where(['dir_name' => $dir_name, 'is_system' => 1])->find();
@@ -106,12 +121,11 @@ class Uploads
             $UploadsClassify = new UploadsClassify;
             $UploadsClassify->title = '远程下载';
             $UploadsClassify->dir_name = $dir_name;
-            $UploadsClassify->channels = Filesystem::PUBLIC['value'];
+            $UploadsClassify->channels = $channels;
             $UploadsClassify->sort = 0;
             $UploadsClassify->is_system = 1;
             $UploadsClassify->save();
         }
-        $channels =  Filesystem::PUBLIC['value'];
         $date_path = date('Ymd');
         $client = new Client();
         $response = $client->get($url);
