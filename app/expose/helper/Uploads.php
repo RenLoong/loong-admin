@@ -113,6 +113,12 @@ class Uploads
             'dir_name' => $dir_name
         ];
     }
+    /**
+     * 远程下载文件
+     * @param string $url 文件URL
+     * @param string $channels 文件存储通道
+     * @return string
+     */
     public static function download(string $url, $channels = Filesystem::PUBLIC['value'])
     {
         $dir_name = 'uploads/remote';
