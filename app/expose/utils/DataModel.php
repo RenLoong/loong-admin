@@ -46,7 +46,7 @@ class DataModel implements ArrayAccess, JsonSerializable
     {
         return json_encode($this->data, JSON_UNESCAPED_UNICODE);
     }
-    public function offsetGet(mixed $offset)
+    public function offsetGet(mixed $offset):mixed
     {
         return $this->data[$offset] ?? null;
     }
@@ -74,7 +74,7 @@ class DataModel implements ArrayAccess, JsonSerializable
     {
         return json_encode($this->data, JSON_UNESCAPED_UNICODE);
     }
-    public function jsonSerialize()
+    public function jsonSerialize(): array
     {
         return $this->data;
     }

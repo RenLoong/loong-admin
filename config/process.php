@@ -12,12 +12,34 @@
  * @license   http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
-global $argv;
+ use support\Log;
+ use support\Request;
+ use app\process\Http;
+ use app\process\Monitor;
+ 
+ global $argv;
 
 return [
+    'webman' => [
+        'handler' => Http::class,
+        'listen' => 'http://0.0.0.0:'.getenv('SERVER_PORT'),
+        'name' => getenv('SERVER_NAME') ? getenv('SERVER_NAME') : 'webman',
+        'count' => getenv('DEBUG') == 'true' ? 1 : cpu_count() * 4,
+        'user' => '',
+        'group' => '',
+        'reusePort' => false,
+        'eventLoop' => '',
+        'context' => [],
+        'constructor' => [
+            'requestClass' => Request::class,
+            'logger' => Log::channel('default'),
+            'appPath' => app_path(),
+            'publicPath' => public_path()
+        ]
+    ],
     // File update detection and automatic reload
     'monitor' => [
-        'handler' => process\Monitor::class,
+        'handler' => Monitor::class,
         'reloadable' => false,
         'constructor' => [
             // Monitor these directories
