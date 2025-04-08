@@ -16,6 +16,7 @@
  use support\Request;
  use app\process\Http;
  use app\process\Monitor;
+ use Workerman\Events\Swoole;
  
  global $argv;
 
@@ -28,7 +29,7 @@ return [
         'user' => '',
         'group' => '',
         'reusePort' => false,
-        'eventLoop' => '',
+        'eventLoop' => Swoole::class,
         'context' => [],
         'constructor' => [
             'requestClass' => Request::class,

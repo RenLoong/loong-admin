@@ -19,15 +19,15 @@ class User extends Basic
     }
     public function getNicknameAttr($value)
     {
-        return base64_decode($value);
+        return $value?base64_decode($value):$value;
     }
     public function setNicknameAttr($value)
     {
-        return base64_encode($value);
+        return $value?base64_encode($value):$value;
     }
     public function setPasswordAttr($value)
     {
-        return Password::encrypt($value);
+        return $value?Password::encrypt($value):$value;
     }
     public static function getTokenInfo($model)
     {
