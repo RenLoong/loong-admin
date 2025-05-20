@@ -15,7 +15,7 @@ class Validate extends ThinkValidate
      * @param Db $db Db对象
      * @return void
      */
-    public function setDb(Db $db)
+    public function setDb($db)
     {
         $this->db = $db;
     }

@@ -8,6 +8,7 @@ use app\expose\build\builder\FormBuilder;
 use app\expose\build\builder\TableBuilder;
 use app\expose\enum\Action;
 use app\expose\enum\State;
+use app\expose\helper\Uploads;
 use app\expose\helper\User as HelperUser;
 use app\model\User;
 use support\Request;
@@ -93,6 +94,19 @@ class UserController extends Basic
                 'clearable' => true
             ]
         ]);
+        $formBuilder->add('puid', '上级UID', 'input', '', [
+            'col' => [
+                'xs' => 24,
+                'sm' => 12,
+                'md' => 8,
+                'lg' => 6,
+                'xl' => 4
+            ],
+            'props' => [
+                'placeholder' => '上级UID搜索',
+                'clearable' => true
+            ]
+        ]);
         $builder->addScreen($formBuilder);
         $builder->add('id', 'ID', [
             'props' => [
@@ -119,6 +133,19 @@ class UserController extends Basic
             ],
             'props' => [
                 'minWidth' => '300px'
+            ]
+        ]);
+        $builder->add('puserinfo', '上级', [
+            'component' => [
+                'name' => 'table-userinfo',
+                'props' => [
+                    'nickname' => 'pnickname',
+                    'avatar' => 'pheadimg',
+                    'info' => 'puid'
+                ]
+            ],
+            'props' => [
+                'width' => '300px'
             ]
         ]);
         $builder->add('contact', '联系方式', [
@@ -211,18 +238,30 @@ class UserController extends Basic
         $where = [];
         $username = $request->get('username');
         if ($username) {
-            $where[] = ['username', 'like', "%{$username}%"];
+            $where[] = ['u.username', 'like', "%{$username}%"];
         }
         $mobile = $request->get('mobile');
         if ($mobile) {
-            $where[] = ['mobile', 'like', "%{$mobile}%"];
+            $where[] = ['u.mobile', 'like', "%{$mobile}%"];
         }
         $email = $request->get('email');
         if ($email) {
-            $where[] = ['email', 'like', "%{$email}%"];
+            $where[] = ['u.email', 'like', "%{$email}%"];
         }
-        $list = User::alias('a')->where($where)
-            ->order('id desc')->paginate($limit)->each(function ($item) {
+        $puid = $request->get('puid');
+        if ($puid) {
+            $where[] = ['u.puid', '=', $puid];
+        }
+        $list = User::alias('u')->where($where)
+            ->join('user p', 'u.puid = p.id', 'LEFT')
+            ->field('u.*,p.nickname as  pnickname,p.headimg as pheadimg')
+            ->order('u.id desc')->paginate($limit)->each(function ($item) {
+                if($item->pheadimg){
+                    $item->pheadimg=Uploads::url($item->pheadimg);
+                }
+                if($item->pnickname){
+                    $item->pnickname=base64_decode($item->pnickname);
+                }
             });
         return $this->resData($list);
     }
