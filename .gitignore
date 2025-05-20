@@ -10,7 +10,3 @@
 /config/plugin/shopwwi/filesystem/app.json
 /public/uploads
 .well-known
-/vendor
-/composer.json
-/composer.json.example
-/composer.lock
