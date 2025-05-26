@@ -16,15 +16,15 @@ class ComposerStaticInit31dbebff699f6ce4d696d736e935f142
         'a4a119a56e50fbb293281d9a48007e0e' => __DIR__ . '/..' . '/symfony/polyfill-php80/bootstrap.php',
         'a1105708a18b76903365ca1c4aa61b02' => __DIR__ . '/..' . '/symfony/translation/Resources/functions.php',
         '72579e7bd17821bb1321b87411366eae' => __DIR__ . '/..' . '/illuminate/support/helpers.php',
+        '253c157292f75eb38082b5acb06f3f01' => __DIR__ . '/..' . '/nikic/fast-route/src/functions.php',
         '320cde22f66dd4f5d3fd621d3e88b98f' => __DIR__ . '/..' . '/symfony/polyfill-ctype/bootstrap.php',
         '9b552a3cc426e3287cc811caefa3cf53' => __DIR__ . '/..' . '/topthink/think-helper/src/helper.php',
-        '253c157292f75eb38082b5acb06f3f01' => __DIR__ . '/..' . '/nikic/fast-route/src/functions.php',
         '8825ede83f2f289127722d4e842cf7e8' => __DIR__ . '/..' . '/symfony/polyfill-intl-grapheme/bootstrap.php',
         'e69f7f6ee287b969198c3c9d6777bd38' => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer/bootstrap.php',
+        'd2136ff22b54ac75cd96a40e0022218e' => __DIR__ . '/..' . '/workerman/webman-framework/src/support/helpers.php',
         '6b998e7ad3182c0d21d23780badfa07b' => __DIR__ . '/..' . '/yansongda/supports/src/Functions.php',
         'b067bc7112e384b61c701452d53a14a8' => __DIR__ . '/..' . '/mtdowling/jmespath.php/src/JmesPath.php',
         'b6b991a57620e2fb6b2f66f03fe9ddc2' => __DIR__ . '/..' . '/symfony/string/Resources/functions.php',
-        'd2136ff22b54ac75cd96a40e0022218e' => __DIR__ . '/..' . '/workerman/webman-framework/src/support/helpers.php',
         '8a9dc1de0ca7e01f3e08231539562f61' => __DIR__ . '/..' . '/aws/aws-sdk-php/src/functions.php',
         '841780ea2e1d6545ea3a253239d59c05' => __DIR__ . '/..' . '/qiniu/php-sdk/src/Qiniu/functions.php',
         '5dd19d8a547b7318af0c3a93c8bd6565' => __DIR__ . '/..' . '/qiniu/php-sdk/src/Qiniu/Http/Middleware/Middleware.php',
@@ -75,6 +75,7 @@ class ComposerStaticInit31dbebff699f6ce4d696d736e935f142
             'Webman\\Event\\' => 13,
             'Webman\\Console\\' => 15,
             'Webman\\Captcha\\' => 15,
+            'Webman\\Cache\\' => 13,
             'Webman\\' => 7,
         ),
         'T' => 
@@ -217,7 +218,8 @@ class ComposerStaticInit31dbebff699f6ce4d696d736e935f142
         array (
             0 => __DIR__ . '/..' . '/webman/think-orm/src/support',
             1 => __DIR__ . '/..' . '/webman/redis/src/support',
-            2 => __DIR__ . '/..' . '/workerman/webman-framework/src/support',
+            2 => __DIR__ . '/..' . '/webman/cache/src/support',
+            3 => __DIR__ . '/..' . '/workerman/webman-framework/src/support',
         ),
         'loong\\oauth\\' => 
         array (
@@ -275,6 +277,10 @@ class ComposerStaticInit31dbebff699f6ce4d696d736e935f142
         'Webman\\Captcha\\' => 
         array (
             0 => __DIR__ . '/..' . '/webman/captcha/src',
+        ),
+        'Webman\\Cache\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/webman/cache/src',
         ),
         'Webman\\' => 
         array (

@@ -8,7 +8,7 @@ $baseDir = dirname($vendorDir);
 return array(
     'voku\\' => array($vendorDir . '/voku/portable-ascii/src/voku'),
     'think\\' => array($vendorDir . '/topthink/think-validate/src', $vendorDir . '/topthink/think-template/src', $vendorDir . '/topthink/think-orm/src', $vendorDir . '/topthink/think-container/src', $vendorDir . '/topthink/think-helper/src'),
-    'support\\' => array($vendorDir . '/webman/think-orm/src/support', $vendorDir . '/webman/redis/src/support', $vendorDir . '/workerman/webman-framework/src/support'),
+    'support\\' => array($vendorDir . '/webman/think-orm/src/support', $vendorDir . '/webman/redis/src/support', $vendorDir . '/webman/cache/src/support', $vendorDir . '/workerman/webman-framework/src/support'),
     'loong\\oauth\\' => array($vendorDir . '/loong/oauth/src'),
     'app\\View\\Components\\' => array($baseDir . '/app/view/components'),
     'app\\' => array($baseDir . '/app'),
@@ -23,6 +23,7 @@ return array(
     'Webman\\Event\\' => array($vendorDir . '/webman/event/src'),
     'Webman\\Console\\' => array($vendorDir . '/webman/console/src'),
     'Webman\\Captcha\\' => array($vendorDir . '/webman/captcha/src'),
+    'Webman\\Cache\\' => array($vendorDir . '/webman/cache/src'),
     'Webman\\' => array($vendorDir . '/workerman/webman-framework/src'),
     'TheNorthMemory\\Xml\\' => array($vendorDir . '/thenorthmemory/xml/src'),
     'TencentCloud\\' => array($vendorDir . '/tencentcloud/tencentcloud-sdk-php/src/TencentCloud'),
