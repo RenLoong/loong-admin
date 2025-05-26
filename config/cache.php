@@ -14,7 +14,7 @@
  */
 
 return [
-    'default' => 'file',
+    'default' => 'redis',
     'stores' => [
         'file' => [
             'driver' => 'file',

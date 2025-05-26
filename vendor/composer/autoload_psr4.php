@@ -25,6 +25,7 @@ return array(
     'Webman\\Captcha\\' => array($vendorDir . '/webman/captcha/src'),
     'Webman\\Cache\\' => array($vendorDir . '/webman/cache/src'),
     'Webman\\' => array($vendorDir . '/workerman/webman-framework/src'),
+    'WebSocket\\' => array($vendorDir . '/textalk/websocket/lib'),
     'TheNorthMemory\\Xml\\' => array($vendorDir . '/thenorthmemory/xml/src'),
     'TencentCloud\\' => array($vendorDir . '/tencentcloud/tencentcloud-sdk-php/src/TencentCloud'),
     'Symfony\\Polyfill\\Php80\\' => array($vendorDir . '/symfony/polyfill-php80'),

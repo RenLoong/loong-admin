@@ -77,6 +77,7 @@ class ComposerStaticInit31dbebff699f6ce4d696d736e935f142
             'Webman\\Captcha\\' => 15,
             'Webman\\Cache\\' => 13,
             'Webman\\' => 7,
+            'WebSocket\\' => 10,
         ),
         'T' => 
         array (
@@ -285,6 +286,10 @@ class ComposerStaticInit31dbebff699f6ce4d696d736e935f142
         'Webman\\' => 
         array (
             0 => __DIR__ . '/..' . '/workerman/webman-framework/src',
+        ),
+        'WebSocket\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/textalk/websocket/lib',
         ),
         'TheNorthMemory\\Xml\\' => 
         array (
