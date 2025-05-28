@@ -34,7 +34,11 @@ class AdminAuth implements MiddlewareInterface
             if ($request->expectsJson()) {
                 $response = $this->exception($th);
             } else {
-                throw $th;
+                if(config('app.debug')){
+                    throw $th;
+                }else{
+                    $response = response($th->getMessage(), 500);
+                }
             }
         }
         return $response;
