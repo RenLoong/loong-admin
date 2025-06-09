@@ -23,9 +23,9 @@ use TencentCloud\Common\AbstractModel;
  * @method integer getTotalCount() 获取该地域下CDN域名总数	
  * @method void setTotalCount(integer $TotalCount) 设置该地域下CDN域名总数	
  * @method array getInstanceList() 获取cdn域名详情	
-注意：此字段可能返回 null，表示取不到有效值。
  * @method void setInstanceList(array $InstanceList) 设置cdn域名详情	
-注意：此字段可能返回 null，表示取不到有效值。
+ * @method string getError() 获取是否查询异常
+ * @method void setError(string $Error) 设置是否查询异常
  */
 class CdnInstanceList extends AbstractModel
 {
@@ -36,14 +36,18 @@ class CdnInstanceList extends AbstractModel
 
     /**
      * @var array cdn域名详情	
-注意：此字段可能返回 null，表示取不到有效值。
      */
     public $InstanceList;
 
     /**
+     * @var string 是否查询异常
+     */
+    public $Error;
+
+    /**
      * @param integer $TotalCount 该地域下CDN域名总数	
      * @param array $InstanceList cdn域名详情	
-注意：此字段可能返回 null，表示取不到有效值。
+     * @param string $Error 是否查询异常
      */
     function __construct()
     {
@@ -69,6 +73,10 @@ class CdnInstanceList extends AbstractModel
                 $obj->deserialize($value);
                 array_push($this->InstanceList, $obj);
             }
+        }
+
+        if (array_key_exists("Error",$param) and $param["Error"] !== null) {
+            $this->Error = $param["Error"];
         }
     }
 }

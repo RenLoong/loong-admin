@@ -23,11 +23,11 @@ use TencentCloud\Common\AbstractModel;
  * @method string getRegion() 获取地域
  * @method void setRegion(string $Region) 设置地域
  * @method array getInstanceList() 获取apigateway实例详情	
-注意：此字段可能返回 null，表示取不到有效值。
  * @method void setInstanceList(array $InstanceList) 设置apigateway实例详情	
-注意：此字段可能返回 null，表示取不到有效值。
  * @method integer getTotalCount() 获取该地域下apigateway实例总数	
  * @method void setTotalCount(integer $TotalCount) 设置该地域下apigateway实例总数	
+ * @method string getError() 获取是否查询异常
+ * @method void setError(string $Error) 设置是否查询异常
  */
 class ApiGatewayInstanceList extends AbstractModel
 {
@@ -38,7 +38,6 @@ class ApiGatewayInstanceList extends AbstractModel
 
     /**
      * @var array apigateway实例详情	
-注意：此字段可能返回 null，表示取不到有效值。
      */
     public $InstanceList;
 
@@ -48,10 +47,15 @@ class ApiGatewayInstanceList extends AbstractModel
     public $TotalCount;
 
     /**
+     * @var string 是否查询异常
+     */
+    public $Error;
+
+    /**
      * @param string $Region 地域
      * @param array $InstanceList apigateway实例详情	
-注意：此字段可能返回 null，表示取不到有效值。
      * @param integer $TotalCount 该地域下apigateway实例总数	
+     * @param string $Error 是否查询异常
      */
     function __construct()
     {
@@ -81,6 +85,10 @@ class ApiGatewayInstanceList extends AbstractModel
 
         if (array_key_exists("TotalCount",$param) and $param["TotalCount"] !== null) {
             $this->TotalCount = $param["TotalCount"];
+        }
+
+        if (array_key_exists("Error",$param) and $param["Error"] !== null) {
+            $this->Error = $param["Error"];
         }
     }
 }

@@ -20,8 +20,8 @@ use TencentCloud\Common\AbstractModel;
 /**
  * DescribeAttributeLabel请求参数结构体
  *
- * @method string getBotBizId() 获取机器人ID
- * @method void setBotBizId(string $BotBizId) 设置机器人ID
+ * @method string getBotBizId() 获取应用ID
+ * @method void setBotBizId(string $BotBizId) 设置应用ID
  * @method string getAttributeBizId() 获取属性ID
  * @method void setAttributeBizId(string $AttributeBizId) 设置属性ID
  * @method integer getLimit() 获取每次加载的数量 
@@ -34,11 +34,13 @@ use TencentCloud\Common\AbstractModel;
  * @method void setQuery(string $Query) 设置查询标签或相似标签
  * @method string getLastLabelBizId() 获取滚动加载游标的标签ID
  * @method void setLastLabelBizId(string $LastLabelBizId) 设置滚动加载游标的标签ID
+ * @method string getQueryScope() 获取查询范围 all(或者传空):标准词和相似词 standard:标准词 similar:相似词
+ * @method void setQueryScope(string $QueryScope) 设置查询范围 all(或者传空):标准词和相似词 standard:标准词 similar:相似词
  */
 class DescribeAttributeLabelRequest extends AbstractModel
 {
     /**
-     * @var string 机器人ID
+     * @var string 应用ID
      */
     public $BotBizId;
 
@@ -73,13 +75,19 @@ class DescribeAttributeLabelRequest extends AbstractModel
     public $LastLabelBizId;
 
     /**
-     * @param string $BotBizId 机器人ID
+     * @var string 查询范围 all(或者传空):标准词和相似词 standard:标准词 similar:相似词
+     */
+    public $QueryScope;
+
+    /**
+     * @param string $BotBizId 应用ID
      * @param string $AttributeBizId 属性ID
      * @param integer $Limit 每次加载的数量 
      * @param string $LoginUin 登录用户主账号(集成商模式必填)
      * @param string $LoginSubAccountUin 登录用户子账号(集成商模式必填)
      * @param string $Query 查询标签或相似标签
      * @param string $LastLabelBizId 滚动加载游标的标签ID
+     * @param string $QueryScope 查询范围 all(或者传空):标准词和相似词 standard:标准词 similar:相似词
      */
     function __construct()
     {
@@ -120,6 +128,10 @@ class DescribeAttributeLabelRequest extends AbstractModel
 
         if (array_key_exists("LastLabelBizId",$param) and $param["LastLabelBizId"] !== null) {
             $this->LastLabelBizId = $param["LastLabelBizId"];
+        }
+
+        if (array_key_exists("QueryScope",$param) and $param["QueryScope"] !== null) {
+            $this->QueryScope = $param["QueryScope"];
         }
     }
 }

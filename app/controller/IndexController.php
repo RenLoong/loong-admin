@@ -10,6 +10,10 @@ class IndexController
     public function index(Request $request)
     {
         $config=new Config('basic');
-        return view(public_path('template/index.html'), $config->toArray());
+        $templateFile=public_path('template/index.html');
+        if (!file_exists($templateFile)) {
+            return '请检查 /public/template/index.html 是否存在。';
+        }
+        return view($templateFile, $config->toArray());
     }
 }

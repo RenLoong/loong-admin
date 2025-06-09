@@ -10,3 +10,4 @@
 /config/plugin/shopwwi/filesystem/app.json
 /public/uploads
 .well-known
+/*.ini

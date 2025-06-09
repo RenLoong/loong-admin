@@ -166,6 +166,24 @@ use TencentCloud\Common\AbstractModel;
 注意：此字段可能返回 null，表示取不到有效值。
  * @method void setResourceType(integer $ResourceType) 设置资源类型
 注意：此字段可能返回 null，表示取不到有效值。
+ * @method string getBillingResourceMode() 获取集群类型
+注意：此字段可能返回 null，表示取不到有效值。
+ * @method void setBillingResourceMode(string $BillingResourceMode) 设置集群类型
+注意：此字段可能返回 null，表示取不到有效值。
+ * @method integer getMemRatio() 获取Cu比例
+注意：此字段可能返回 null，表示取不到有效值。
+ * @method void setMemRatio(integer $MemRatio) 设置Cu比例
+注意：此字段可能返回 null，表示取不到有效值。
+ * @method integer getCrossTenantEniMode() 获取是否开启跨租户弹性网卡
+ * @method void setCrossTenantEniMode(integer $CrossTenantEniMode) 设置是否开启跨租户弹性网卡
+ * @method float getTotalCpu() 获取总的CPU
+ * @method void setTotalCpu(float $TotalCpu) 设置总的CPU
+ * @method float getTotalMem() 获取总的内存
+ * @method void setTotalMem(float $TotalMem) 设置总的内存
+ * @method float getRunningCpu() 获取运行的CPU
+ * @method void setRunningCpu(float $RunningCpu) 设置运行的CPU
+ * @method float getRunningMem() 获取运行的内存
+ * @method void setRunningMem(float $RunningMem) 设置运行的内存
  */
 class Cluster extends AbstractModel
 {
@@ -423,6 +441,43 @@ class Cluster extends AbstractModel
     public $ResourceType;
 
     /**
+     * @var string 集群类型
+注意：此字段可能返回 null，表示取不到有效值。
+     */
+    public $BillingResourceMode;
+
+    /**
+     * @var integer Cu比例
+注意：此字段可能返回 null，表示取不到有效值。
+     */
+    public $MemRatio;
+
+    /**
+     * @var integer 是否开启跨租户弹性网卡
+     */
+    public $CrossTenantEniMode;
+
+    /**
+     * @var float 总的CPU
+     */
+    public $TotalCpu;
+
+    /**
+     * @var float 总的内存
+     */
+    public $TotalMem;
+
+    /**
+     * @var float 运行的CPU
+     */
+    public $RunningCpu;
+
+    /**
+     * @var float 运行的内存
+     */
+    public $RunningMem;
+
+    /**
      * @param string $ClusterId 集群 ID
      * @param string $Name 集群名称
      * @param string $Region 地域
@@ -496,6 +551,15 @@ class Cluster extends AbstractModel
 注意：此字段可能返回 null，表示取不到有效值。
      * @param integer $ResourceType 资源类型
 注意：此字段可能返回 null，表示取不到有效值。
+     * @param string $BillingResourceMode 集群类型
+注意：此字段可能返回 null，表示取不到有效值。
+     * @param integer $MemRatio Cu比例
+注意：此字段可能返回 null，表示取不到有效值。
+     * @param integer $CrossTenantEniMode 是否开启跨租户弹性网卡
+     * @param float $TotalCpu 总的CPU
+     * @param float $TotalMem 总的内存
+     * @param float $RunningCpu 运行的CPU
+     * @param float $RunningMem 运行的内存
      */
     function __construct()
     {
@@ -720,6 +784,34 @@ class Cluster extends AbstractModel
 
         if (array_key_exists("ResourceType",$param) and $param["ResourceType"] !== null) {
             $this->ResourceType = $param["ResourceType"];
+        }
+
+        if (array_key_exists("BillingResourceMode",$param) and $param["BillingResourceMode"] !== null) {
+            $this->BillingResourceMode = $param["BillingResourceMode"];
+        }
+
+        if (array_key_exists("MemRatio",$param) and $param["MemRatio"] !== null) {
+            $this->MemRatio = $param["MemRatio"];
+        }
+
+        if (array_key_exists("CrossTenantEniMode",$param) and $param["CrossTenantEniMode"] !== null) {
+            $this->CrossTenantEniMode = $param["CrossTenantEniMode"];
+        }
+
+        if (array_key_exists("TotalCpu",$param) and $param["TotalCpu"] !== null) {
+            $this->TotalCpu = $param["TotalCpu"];
+        }
+
+        if (array_key_exists("TotalMem",$param) and $param["TotalMem"] !== null) {
+            $this->TotalMem = $param["TotalMem"];
+        }
+
+        if (array_key_exists("RunningCpu",$param) and $param["RunningCpu"] !== null) {
+            $this->RunningCpu = $param["RunningCpu"];
+        }
+
+        if (array_key_exists("RunningMem",$param) and $param["RunningMem"] !== null) {
+            $this->RunningMem = $param["RunningMem"];
         }
     }
 }

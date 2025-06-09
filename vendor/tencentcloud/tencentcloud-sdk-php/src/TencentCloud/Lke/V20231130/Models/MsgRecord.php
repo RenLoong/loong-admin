@@ -57,14 +57,44 @@ use TencentCloud\Common\AbstractModel;
  * @method boolean getIsLlmGenerated() 获取是否大模型
  * @method void setIsLlmGenerated(boolean $IsLlmGenerated) 设置是否大模型
  * @method array getImageUrls() 获取图片链接，可公有读
+注意：此字段可能返回 null，表示取不到有效值。
  * @method void setImageUrls(array $ImageUrls) 设置图片链接，可公有读
+注意：此字段可能返回 null，表示取不到有效值。
  * @method TokenStat getTokenStat() 获取当次 token 统计信息
 注意：此字段可能返回 null，表示取不到有效值。
  * @method void setTokenStat(TokenStat $TokenStat) 设置当次 token 统计信息
 注意：此字段可能返回 null，表示取不到有效值。
  * @method integer getReplyMethod() 获取回复方式
+1:大模型直接回复;
+2:保守回复, 未知问题回复;
+3:拒答问题回复;
+4:敏感回复;
+5:问答对直接回复, 已采纳问答对优先回复;
+6:欢迎语回复;
+7:并发超限回复;
+8:全局干预知识;
+9:任务流程过程回复, 当历史记录中 task_flow.type = 0 时, 为大模型回复;
+10:任务流程答案回复;
+11:搜索引擎回复;
+12:知识润色后回复;
+13:图片理解回复;
+14:实时文档回复;
 注意：此字段可能返回 null，表示取不到有效值。
  * @method void setReplyMethod(integer $ReplyMethod) 设置回复方式
+1:大模型直接回复;
+2:保守回复, 未知问题回复;
+3:拒答问题回复;
+4:敏感回复;
+5:问答对直接回复, 已采纳问答对优先回复;
+6:欢迎语回复;
+7:并发超限回复;
+8:全局干预知识;
+9:任务流程过程回复, 当历史记录中 task_flow.type = 0 时, 为大模型回复;
+10:任务流程答案回复;
+11:搜索引擎回复;
+12:知识润色后回复;
+13:图片理解回复;
+14:实时文档回复;
 注意：此字段可能返回 null，表示取不到有效值。
  * @method array getOptionCards() 获取选项卡, 用于多轮对话
 注意：此字段可能返回 null，表示取不到有效值。
@@ -73,6 +103,22 @@ use TencentCloud\Common\AbstractModel;
  * @method TaskFlowInfo getTaskFlow() 获取任务信息
 注意：此字段可能返回 null，表示取不到有效值。
  * @method void setTaskFlow(TaskFlowInfo $TaskFlow) 设置任务信息
+注意：此字段可能返回 null，表示取不到有效值。
+ * @method array getFileInfos() 获取用户传入的文件信息
+注意：此字段可能返回 null，表示取不到有效值。
+ * @method void setFileInfos(array $FileInfos) 设置用户传入的文件信息
+注意：此字段可能返回 null，表示取不到有效值。
+ * @method array getQuoteInfos() 获取参考来源引用位置信息
+注意：此字段可能返回 null，表示取不到有效值。
+ * @method void setQuoteInfos(array $QuoteInfos) 设置参考来源引用位置信息
+注意：此字段可能返回 null，表示取不到有效值。
+ * @method AgentThought getAgentThought() 获取Agent的思考过程信息
+注意：此字段可能返回 null，表示取不到有效值。
+ * @method void setAgentThought(AgentThought $AgentThought) 设置Agent的思考过程信息
+注意：此字段可能返回 null，表示取不到有效值。
+ * @method ExtraInfo getExtraInfo() 获取扩展信息
+注意：此字段可能返回 null，表示取不到有效值。
+ * @method void setExtraInfo(ExtraInfo $ExtraInfo) 设置扩展信息
 注意：此字段可能返回 null，表示取不到有效值。
  */
 class MsgRecord extends AbstractModel
@@ -161,6 +207,7 @@ class MsgRecord extends AbstractModel
 
     /**
      * @var array 图片链接，可公有读
+注意：此字段可能返回 null，表示取不到有效值。
      */
     public $ImageUrls;
 
@@ -172,6 +219,20 @@ class MsgRecord extends AbstractModel
 
     /**
      * @var integer 回复方式
+1:大模型直接回复;
+2:保守回复, 未知问题回复;
+3:拒答问题回复;
+4:敏感回复;
+5:问答对直接回复, 已采纳问答对优先回复;
+6:欢迎语回复;
+7:并发超限回复;
+8:全局干预知识;
+9:任务流程过程回复, 当历史记录中 task_flow.type = 0 时, 为大模型回复;
+10:任务流程答案回复;
+11:搜索引擎回复;
+12:知识润色后回复;
+13:图片理解回复;
+14:实时文档回复;
 注意：此字段可能返回 null，表示取不到有效值。
      */
     public $ReplyMethod;
@@ -187,6 +248,30 @@ class MsgRecord extends AbstractModel
 注意：此字段可能返回 null，表示取不到有效值。
      */
     public $TaskFlow;
+
+    /**
+     * @var array 用户传入的文件信息
+注意：此字段可能返回 null，表示取不到有效值。
+     */
+    public $FileInfos;
+
+    /**
+     * @var array 参考来源引用位置信息
+注意：此字段可能返回 null，表示取不到有效值。
+     */
+    public $QuoteInfos;
+
+    /**
+     * @var AgentThought Agent的思考过程信息
+注意：此字段可能返回 null，表示取不到有效值。
+     */
+    public $AgentThought;
+
+    /**
+     * @var ExtraInfo 扩展信息
+注意：此字段可能返回 null，表示取不到有效值。
+     */
+    public $ExtraInfo;
 
     /**
      * @param string $Content 内容
@@ -208,13 +293,36 @@ class MsgRecord extends AbstractModel
      * @param array $Reasons 评价原因
      * @param boolean $IsLlmGenerated 是否大模型
      * @param array $ImageUrls 图片链接，可公有读
+注意：此字段可能返回 null，表示取不到有效值。
      * @param TokenStat $TokenStat 当次 token 统计信息
 注意：此字段可能返回 null，表示取不到有效值。
      * @param integer $ReplyMethod 回复方式
+1:大模型直接回复;
+2:保守回复, 未知问题回复;
+3:拒答问题回复;
+4:敏感回复;
+5:问答对直接回复, 已采纳问答对优先回复;
+6:欢迎语回复;
+7:并发超限回复;
+8:全局干预知识;
+9:任务流程过程回复, 当历史记录中 task_flow.type = 0 时, 为大模型回复;
+10:任务流程答案回复;
+11:搜索引擎回复;
+12:知识润色后回复;
+13:图片理解回复;
+14:实时文档回复;
 注意：此字段可能返回 null，表示取不到有效值。
      * @param array $OptionCards 选项卡, 用于多轮对话
 注意：此字段可能返回 null，表示取不到有效值。
      * @param TaskFlowInfo $TaskFlow 任务信息
+注意：此字段可能返回 null，表示取不到有效值。
+     * @param array $FileInfos 用户传入的文件信息
+注意：此字段可能返回 null，表示取不到有效值。
+     * @param array $QuoteInfos 参考来源引用位置信息
+注意：此字段可能返回 null，表示取不到有效值。
+     * @param AgentThought $AgentThought Agent的思考过程信息
+注意：此字段可能返回 null，表示取不到有效值。
+     * @param ExtraInfo $ExtraInfo 扩展信息
 注意：此字段可能返回 null，表示取不到有效值。
      */
     function __construct()
@@ -319,6 +427,34 @@ class MsgRecord extends AbstractModel
         if (array_key_exists("TaskFlow",$param) and $param["TaskFlow"] !== null) {
             $this->TaskFlow = new TaskFlowInfo();
             $this->TaskFlow->deserialize($param["TaskFlow"]);
+        }
+
+        if (array_key_exists("FileInfos",$param) and $param["FileInfos"] !== null) {
+            $this->FileInfos = [];
+            foreach ($param["FileInfos"] as $key => $value){
+                $obj = new FileInfo();
+                $obj->deserialize($value);
+                array_push($this->FileInfos, $obj);
+            }
+        }
+
+        if (array_key_exists("QuoteInfos",$param) and $param["QuoteInfos"] !== null) {
+            $this->QuoteInfos = [];
+            foreach ($param["QuoteInfos"] as $key => $value){
+                $obj = new QuoteInfo();
+                $obj->deserialize($value);
+                array_push($this->QuoteInfos, $obj);
+            }
+        }
+
+        if (array_key_exists("AgentThought",$param) and $param["AgentThought"] !== null) {
+            $this->AgentThought = new AgentThought();
+            $this->AgentThought->deserialize($param["AgentThought"]);
+        }
+
+        if (array_key_exists("ExtraInfo",$param) and $param["ExtraInfo"] !== null) {
+            $this->ExtraInfo = new ExtraInfo();
+            $this->ExtraInfo->deserialize($param["ExtraInfo"]);
         }
     }
 }

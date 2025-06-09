@@ -20,10 +20,8 @@ use TencentCloud\Common\AbstractModel;
 /**
  * GetDocPreview返回参数结构体
  *
- * @method string getFileName() 获取文件名
-
- * @method void setFileName(string $FileName) 设置文件名
-
+ * @method string getFileName() 获取文件名, 发布端固定使用这个名称
+ * @method void setFileName(string $FileName) 设置文件名, 发布端固定使用这个名称
  * @method string getFileType() 获取文件类型
  * @method void setFileType(string $FileType) 设置文件类型
  * @method string getCosUrl() 获取cos路径
@@ -38,14 +36,17 @@ use TencentCloud\Common\AbstractModel;
 
  * @method void setBucket(string $Bucket) 设置cos桶
 
+ * @method string getNewName() 获取存在文档重命名情况下的新名称, 评测端优先使用这个名称
+ * @method void setNewName(string $NewName) 设置存在文档重命名情况下的新名称, 评测端优先使用这个名称
+ * @method string getParseResultCosUrl() 获取文件md结果cos临时地址
+ * @method void setParseResultCosUrl(string $ParseResultCosUrl) 设置文件md结果cos临时地址
  * @method string getRequestId() 获取唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
  * @method void setRequestId(string $RequestId) 设置唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
  */
 class GetDocPreviewResponse extends AbstractModel
 {
     /**
-     * @var string 文件名
-
+     * @var string 文件名, 发布端固定使用这个名称
      */
     public $FileName;
 
@@ -73,13 +74,22 @@ class GetDocPreviewResponse extends AbstractModel
     public $Bucket;
 
     /**
+     * @var string 存在文档重命名情况下的新名称, 评测端优先使用这个名称
+     */
+    public $NewName;
+
+    /**
+     * @var string 文件md结果cos临时地址
+     */
+    public $ParseResultCosUrl;
+
+    /**
      * @var string 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     public $RequestId;
 
     /**
-     * @param string $FileName 文件名
-
+     * @param string $FileName 文件名, 发布端固定使用这个名称
      * @param string $FileType 文件类型
      * @param string $CosUrl cos路径
 
@@ -87,6 +97,8 @@ class GetDocPreviewResponse extends AbstractModel
 
      * @param string $Bucket cos桶
 
+     * @param string $NewName 存在文档重命名情况下的新名称, 评测端优先使用这个名称
+     * @param string $ParseResultCosUrl 文件md结果cos临时地址
      * @param string $RequestId 唯一请求 ID，由服务端生成，每次请求都会返回（若请求因其他原因未能抵达服务端，则该次请求不会获得 RequestId）。定位问题时需要提供该次请求的 RequestId。
      */
     function __construct()
@@ -120,6 +132,14 @@ class GetDocPreviewResponse extends AbstractModel
 
         if (array_key_exists("Bucket",$param) and $param["Bucket"] !== null) {
             $this->Bucket = $param["Bucket"];
+        }
+
+        if (array_key_exists("NewName",$param) and $param["NewName"] !== null) {
+            $this->NewName = $param["NewName"];
+        }
+
+        if (array_key_exists("ParseResultCosUrl",$param) and $param["ParseResultCosUrl"] !== null) {
+            $this->ParseResultCosUrl = $param["ParseResultCosUrl"];
         }
 
         if (array_key_exists("RequestId",$param) and $param["RequestId"] !== null) {

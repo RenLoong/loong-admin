@@ -21,7 +21,7 @@ use think\db\Raw;
 use think\facade\Db;
 
 if (!function_exists('db')) {
-    function db(string $name, ?string $connect = null): Query
+    function db(string $name, string|array|null $connect = null): Query
     {
         if ($connect) {
             return Db::connect($connect)->name($name);
@@ -38,14 +38,14 @@ if (!function_exists('raw')) {
 }
 
 if (!function_exists('inc')) {
-    function inc(float $step = 1, int $lazyTime = 0): Express
+    function inc(float|int $step = 1, int $lazyTime = 0): Express
     {
         return new Express('+', $step, $lazyTime);
     }
 }
 
 if (!function_exists('dec')) {
-    function dec(float $step = 1, int $lazyTime = 0): Express
+    function dec(float|int $step = 1, int $lazyTime = 0): Express
     {
         return new Express('-', $step, $lazyTime);
     }

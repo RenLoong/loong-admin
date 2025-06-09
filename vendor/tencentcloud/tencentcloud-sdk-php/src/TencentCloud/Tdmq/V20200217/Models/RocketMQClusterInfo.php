@@ -100,6 +100,16 @@ use TencentCloud\Common\AbstractModel;
 注意：此字段可能返回 null，表示取不到有效值。
  * @method void setInstanceStatus(integer $InstanceStatus) 设置实例状态，0表示创建中，1表示正常，2表示隔离中，3表示已销毁，4 - 异常, 5 - 发货失败，6 - 变配中，7 - 变配失败
 注意：此字段可能返回 null，表示取不到有效值。
+ * @method integer getZoneId() 获取集群所属可用区，表明集群归属的可用区
+注意：此字段可能返回 null，表示取不到有效值。
+ * @method void setZoneId(integer $ZoneId) 设置集群所属可用区，表明集群归属的可用区
+注意：此字段可能返回 null，表示取不到有效值。
+ * @method array getZoneIds() 获取集群节点所在的可用区，若该集群为跨可用区集群，则包含该集群节点所在的多个可用区。
+注意：此字段可能返回 null，表示取不到有效值。
+ * @method void setZoneIds(array $ZoneIds) 设置集群节点所在的可用区，若该集群为跨可用区集群，则包含该集群节点所在的多个可用区。
+注意：此字段可能返回 null，表示取不到有效值。
+ * @method boolean getIsFrozen() 获取是否已冻结
+ * @method void setIsFrozen(boolean $IsFrozen) 设置是否已冻结
  */
 class RocketMQClusterInfo extends AbstractModel
 {
@@ -236,6 +246,23 @@ class RocketMQClusterInfo extends AbstractModel
     public $InstanceStatus;
 
     /**
+     * @var integer 集群所属可用区，表明集群归属的可用区
+注意：此字段可能返回 null，表示取不到有效值。
+     */
+    public $ZoneId;
+
+    /**
+     * @var array 集群节点所在的可用区，若该集群为跨可用区集群，则包含该集群节点所在的多个可用区。
+注意：此字段可能返回 null，表示取不到有效值。
+     */
+    public $ZoneIds;
+
+    /**
+     * @var boolean 是否已冻结
+     */
+    public $IsFrozen;
+
+    /**
      * @param string $ClusterId 集群ID
      * @param string $ClusterName 集群名称
      * @param string $Region 地域信息
@@ -276,6 +303,11 @@ class RocketMQClusterInfo extends AbstractModel
 注意：此字段可能返回 null，表示取不到有效值。
      * @param integer $InstanceStatus 实例状态，0表示创建中，1表示正常，2表示隔离中，3表示已销毁，4 - 异常, 5 - 发货失败，6 - 变配中，7 - 变配失败
 注意：此字段可能返回 null，表示取不到有效值。
+     * @param integer $ZoneId 集群所属可用区，表明集群归属的可用区
+注意：此字段可能返回 null，表示取不到有效值。
+     * @param array $ZoneIds 集群节点所在的可用区，若该集群为跨可用区集群，则包含该集群节点所在的多个可用区。
+注意：此字段可能返回 null，表示取不到有效值。
+     * @param boolean $IsFrozen 是否已冻结
      */
     function __construct()
     {
@@ -385,6 +417,18 @@ class RocketMQClusterInfo extends AbstractModel
 
         if (array_key_exists("InstanceStatus",$param) and $param["InstanceStatus"] !== null) {
             $this->InstanceStatus = $param["InstanceStatus"];
+        }
+
+        if (array_key_exists("ZoneId",$param) and $param["ZoneId"] !== null) {
+            $this->ZoneId = $param["ZoneId"];
+        }
+
+        if (array_key_exists("ZoneIds",$param) and $param["ZoneIds"] !== null) {
+            $this->ZoneIds = $param["ZoneIds"];
+        }
+
+        if (array_key_exists("IsFrozen",$param) and $param["IsFrozen"] !== null) {
+            $this->IsFrozen = $param["IsFrozen"];
         }
     }
 }

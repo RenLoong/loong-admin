@@ -20,16 +20,16 @@ use TencentCloud\Common\AbstractModel;
 /**
  * ListReleaseDocPreview请求参数结构体
  *
- * @method string getBotBizId() 获取机器人ID
- * @method void setBotBizId(string $BotBizId) 设置机器人ID
+ * @method string getBotBizId() 获取应用ID
+ * @method void setBotBizId(string $BotBizId) 设置应用ID
  * @method integer getPageNumber() 获取页码
  * @method void setPageNumber(integer $PageNumber) 设置页码
  * @method integer getPageSize() 获取每页数量
  * @method void setPageSize(integer $PageSize) 设置每页数量
  * @method string getQuery() 获取查询内容
  * @method void setQuery(string $Query) 设置查询内容
- * @method string getReleaseBizId() 获取发布业务ID
- * @method void setReleaseBizId(string $ReleaseBizId) 设置发布业务ID
+ * @method string getReleaseBizId() 获取发布单ID
+ * @method void setReleaseBizId(string $ReleaseBizId) 设置发布单ID
  * @method string getStartTime() 获取开始时间
  * @method void setStartTime(string $StartTime) 设置开始时间
  * @method string getEndTime() 获取结束时间
@@ -40,7 +40,7 @@ use TencentCloud\Common\AbstractModel;
 class ListReleaseDocPreviewRequest extends AbstractModel
 {
     /**
-     * @var string 机器人ID
+     * @var string 应用ID
      */
     public $BotBizId;
 
@@ -60,7 +60,7 @@ class ListReleaseDocPreviewRequest extends AbstractModel
     public $Query;
 
     /**
-     * @var string 发布业务ID
+     * @var string 发布单ID
      */
     public $ReleaseBizId;
 
@@ -80,11 +80,11 @@ class ListReleaseDocPreviewRequest extends AbstractModel
     public $Actions;
 
     /**
-     * @param string $BotBizId 机器人ID
+     * @param string $BotBizId 应用ID
      * @param integer $PageNumber 页码
      * @param integer $PageSize 每页数量
      * @param string $Query 查询内容
-     * @param string $ReleaseBizId 发布业务ID
+     * @param string $ReleaseBizId 发布单ID
      * @param string $StartTime 开始时间
      * @param string $EndTime 结束时间
      * @param array $Actions 状态(1新增2修改3删除)

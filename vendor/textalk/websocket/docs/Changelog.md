@@ -2,6 +2,30 @@
 
 # Websocket: Changelog
 
+## `v1.6`
+
+ > PHP version `^7.4|^8.0`
+
+### `1.6.3`
+
+ * Fix issue with implicit default ports (@etrinh, @sirn-se)
+
+### `1.6.2`
+
+ * Fix issue where port was missing in socket uri (@sirn-se)
+
+### `1.6.1`
+
+ * Fix client path for http request (@simPod, @sirn-se)
+
+### `1.6.0`
+ * Connection separate from Client and Server (@sirn-se)
+ * getPier() deprecated, replaced by getRemoteName() (@sirn-se)
+ * Client accepts `Psr\Http\Message\UriInterface` as input for URI:s (@sirn-se)
+ * Bad URI throws exception when Client is instanciated, previously when used (@sirn-se)
+ * Preparations for multiple conection and listeners (@sirn-se)
+ * Major internal refactoring (@sirn-se)
+
 ## `v1.5`
 
  > PHP version `^7.2|^8.0`

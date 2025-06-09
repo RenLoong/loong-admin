@@ -30,8 +30,8 @@ use TencentCloud\Common\AbstractModel;
 
  * @method void setPageSize(integer $PageSize) 设置每页数量
 
- * @method string getBotBizId() 获取机器人ID
- * @method void setBotBizId(string $BotBizId) 设置机器人ID
+ * @method string getBotBizId() 获取应用ID
+ * @method void setBotBizId(string $BotBizId) 设置应用ID
  * @method string getQuery() 获取查询内容
 
  * @method void setQuery(string $Query) 设置查询内容
@@ -63,6 +63,9 @@ use TencentCloud\Common\AbstractModel;
  * @method string getQueryAnswer() 获取查询答案
 
  * @method void setQueryAnswer(string $QueryAnswer) 设置查询答案
+
+ * @method string getQueryType() 获取查询类型 filename 名称、 attribute 标签
+ * @method void setQueryType(string $QueryType) 设置查询类型 filename 名称、 attribute 标签
  */
 class QAQuery extends AbstractModel
 {
@@ -80,7 +83,7 @@ class QAQuery extends AbstractModel
     public $PageSize;
 
     /**
-     * @var string 机器人ID
+     * @var string 应用ID
      */
     public $BotBizId;
 
@@ -133,12 +136,17 @@ class QAQuery extends AbstractModel
     public $QueryAnswer;
 
     /**
+     * @var string 查询类型 filename 名称、 attribute 标签
+     */
+    public $QueryType;
+
+    /**
      * @param integer $PageNumber 页码
 
 
      * @param integer $PageSize 每页数量
 
-     * @param string $BotBizId 机器人ID
+     * @param string $BotBizId 应用ID
      * @param string $Query 查询内容
 
      * @param string $CateBizId 分类ID
@@ -154,6 +162,8 @@ class QAQuery extends AbstractModel
      * @param integer $Source 来源
 
      * @param string $QueryAnswer 查询答案
+
+     * @param string $QueryType 查询类型 filename 名称、 attribute 标签
      */
     function __construct()
     {
@@ -210,6 +220,10 @@ class QAQuery extends AbstractModel
 
         if (array_key_exists("QueryAnswer",$param) and $param["QueryAnswer"] !== null) {
             $this->QueryAnswer = $param["QueryAnswer"];
+        }
+
+        if (array_key_exists("QueryType",$param) and $param["QueryType"] !== null) {
+            $this->QueryType = $param["QueryType"];
         }
     }
 }

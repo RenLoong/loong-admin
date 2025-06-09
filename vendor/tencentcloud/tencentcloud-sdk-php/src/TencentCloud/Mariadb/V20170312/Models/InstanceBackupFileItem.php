@@ -27,9 +27,7 @@ use TencentCloud\Common\AbstractModel;
  * @method integer getInstanceStatus() 获取实例状态
  * @method void setInstanceStatus(integer $InstanceStatus) 设置实例状态
  * @method string getShardId() 获取分片ID
-注意：此字段可能返回 null，表示取不到有效值。
  * @method void setShardId(string $ShardId) 设置分片ID
-注意：此字段可能返回 null，表示取不到有效值。
  * @method string getFilePath() 获取文件路径
  * @method void setFilePath(string $FilePath) 设置文件路径
  * @method string getFileName() 获取文件名
@@ -44,6 +42,8 @@ use TencentCloud\Common\AbstractModel;
  * @method void setStartTime(string $StartTime) 设置备份开始时间
  * @method string getEndTime() 获取备份结束时间
  * @method void setEndTime(string $EndTime) 设置备份结束时间
+ * @method string getStorageClass() 获取对象的存储类型，枚举值：STANDARD（标准存储）、ARCHIVE（归档存储）。
+ * @method void setStorageClass(string $StorageClass) 设置对象的存储类型，枚举值：STANDARD（标准存储）、ARCHIVE（归档存储）。
  */
 class InstanceBackupFileItem extends AbstractModel
 {
@@ -64,7 +64,6 @@ class InstanceBackupFileItem extends AbstractModel
 
     /**
      * @var string 分片ID
-注意：此字段可能返回 null，表示取不到有效值。
      */
     public $ShardId;
 
@@ -104,11 +103,15 @@ class InstanceBackupFileItem extends AbstractModel
     public $EndTime;
 
     /**
+     * @var string 对象的存储类型，枚举值：STANDARD（标准存储）、ARCHIVE（归档存储）。
+     */
+    public $StorageClass;
+
+    /**
      * @param string $InstanceId 实例ID
      * @param string $InstanceName 实例名称
      * @param integer $InstanceStatus 实例状态
      * @param string $ShardId 分片ID
-注意：此字段可能返回 null，表示取不到有效值。
      * @param string $FilePath 文件路径
      * @param string $FileName 文件名
      * @param integer $FileSize 文件大小
@@ -116,6 +119,7 @@ class InstanceBackupFileItem extends AbstractModel
      * @param integer $ManualBackup 手动备份，0:否，1:是
      * @param string $StartTime 备份开始时间
      * @param string $EndTime 备份结束时间
+     * @param string $StorageClass 对象的存储类型，枚举值：STANDARD（标准存储）、ARCHIVE（归档存储）。
      */
     function __construct()
     {
@@ -172,6 +176,10 @@ class InstanceBackupFileItem extends AbstractModel
 
         if (array_key_exists("EndTime",$param) and $param["EndTime"] !== null) {
             $this->EndTime = $param["EndTime"];
+        }
+
+        if (array_key_exists("StorageClass",$param) and $param["StorageClass"] !== null) {
+            $this->StorageClass = $param["StorageClass"];
         }
     }
 }

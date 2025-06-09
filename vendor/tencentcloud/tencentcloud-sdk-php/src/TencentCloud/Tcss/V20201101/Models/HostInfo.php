@@ -51,13 +51,9 @@ use TencentCloud\Common\AbstractModel;
  * @method integer getRegionID() 获取地域ID
  * @method void setRegionID(integer $RegionID) 设置地域ID
  * @method ProjectInfo getProject() 获取所属项目
-注意：此字段可能返回 null，表示取不到有效值。
  * @method void setProject(ProjectInfo $Project) 设置所属项目
-注意：此字段可能返回 null，表示取不到有效值。
  * @method array getTags() 获取标签
-注意：此字段可能返回 null，表示取不到有效值。
  * @method void setTags(array $Tags) 设置标签
-注意：此字段可能返回 null，表示取不到有效值。
  * @method string getClusterID() 获取集群id
  * @method void setClusterID(string $ClusterID) 设置集群id
  * @method string getClusterName() 获取集群名称
@@ -72,6 +68,8 @@ use TencentCloud\Common\AbstractModel;
  * @method void setDefendStatus(string $DefendStatus) 设置防护状态:
 已防护: Defended
 未防护: UnDefended
+ * @method integer getCoresCnt() 获取核数
+ * @method void setCoresCnt(integer $CoresCnt) 设置核数
  */
 class HostInfo extends AbstractModel
 {
@@ -152,13 +150,11 @@ class HostInfo extends AbstractModel
 
     /**
      * @var ProjectInfo 所属项目
-注意：此字段可能返回 null，表示取不到有效值。
      */
     public $Project;
 
     /**
      * @var array 标签
-注意：此字段可能返回 null，表示取不到有效值。
      */
     public $Tags;
 
@@ -190,6 +186,11 @@ class HostInfo extends AbstractModel
     public $DefendStatus;
 
     /**
+     * @var integer 核数
+     */
+    public $CoresCnt;
+
+    /**
      * @param string $HostID 主机id
      * @param string $HostIP 主机ip即内网ip
      * @param string $HostName 主机名称
@@ -206,9 +207,7 @@ class HostInfo extends AbstractModel
      * @param string $InstanceID 主机实例ID
      * @param integer $RegionID 地域ID
      * @param ProjectInfo $Project 所属项目
-注意：此字段可能返回 null，表示取不到有效值。
      * @param array $Tags 标签
-注意：此字段可能返回 null，表示取不到有效值。
      * @param string $ClusterID 集群id
      * @param string $ClusterName 集群名称
      * @param string $ClusterAccessedStatus 集群接入状态
@@ -216,6 +215,7 @@ class HostInfo extends AbstractModel
      * @param string $DefendStatus 防护状态:
 已防护: Defended
 未防护: UnDefended
+     * @param integer $CoresCnt 核数
      */
     function __construct()
     {
@@ -322,6 +322,10 @@ class HostInfo extends AbstractModel
 
         if (array_key_exists("DefendStatus",$param) and $param["DefendStatus"] !== null) {
             $this->DefendStatus = $param["DefendStatus"];
+        }
+
+        if (array_key_exists("CoresCnt",$param) and $param["CoresCnt"] !== null) {
+            $this->CoresCnt = $param["CoresCnt"];
         }
     }
 }

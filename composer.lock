@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "6b719d122bb04dc07cfa972e054e239d",
+    "content-hash": "a887b95b82d6ee19cf00ef8c987c534d",
     "packages": [
         {
             "name": "adbario/php-dot-notation",
@@ -67,16 +67,16 @@
         },
         {
             "name": "alibabacloud/credentials",
-            "version": "1.2.0",
+            "version": "1.2.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aliyun/credentials-php.git",
-                "reference": "ebcda2e628180b4df235b46a86e1d014c561f5d9"
+                "reference": "f6d1986e7b7be8da781d0b99f24c92d9860ba0c1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aliyun/credentials-php/zipball/ebcda2e628180b4df235b46a86e1d014c561f5d9",
-                "reference": "ebcda2e628180b4df235b46a86e1d014c561f5d9",
+                "url": "https://api.github.com/repos/aliyun/credentials-php/zipball/f6d1986e7b7be8da781d0b99f24c92d9860ba0c1",
+                "reference": "f6d1986e7b7be8da781d0b99f24c92d9860ba0c1",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -149,20 +149,20 @@
                 "issues": "https://github.com/aliyun/credentials-php/issues",
                 "source": "https://github.com/aliyun/credentials-php"
             },
-            "time": "2024-10-16T13:29:17+00:00"
+            "time": "2025-04-18T09:09:46+00:00"
         },
         {
             "name": "alibabacloud/darabonba-openapi",
-            "version": "0.2.13",
+            "version": "0.2.15",
             "source": {
                 "type": "git",
                 "url": "https://github.com/alibabacloud-sdk-php/darabonba-openapi.git",
-                "reference": "0213396384e2c064eefd614f3dd53636a63f987f"
+                "reference": "de1a60831d74b0ddf78c16f6d31be57d95b7d49e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/alibabacloud-sdk-php/darabonba-openapi/zipball/0213396384e2c064eefd614f3dd53636a63f987f",
-                "reference": "0213396384e2c064eefd614f3dd53636a63f987f",
+                "url": "https://api.github.com/repos/alibabacloud-sdk-php/darabonba-openapi/zipball/de1a60831d74b0ddf78c16f6d31be57d95b7d49e",
+                "reference": "de1a60831d74b0ddf78c16f6d31be57d95b7d49e",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -172,7 +172,7 @@
                 ]
             },
             "require": {
-                "alibabacloud/credentials": "^1.1",
+                "alibabacloud/credentials": "^1.2.2",
                 "alibabacloud/gateway-spi": "^1",
                 "alibabacloud/openapi-util": "^0.1.10|^0.2.1",
                 "alibabacloud/tea-utils": "^0.2.21",
@@ -198,9 +198,9 @@
             "description": "Alibaba Cloud OpenApi Client",
             "support": {
                 "issues": "https://github.com/alibabacloud-sdk-php/darabonba-openapi/issues",
-                "source": "https://github.com/alibabacloud-sdk-php/darabonba-openapi/tree/0.2.13"
+                "source": "https://github.com/alibabacloud-sdk-php/darabonba-openapi/tree/0.2.15"
             },
-            "time": "2024-07-15T13:11:36+00:00"
+            "time": "2025-04-15T11:59:13+00:00"
         },
         {
             "name": "alibabacloud/dysmsapi-20170525",
@@ -1206,16 +1206,16 @@
         },
         {
             "name": "guzzlehttp/promises",
-            "version": "2.0.3",
+            "version": "2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/promises.git",
-                "reference": "6ea8dd08867a2a42619d65c3deb2c0fcbf81c8f8"
+                "reference": "7c69f28996b0a6920945dd20b3857e499d9ca96c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/promises/zipball/6ea8dd08867a2a42619d65c3deb2c0fcbf81c8f8",
-                "reference": "6ea8dd08867a2a42619d65c3deb2c0fcbf81c8f8",
+                "url": "https://api.github.com/repos/guzzle/promises/zipball/7c69f28996b0a6920945dd20b3857e499d9ca96c",
+                "reference": "7c69f28996b0a6920945dd20b3857e499d9ca96c",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -1275,7 +1275,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/promises/issues",
-                "source": "https://github.com/guzzle/promises/tree/2.0.3"
+                "source": "https://github.com/guzzle/promises/tree/2.2.0"
             },
             "funding": [
                 {
@@ -1291,20 +1291,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-07-18T10:29:17+00:00"
+            "time": "2025-03-27T13:27:01+00:00"
         },
         {
             "name": "guzzlehttp/psr7",
-            "version": "2.7.0",
+            "version": "2.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/psr7.git",
-                "reference": "a70f5c95fb43bc83f07c9c948baa0dc1829bf201"
+                "reference": "c2270caaabe631b3b44c85f99e5a04bbb8060d16"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/psr7/zipball/a70f5c95fb43bc83f07c9c948baa0dc1829bf201",
-                "reference": "a70f5c95fb43bc83f07c9c948baa0dc1829bf201",
+                "url": "https://api.github.com/repos/guzzle/psr7/zipball/c2270caaabe631b3b44c85f99e5a04bbb8060d16",
+                "reference": "c2270caaabe631b3b44c85f99e5a04bbb8060d16",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -1397,7 +1397,7 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/psr7/issues",
-                "source": "https://github.com/guzzle/psr7/tree/2.7.0"
+                "source": "https://github.com/guzzle/psr7/tree/2.7.1"
             },
             "funding": [
                 {
@@ -1413,7 +1413,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-07-18T11:15:46+00:00"
+            "time": "2025-03-27T12:30:47+00:00"
         },
         {
             "name": "illuminate/bus",
@@ -2374,16 +2374,16 @@
         },
         {
             "name": "monolog/monolog",
-            "version": "3.8.1",
+            "version": "3.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Seldaek/monolog.git",
-                "reference": "aef6ee73a77a66e404dd6540934a9ef1b3c855b4"
+                "reference": "10d85740180ecba7896c87e06a166e0c95a0e3b6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/aef6ee73a77a66e404dd6540934a9ef1b3c855b4",
-                "reference": "aef6ee73a77a66e404dd6540934a9ef1b3c855b4",
+                "url": "https://api.github.com/repos/Seldaek/monolog/zipball/10d85740180ecba7896c87e06a166e0c95a0e3b6",
+                "reference": "10d85740180ecba7896c87e06a166e0c95a0e3b6",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -2467,7 +2467,7 @@
             ],
             "support": {
                 "issues": "https://github.com/Seldaek/monolog/issues",
-                "source": "https://github.com/Seldaek/monolog/tree/3.8.1"
+                "source": "https://github.com/Seldaek/monolog/tree/3.9.0"
             },
             "funding": [
                 {
@@ -2479,7 +2479,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-12-05T17:15:07+00:00"
+            "time": "2025-03-24T10:02:05+00:00"
         },
         {
             "name": "mtdowling/jmespath.php",
@@ -2853,16 +2853,16 @@
         },
         {
             "name": "overtrue/flysystem-qiniu",
-            "version": "3.2.3",
+            "version": "3.2.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/overtrue/flysystem-qiniu.git",
-                "reference": "5e04ac38be53b57345c56e02973fc4224db776e6"
+                "reference": "49c7eaa22aa24d68c8b24b01a6a93ff7ccbe980a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/overtrue/flysystem-qiniu/zipball/5e04ac38be53b57345c56e02973fc4224db776e6",
-                "reference": "5e04ac38be53b57345c56e02973fc4224db776e6",
+                "url": "https://api.github.com/repos/overtrue/flysystem-qiniu/zipball/49c7eaa22aa24d68c8b24b01a6a93ff7ccbe980a",
+                "reference": "49c7eaa22aa24d68c8b24b01a6a93ff7ccbe980a",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -2877,7 +2877,7 @@
             },
             "require-dev": {
                 "mockery/mockery": "^1.4",
-                "phpunit/phpunit": "^9.5"
+                "phpunit/phpunit": "^11.5"
             },
             "type": "library",
             "extra": {
@@ -2910,7 +2910,7 @@
             "description": "Flysystem adapter for the Qiniu storage.",
             "support": {
                 "issues": "https://github.com/overtrue/flysystem-qiniu/issues",
-                "source": "https://github.com/overtrue/flysystem-qiniu/tree/3.2.3"
+                "source": "https://github.com/overtrue/flysystem-qiniu/tree/3.2.5"
             },
             "funding": [
                 {
@@ -2918,20 +2918,20 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-12-21T14:40:53+00:00"
+            "time": "2025-05-22T10:16:24+00:00"
         },
         {
             "name": "overtrue/qcloud-cos-client",
-            "version": "2.1.7",
+            "version": "2.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/overtrue/qcloud-cos-client.git",
-                "reference": "5cb1f14dc5d6848c0d899606c0a59e878b836583"
+                "reference": "0fef6153fdb37fc7fbb3b6c29cc746310c662361"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/overtrue/qcloud-cos-client/zipball/5cb1f14dc5d6848c0d899606c0a59e878b836583",
-                "reference": "5cb1f14dc5d6848c0d899606c0a59e878b836583",
+                "url": "https://api.github.com/repos/overtrue/qcloud-cos-client/zipball/0fef6153fdb37fc7fbb3b6c29cc746310c662361",
+                "reference": "0fef6153fdb37fc7fbb3b6c29cc746310c662361",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -2989,7 +2989,7 @@
             "description": "Client of QCloud.com COS",
             "support": {
                 "issues": "https://github.com/overtrue/qcloud-cos-client/issues",
-                "source": "https://github.com/overtrue/qcloud-cos-client/tree/2.1.7"
+                "source": "https://github.com/overtrue/qcloud-cos-client/tree/2.2.0"
             },
             "funding": [
                 {
@@ -2997,20 +2997,20 @@
                     "type": "github"
                 }
             ],
-            "time": "2024-09-04T13:58:12+00:00"
+            "time": "2025-05-16T08:35:45+00:00"
         },
         {
             "name": "php-ffmpeg/php-ffmpeg",
-            "version": "v1.3.1",
+            "version": "v1.3.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/PHP-FFMpeg/PHP-FFMpeg.git",
-                "reference": "0fbbc4c6a6336155679adc800616001ae3328c7a"
+                "reference": "8e74bdc07ad200da7a6cfb21ec2652875e4368e0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/PHP-FFMpeg/PHP-FFMpeg/zipball/0fbbc4c6a6336155679adc800616001ae3328c7a",
-                "reference": "0fbbc4c6a6336155679adc800616001ae3328c7a",
+                "url": "https://api.github.com/repos/PHP-FFMpeg/PHP-FFMpeg/zipball/8e74bdc07ad200da7a6cfb21ec2652875e4368e0",
+                "reference": "8e74bdc07ad200da7a6cfb21ec2652875e4368e0",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -3090,9 +3090,9 @@
             ],
             "support": {
                 "issues": "https://github.com/PHP-FFMpeg/PHP-FFMpeg/issues",
-                "source": "https://github.com/PHP-FFMpeg/PHP-FFMpeg/tree/v1.3.1"
+                "source": "https://github.com/PHP-FFMpeg/PHP-FFMpeg/tree/v1.3.2"
             },
-            "time": "2025-01-10T20:23:57+00:00"
+            "time": "2025-04-01T20:36:46+00:00"
         },
         {
             "name": "phpoption/phpoption",
@@ -3174,6 +3174,124 @@
                 }
             ],
             "time": "2024-07-20T21:41:07+00:00"
+        },
+        {
+            "name": "phrity/net-uri",
+            "version": "1.3.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sirn-se/phrity-net-uri.git",
+                "reference": "3f458e0c4d1ddc0e218d7a5b9420127c63925f43"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sirn-se/phrity-net-uri/zipball/3f458e0c4d1ddc0e218d7a5b9420127c63925f43",
+                "reference": "3f458e0c4d1ddc0e218d7a5b9420127c63925f43",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "php": "^7.4 | ^8.0",
+                "psr/http-factory": "^1.0",
+                "psr/http-message": "^1.0 | ^2.0"
+            },
+            "require-dev": {
+                "php-coveralls/php-coveralls": "^2.0",
+                "phpunit/phpunit": "^9.0 | ^10.0",
+                "squizlabs/php_codesniffer": "^3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Phrity\\Net\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sören Jensen",
+                    "email": "sirn@sirn.se",
+                    "homepage": "https://phrity.sirn.se"
+                }
+            ],
+            "description": "PSR-7 Uri and PSR-17 UriFactory implementation",
+            "homepage": "https://phrity.sirn.se/net-uri",
+            "keywords": [
+                "psr-17",
+                "psr-7",
+                "uri",
+                "uri factory"
+            ],
+            "support": {
+                "issues": "https://github.com/sirn-se/phrity-net-uri/issues",
+                "source": "https://github.com/sirn-se/phrity-net-uri/tree/1.3.0"
+            },
+            "time": "2023-08-21T10:33:06+00:00"
+        },
+        {
+            "name": "phrity/util-errorhandler",
+            "version": "1.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/sirn-se/phrity-util-errorhandler.git",
+                "reference": "483228156e06673963902b1cc1e6bd9541ab4d5e"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/sirn-se/phrity-util-errorhandler/zipball/483228156e06673963902b1cc1e6bd9541ab4d5e",
+                "reference": "483228156e06673963902b1cc1e6bd9541ab4d5e",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "php": "^7.4 | ^8.0"
+            },
+            "require-dev": {
+                "php-coveralls/php-coveralls": "^2.0",
+                "phpunit/phpunit": "^9.0 | ^10.0 | ^11.0",
+                "squizlabs/php_codesniffer": "^3.5"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Phrity\\Util\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Sören Jensen",
+                    "email": "sirn@sirn.se",
+                    "homepage": "https://phrity.sirn.se"
+                }
+            ],
+            "description": "Inline error handler; catch and resolve errors for code block.",
+            "homepage": "https://phrity.sirn.se/util-errorhandler",
+            "keywords": [
+                "error",
+                "warning"
+            ],
+            "support": {
+                "issues": "https://github.com/sirn-se/phrity-util-errorhandler/issues",
+                "source": "https://github.com/sirn-se/phrity-util-errorhandler/tree/1.1.1"
+            },
+            "time": "2024-09-12T06:49:16+00:00"
         },
         {
             "name": "psr/cache",
@@ -3520,16 +3638,16 @@
         },
         {
             "name": "psr/http-message",
-            "version": "2.0",
+            "version": "1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/http-message.git",
-                "reference": "402d35bcb92c70c026d1a6a9883f06b2ead23d71"
+                "reference": "cb6ce4845ce34a8ad9e68117c10ee90a29919eba"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/http-message/zipball/402d35bcb92c70c026d1a6a9883f06b2ead23d71",
-                "reference": "402d35bcb92c70c026d1a6a9883f06b2ead23d71",
+                "url": "https://api.github.com/repos/php-fig/http-message/zipball/cb6ce4845ce34a8ad9e68117c10ee90a29919eba",
+                "reference": "cb6ce4845ce34a8ad9e68117c10ee90a29919eba",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -3544,7 +3662,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "2.0.x-dev"
+                    "dev-master": "1.1.x-dev"
                 }
             },
             "autoload": {
@@ -3559,7 +3677,7 @@
             "authors": [
                 {
                     "name": "PHP-FIG",
-                    "homepage": "https://www.php-fig.org/"
+                    "homepage": "http://www.php-fig.org/"
                 }
             ],
             "description": "Common interface for HTTP messages",
@@ -3573,9 +3691,9 @@
                 "response"
             ],
             "support": {
-                "source": "https://github.com/php-fig/http-message/tree/2.0"
+                "source": "https://github.com/php-fig/http-message/tree/1.1"
             },
-            "time": "2023-04-04T09:54:51+00:00"
+            "time": "2023-04-04T09:50:52+00:00"
         },
         {
             "name": "psr/log",
@@ -3867,16 +3985,16 @@
         },
         {
             "name": "shopwwi/webman-filesystem",
-            "version": "v1.1.0",
+            "version": "v1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/shopwwi/webman-filesystem.git",
-                "reference": "26ac82515d3787943573c50d1a6f0ca339f0d3d4"
+                "reference": "40d85f01d29513299c1d9d129e29d57624bebeae"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/shopwwi/webman-filesystem/zipball/26ac82515d3787943573c50d1a6f0ca339f0d3d4",
-                "reference": "26ac82515d3787943573c50d1a6f0ca339f0d3d4",
+                "url": "https://api.github.com/repos/shopwwi/webman-filesystem/zipball/40d85f01d29513299c1d9d129e29d57624bebeae",
+                "reference": "40d85f01d29513299c1d9d129e29d57624bebeae",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -3920,9 +4038,9 @@
             ],
             "support": {
                 "issues": "https://github.com/shopwwi/webman-filesystem/issues",
-                "source": "https://github.com/shopwwi/webman-filesystem/tree/v1.1.0"
+                "source": "https://github.com/shopwwi/webman-filesystem/tree/v1.1.1"
             },
-            "time": "2024-01-21T08:03:36+00:00"
+            "time": "2024-04-29T12:40:45+00:00"
         },
         {
             "name": "spatie/temporary-directory",
@@ -4177,16 +4295,16 @@
         },
         {
             "name": "symfony/console",
-            "version": "v6.4.15",
+            "version": "v6.4.21",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/console.git",
-                "reference": "f1fc6f47283e27336e7cebb9e8946c8de7bff9bd"
+                "reference": "a3011c7b7adb58d89f6c0d822abb641d7a5f9719"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/console/zipball/f1fc6f47283e27336e7cebb9e8946c8de7bff9bd",
-                "reference": "f1fc6f47283e27336e7cebb9e8946c8de7bff9bd",
+                "url": "https://api.github.com/repos/symfony/console/zipball/a3011c7b7adb58d89f6c0d822abb641d7a5f9719",
+                "reference": "a3011c7b7adb58d89f6c0d822abb641d7a5f9719",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -4257,7 +4375,7 @@
                 "terminal"
             ],
             "support": {
-                "source": "https://github.com/symfony/console/tree/v6.4.15"
+                "source": "https://github.com/symfony/console/tree/v6.4.21"
             },
             "funding": [
                 {
@@ -4273,7 +4391,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-11-06T14:19:14+00:00"
+            "time": "2025-04-07T15:42:41+00:00"
         },
         {
             "name": "symfony/deprecation-contracts",
@@ -4462,8 +4580,8 @@
             "type": "library",
             "extra": {
                 "thanks": {
-                    "name": "symfony/polyfill",
-                    "url": "https://github.com/symfony/polyfill"
+                    "url": "https://github.com/symfony/polyfill",
+                    "name": "symfony/polyfill"
                 }
             },
             "autoload": {
@@ -4546,8 +4664,8 @@
             "type": "library",
             "extra": {
                 "thanks": {
-                    "name": "symfony/polyfill",
-                    "url": "https://github.com/symfony/polyfill"
+                    "url": "https://github.com/symfony/polyfill",
+                    "name": "symfony/polyfill"
                 }
             },
             "autoload": {
@@ -4778,16 +4896,16 @@
         },
         {
             "name": "symfony/process",
-            "version": "v6.4.14",
+            "version": "v6.4.20",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/process.git",
-                "reference": "25214adbb0996d18112548de20c281be9f27279f"
+                "reference": "e2a61c16af36c9a07e5c9906498b73e091949a20"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/process/zipball/25214adbb0996d18112548de20c281be9f27279f",
-                "reference": "25214adbb0996d18112548de20c281be9f27279f",
+                "url": "https://api.github.com/repos/symfony/process/zipball/e2a61c16af36c9a07e5c9906498b73e091949a20",
+                "reference": "e2a61c16af36c9a07e5c9906498b73e091949a20",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -4825,7 +4943,7 @@
             "description": "Executes commands in sub-processes",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/process/tree/v6.4.14"
+                "source": "https://github.com/symfony/process/tree/v6.4.20"
             },
             "funding": [
                 {
@@ -4841,7 +4959,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-11-06T09:25:01+00:00"
+            "time": "2025-03-10T17:11:00+00:00"
         },
         {
             "name": "symfony/service-contracts",
@@ -4934,16 +5052,16 @@
         },
         {
             "name": "symfony/string",
-            "version": "v6.4.13",
+            "version": "v6.4.21",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/string.git",
-                "reference": "38371c60c71c72b3d64d8d76f6b1bb81a2cc3627"
+                "reference": "73e2c6966a5aef1d4892873ed5322245295370c6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/string/zipball/38371c60c71c72b3d64d8d76f6b1bb81a2cc3627",
-                "reference": "38371c60c71c72b3d64d8d76f6b1bb81a2cc3627",
+                "url": "https://api.github.com/repos/symfony/string/zipball/73e2c6966a5aef1d4892873ed5322245295370c6",
+                "reference": "73e2c6966a5aef1d4892873ed5322245295370c6",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -5006,7 +5124,7 @@
                 "utf8"
             ],
             "support": {
-                "source": "https://github.com/symfony/string/tree/v6.4.13"
+                "source": "https://github.com/symfony/string/tree/v6.4.21"
             },
             "funding": [
                 {
@@ -5022,20 +5140,20 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-09-25T14:18:03+00:00"
+            "time": "2025-04-18T15:23:29+00:00"
         },
         {
             "name": "symfony/translation",
-            "version": "v6.4.13",
+            "version": "v6.4.21",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/translation.git",
-                "reference": "bee9bfabfa8b4045a66bf82520e492cddbaffa66"
+                "reference": "bb92ea5588396b319ba43283a5a3087a034cb29c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/translation/zipball/bee9bfabfa8b4045a66bf82520e492cddbaffa66",
-                "reference": "bee9bfabfa8b4045a66bf82520e492cddbaffa66",
+                "url": "https://api.github.com/repos/symfony/translation/zipball/bb92ea5588396b319ba43283a5a3087a034cb29c",
+                "reference": "bb92ea5588396b319ba43283a5a3087a034cb29c",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -5107,7 +5225,7 @@
             "description": "Provides tools to internationalize your application",
             "homepage": "https://symfony.com",
             "support": {
-                "source": "https://github.com/symfony/translation/tree/v6.4.13"
+                "source": "https://github.com/symfony/translation/tree/v6.4.21"
             },
             "funding": [
                 {
@@ -5123,7 +5241,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-09-27T18:14:25+00:00"
+            "time": "2025-04-07T19:02:30+00:00"
         },
         {
             "name": "symfony/translation-contracts",
@@ -5294,16 +5412,16 @@
         },
         {
             "name": "tencentcloud/tencentcloud-sdk-php",
-            "version": "3.0.1159",
+            "version": "3.0.1381",
             "source": {
                 "type": "git",
                 "url": "https://github.com/TencentCloud/tencentcloud-sdk-php.git",
-                "reference": "1447d10e941f488d5444340b299186a017cda72b"
+                "reference": "42eabdbd17647b1aa0d4aac0f802ff78aebee67f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/TencentCloud/tencentcloud-sdk-php/zipball/1447d10e941f488d5444340b299186a017cda72b",
-                "reference": "1447d10e941f488d5444340b299186a017cda72b",
+                "url": "https://api.github.com/repos/TencentCloud/tencentcloud-sdk-php/zipball/42eabdbd17647b1aa0d4aac0f802ff78aebee67f",
+                "reference": "42eabdbd17647b1aa0d4aac0f802ff78aebee67f",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -5344,22 +5462,22 @@
             "homepage": "https://github.com/TencentCloud/tencentcloud-sdk-php",
             "support": {
                 "issues": "https://github.com/TencentCloud/tencentcloud-sdk-php/issues",
-                "source": "https://github.com/TencentCloud/tencentcloud-sdk-php/tree/3.0.1159"
+                "source": "https://github.com/TencentCloud/tencentcloud-sdk-php/tree/3.0.1381"
             },
-            "time": "2024-06-09T20:07:48+00:00"
+            "time": "2025-05-18T20:08:12+00:00"
         },
         {
             "name": "textalk/websocket",
-            "version": "1.5.8",
+            "version": "1.6.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Textalk/websocket-php.git",
-                "reference": "d05dbaa97500176447ffb1f1800573f23085ab13"
+                "reference": "67de79745b1a357caf812bfc44e0abf481cee012"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Textalk/websocket-php/zipball/d05dbaa97500176447ffb1f1800573f23085ab13",
-                "reference": "d05dbaa97500176447ffb1f1800573f23085ab13",
+                "url": "https://api.github.com/repos/Textalk/websocket-php/zipball/67de79745b1a357caf812bfc44e0abf481cee012",
+                "reference": "67de79745b1a357caf812bfc44e0abf481cee012",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -5369,12 +5487,15 @@
                 ]
             },
             "require": {
-                "php": "^7.2 | ^8.0",
-                "psr/log": "^1 | ^2 | ^3"
+                "php": "^7.4 | ^8.0",
+                "phrity/net-uri": "^1.0",
+                "phrity/util-errorhandler": "^1.0",
+                "psr/http-message": "^1.0",
+                "psr/log": "^1.0 | ^2.0 | ^3.0"
             },
             "require-dev": {
                 "php-coveralls/php-coveralls": "^2.0",
-                "phpunit/phpunit": "^8.0|^9.0",
+                "phpunit/phpunit": "^9.0",
                 "squizlabs/php_codesniffer": "^3.5"
             },
             "type": "library",
@@ -5392,16 +5513,15 @@
                     "name": "Fredrik Liljegren"
                 },
                 {
-                    "name": "Sören Jensen",
-                    "email": "soren@abicart.se"
+                    "name": "Sören Jensen"
                 }
             ],
             "description": "WebSocket client and server",
             "support": {
                 "issues": "https://github.com/Textalk/websocket-php/issues",
-                "source": "https://github.com/Textalk/websocket-php/tree/1.5.8"
+                "source": "https://github.com/Textalk/websocket-php/tree/1.6.3"
             },
-            "time": "2022-04-26T06:28:24+00:00"
+            "time": "2022-11-07T18:59:33+00:00"
         },
         {
             "name": "thenorthmemory/xml",
@@ -5514,16 +5634,16 @@
         },
         {
             "name": "topthink/think-helper",
-            "version": "v3.1.10",
+            "version": "v3.1.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/top-think/think-helper.git",
-                "reference": "ac66cc0859a12cd5d73258f50f338aadc95e9b46"
+                "reference": "1d6ada9b9f3130046bf6922fe1bd159c8d88a33c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/top-think/think-helper/zipball/ac66cc0859a12cd5d73258f50f338aadc95e9b46",
-                "reference": "ac66cc0859a12cd5d73258f50f338aadc95e9b46",
+                "url": "https://api.github.com/repos/top-think/think-helper/zipball/1d6ada9b9f3130046bf6922fe1bd159c8d88a33c",
+                "reference": "1d6ada9b9f3130046bf6922fe1bd159c8d88a33c",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -5560,22 +5680,22 @@
             "description": "The ThinkPHP6 Helper Package",
             "support": {
                 "issues": "https://github.com/top-think/think-helper/issues",
-                "source": "https://github.com/top-think/think-helper/tree/v3.1.10"
+                "source": "https://github.com/top-think/think-helper/tree/v3.1.11"
             },
-            "time": "2024-11-21T01:47:51+00:00"
+            "time": "2025-04-07T06:55:59+00:00"
         },
         {
             "name": "topthink/think-orm",
-            "version": "v4.0.3",
+            "version": "v4.0.40",
             "source": {
                 "type": "git",
                 "url": "https://github.com/top-think/think-orm.git",
-                "reference": "0c951d1eb08b48211d31079a616164e195028e44"
+                "reference": "1637860ff736859058f0a5003c7cc719c2068dbc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/top-think/think-orm/zipball/0c951d1eb08b48211d31079a616164e195028e44",
-                "reference": "0c951d1eb08b48211d31079a616164e195028e44",
+                "url": "https://api.github.com/repos/top-think/think-orm/zipball/1637860ff736859058f0a5003c7cc719c2068dbc",
+                "reference": "1637860ff736859058f0a5003c7cc719c2068dbc",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -5590,7 +5710,8 @@
                 "php": ">=8.0.0",
                 "psr/log": ">=1.0",
                 "psr/simple-cache": ">=1.0",
-                "topthink/think-helper": "^3.1"
+                "topthink/think-helper": "^3.1",
+                "topthink/think-validate": "^3.0"
             },
             "require-dev": {
                 "phpunit/phpunit": "^9.6|^10"
@@ -5625,9 +5746,9 @@
             ],
             "support": {
                 "issues": "https://github.com/top-think/think-orm/issues",
-                "source": "https://github.com/top-think/think-orm/tree/v4.0.3"
+                "source": "https://github.com/top-think/think-orm/tree/v4.0.40"
             },
-            "time": "2025-02-13T06:09:45+00:00"
+            "time": "2025-05-27T03:32:05+00:00"
         },
         {
             "name": "topthink/think-template",
@@ -5678,16 +5799,16 @@
         },
         {
             "name": "topthink/think-validate",
-            "version": "v3.0.3",
+            "version": "v3.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/top-think/think-validate.git",
-                "reference": "2729f938952a01e9d0e1a17d742b07fcf960ae31"
+                "reference": "c6a7704fc991d3689408299822dbc2ba4ee3f79a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/top-think/think-validate/zipball/2729f938952a01e9d0e1a17d742b07fcf960ae31",
-                "reference": "2729f938952a01e9d0e1a17d742b07fcf960ae31",
+                "url": "https://api.github.com/repos/top-think/think-validate/zipball/c6a7704fc991d3689408299822dbc2ba4ee3f79a",
+                "reference": "c6a7704fc991d3689408299822dbc2ba4ee3f79a",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -5722,9 +5843,9 @@
             "description": "think validate",
             "support": {
                 "issues": "https://github.com/top-think/think-validate/issues",
-                "source": "https://github.com/top-think/think-validate/tree/v3.0.3"
+                "source": "https://github.com/top-think/think-validate/tree/v3.0.6"
             },
-            "time": "2025-01-07T08:18:42+00:00"
+            "time": "2025-05-23T04:10:45+00:00"
         },
         {
             "name": "vlucas/phpdotenv",
@@ -5941,16 +6062,16 @@
         },
         {
             "name": "webman/captcha",
-            "version": "v1.0.3",
+            "version": "v1.0.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/webman-php/captcha.git",
-                "reference": "e80f271af99cb337406118fa7d90c0699ee1f3bc"
+                "reference": "44dc1e74b23e180e1dcb361c11b2ca8bc2e6b32c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/webman-php/captcha/zipball/e80f271af99cb337406118fa7d90c0699ee1f3bc",
-                "reference": "e80f271af99cb337406118fa7d90c0699ee1f3bc",
+                "url": "https://api.github.com/repos/webman-php/captcha/zipball/44dc1e74b23e180e1dcb361c11b2ca8bc2e6b32c",
+                "reference": "44dc1e74b23e180e1dcb361c11b2ca8bc2e6b32c",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -5999,22 +6120,22 @@
                 "spam"
             ],
             "support": {
-                "source": "https://github.com/webman-php/captcha/tree/v1.0.3"
+                "source": "https://github.com/webman-php/captcha/tree/v1.0.4"
             },
-            "time": "2024-03-28T07:54:04+00:00"
+            "time": "2024-05-14T02:56:38+00:00"
         },
         {
             "name": "webman/console",
-            "version": "v2.1.1",
+            "version": "v2.1.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/webman-php/console.git",
-                "reference": "4b1ccee3bd2498a9fe997c5ea2c1623523e7bd7e"
+                "reference": "bbee274a5f091eaf90e7a257dd0fbfef47da9a17"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/webman-php/console/zipball/4b1ccee3bd2498a9fe997c5ea2c1623523e7bd7e",
-                "reference": "4b1ccee3bd2498a9fe997c5ea2c1623523e7bd7e",
+                "url": "https://api.github.com/repos/webman-php/console/zipball/bbee274a5f091eaf90e7a257dd0fbfef47da9a17",
+                "reference": "bbee274a5f091eaf90e7a257dd0fbfef47da9a17",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -6060,7 +6181,7 @@
                 "source": "https://github.com/webman-php/console",
                 "wiki": "http://www.workerman.net/doc/webman"
             },
-            "time": "2025-02-16T01:31:32+00:00"
+            "time": "2025-03-06T08:23:07+00:00"
         },
         {
             "name": "webman/event",
@@ -6098,6 +6219,45 @@
                 "source": "https://github.com/webman-php/event/tree/v1.0.4"
             },
             "time": "2023-03-28T04:01:23+00:00"
+        },
+        {
+            "name": "webman/push",
+            "version": "v1.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/webman-php/push.git",
+                "reference": "b9e51d39a6ae232eab6b3f5c48a918857976add8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/webman-php/push/zipball/b9e51d39a6ae232eab6b3f5c48a918857976add8",
+                "reference": "b9e51d39a6ae232eab6b3f5c48a918857976add8",
+                "shasum": "",
+                "mirrors": [
+                    {
+                        "url": "https://mirrors.aliyun.com/composer/dists/%package%/%reference%.%type%",
+                        "preferred": true
+                    }
+                ]
+            },
+            "require": {
+                "php": ">=7.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Webman\\Push\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "support": {
+                "issues": "https://github.com/webman-php/push/issues",
+                "source": "https://github.com/webman-php/push/tree/v1.1.1"
+            },
+            "time": "2025-05-15T14:32:34+00:00"
         },
         {
             "name": "webman/redis",
@@ -6143,16 +6303,16 @@
         },
         {
             "name": "webman/think-orm",
-            "version": "v2.1.0",
+            "version": "v2.1.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/webman-php/think-orm.git",
-                "reference": "bc4bc1b06f8bcbda8fdaa6bcf7a7f4e788deaa53"
+                "reference": "af4a2586177a333983e0da1bf6512ec12f894b29"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/webman-php/think-orm/zipball/bc4bc1b06f8bcbda8fdaa6bcf7a7f4e788deaa53",
-                "reference": "bc4bc1b06f8bcbda8fdaa6bcf7a7f4e788deaa53",
+                "url": "https://api.github.com/repos/webman-php/think-orm/zipball/af4a2586177a333983e0da1bf6512ec12f894b29",
+                "reference": "af4a2586177a333983e0da1bf6512ec12f894b29",
                 "shasum": "",
                 "mirrors": [
                     {
@@ -6163,7 +6323,8 @@
             },
             "require": {
                 "php": ">=8.1",
-                "topthink/think-orm": "^2.0.53 || ^3.0.0 || ^4.0.0 || dev-master",
+                "topthink/think-container": "^2.0|^3.0",
+                "topthink/think-orm": "^2.0.53 || ^3.0.0 || ^4.0.30 || dev-master",
                 "workerman/webman-framework": "^2.1 || dev-master"
             },
             "type": "library",
@@ -6179,9 +6340,9 @@
             ],
             "support": {
                 "issues": "https://github.com/webman-php/think-orm/issues",
-                "source": "https://github.com/webman-php/think-orm/tree/v2.1.0"
+                "source": "https://github.com/webman-php/think-orm/tree/v2.1.6"
             },
-            "time": "2025-02-06T03:26:12+00:00"
+            "time": "2025-05-27T13:15:25+00:00"
         },
         {
             "name": "workerman/coroutine",
@@ -6666,12 +6827,12 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {},
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
         "php": ">=8.1"
     },
-    "platform-dev": {},
-    "plugin-api-version": "2.6.0"
+    "platform-dev": [],
+    "plugin-api-version": "2.0.0"
 }

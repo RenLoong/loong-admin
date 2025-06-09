@@ -42,9 +42,9 @@ use TencentCloud\Common\AbstractModel;
 注意：此字段可能返回 null，表示取不到有效值。
  * @method void setText(string $Text) 设置该字段用于返回音频文件经ASR识别后的文本信息。最长可识别**5小时**的音频文件，若超出时长限制，接口将会报错。
 注意：此字段可能返回 null，表示取不到有效值。
- * @method string getUrl() 获取该字段用于返回音频片段存储的链接地址，该地址有效期为1天。
+ * @method string getUrl() 获取该字段用于返回审核结果的访问链接（URL）。<br>备注：链接默认有效期为12小时。如果您需要更长时效的链接，请使用[COS预签名](https://cloud.tencent.com/document/product/1265/104001)功能更新签名时效。
 注意：此字段可能返回 null，表示取不到有效值。
- * @method void setUrl(string $Url) 设置该字段用于返回音频片段存储的链接地址，该地址有效期为1天。
+ * @method void setUrl(string $Url) 设置该字段用于返回审核结果的访问链接（URL）。<br>备注：链接默认有效期为12小时。如果您需要更长时效的链接，请使用[COS预签名](https://cloud.tencent.com/document/product/1265/104001)功能更新签名时效。
 注意：此字段可能返回 null，表示取不到有效值。
  * @method string getDuration() 获取该字段用于返回音频文件的时长，单位为毫秒。
  * @method void setDuration(string $Duration) 设置该字段用于返回音频文件的时长，单位为毫秒。
@@ -64,6 +64,16 @@ use TencentCloud\Common\AbstractModel;
 注意：此字段可能返回 null，表示取不到有效值。
  * @method void setRecognitionResults(array $RecognitionResults) 设置识别类标签结果信息列表
 注意：此字段可能返回 null，表示取不到有效值。
+ * @method array getSpeakerResults() 获取说话人结果
+ * @method void setSpeakerResults(array $SpeakerResults) 设置说话人结果
+ * @method array getLabelResults() 获取歌曲识别结果
+ * @method void setLabelResults(array $LabelResults) 设置歌曲识别结果
+ * @method array getTravelResults() 获取出行结果
+ * @method void setTravelResults(array $TravelResults) 设置出行结果
+ * @method string getSubTag() 获取三级标签
+ * @method void setSubTag(string $SubTag) 设置三级标签
+ * @method string getSubTagCode() 获取三级标签码
+ * @method void setSubTagCode(string $SubTagCode) 设置三级标签码
  */
 class AudioResult extends AbstractModel
 {
@@ -99,7 +109,7 @@ class AudioResult extends AbstractModel
     public $Text;
 
     /**
-     * @var string 该字段用于返回音频片段存储的链接地址，该地址有效期为1天。
+     * @var string 该字段用于返回审核结果的访问链接（URL）。<br>备注：链接默认有效期为12小时。如果您需要更长时效的链接，请使用[COS预签名](https://cloud.tencent.com/document/product/1265/104001)功能更新签名时效。
 注意：此字段可能返回 null，表示取不到有效值。
      */
     public $Url;
@@ -142,6 +152,31 @@ class AudioResult extends AbstractModel
     public $RecognitionResults;
 
     /**
+     * @var array 说话人结果
+     */
+    public $SpeakerResults;
+
+    /**
+     * @var array 歌曲识别结果
+     */
+    public $LabelResults;
+
+    /**
+     * @var array 出行结果
+     */
+    public $TravelResults;
+
+    /**
+     * @var string 三级标签
+     */
+    public $SubTag;
+
+    /**
+     * @var string 三级标签码
+     */
+    public $SubTagCode;
+
+    /**
      * @param integer $HitFlag 该字段用于返回审核内容是否命中审核模型；取值：0（**未命中**）、1（**命中**）。
 注意：此字段可能返回 null，表示取不到有效值。
      * @param string $Label 该字段用于返回检测结果所对应的恶意标签。<br>返回值：**Normal**：正常，**Porn**：色情，**Abuse**：谩骂，**Ad**：广告，**Custom**：自定义违规；以及其他令人反感、不安全或不适宜的内容类型。
@@ -153,7 +188,7 @@ class AudioResult extends AbstractModel
 注意：此字段可能返回 null，表示取不到有效值。
      * @param string $Text 该字段用于返回音频文件经ASR识别后的文本信息。最长可识别**5小时**的音频文件，若超出时长限制，接口将会报错。
 注意：此字段可能返回 null，表示取不到有效值。
-     * @param string $Url 该字段用于返回音频片段存储的链接地址，该地址有效期为1天。
+     * @param string $Url 该字段用于返回审核结果的访问链接（URL）。<br>备注：链接默认有效期为12小时。如果您需要更长时效的链接，请使用[COS预签名](https://cloud.tencent.com/document/product/1265/104001)功能更新签名时效。
 注意：此字段可能返回 null，表示取不到有效值。
      * @param string $Duration 该字段用于返回音频文件的时长，单位为毫秒。
      * @param string $Extra 该字段用于返回额外附加信息，不同客户或Biztype下返回信息不同。
@@ -164,6 +199,11 @@ class AudioResult extends AbstractModel
 注意：此字段可能返回 null，表示取不到有效值。
      * @param array $RecognitionResults 识别类标签结果信息列表
 注意：此字段可能返回 null，表示取不到有效值。
+     * @param array $SpeakerResults 说话人结果
+     * @param array $LabelResults 歌曲识别结果
+     * @param array $TravelResults 出行结果
+     * @param string $SubTag 三级标签
+     * @param string $SubTagCode 三级标签码
      */
     function __construct()
     {
@@ -248,6 +288,41 @@ class AudioResult extends AbstractModel
                 $obj->deserialize($value);
                 array_push($this->RecognitionResults, $obj);
             }
+        }
+
+        if (array_key_exists("SpeakerResults",$param) and $param["SpeakerResults"] !== null) {
+            $this->SpeakerResults = [];
+            foreach ($param["SpeakerResults"] as $key => $value){
+                $obj = new SpeakerResults();
+                $obj->deserialize($value);
+                array_push($this->SpeakerResults, $obj);
+            }
+        }
+
+        if (array_key_exists("LabelResults",$param) and $param["LabelResults"] !== null) {
+            $this->LabelResults = [];
+            foreach ($param["LabelResults"] as $key => $value){
+                $obj = new LabelResults();
+                $obj->deserialize($value);
+                array_push($this->LabelResults, $obj);
+            }
+        }
+
+        if (array_key_exists("TravelResults",$param) and $param["TravelResults"] !== null) {
+            $this->TravelResults = [];
+            foreach ($param["TravelResults"] as $key => $value){
+                $obj = new TravelResults();
+                $obj->deserialize($value);
+                array_push($this->TravelResults, $obj);
+            }
+        }
+
+        if (array_key_exists("SubTag",$param) and $param["SubTag"] !== null) {
+            $this->SubTag = $param["SubTag"];
+        }
+
+        if (array_key_exists("SubTagCode",$param) and $param["SubTagCode"] !== null) {
+            $this->SubTagCode = $param["SubTagCode"];
         }
     }
 }

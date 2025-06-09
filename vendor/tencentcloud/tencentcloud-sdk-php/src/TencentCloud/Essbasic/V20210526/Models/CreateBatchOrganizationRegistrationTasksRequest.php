@@ -25,23 +25,17 @@ use TencentCloud\Common\AbstractModel;
 此接口下面信息必填。
 <ul>
 <li>渠道应用标识:  Agent.AppId</li>
-<li>第三方平台子客企业标识: Agent.ProxyOrganizationOpenId</li>
-<li>第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId</li>
 </ul>
-第三方平台子客企业和员工必须已经经过实名认证
+
  * @method void setAgent(Agent $Agent) 设置关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。
 
 此接口下面信息必填。
 <ul>
 <li>渠道应用标识:  Agent.AppId</li>
-<li>第三方平台子客企业标识: Agent.ProxyOrganizationOpenId</li>
-<li>第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId</li>
 </ul>
-第三方平台子客企业和员工必须已经经过实名认证
- * @method array getRegistrationOrganizations() 获取当前应用下子客的组织机构注册信息。
-一次最多支持10条认证流
- * @method void setRegistrationOrganizations(array $RegistrationOrganizations) 设置当前应用下子客的组织机构注册信息。
-一次最多支持10条认证流
+
+ * @method array getRegistrationOrganizations() 获取当前应用下子企业的组织机构注册信息。最多支持查询10子企业。
+ * @method void setRegistrationOrganizations(array $RegistrationOrganizations) 设置当前应用下子企业的组织机构注册信息。最多支持查询10子企业。
  * @method string getEndpoint() 获取生成链接的类型：
 <ul><li>**PC**：(默认)web控制台链接, 需要在PC浏览器中打开</li>
 <li>**CHANNEL**：H5跳转到电子签小程序链接, 一般用于发送短信中带的链接, 打开后进入腾讯电子签小程序</li>
@@ -49,7 +43,7 @@ use TencentCloud\Common\AbstractModel;
 <li>**APP**：第三方APP或小程序跳转电子签小程序链接, 一般用于贵方小程序或者APP跳转过来,  打开后进入腾讯电子签小程序</li>
 <li>**H5**：第三方H5跳转到电子签H5长链接, 一般用于贵方H5跳转过来,  打开后进入腾讯电子签H5页面</li>
 <li>**SHORT_H5**：第三方H5跳转到电子签H5短链接, 一般用于贵方H5跳转过来,  打开后进入腾讯电子签H5页面</li></ul>
-示例值：PC
+
 
  * @method void setEndpoint(string $Endpoint) 设置生成链接的类型：
 <ul><li>**PC**：(默认)web控制台链接, 需要在PC浏览器中打开</li>
@@ -58,7 +52,6 @@ use TencentCloud\Common\AbstractModel;
 <li>**APP**：第三方APP或小程序跳转电子签小程序链接, 一般用于贵方小程序或者APP跳转过来,  打开后进入腾讯电子签小程序</li>
 <li>**H5**：第三方H5跳转到电子签H5长链接, 一般用于贵方H5跳转过来,  打开后进入腾讯电子签H5页面</li>
 <li>**SHORT_H5**：第三方H5跳转到电子签H5短链接, 一般用于贵方H5跳转过来,  打开后进入腾讯电子签H5页面</li></ul>
-示例值：PC
  */
 class CreateBatchOrganizationRegistrationTasksRequest extends AbstractModel
 {
@@ -68,16 +61,13 @@ class CreateBatchOrganizationRegistrationTasksRequest extends AbstractModel
 此接口下面信息必填。
 <ul>
 <li>渠道应用标识:  Agent.AppId</li>
-<li>第三方平台子客企业标识: Agent.ProxyOrganizationOpenId</li>
-<li>第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId</li>
 </ul>
-第三方平台子客企业和员工必须已经经过实名认证
+
      */
     public $Agent;
 
     /**
-     * @var array 当前应用下子客的组织机构注册信息。
-一次最多支持10条认证流
+     * @var array 当前应用下子企业的组织机构注册信息。最多支持查询10子企业。
      */
     public $RegistrationOrganizations;
 
@@ -89,7 +79,7 @@ class CreateBatchOrganizationRegistrationTasksRequest extends AbstractModel
 <li>**APP**：第三方APP或小程序跳转电子签小程序链接, 一般用于贵方小程序或者APP跳转过来,  打开后进入腾讯电子签小程序</li>
 <li>**H5**：第三方H5跳转到电子签H5长链接, 一般用于贵方H5跳转过来,  打开后进入腾讯电子签H5页面</li>
 <li>**SHORT_H5**：第三方H5跳转到电子签H5短链接, 一般用于贵方H5跳转过来,  打开后进入腾讯电子签H5页面</li></ul>
-示例值：PC
+
 
      */
     public $Endpoint;
@@ -100,12 +90,9 @@ class CreateBatchOrganizationRegistrationTasksRequest extends AbstractModel
 此接口下面信息必填。
 <ul>
 <li>渠道应用标识:  Agent.AppId</li>
-<li>第三方平台子客企业标识: Agent.ProxyOrganizationOpenId</li>
-<li>第三方平台子客企业中的员工标识: Agent. ProxyOperator.OpenId</li>
 </ul>
-第三方平台子客企业和员工必须已经经过实名认证
-     * @param array $RegistrationOrganizations 当前应用下子客的组织机构注册信息。
-一次最多支持10条认证流
+
+     * @param array $RegistrationOrganizations 当前应用下子企业的组织机构注册信息。最多支持查询10子企业。
      * @param string $Endpoint 生成链接的类型：
 <ul><li>**PC**：(默认)web控制台链接, 需要在PC浏览器中打开</li>
 <li>**CHANNEL**：H5跳转到电子签小程序链接, 一般用于发送短信中带的链接, 打开后进入腾讯电子签小程序</li>
@@ -113,7 +100,6 @@ class CreateBatchOrganizationRegistrationTasksRequest extends AbstractModel
 <li>**APP**：第三方APP或小程序跳转电子签小程序链接, 一般用于贵方小程序或者APP跳转过来,  打开后进入腾讯电子签小程序</li>
 <li>**H5**：第三方H5跳转到电子签H5长链接, 一般用于贵方H5跳转过来,  打开后进入腾讯电子签H5页面</li>
 <li>**SHORT_H5**：第三方H5跳转到电子签H5短链接, 一般用于贵方H5跳转过来,  打开后进入腾讯电子签H5页面</li></ul>
-示例值：PC
      */
     function __construct()
     {

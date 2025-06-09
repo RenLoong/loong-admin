@@ -71,16 +71,22 @@ use TencentCloud\Common\AbstractModel;
  * @method void setSecurityGroupIDs(array $SecurityGroupIDs) 设置安全组列表
 注意：此字段可能返回 null，表示取不到有效值。
  * @method string getVpcId() 获取VPC 唯一 ID
-注意：此字段可能返回 null，表示取不到有效值。
  * @method void setVpcId(string $VpcId) 设置VPC 唯一 ID
-注意：此字段可能返回 null，表示取不到有效值。
  * @method string getSubnetId() 获取子网唯一 ID
-注意：此字段可能返回 null，表示取不到有效值。
  * @method void setSubnetId(string $SubnetId) 设置子网唯一 ID
-注意：此字段可能返回 null，表示取不到有效值。
  * @method string getOsImage() 获取OS的名称
 注意：此字段可能返回 null，表示取不到有效值。
  * @method void setOsImage(string $OsImage) 设置OS的名称
+注意：此字段可能返回 null，表示取不到有效值。
+ * @method string getInstanceId() 获取**原生节点对应的实例 ID**
+
+- ins-q47ofw6 表示这个实例是一个 CVM 的实例
+- eks-f8mvyaep 表示这个实例是一个 CXM 的实例
+注意：此字段可能返回 null，表示取不到有效值。
+ * @method void setInstanceId(string $InstanceId) 设置**原生节点对应的实例 ID**
+
+- ins-q47ofw6 表示这个实例是一个 CVM 的实例
+- eks-f8mvyaep 表示这个实例是一个 CXM 的实例
 注意：此字段可能返回 null，表示取不到有效值。
  */
 class NativeNodeInfo extends AbstractModel
@@ -188,13 +194,11 @@ class NativeNodeInfo extends AbstractModel
 
     /**
      * @var string VPC 唯一 ID
-注意：此字段可能返回 null，表示取不到有效值。
      */
     public $VpcId;
 
     /**
      * @var string 子网唯一 ID
-注意：此字段可能返回 null，表示取不到有效值。
      */
     public $SubnetId;
 
@@ -203,6 +207,15 @@ class NativeNodeInfo extends AbstractModel
 注意：此字段可能返回 null，表示取不到有效值。
      */
     public $OsImage;
+
+    /**
+     * @var string **原生节点对应的实例 ID**
+
+- ins-q47ofw6 表示这个实例是一个 CVM 的实例
+- eks-f8mvyaep 表示这个实例是一个 CXM 的实例
+注意：此字段可能返回 null，表示取不到有效值。
+     */
+    public $InstanceId;
 
     /**
      * @param string $MachineName 节点名称
@@ -231,10 +244,13 @@ class NativeNodeInfo extends AbstractModel
      * @param array $SecurityGroupIDs 安全组列表
 注意：此字段可能返回 null，表示取不到有效值。
      * @param string $VpcId VPC 唯一 ID
-注意：此字段可能返回 null，表示取不到有效值。
      * @param string $SubnetId 子网唯一 ID
-注意：此字段可能返回 null，表示取不到有效值。
      * @param string $OsImage OS的名称
+注意：此字段可能返回 null，表示取不到有效值。
+     * @param string $InstanceId **原生节点对应的实例 ID**
+
+- ins-q47ofw6 表示这个实例是一个 CVM 的实例
+- eks-f8mvyaep 表示这个实例是一个 CXM 的实例
 注意：此字段可能返回 null，表示取不到有效值。
      */
     function __construct()
@@ -337,6 +353,10 @@ class NativeNodeInfo extends AbstractModel
 
         if (array_key_exists("OsImage",$param) and $param["OsImage"] !== null) {
             $this->OsImage = $param["OsImage"];
+        }
+
+        if (array_key_exists("InstanceId",$param) and $param["InstanceId"] !== null) {
+            $this->InstanceId = $param["InstanceId"];
         }
     }
 }

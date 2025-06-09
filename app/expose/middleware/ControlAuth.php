@@ -80,7 +80,7 @@ class ControlAuth implements MiddlewareInterface
             }
             $user = Auth::setPrefix('CONTROL')->decrypt($token);
             if (!$user) {
-                throw new Exception('登录已过期，请重新登录', ResponseCode::NEED_LOGIN);
+                throw new TokenExpireException();
             }
             $request->uid           = $user['uid'];
             $request->token         = $token;

@@ -22,8 +22,8 @@ use TencentCloud\Common\AbstractModel;
  *
  * @method Asset getAsset() 获取基础对象
  * @method void setAsset(Asset $Asset) 设置基础对象
- * @method string getType() 获取表类型
- * @method void setType(string $Type) 设置表类型
+ * @method string getType() 获取表类型：EXTERNAL_TABLE, VIRTUAL_VIEW, MATERIALIZED_VIEW
+ * @method void setType(string $Type) 设置表类型：EXTERNAL_TABLE, VIRTUAL_VIEW, MATERIALIZED_VIEW
  * @method string getDbName() 获取数据库名称
  * @method void setDbName(string $DbName) 设置数据库名称
  * @method integer getStorageSize() 获取存储大小
@@ -52,6 +52,8 @@ use TencentCloud\Common\AbstractModel;
  * @method void setPartitions(array $Partitions) 设置分区
  * @method string getName() 获取表名称
  * @method void setName(string $Name) 设置表名称
+ * @method string getDatasourceConnectionName() 获取数据源连接名
+ * @method void setDatasourceConnectionName(string $DatasourceConnectionName) 设置数据源连接名
  */
 class CreateDMSTableRequest extends AbstractModel
 {
@@ -61,7 +63,7 @@ class CreateDMSTableRequest extends AbstractModel
     public $Asset;
 
     /**
-     * @var string 表类型
+     * @var string 表类型：EXTERNAL_TABLE, VIRTUAL_VIEW, MATERIALIZED_VIEW
      */
     public $Type;
 
@@ -136,8 +138,13 @@ class CreateDMSTableRequest extends AbstractModel
     public $Name;
 
     /**
+     * @var string 数据源连接名
+     */
+    public $DatasourceConnectionName;
+
+    /**
      * @param Asset $Asset 基础对象
-     * @param string $Type 表类型
+     * @param string $Type 表类型：EXTERNAL_TABLE, VIRTUAL_VIEW, MATERIALIZED_VIEW
      * @param string $DbName 数据库名称
      * @param integer $StorageSize 存储大小
      * @param integer $RecordCount 记录数量
@@ -152,6 +159,7 @@ class CreateDMSTableRequest extends AbstractModel
      * @param string $ViewExpandedText 视图文本
      * @param array $Partitions 分区
      * @param string $Name 表名称
+     * @param string $DatasourceConnectionName 数据源连接名
      */
     function __construct()
     {
@@ -245,6 +253,10 @@ class CreateDMSTableRequest extends AbstractModel
 
         if (array_key_exists("Name",$param) and $param["Name"] !== null) {
             $this->Name = $param["Name"];
+        }
+
+        if (array_key_exists("DatasourceConnectionName",$param) and $param["DatasourceConnectionName"] !== null) {
+            $this->DatasourceConnectionName = $param["DatasourceConnectionName"];
         }
     }
 }

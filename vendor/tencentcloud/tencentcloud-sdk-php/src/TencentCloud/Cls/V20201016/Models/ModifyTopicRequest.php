@@ -46,6 +46,12 @@ use TencentCloud\Common\AbstractModel;
 开启后将支持指定操作匿名访问该日志主题。详情请参见[日志主题](https://cloud.tencent.com/document/product/614/41035)。
  * @method void setIsWebTracking(boolean $IsWebTracking) 设置免鉴权开关。 false：关闭； true：开启。
 开启后将支持指定操作匿名访问该日志主题。详情请参见[日志主题](https://cloud.tencent.com/document/product/614/41035)。
+ * @method TopicExtendInfo getExtends() 获取日志主题扩展信息
+ * @method void setExtends(TopicExtendInfo $Extends) 设置日志主题扩展信息
+ * @method integer getPartitionCount() 获取日志主题分区数量
+ * @method void setPartitionCount(integer $PartitionCount) 设置日志主题分区数量
+ * @method string getCancelTopicAsyncTaskID() 获取取消切换存储任务的id
+ * @method void setCancelTopicAsyncTaskID(string $CancelTopicAsyncTaskID) 设置取消切换存储任务的id
  */
 class ModifyTopicRequest extends AbstractModel
 {
@@ -103,6 +109,21 @@ class ModifyTopicRequest extends AbstractModel
     public $IsWebTracking;
 
     /**
+     * @var TopicExtendInfo 日志主题扩展信息
+     */
+    public $Extends;
+
+    /**
+     * @var integer 日志主题分区数量
+     */
+    public $PartitionCount;
+
+    /**
+     * @var string 取消切换存储任务的id
+     */
+    public $CancelTopicAsyncTaskID;
+
+    /**
      * @param string $TopicId 日志主题ID
      * @param string $TopicName 日志主题名称
      * @param array $Tags 标签描述列表，通过指定该参数可以同时绑定标签到相应的日志主题。最大支持10个标签键值对，并且不能有重复的键值对。
@@ -116,6 +137,9 @@ class ModifyTopicRequest extends AbstractModel
 非0：开启日志沉降后标准存储的天数。HotPeriod需要大于等于7，且小于Period。仅在StorageType为 hot 时生效
      * @param boolean $IsWebTracking 免鉴权开关。 false：关闭； true：开启。
 开启后将支持指定操作匿名访问该日志主题。详情请参见[日志主题](https://cloud.tencent.com/document/product/614/41035)。
+     * @param TopicExtendInfo $Extends 日志主题扩展信息
+     * @param integer $PartitionCount 日志主题分区数量
+     * @param string $CancelTopicAsyncTaskID 取消切换存储任务的id
      */
     function __construct()
     {
@@ -173,6 +197,19 @@ class ModifyTopicRequest extends AbstractModel
 
         if (array_key_exists("IsWebTracking",$param) and $param["IsWebTracking"] !== null) {
             $this->IsWebTracking = $param["IsWebTracking"];
+        }
+
+        if (array_key_exists("Extends",$param) and $param["Extends"] !== null) {
+            $this->Extends = new TopicExtendInfo();
+            $this->Extends->deserialize($param["Extends"]);
+        }
+
+        if (array_key_exists("PartitionCount",$param) and $param["PartitionCount"] !== null) {
+            $this->PartitionCount = $param["PartitionCount"];
+        }
+
+        if (array_key_exists("CancelTopicAsyncTaskID",$param) and $param["CancelTopicAsyncTaskID"] !== null) {
+            $this->CancelTopicAsyncTaskID = $param["CancelTopicAsyncTaskID"];
         }
     }
 }

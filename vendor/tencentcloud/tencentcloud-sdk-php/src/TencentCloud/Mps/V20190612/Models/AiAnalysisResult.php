@@ -60,6 +60,10 @@ use TencentCloud\Common\AbstractModel;
 注意：此字段可能返回 null，表示取不到有效值。
  * @method void setDeLogoTask(AiAnalysisTaskDelLogoResult $DeLogoTask) 设置视频内容分析智能擦除任务的查询结果，当任务类型为 DeLogo 时有效。
 注意：此字段可能返回 null，表示取不到有效值。
+ * @method AiAnalysisTaskSegmentResult getSegmentTask() 获取视频内容分析拆条任务的查询结果，当任务类型为 SegmentRecognition 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+ * @method void setSegmentTask(AiAnalysisTaskSegmentResult $SegmentTask) 设置视频内容分析拆条任务的查询结果，当任务类型为 SegmentRecognition 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
  * @method AiAnalysisTaskHeadTailResult getHeadTailTask() 获取视频内容分析片头片尾任务的查询结果，当任务类型为 HeadTailRecognition 时有效。
 注意：此字段可能返回 null，表示取不到有效值。
  * @method void setHeadTailTask(AiAnalysisTaskHeadTailResult $HeadTailTask) 设置视频内容分析片头片尾任务的查询结果，当任务类型为 HeadTailRecognition 时有效。
@@ -67,6 +71,10 @@ use TencentCloud\Common\AbstractModel;
  * @method AiAnalysisTaskDescriptionResult getDescriptionTask() 获取视频内容分析摘要任务的查询结果，当任务类型为 Description 时有效。
 注意：此字段可能返回 null，表示取不到有效值。
  * @method void setDescriptionTask(AiAnalysisTaskDescriptionResult $DescriptionTask) 设置视频内容分析摘要任务的查询结果，当任务类型为 Description 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+ * @method AiAnalysisTaskHorizontalToVerticalResult getHorizontalToVerticalTask() 获取视频内容分析横转竖任务的查询结果，当任务类型为 HorizontalToVertical 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+ * @method void setHorizontalToVerticalTask(AiAnalysisTaskHorizontalToVerticalResult $HorizontalToVerticalTask) 设置视频内容分析横转竖任务的查询结果，当任务类型为 HorizontalToVertical 时有效。
 注意：此字段可能返回 null，表示取不到有效值。
  */
 class AiAnalysisResult extends AbstractModel
@@ -120,6 +128,12 @@ class AiAnalysisResult extends AbstractModel
     public $DeLogoTask;
 
     /**
+     * @var AiAnalysisTaskSegmentResult 视频内容分析拆条任务的查询结果，当任务类型为 SegmentRecognition 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+     */
+    public $SegmentTask;
+
+    /**
      * @var AiAnalysisTaskHeadTailResult 视频内容分析片头片尾任务的查询结果，当任务类型为 HeadTailRecognition 时有效。
 注意：此字段可能返回 null，表示取不到有效值。
      */
@@ -130,6 +144,12 @@ class AiAnalysisResult extends AbstractModel
 注意：此字段可能返回 null，表示取不到有效值。
      */
     public $DescriptionTask;
+
+    /**
+     * @var AiAnalysisTaskHorizontalToVerticalResult 视频内容分析横转竖任务的查询结果，当任务类型为 HorizontalToVertical 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+     */
+    public $HorizontalToVerticalTask;
 
     /**
      * @param string $Type 任务的类型，可以取的值有：
@@ -152,9 +172,13 @@ class AiAnalysisResult extends AbstractModel
 注意：此字段可能返回 null，表示取不到有效值。
      * @param AiAnalysisTaskDelLogoResult $DeLogoTask 视频内容分析智能擦除任务的查询结果，当任务类型为 DeLogo 时有效。
 注意：此字段可能返回 null，表示取不到有效值。
+     * @param AiAnalysisTaskSegmentResult $SegmentTask 视频内容分析拆条任务的查询结果，当任务类型为 SegmentRecognition 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
      * @param AiAnalysisTaskHeadTailResult $HeadTailTask 视频内容分析片头片尾任务的查询结果，当任务类型为 HeadTailRecognition 时有效。
 注意：此字段可能返回 null，表示取不到有效值。
      * @param AiAnalysisTaskDescriptionResult $DescriptionTask 视频内容分析摘要任务的查询结果，当任务类型为 Description 时有效。
+注意：此字段可能返回 null，表示取不到有效值。
+     * @param AiAnalysisTaskHorizontalToVerticalResult $HorizontalToVerticalTask 视频内容分析横转竖任务的查询结果，当任务类型为 HorizontalToVertical 时有效。
 注意：此字段可能返回 null，表示取不到有效值。
      */
     function __construct()
@@ -204,6 +228,11 @@ class AiAnalysisResult extends AbstractModel
             $this->DeLogoTask->deserialize($param["DeLogoTask"]);
         }
 
+        if (array_key_exists("SegmentTask",$param) and $param["SegmentTask"] !== null) {
+            $this->SegmentTask = new AiAnalysisTaskSegmentResult();
+            $this->SegmentTask->deserialize($param["SegmentTask"]);
+        }
+
         if (array_key_exists("HeadTailTask",$param) and $param["HeadTailTask"] !== null) {
             $this->HeadTailTask = new AiAnalysisTaskHeadTailResult();
             $this->HeadTailTask->deserialize($param["HeadTailTask"]);
@@ -212,6 +241,11 @@ class AiAnalysisResult extends AbstractModel
         if (array_key_exists("DescriptionTask",$param) and $param["DescriptionTask"] !== null) {
             $this->DescriptionTask = new AiAnalysisTaskDescriptionResult();
             $this->DescriptionTask->deserialize($param["DescriptionTask"]);
+        }
+
+        if (array_key_exists("HorizontalToVerticalTask",$param) and $param["HorizontalToVerticalTask"] !== null) {
+            $this->HorizontalToVerticalTask = new AiAnalysisTaskHorizontalToVerticalResult();
+            $this->HorizontalToVerticalTask->deserialize($param["HorizontalToVerticalTask"]);
         }
     }
 }

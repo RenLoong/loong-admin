@@ -20,28 +20,10 @@ use TencentCloud\Common\AbstractModel;
 /**
  * RecognizeGeneralInvoice请求参数结构体
  *
- * @method string getImageBase64() 获取图片的 Base64 值。
-支持的图片格式：PNG、JPG、JPEG、PDF，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 8M。图片下载时间不超过 3 秒。
-支持的图片像素：单边介于20-10000px之间。
-图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
- * @method void setImageBase64(string $ImageBase64) 设置图片的 Base64 值。
-支持的图片格式：PNG、JPG、JPEG、PDF，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 8M。图片下载时间不超过 3 秒。
-支持的图片像素：单边介于20-10000px之间。
-图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
- * @method string getImageUrl() 获取图片的 Url 地址。
-支持的图片格式：PNG、JPG、JPEG、PDF，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经 Base64 编码后不超过 8M。图片下载时间不超过 3 秒。
-支持的图片像素：单边介于20-10000px之间。
-图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
-非腾讯云存储的 Url 速度和稳定性可能受一定影响。
- * @method void setImageUrl(string $ImageUrl) 设置图片的 Url 地址。
-支持的图片格式：PNG、JPG、JPEG、PDF，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经 Base64 编码后不超过 8M。图片下载时间不超过 3 秒。
-支持的图片像素：单边介于20-10000px之间。
-图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
-非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+ * @method string getImageBase64() 获取图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG、PDF，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。支持的图片像素：单边介于20-10000px之间。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+ * @method void setImageBase64(string $ImageBase64) 设置图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG、PDF，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。支持的图片像素：单边介于20-10000px之间。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+ * @method string getImageUrl() 获取图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG、PDF，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。支持的图片像素：单边介于20-10000px之间。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+ * @method void setImageUrl(string $ImageUrl) 设置图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG、PDF，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。支持的图片像素：单边介于20-10000px之间。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
  * @method array getTypes() 获取需要识别的票据类型列表，为空或不填表示识别全部类型。当传入单个类型时，图片均采用该票类型进行处理。
 暂不支持多个参数进行局部控制。
 0：出租车发票
@@ -58,6 +40,9 @@ use TencentCloud\Common\AbstractModel;
 15：非税发票
 16：全电发票
 17：医疗发票
+18：完税凭证
+19：海关缴款书
+20：银行回单
 -1：其他发票
  * @method void setTypes(array $Types) 设置需要识别的票据类型列表，为空或不填表示识别全部类型。当传入单个类型时，图片均采用该票类型进行处理。
 暂不支持多个参数进行局部控制。
@@ -75,6 +60,9 @@ use TencentCloud\Common\AbstractModel;
 15：非税发票
 16：全电发票
 17：医疗发票
+18：完税凭证
+19：海关缴款书
+20：银行回单
 -1：其他发票
  * @method boolean getEnableOther() 获取是否开启其他票识别，默认值为true，开启后可支持其他发票的智能识别。	
  * @method void setEnableOther(boolean $EnableOther) 设置是否开启其他票识别，默认值为true，开启后可支持其他发票的智能识别。	
@@ -92,21 +80,12 @@ use TencentCloud\Common\AbstractModel;
 class RecognizeGeneralInvoiceRequest extends AbstractModel
 {
     /**
-     * @var string 图片的 Base64 值。
-支持的图片格式：PNG、JPG、JPEG、PDF，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 8M。图片下载时间不超过 3 秒。
-支持的图片像素：单边介于20-10000px之间。
-图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+     * @var string 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG、PDF，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。支持的图片像素：单边介于20-10000px之间。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
      */
     public $ImageBase64;
 
     /**
-     * @var string 图片的 Url 地址。
-支持的图片格式：PNG、JPG、JPEG、PDF，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经 Base64 编码后不超过 8M。图片下载时间不超过 3 秒。
-支持的图片像素：单边介于20-10000px之间。
-图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
-非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+     * @var string 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG、PDF，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。支持的图片像素：单边介于20-10000px之间。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
      */
     public $ImageUrl;
 
@@ -127,6 +106,9 @@ class RecognizeGeneralInvoiceRequest extends AbstractModel
 15：非税发票
 16：全电发票
 17：医疗发票
+18：完税凭证
+19：海关缴款书
+20：银行回单
 -1：其他发票
      */
     public $Types;
@@ -162,17 +144,8 @@ class RecognizeGeneralInvoiceRequest extends AbstractModel
     public $EnableItemPolygon;
 
     /**
-     * @param string $ImageBase64 图片的 Base64 值。
-支持的图片格式：PNG、JPG、JPEG、PDF，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经Base64编码后不超过 8M。图片下载时间不超过 3 秒。
-支持的图片像素：单边介于20-10000px之间。
-图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
-     * @param string $ImageUrl 图片的 Url 地址。
-支持的图片格式：PNG、JPG、JPEG、PDF，暂不支持 GIF 格式。
-支持的图片大小：所下载图片经 Base64 编码后不超过 8M。图片下载时间不超过 3 秒。
-支持的图片像素：单边介于20-10000px之间。
-图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。
-非腾讯云存储的 Url 速度和稳定性可能受一定影响。
+     * @param string $ImageBase64 图片的 Base64 值。支持的图片格式：PNG、JPG、JPEG、PDF，暂不支持 GIF 格式。支持的图片大小：所下载图片经Base64编码后不超过 10M。图片下载时间不超过 3 秒。支持的图片像素：单边介于20-10000px之间。图片的 ImageUrl、ImageBase64 必须提供一个，如果都提供，只使用 ImageUrl。
+     * @param string $ImageUrl 图片的 Url 地址。支持的图片格式：PNG、JPG、JPEG、PDF，暂不支持 GIF 格式。支持的图片大小：所下载图片经 Base64 编码后不超过 10M。图片下载时间不超过 3 秒。支持的图片像素：单边介于20-10000px之间。图片存储于腾讯云的 Url 可保障更高的下载速度和稳定性，建议图片存储于腾讯云。非腾讯云存储的 Url 速度和稳定性可能受一定影响。
      * @param array $Types 需要识别的票据类型列表，为空或不填表示识别全部类型。当传入单个类型时，图片均采用该票类型进行处理。
 暂不支持多个参数进行局部控制。
 0：出租车发票
@@ -189,6 +162,9 @@ class RecognizeGeneralInvoiceRequest extends AbstractModel
 15：非税发票
 16：全电发票
 17：医疗发票
+18：完税凭证
+19：海关缴款书
+20：银行回单
 -1：其他发票
      * @param boolean $EnableOther 是否开启其他票识别，默认值为true，开启后可支持其他发票的智能识别。	
      * @param boolean $EnablePdf 是否开启PDF识别，默认值为true，开启后可同时支持图片和PDF的识别。

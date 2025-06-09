@@ -24,10 +24,9 @@ use TencentCloud\Privatedns\V20201028\Models as Models;
 
 /**
  * @method Models\AddSpecifyPrivateZoneVpcResponse AddSpecifyPrivateZoneVpc(Models\AddSpecifyPrivateZoneVpcRequest $req) 追加与私有域关联的VPC
- * @method Models\CreatePrivateDNSAccountResponse CreatePrivateDNSAccount(Models\CreatePrivateDNSAccountRequest $req) 创建私有域解析账号
+ * @method Models\CreatePrivateDNSAccountResponse CreatePrivateDNSAccount(Models\CreatePrivateDNSAccountRequest $req) 跨账号关联VPC时绑定其他账号
  * @method Models\CreatePrivateZoneResponse CreatePrivateZone(Models\CreatePrivateZoneRequest $req) 创建私有域
  * @method Models\CreatePrivateZoneRecordResponse CreatePrivateZoneRecord(Models\CreatePrivateZoneRecordRequest $req) 添加私有域解析记录
- * @method Models\DeleteEndPointResponse DeleteEndPoint(Models\DeleteEndPointRequest $req) 删除终端节点
  * @method Models\DeletePrivateDNSAccountResponse DeletePrivateDNSAccount(Models\DeletePrivateDNSAccountRequest $req) 删除私有域解析账号
  * @method Models\DeletePrivateZoneResponse DeletePrivateZone(Models\DeletePrivateZoneRequest $req) 删除私有域并停止解析
  * @method Models\DeletePrivateZoneRecordResponse DeletePrivateZoneRecord(Models\DeletePrivateZoneRecordRequest $req) 删除私有域解析记录

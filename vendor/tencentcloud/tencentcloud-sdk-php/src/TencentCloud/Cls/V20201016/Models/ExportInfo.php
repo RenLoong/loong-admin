@@ -50,6 +50,8 @@ use TencentCloud\Common\AbstractModel;
 0：Lucene语法，1：CQL语法。
  * @method void setSyntaxRule(integer $SyntaxRule) 设置语法规则。 默认值为0。
 0：Lucene语法，1：CQL语法。
+ * @method array getDerivedFields() 获取导出字段
+ * @method void setDerivedFields(array $DerivedFields) 设置导出字段
  */
 class ExportInfo extends AbstractModel
 {
@@ -125,6 +127,11 @@ class ExportInfo extends AbstractModel
     public $SyntaxRule;
 
     /**
+     * @var array 导出字段
+     */
+    public $DerivedFields;
+
+    /**
      * @param string $TopicId 日志主题ID
      * @param string $ExportId 日志导出任务ID
      * @param string $Query 日志导出查询语句
@@ -140,6 +147,7 @@ class ExportInfo extends AbstractModel
      * @param string $CreateTime 日志导出创建时间
      * @param integer $SyntaxRule 语法规则。 默认值为0。
 0：Lucene语法，1：CQL语法。
+     * @param array $DerivedFields 导出字段
      */
     function __construct()
     {
@@ -208,6 +216,10 @@ class ExportInfo extends AbstractModel
 
         if (array_key_exists("SyntaxRule",$param) and $param["SyntaxRule"] !== null) {
             $this->SyntaxRule = $param["SyntaxRule"];
+        }
+
+        if (array_key_exists("DerivedFields",$param) and $param["DerivedFields"] !== null) {
+            $this->DerivedFields = $param["DerivedFields"];
         }
     }
 }

@@ -23,7 +23,9 @@ use TencentCloud\Common\AbstractModel;
  * @method string getLegalName() 获取法人姓名
  * @method void setLegalName(string $LegalName) 设置法人姓名
  * @method string getUscc() 获取社会统一信用代码
+注意：此字段可能返回 null，表示取不到有效值。
  * @method void setUscc(string $Uscc) 设置社会统一信用代码
+注意：此字段可能返回 null，表示取不到有效值。
  * @method string getUnifiedSocialCreditCode() 获取社会统一信用代码
  * @method void setUnifiedSocialCreditCode(string $UnifiedSocialCreditCode) 设置社会统一信用代码
  */
@@ -36,6 +38,7 @@ class RegisterInfo extends AbstractModel
 
     /**
      * @var string 社会统一信用代码
+注意：此字段可能返回 null，表示取不到有效值。
      * @deprecated
      */
     public $Uscc;
@@ -48,6 +51,7 @@ class RegisterInfo extends AbstractModel
     /**
      * @param string $LegalName 法人姓名
      * @param string $Uscc 社会统一信用代码
+注意：此字段可能返回 null，表示取不到有效值。
      * @param string $UnifiedSocialCreditCode 社会统一信用代码
      */
     function __construct()

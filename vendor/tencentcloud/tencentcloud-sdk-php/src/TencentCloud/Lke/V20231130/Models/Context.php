@@ -40,6 +40,14 @@ use TencentCloud\Common\AbstractModel;
 注意：此字段可能返回 null，表示取不到有效值。
  * @method void setContent(string $Content) 设置消息内容
 注意：此字段可能返回 null，表示取不到有效值。
+ * @method array getFileInfos() 获取文档信息
+注意：此字段可能返回 null，表示取不到有效值。
+ * @method void setFileInfos(array $FileInfos) 设置文档信息
+注意：此字段可能返回 null，表示取不到有效值。
+ * @method integer getReplyMethod() 获取回复方式，15：澄清确认回复
+注意：此字段可能返回 null，表示取不到有效值。
+ * @method void setReplyMethod(integer $ReplyMethod) 设置回复方式，15：澄清确认回复
+注意：此字段可能返回 null，表示取不到有效值。
  */
 class Context extends AbstractModel
 {
@@ -74,6 +82,18 @@ class Context extends AbstractModel
     public $Content;
 
     /**
+     * @var array 文档信息
+注意：此字段可能返回 null，表示取不到有效值。
+     */
+    public $FileInfos;
+
+    /**
+     * @var integer 回复方式，15：澄清确认回复
+注意：此字段可能返回 null，表示取不到有效值。
+     */
+    public $ReplyMethod;
+
+    /**
      * @param string $RecordBizId 消息记录ID信息
 注意：此字段可能返回 null，表示取不到有效值。
      * @param boolean $IsVisitor 是否为用户
@@ -83,6 +103,10 @@ class Context extends AbstractModel
      * @param string $Avatar 头像
 注意：此字段可能返回 null，表示取不到有效值。
      * @param string $Content 消息内容
+注意：此字段可能返回 null，表示取不到有效值。
+     * @param array $FileInfos 文档信息
+注意：此字段可能返回 null，表示取不到有效值。
+     * @param integer $ReplyMethod 回复方式，15：澄清确认回复
 注意：此字段可能返回 null，表示取不到有效值。
      */
     function __construct()
@@ -116,6 +140,19 @@ class Context extends AbstractModel
 
         if (array_key_exists("Content",$param) and $param["Content"] !== null) {
             $this->Content = $param["Content"];
+        }
+
+        if (array_key_exists("FileInfos",$param) and $param["FileInfos"] !== null) {
+            $this->FileInfos = [];
+            foreach ($param["FileInfos"] as $key => $value){
+                $obj = new MsgFileInfo();
+                $obj->deserialize($value);
+                array_push($this->FileInfos, $obj);
+            }
+        }
+
+        if (array_key_exists("ReplyMethod",$param) and $param["ReplyMethod"] !== null) {
+            $this->ReplyMethod = $param["ReplyMethod"];
         }
     }
 }

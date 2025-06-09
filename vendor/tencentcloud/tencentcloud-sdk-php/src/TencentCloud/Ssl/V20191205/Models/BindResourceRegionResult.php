@@ -21,17 +21,16 @@ use TencentCloud\Common\AbstractModel;
  * 绑定资源地域结果
  *
  * @method string getRegion() 获取地域
-注意：此字段可能返回 null，表示取不到有效值。
  * @method void setRegion(string $Region) 设置地域
-注意：此字段可能返回 null，表示取不到有效值。
  * @method integer getTotalCount() 获取关联资源总数
  * @method void setTotalCount(integer $TotalCount) 设置关联资源总数
+ * @method string getError() 获取是否查询异常
+ * @method void setError(string $Error) 设置是否查询异常
  */
 class BindResourceRegionResult extends AbstractModel
 {
     /**
      * @var string 地域
-注意：此字段可能返回 null，表示取不到有效值。
      */
     public $Region;
 
@@ -41,9 +40,14 @@ class BindResourceRegionResult extends AbstractModel
     public $TotalCount;
 
     /**
+     * @var string 是否查询异常
+     */
+    public $Error;
+
+    /**
      * @param string $Region 地域
-注意：此字段可能返回 null，表示取不到有效值。
      * @param integer $TotalCount 关联资源总数
+     * @param string $Error 是否查询异常
      */
     function __construct()
     {
@@ -64,6 +68,10 @@ class BindResourceRegionResult extends AbstractModel
 
         if (array_key_exists("TotalCount",$param) and $param["TotalCount"] !== null) {
             $this->TotalCount = $param["TotalCount"];
+        }
+
+        if (array_key_exists("Error",$param) and $param["Error"] !== null) {
+            $this->Error = $param["Error"];
         }
     }
 }

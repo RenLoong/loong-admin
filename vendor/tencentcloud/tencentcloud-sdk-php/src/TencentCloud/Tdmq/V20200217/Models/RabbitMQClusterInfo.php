@@ -29,15 +29,11 @@ use TencentCloud\Common\AbstractModel;
  * @method integer getCreateTime() 获取创建时间，毫秒为单位
  * @method void setCreateTime(integer $CreateTime) 设置创建时间，毫秒为单位
  * @method string getRemark() 获取集群说明信息
-注意：此字段可能返回 null，表示取不到有效值。
  * @method void setRemark(string $Remark) 设置集群说明信息
-注意：此字段可能返回 null，表示取不到有效值。
  * @method array getVpcs() 获取VPC及网络信息
  * @method void setVpcs(array $Vpcs) 设置VPC及网络信息
  * @method array getZoneIds() 获取可用区信息
-注意：此字段可能返回 null，表示取不到有效值。
  * @method void setZoneIds(array $ZoneIds) 设置可用区信息
-注意：此字段可能返回 null，表示取不到有效值。
  * @method integer getVirtualHostNumber() 获取虚拟主机数量
  * @method void setVirtualHostNumber(integer $VirtualHostNumber) 设置虚拟主机数量
  * @method integer getQueueNumber() 获取队列数量
@@ -63,21 +59,21 @@ use TencentCloud\Common\AbstractModel;
  * @method integer getClusterStatus() 获取实例状态，0表示创建中，1表示正常，2表示隔离中，3表示已销毁，4 - 异常, 5 - 发货失败
  * @method void setClusterStatus(integer $ClusterStatus) 设置实例状态，0表示创建中，1表示正常，2表示隔离中，3表示已销毁，4 - 异常, 5 - 发货失败
  * @method integer getAutoRenewFlag() 获取自动续费标记，0表示默认状态(用户未设置，即初始状态即手动续费)， 1表示自动续费，2表示明确不自动续费(用户设置)
-注意：此字段可能返回 null，表示取不到有效值。
  * @method void setAutoRenewFlag(integer $AutoRenewFlag) 设置自动续费标记，0表示默认状态(用户未设置，即初始状态即手动续费)， 1表示自动续费，2表示明确不自动续费(用户设置)
-注意：此字段可能返回 null，表示取不到有效值。
  * @method integer getMirrorQueuePolicyFlag() 获取是否开启镜像队列策略。1表示开启，0表示没开启。
-注意：此字段可能返回 null，表示取不到有效值。
  * @method void setMirrorQueuePolicyFlag(integer $MirrorQueuePolicyFlag) 设置是否开启镜像队列策略。1表示开启，0表示没开启。
-注意：此字段可能返回 null，表示取不到有效值。
  * @method float getMessageConsumeRate() 获取每秒消费消息数 单位：条/秒
-注意：此字段可能返回 null，表示取不到有效值。
  * @method void setMessageConsumeRate(float $MessageConsumeRate) 设置每秒消费消息数 单位：条/秒
-注意：此字段可能返回 null，表示取不到有效值。
  * @method string getClusterVersion() 获取集群版本信息
-注意：此字段可能返回 null，表示取不到有效值。
  * @method void setClusterVersion(string $ClusterVersion) 设置集群版本信息
-注意：此字段可能返回 null，表示取不到有效值。
+ * @method integer getPayMode() 获取计费模式，0-后付费，1-预付费
+ * @method void setPayMode(integer $PayMode) 设置计费模式，0-后付费，1-预付费
+ * @method integer getInstanceType() 获取实例类型，0 专享版、1 Serverless 版
+ * @method void setInstanceType(integer $InstanceType) 设置实例类型，0 专享版、1 Serverless 版
+ * @method integer getIsolatedTime() 获取开始隔离时间
+ * @method void setIsolatedTime(integer $IsolatedTime) 设置开始隔离时间
+ * @method boolean getContainer() 获取是否为容器实例，默认 true
+ * @method void setContainer(boolean $Container) 设置是否为容器实例，默认 true
  */
 class RabbitMQClusterInfo extends AbstractModel
 {
@@ -103,7 +99,6 @@ class RabbitMQClusterInfo extends AbstractModel
 
     /**
      * @var string 集群说明信息
-注意：此字段可能返回 null，表示取不到有效值。
      */
     public $Remark;
 
@@ -114,7 +109,6 @@ class RabbitMQClusterInfo extends AbstractModel
 
     /**
      * @var array 可用区信息
-注意：此字段可能返回 null，表示取不到有效值。
      */
     public $ZoneIds;
 
@@ -176,27 +170,43 @@ class RabbitMQClusterInfo extends AbstractModel
 
     /**
      * @var integer 自动续费标记，0表示默认状态(用户未设置，即初始状态即手动续费)， 1表示自动续费，2表示明确不自动续费(用户设置)
-注意：此字段可能返回 null，表示取不到有效值。
      */
     public $AutoRenewFlag;
 
     /**
      * @var integer 是否开启镜像队列策略。1表示开启，0表示没开启。
-注意：此字段可能返回 null，表示取不到有效值。
      */
     public $MirrorQueuePolicyFlag;
 
     /**
      * @var float 每秒消费消息数 单位：条/秒
-注意：此字段可能返回 null，表示取不到有效值。
      */
     public $MessageConsumeRate;
 
     /**
      * @var string 集群版本信息
-注意：此字段可能返回 null，表示取不到有效值。
      */
     public $ClusterVersion;
+
+    /**
+     * @var integer 计费模式，0-后付费，1-预付费
+     */
+    public $PayMode;
+
+    /**
+     * @var integer 实例类型，0 专享版、1 Serverless 版
+     */
+    public $InstanceType;
+
+    /**
+     * @var integer 开始隔离时间
+     */
+    public $IsolatedTime;
+
+    /**
+     * @var boolean 是否为容器实例，默认 true
+     */
+    public $Container;
 
     /**
      * @param string $ClusterId 集群ID
@@ -204,10 +214,8 @@ class RabbitMQClusterInfo extends AbstractModel
      * @param string $Region 地域信息
      * @param integer $CreateTime 创建时间，毫秒为单位
      * @param string $Remark 集群说明信息
-注意：此字段可能返回 null，表示取不到有效值。
      * @param array $Vpcs VPC及网络信息
      * @param array $ZoneIds 可用区信息
-注意：此字段可能返回 null，表示取不到有效值。
      * @param integer $VirtualHostNumber 虚拟主机数量
      * @param integer $QueueNumber 队列数量
      * @param float $MessagePublishRate 每秒生产消息数 单位：条/秒
@@ -221,13 +229,13 @@ class RabbitMQClusterInfo extends AbstractModel
 注意：此字段可能返回 null，表示取不到有效值。
      * @param integer $ClusterStatus 实例状态，0表示创建中，1表示正常，2表示隔离中，3表示已销毁，4 - 异常, 5 - 发货失败
      * @param integer $AutoRenewFlag 自动续费标记，0表示默认状态(用户未设置，即初始状态即手动续费)， 1表示自动续费，2表示明确不自动续费(用户设置)
-注意：此字段可能返回 null，表示取不到有效值。
      * @param integer $MirrorQueuePolicyFlag 是否开启镜像队列策略。1表示开启，0表示没开启。
-注意：此字段可能返回 null，表示取不到有效值。
      * @param float $MessageConsumeRate 每秒消费消息数 单位：条/秒
-注意：此字段可能返回 null，表示取不到有效值。
      * @param string $ClusterVersion 集群版本信息
-注意：此字段可能返回 null，表示取不到有效值。
+     * @param integer $PayMode 计费模式，0-后付费，1-预付费
+     * @param integer $InstanceType 实例类型，0 专享版、1 Serverless 版
+     * @param integer $IsolatedTime 开始隔离时间
+     * @param boolean $Container 是否为容器实例，默认 true
      */
     function __construct()
     {
@@ -333,6 +341,22 @@ class RabbitMQClusterInfo extends AbstractModel
 
         if (array_key_exists("ClusterVersion",$param) and $param["ClusterVersion"] !== null) {
             $this->ClusterVersion = $param["ClusterVersion"];
+        }
+
+        if (array_key_exists("PayMode",$param) and $param["PayMode"] !== null) {
+            $this->PayMode = $param["PayMode"];
+        }
+
+        if (array_key_exists("InstanceType",$param) and $param["InstanceType"] !== null) {
+            $this->InstanceType = $param["InstanceType"];
+        }
+
+        if (array_key_exists("IsolatedTime",$param) and $param["IsolatedTime"] !== null) {
+            $this->IsolatedTime = $param["IsolatedTime"];
+        }
+
+        if (array_key_exists("Container",$param) and $param["Container"] !== null) {
+            $this->Container = $param["Container"];
         }
     }
 }

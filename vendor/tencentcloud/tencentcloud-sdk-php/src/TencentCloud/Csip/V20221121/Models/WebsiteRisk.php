@@ -30,8 +30,8 @@ use TencentCloud\Common\AbstractModel;
  * @method void setFirstTime(string $FirstTime) 设置首次识别时间
  * @method integer getStatus() 获取状态，0未处理、1已处置、2已忽略
  * @method void setStatus(integer $Status) 设置状态，0未处理、1已处置、2已忽略
- * @method string getId() 获取资产唯一id
- * @method void setId(string $Id) 设置资产唯一id
+ * @method string getId() 获取ID,处理风险使用
+ * @method void setId(string $Id) 设置ID,处理风险使用
  * @method string getIndex() 获取前端索引
  * @method void setIndex(string $Index) 设置前端索引
  * @method string getInstanceId() 获取实例id
@@ -41,13 +41,9 @@ use TencentCloud\Common\AbstractModel;
  * @method string getAppId() 获取用户appid
  * @method void setAppId(string $AppId) 设置用户appid
  * @method string getNick() 获取用户昵称
-注意：此字段可能返回 null，表示取不到有效值。
  * @method void setNick(string $Nick) 设置用户昵称
-注意：此字段可能返回 null，表示取不到有效值。
  * @method string getUin() 获取用户uin
-注意：此字段可能返回 null，表示取不到有效值。
  * @method void setUin(string $Uin) 设置用户uin
-注意：此字段可能返回 null，表示取不到有效值。
  * @method string getURL() 获取风险链接
  * @method void setURL(string $URL) 设置风险链接
  * @method string getURLPath() 获取风险文件地址
@@ -91,7 +87,7 @@ class WebsiteRisk extends AbstractModel
     public $Status;
 
     /**
-     * @var string 资产唯一id
+     * @var string ID,处理风险使用
      */
     public $Id;
 
@@ -117,13 +113,11 @@ class WebsiteRisk extends AbstractModel
 
     /**
      * @var string 用户昵称
-注意：此字段可能返回 null，表示取不到有效值。
      */
     public $Nick;
 
     /**
      * @var string 用户uin
-注意：此字段可能返回 null，表示取不到有效值。
      */
     public $Uin;
 
@@ -168,15 +162,13 @@ class WebsiteRisk extends AbstractModel
      * @param string $RecentTime 最近识别时间
      * @param string $FirstTime 首次识别时间
      * @param integer $Status 状态，0未处理、1已处置、2已忽略
-     * @param string $Id 资产唯一id
+     * @param string $Id ID,处理风险使用
      * @param string $Index 前端索引
      * @param string $InstanceId 实例id
      * @param string $InstanceName 实例名
      * @param string $AppId 用户appid
      * @param string $Nick 用户昵称
-注意：此字段可能返回 null，表示取不到有效值。
      * @param string $Uin 用户uin
-注意：此字段可能返回 null，表示取不到有效值。
      * @param string $URL 风险链接
      * @param string $URLPath 风险文件地址
      * @param string $InstanceType 实例类型

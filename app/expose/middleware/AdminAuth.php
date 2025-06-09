@@ -8,6 +8,7 @@ use app\expose\utils\Json;
 use app\model\Admin;
 use Exception;
 use loong\oauth\exception\LockException;
+use loong\oauth\exception\TokenExpireException;
 use Webman\MiddlewareInterface;
 use Webman\Http\Response;
 use Webman\Http\Request;
@@ -80,9 +81,13 @@ class AdminAuth implements MiddlewareInterface
             }
             $user = Auth::setPrefix('ADMIN')->decrypt($token);
             if (!$user) {
-                throw new Exception('登录已过期，请重新登录', ResponseCode::NEED_LOGIN);
+                throw new TokenExpireException();
             }
             $request->admin_uid           = $user['uid'];
+        } catch (TokenExpireException $e) {
+            if ($isForceLogin) {
+                throw new Exception('登录已过期，请重新登录', ResponseCode::NEED_LOGIN);
+            }
         } catch (LockException $e) {
             if ($isForceLogin) {
                 throw new Exception($e->getMessage(), ResponseCode::LOCK);

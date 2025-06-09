@@ -1,4 +1,5 @@
 <?php
+
 /**
  * This file is part of webman.
  *
@@ -12,18 +13,20 @@
  * @license   http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
- use support\Log;
- use support\Request;
- use app\process\Http;
- use app\process\Monitor;
- use Workerman\Events\Swoole;
- 
- global $argv;
+use support\Log;
+use support\Request;
+use app\process\Http;
+use app\process\Monitor;
+use process\Test;
+use process\Test1;
+use Workerman\Events\Swoole;
+
+global $argv;
 
 return [
     'webman' => [
         'handler' => Http::class,
-        'listen' => 'http://0.0.0.0:'.getenv('SERVER_PORT'),
+        'listen' => 'http://0.0.0.0:' . getenv('SERVER_PORT'),
         'name' => getenv('SERVER_NAME') ? getenv('SERVER_NAME') : 'webman',
         'count' => getenv('DEBUG') == 'true' ? 1 : cpu_count(),
         'user' => '',
@@ -54,12 +57,23 @@ return [
             ], glob(base_path() . '/plugin/*/app'), glob(base_path() . '/plugin/*/config'), glob(base_path() . '/plugin/*/api')),
             // Files with these suffixes will be monitored
             'monitorExtensions' => [
-                'php', 'html', 'htm', 'env'
+                'php',
+                'html',
+                'htm',
+                'env'
             ],
             'options' => [
                 'enable_file_monitor' => !in_array('-d', $argv) && DIRECTORY_SEPARATOR === '/',
                 'enable_memory_monitor' => DIRECTORY_SEPARATOR === '/',
             ]
         ]
+    ],
+    'Test' => [
+        'eventLoop' => Swoole::class,
+        'handler'  => Test::class
+    ],
+    'Test1' => [
+        'eventLoop' => Swoole::class,
+        'handler'  => Test1::class
     ]
 ];

@@ -20,526 +20,362 @@ use TencentCloud\Common\AbstractModel;
 /**
  * 业务响应数据
  *
- * @method integer getId() 获取设备ID(只支持32位)
-注意：此字段可能返回 null，表示取不到有效值。
- * @method void setId(integer $Id) 设置设备ID(只支持32位)
-注意：此字段可能返回 null，表示取不到有效值。
- * @method string getMid() 获取设备唯一标识符
-注意：此字段可能返回 null，表示取不到有效值。
- * @method void setMid(string $Mid) 设置设备唯一标识符
-注意：此字段可能返回 null，表示取不到有效值。
+ * @method integer getId() 获取设备ID
+ * @method void setId(integer $Id) 设置设备ID
+ * @method string getMid() 获取设备唯一标识码，在ioa中每个设备有唯一标识码
+ * @method void setMid(string $Mid) 设置设备唯一标识码，在ioa中每个设备有唯一标识码
  * @method string getName() 获取终端名（设备名）
-注意：此字段可能返回 null，表示取不到有效值。
  * @method void setName(string $Name) 设置终端名（设备名）
-注意：此字段可能返回 null，表示取不到有效值。
- * @method integer getGroupId() 获取设备所在分组ID(只支持32位)
-注意：此字段可能返回 null，表示取不到有效值。
- * @method void setGroupId(integer $GroupId) 设置设备所在分组ID(只支持32位)
-注意：此字段可能返回 null，表示取不到有效值。
- * @method integer getOsType() 获取OS平台(只支持32位)
-注意：此字段可能返回 null，表示取不到有效值。
- * @method void setOsType(integer $OsType) 设置OS平台(只支持32位)
-注意：此字段可能返回 null，表示取不到有效值。
+ * @method integer getGroupId() 获取设备所在分组ID
+ * @method void setGroupId(integer $GroupId) 设置设备所在分组ID
+ * @method integer getOsType() 获取OS平台，0：Windows 、1： Linux、 2：macOS 、4： Android、 5: iOS。默认是0
+ * @method void setOsType(integer $OsType) 设置OS平台，0：Windows 、1： Linux、 2：macOS 、4： Android、 5: iOS。默认是0
  * @method string getIp() 获取设备IP地址（出口IP）
-注意：此字段可能返回 null，表示取不到有效值。
  * @method void setIp(string $Ip) 设置设备IP地址（出口IP）
-注意：此字段可能返回 null，表示取不到有效值。
- * @method integer getOnlineStatus() 获取在线状态 2 在线 0，1 离线(只支持32位)
-注意：此字段可能返回 null，表示取不到有效值。
- * @method void setOnlineStatus(integer $OnlineStatus) 设置在线状态 2 在线 0，1 离线(只支持32位)
-注意：此字段可能返回 null，表示取不到有效值。
+ * @method integer getOnlineStatus() 获取在线状态，2：在线、0或者1:离线
+ * @method void setOnlineStatus(integer $OnlineStatus) 设置在线状态，2：在线、0或者1:离线
  * @method string getVersion() 获取客户端版本号-大整数
-注意：此字段可能返回 null，表示取不到有效值。
  * @method void setVersion(string $Version) 设置客户端版本号-大整数
-注意：此字段可能返回 null，表示取不到有效值。
  * @method string getStrVersion() 获取客户端版本号-点分字符串
-注意：此字段可能返回 null，表示取不到有效值。
  * @method void setStrVersion(string $StrVersion) 设置客户端版本号-点分字符串
-注意：此字段可能返回 null，表示取不到有效值。
  * @method string getItime() 获取首次在线时间
-注意：此字段可能返回 null，表示取不到有效值。
  * @method void setItime(string $Itime) 设置首次在线时间
-注意：此字段可能返回 null，表示取不到有效值。
  * @method string getConnActiveTime() 获取最后一次在线时间
-注意：此字段可能返回 null，表示取不到有效值。
  * @method void setConnActiveTime(string $ConnActiveTime) 设置最后一次在线时间
-注意：此字段可能返回 null，表示取不到有效值。
- * @method integer getLocked() 获取设备是否加锁 1 锁定 0 2 非锁定(只支持32位)
-注意：此字段可能返回 null，表示取不到有效值。
- * @method void setLocked(integer $Locked) 设置设备是否加锁 1 锁定 0 2 非锁定(只支持32位)
-注意：此字段可能返回 null，表示取不到有效值。
+ * @method integer getLocked() 获取设备是否加锁 ，1：锁定 0或者2：未锁定。
+ * @method void setLocked(integer $Locked) 设置设备是否加锁 ，1：锁定 0或者2：未锁定。
  * @method string getLocalIpList() 获取设备本地IP列表, 包括IP
-注意：此字段可能返回 null，表示取不到有效值。
  * @method void setLocalIpList(string $LocalIpList) 设置设备本地IP列表, 包括IP
-注意：此字段可能返回 null，表示取不到有效值。
- * @method integer getHostId() 获取主机ID(只支持32位)
-注意：此字段可能返回 null，表示取不到有效值。
- * @method void setHostId(integer $HostId) 设置主机ID(只支持32位)
-注意：此字段可能返回 null，表示取不到有效值。
+ * @method integer getHostId() 获取宿主机id（需要宿主机也安装iOA才能显示）
+ * @method void setHostId(integer $HostId) 设置宿主机id（需要宿主机也安装iOA才能显示）
  * @method string getGroupName() 获取设备所属分组名
-注意：此字段可能返回 null，表示取不到有效值。
  * @method void setGroupName(string $GroupName) 设置设备所属分组名
-注意：此字段可能返回 null，表示取不到有效值。
  * @method string getGroupNamePath() 获取设备所属分组路径
-注意：此字段可能返回 null，表示取不到有效值。
  * @method void setGroupNamePath(string $GroupNamePath) 设置设备所属分组路径
-注意：此字段可能返回 null，表示取不到有效值。
  * @method integer getCriticalVulListCount() 获取未修复高危漏洞数(只支持32位)
-注意：此字段可能返回 null，表示取不到有效值。
  * @method void setCriticalVulListCount(integer $CriticalVulListCount) 设置未修复高危漏洞数(只支持32位)
-注意：此字段可能返回 null，表示取不到有效值。
- * @method string getComputerName() 获取设备名 和Name相同，保留参数
-注意：此字段可能返回 null，表示取不到有效值。
- * @method void setComputerName(string $ComputerName) 设置设备名 和Name相同，保留参数
-注意：此字段可能返回 null，表示取不到有效值。
+ * @method string getComputerName() 获取设备名，和Name相同
+ * @method void setComputerName(string $ComputerName) 设置设备名，和Name相同
  * @method string getDomainName() 获取登录域名
-注意：此字段可能返回 null，表示取不到有效值。
  * @method void setDomainName(string $DomainName) 设置登录域名
-注意：此字段可能返回 null，表示取不到有效值。
  * @method string getMacAddr() 获取MAC地址
-注意：此字段可能返回 null，表示取不到有效值。
  * @method void setMacAddr(string $MacAddr) 设置MAC地址
-注意：此字段可能返回 null，表示取不到有效值。
- * @method integer getVulCount() 获取漏洞数(只支持32位)
-注意：此字段可能返回 null，表示取不到有效值。
- * @method void setVulCount(integer $VulCount) 设置漏洞数(只支持32位)
-注意：此字段可能返回 null，表示取不到有效值。
- * @method integer getRiskCount() 获取病毒风险数(只支持32位)
-注意：此字段可能返回 null，表示取不到有效值。
- * @method void setRiskCount(integer $RiskCount) 设置病毒风险数(只支持32位)
-注意：此字段可能返回 null，表示取不到有效值。
+ * @method integer getVulCount() 获取漏洞数
+ * @method void setVulCount(integer $VulCount) 设置漏洞数
+ * @method integer getRiskCount() 获取病毒风险数
+ * @method void setRiskCount(integer $RiskCount) 设置病毒风险数
  * @method string getVirusVer() 获取病毒库版本
-注意：此字段可能返回 null，表示取不到有效值。
  * @method void setVirusVer(string $VirusVer) 设置病毒库版本
-注意：此字段可能返回 null，表示取不到有效值。
  * @method string getVulVersion() 获取漏洞库版本
-注意：此字段可能返回 null，表示取不到有效值。
  * @method void setVulVersion(string $VulVersion) 设置漏洞库版本
-注意：此字段可能返回 null，表示取不到有效值。
  * @method string getSysRepVersion() 获取系统修复引擎版本
-注意：此字段可能返回 null，表示取不到有效值。
  * @method void setSysRepVersion(string $SysRepVersion) 设置系统修复引擎版本
-注意：此字段可能返回 null，表示取不到有效值。
  * @method array getVulCriticalList() 获取高危补丁列表
-注意：此字段可能返回 null，表示取不到有效值。
  * @method void setVulCriticalList(array $VulCriticalList) 设置高危补丁列表
-注意：此字段可能返回 null，表示取不到有效值。
  * @method string getTags() 获取标签
-注意：此字段可能返回 null，表示取不到有效值。
  * @method void setTags(string $Tags) 设置标签
-注意：此字段可能返回 null，表示取不到有效值。
  * @method string getUserName() 获取终端用户名
-注意：此字段可能返回 null，表示取不到有效值。
  * @method void setUserName(string $UserName) 设置终端用户名
-注意：此字段可能返回 null，表示取不到有效值。
- * @method integer getFirewallStatus() 获取防火墙状态(只支持32位)
-注意：此字段可能返回 null，表示取不到有效值。
- * @method void setFirewallStatus(integer $FirewallStatus) 设置防火墙状态(只支持32位)
-注意：此字段可能返回 null，表示取不到有效值。
+ * @method integer getFirewallStatus() 获取防火墙状态，不等于0表示开启
+ * @method void setFirewallStatus(integer $FirewallStatus) 设置防火墙状态，不等于0表示开启
  * @method string getSerialNum() 获取SN序列号
-注意：此字段可能返回 null，表示取不到有效值。
  * @method void setSerialNum(string $SerialNum) 设置SN序列号
-注意：此字段可能返回 null，表示取不到有效值。
  * @method string getDeviceStrategyVer() 获取设备管控策略版本
-注意：此字段可能返回 null，表示取不到有效值。
  * @method void setDeviceStrategyVer(string $DeviceStrategyVer) 设置设备管控策略版本
-注意：此字段可能返回 null，表示取不到有效值。
  * @method string getNGNStrategyVer() 获取NGN策略版本
-注意：此字段可能返回 null，表示取不到有效值。
  * @method void setNGNStrategyVer(string $NGNStrategyVer) 设置NGN策略版本
-注意：此字段可能返回 null，表示取不到有效值。
- * @method string getIOAUserName() 获取最近登录账号
-注意：此字段可能返回 null，表示取不到有效值。
- * @method void setIOAUserName(string $IOAUserName) 设置最近登录账号
-注意：此字段可能返回 null，表示取不到有效值。
+ * @method string getIOAUserName() 获取最近登录账户的账号(账号系统用户账号)
+ * @method void setIOAUserName(string $IOAUserName) 设置最近登录账户的账号(账号系统用户账号)
  * @method string getDeviceNewStrategyVer() 获取设备管控新策略
-注意：此字段可能返回 null，表示取不到有效值。
  * @method void setDeviceNewStrategyVer(string $DeviceNewStrategyVer) 设置设备管控新策略
-注意：此字段可能返回 null，表示取不到有效值。
  * @method string getNGNNewStrategyVer() 获取NGN策略新版本
-注意：此字段可能返回 null，表示取不到有效值。
  * @method void setNGNNewStrategyVer(string $NGNNewStrategyVer) 设置NGN策略新版本
-注意：此字段可能返回 null，表示取不到有效值。
- * @method string getHostName() 获取主机名称
-注意：此字段可能返回 null，表示取不到有效值。
- * @method void setHostName(string $HostName) 设置主机名称
-注意：此字段可能返回 null，表示取不到有效值。
+ * @method string getHostName() 获取宿主机名称（需要宿主机也安装iOA才能显示）
+ * @method void setHostName(string $HostName) 设置宿主机名称（需要宿主机也安装iOA才能显示）
  * @method string getBaseBoardSn() 获取主板序列号
-注意：此字段可能返回 null，表示取不到有效值。
  * @method void setBaseBoardSn(string $BaseBoardSn) 设置主板序列号
-注意：此字段可能返回 null，表示取不到有效值。
- * @method string getAccountUsers() 获取绑定账户只有名字
-注意：此字段可能返回 null，表示取不到有效值。
- * @method void setAccountUsers(string $AccountUsers) 设置绑定账户只有名字
-注意：此字段可能返回 null，表示取不到有效值。
+ * @method string getAccountUsers() 获取绑定账户名称
+ * @method void setAccountUsers(string $AccountUsers) 设置绑定账户名称
  * @method string getIdentityStrategyVer() 获取身份策略版本
-注意：此字段可能返回 null，表示取不到有效值。
  * @method void setIdentityStrategyVer(string $IdentityStrategyVer) 设置身份策略版本
-注意：此字段可能返回 null，表示取不到有效值。
  * @method string getIdentityNewStrategyVer() 获取身份策略新版本
-注意：此字段可能返回 null，表示取不到有效值。
  * @method void setIdentityNewStrategyVer(string $IdentityNewStrategyVer) 设置身份策略新版本
-注意：此字段可能返回 null，表示取不到有效值。
  * @method string getAccountGroupName() 获取最近登录账号部门
-注意：此字段可能返回 null，表示取不到有效值。
  * @method void setAccountGroupName(string $AccountGroupName) 设置最近登录账号部门
-注意：此字段可能返回 null，表示取不到有效值。
- * @method string getAccountName() 获取登录账号姓名
-注意：此字段可能返回 null，表示取不到有效值。
- * @method void setAccountName(string $AccountName) 设置登录账号姓名
-注意：此字段可能返回 null，表示取不到有效值。
+ * @method string getAccountName() 获取最近登录账户的姓名(账号系统用户姓名)
+ * @method void setAccountName(string $AccountName) 设置最近登录账户的姓名(账号系统用户姓名)
  * @method integer getAccountGroupId() 获取账号组id
-注意：此字段可能返回 null，表示取不到有效值。
  * @method void setAccountGroupId(integer $AccountGroupId) 设置账号组id
-注意：此字段可能返回 null，表示取不到有效值。
+ * @method string getRemarkName() 获取终端备注名
+ * @method void setRemarkName(string $RemarkName) 设置终端备注名
  */
 class DeviceDetail extends AbstractModel
 {
     /**
-     * @var integer 设备ID(只支持32位)
-注意：此字段可能返回 null，表示取不到有效值。
+     * @var integer 设备ID
      */
     public $Id;
 
     /**
-     * @var string 设备唯一标识符
-注意：此字段可能返回 null，表示取不到有效值。
+     * @var string 设备唯一标识码，在ioa中每个设备有唯一标识码
      */
     public $Mid;
 
     /**
      * @var string 终端名（设备名）
-注意：此字段可能返回 null，表示取不到有效值。
      */
     public $Name;
 
     /**
-     * @var integer 设备所在分组ID(只支持32位)
-注意：此字段可能返回 null，表示取不到有效值。
+     * @var integer 设备所在分组ID
      */
     public $GroupId;
 
     /**
-     * @var integer OS平台(只支持32位)
-注意：此字段可能返回 null，表示取不到有效值。
+     * @var integer OS平台，0：Windows 、1： Linux、 2：macOS 、4： Android、 5: iOS。默认是0
      */
     public $OsType;
 
     /**
      * @var string 设备IP地址（出口IP）
-注意：此字段可能返回 null，表示取不到有效值。
      */
     public $Ip;
 
     /**
-     * @var integer 在线状态 2 在线 0，1 离线(只支持32位)
-注意：此字段可能返回 null，表示取不到有效值。
+     * @var integer 在线状态，2：在线、0或者1:离线
      */
     public $OnlineStatus;
 
     /**
      * @var string 客户端版本号-大整数
-注意：此字段可能返回 null，表示取不到有效值。
      */
     public $Version;
 
     /**
      * @var string 客户端版本号-点分字符串
-注意：此字段可能返回 null，表示取不到有效值。
      */
     public $StrVersion;
 
     /**
      * @var string 首次在线时间
-注意：此字段可能返回 null，表示取不到有效值。
      */
     public $Itime;
 
     /**
      * @var string 最后一次在线时间
-注意：此字段可能返回 null，表示取不到有效值。
      */
     public $ConnActiveTime;
 
     /**
-     * @var integer 设备是否加锁 1 锁定 0 2 非锁定(只支持32位)
-注意：此字段可能返回 null，表示取不到有效值。
+     * @var integer 设备是否加锁 ，1：锁定 0或者2：未锁定。
      */
     public $Locked;
 
     /**
      * @var string 设备本地IP列表, 包括IP
-注意：此字段可能返回 null，表示取不到有效值。
      */
     public $LocalIpList;
 
     /**
-     * @var integer 主机ID(只支持32位)
-注意：此字段可能返回 null，表示取不到有效值。
+     * @var integer 宿主机id（需要宿主机也安装iOA才能显示）
      */
     public $HostId;
 
     /**
      * @var string 设备所属分组名
-注意：此字段可能返回 null，表示取不到有效值。
      */
     public $GroupName;
 
     /**
      * @var string 设备所属分组路径
-注意：此字段可能返回 null，表示取不到有效值。
      */
     public $GroupNamePath;
 
     /**
      * @var integer 未修复高危漏洞数(只支持32位)
-注意：此字段可能返回 null，表示取不到有效值。
      */
     public $CriticalVulListCount;
 
     /**
-     * @var string 设备名 和Name相同，保留参数
-注意：此字段可能返回 null，表示取不到有效值。
+     * @var string 设备名，和Name相同
      */
     public $ComputerName;
 
     /**
      * @var string 登录域名
-注意：此字段可能返回 null，表示取不到有效值。
      */
     public $DomainName;
 
     /**
      * @var string MAC地址
-注意：此字段可能返回 null，表示取不到有效值。
      */
     public $MacAddr;
 
     /**
-     * @var integer 漏洞数(只支持32位)
-注意：此字段可能返回 null，表示取不到有效值。
+     * @var integer 漏洞数
      */
     public $VulCount;
 
     /**
-     * @var integer 病毒风险数(只支持32位)
-注意：此字段可能返回 null，表示取不到有效值。
+     * @var integer 病毒风险数
      */
     public $RiskCount;
 
     /**
      * @var string 病毒库版本
-注意：此字段可能返回 null，表示取不到有效值。
      */
     public $VirusVer;
 
     /**
      * @var string 漏洞库版本
-注意：此字段可能返回 null，表示取不到有效值。
      */
     public $VulVersion;
 
     /**
      * @var string 系统修复引擎版本
-注意：此字段可能返回 null，表示取不到有效值。
      */
     public $SysRepVersion;
 
     /**
      * @var array 高危补丁列表
-注意：此字段可能返回 null，表示取不到有效值。
      */
     public $VulCriticalList;
 
     /**
      * @var string 标签
-注意：此字段可能返回 null，表示取不到有效值。
      */
     public $Tags;
 
     /**
      * @var string 终端用户名
-注意：此字段可能返回 null，表示取不到有效值。
      */
     public $UserName;
 
     /**
-     * @var integer 防火墙状态(只支持32位)
-注意：此字段可能返回 null，表示取不到有效值。
+     * @var integer 防火墙状态，不等于0表示开启
      */
     public $FirewallStatus;
 
     /**
      * @var string SN序列号
-注意：此字段可能返回 null，表示取不到有效值。
      */
     public $SerialNum;
 
     /**
      * @var string 设备管控策略版本
-注意：此字段可能返回 null，表示取不到有效值。
      */
     public $DeviceStrategyVer;
 
     /**
      * @var string NGN策略版本
-注意：此字段可能返回 null，表示取不到有效值。
      */
     public $NGNStrategyVer;
 
     /**
-     * @var string 最近登录账号
-注意：此字段可能返回 null，表示取不到有效值。
+     * @var string 最近登录账户的账号(账号系统用户账号)
      */
     public $IOAUserName;
 
     /**
      * @var string 设备管控新策略
-注意：此字段可能返回 null，表示取不到有效值。
      */
     public $DeviceNewStrategyVer;
 
     /**
      * @var string NGN策略新版本
-注意：此字段可能返回 null，表示取不到有效值。
      */
     public $NGNNewStrategyVer;
 
     /**
-     * @var string 主机名称
-注意：此字段可能返回 null，表示取不到有效值。
+     * @var string 宿主机名称（需要宿主机也安装iOA才能显示）
      */
     public $HostName;
 
     /**
      * @var string 主板序列号
-注意：此字段可能返回 null，表示取不到有效值。
      */
     public $BaseBoardSn;
 
     /**
-     * @var string 绑定账户只有名字
-注意：此字段可能返回 null，表示取不到有效值。
+     * @var string 绑定账户名称
      */
     public $AccountUsers;
 
     /**
      * @var string 身份策略版本
-注意：此字段可能返回 null，表示取不到有效值。
      */
     public $IdentityStrategyVer;
 
     /**
      * @var string 身份策略新版本
-注意：此字段可能返回 null，表示取不到有效值。
      */
     public $IdentityNewStrategyVer;
 
     /**
      * @var string 最近登录账号部门
-注意：此字段可能返回 null，表示取不到有效值。
      */
     public $AccountGroupName;
 
     /**
-     * @var string 登录账号姓名
-注意：此字段可能返回 null，表示取不到有效值。
+     * @var string 最近登录账户的姓名(账号系统用户姓名)
      */
     public $AccountName;
 
     /**
      * @var integer 账号组id
-注意：此字段可能返回 null，表示取不到有效值。
      */
     public $AccountGroupId;
 
     /**
-     * @param integer $Id 设备ID(只支持32位)
-注意：此字段可能返回 null，表示取不到有效值。
-     * @param string $Mid 设备唯一标识符
-注意：此字段可能返回 null，表示取不到有效值。
+     * @var string 终端备注名
+     */
+    public $RemarkName;
+
+    /**
+     * @param integer $Id 设备ID
+     * @param string $Mid 设备唯一标识码，在ioa中每个设备有唯一标识码
      * @param string $Name 终端名（设备名）
-注意：此字段可能返回 null，表示取不到有效值。
-     * @param integer $GroupId 设备所在分组ID(只支持32位)
-注意：此字段可能返回 null，表示取不到有效值。
-     * @param integer $OsType OS平台(只支持32位)
-注意：此字段可能返回 null，表示取不到有效值。
+     * @param integer $GroupId 设备所在分组ID
+     * @param integer $OsType OS平台，0：Windows 、1： Linux、 2：macOS 、4： Android、 5: iOS。默认是0
      * @param string $Ip 设备IP地址（出口IP）
-注意：此字段可能返回 null，表示取不到有效值。
-     * @param integer $OnlineStatus 在线状态 2 在线 0，1 离线(只支持32位)
-注意：此字段可能返回 null，表示取不到有效值。
+     * @param integer $OnlineStatus 在线状态，2：在线、0或者1:离线
      * @param string $Version 客户端版本号-大整数
-注意：此字段可能返回 null，表示取不到有效值。
      * @param string $StrVersion 客户端版本号-点分字符串
-注意：此字段可能返回 null，表示取不到有效值。
      * @param string $Itime 首次在线时间
-注意：此字段可能返回 null，表示取不到有效值。
      * @param string $ConnActiveTime 最后一次在线时间
-注意：此字段可能返回 null，表示取不到有效值。
-     * @param integer $Locked 设备是否加锁 1 锁定 0 2 非锁定(只支持32位)
-注意：此字段可能返回 null，表示取不到有效值。
+     * @param integer $Locked 设备是否加锁 ，1：锁定 0或者2：未锁定。
      * @param string $LocalIpList 设备本地IP列表, 包括IP
-注意：此字段可能返回 null，表示取不到有效值。
-     * @param integer $HostId 主机ID(只支持32位)
-注意：此字段可能返回 null，表示取不到有效值。
+     * @param integer $HostId 宿主机id（需要宿主机也安装iOA才能显示）
      * @param string $GroupName 设备所属分组名
-注意：此字段可能返回 null，表示取不到有效值。
      * @param string $GroupNamePath 设备所属分组路径
-注意：此字段可能返回 null，表示取不到有效值。
      * @param integer $CriticalVulListCount 未修复高危漏洞数(只支持32位)
-注意：此字段可能返回 null，表示取不到有效值。
-     * @param string $ComputerName 设备名 和Name相同，保留参数
-注意：此字段可能返回 null，表示取不到有效值。
+     * @param string $ComputerName 设备名，和Name相同
      * @param string $DomainName 登录域名
-注意：此字段可能返回 null，表示取不到有效值。
      * @param string $MacAddr MAC地址
-注意：此字段可能返回 null，表示取不到有效值。
-     * @param integer $VulCount 漏洞数(只支持32位)
-注意：此字段可能返回 null，表示取不到有效值。
-     * @param integer $RiskCount 病毒风险数(只支持32位)
-注意：此字段可能返回 null，表示取不到有效值。
+     * @param integer $VulCount 漏洞数
+     * @param integer $RiskCount 病毒风险数
      * @param string $VirusVer 病毒库版本
-注意：此字段可能返回 null，表示取不到有效值。
      * @param string $VulVersion 漏洞库版本
-注意：此字段可能返回 null，表示取不到有效值。
      * @param string $SysRepVersion 系统修复引擎版本
-注意：此字段可能返回 null，表示取不到有效值。
      * @param array $VulCriticalList 高危补丁列表
-注意：此字段可能返回 null，表示取不到有效值。
      * @param string $Tags 标签
-注意：此字段可能返回 null，表示取不到有效值。
      * @param string $UserName 终端用户名
-注意：此字段可能返回 null，表示取不到有效值。
-     * @param integer $FirewallStatus 防火墙状态(只支持32位)
-注意：此字段可能返回 null，表示取不到有效值。
+     * @param integer $FirewallStatus 防火墙状态，不等于0表示开启
      * @param string $SerialNum SN序列号
-注意：此字段可能返回 null，表示取不到有效值。
      * @param string $DeviceStrategyVer 设备管控策略版本
-注意：此字段可能返回 null，表示取不到有效值。
      * @param string $NGNStrategyVer NGN策略版本
-注意：此字段可能返回 null，表示取不到有效值。
-     * @param string $IOAUserName 最近登录账号
-注意：此字段可能返回 null，表示取不到有效值。
+     * @param string $IOAUserName 最近登录账户的账号(账号系统用户账号)
      * @param string $DeviceNewStrategyVer 设备管控新策略
-注意：此字段可能返回 null，表示取不到有效值。
      * @param string $NGNNewStrategyVer NGN策略新版本
-注意：此字段可能返回 null，表示取不到有效值。
-     * @param string $HostName 主机名称
-注意：此字段可能返回 null，表示取不到有效值。
+     * @param string $HostName 宿主机名称（需要宿主机也安装iOA才能显示）
      * @param string $BaseBoardSn 主板序列号
-注意：此字段可能返回 null，表示取不到有效值。
-     * @param string $AccountUsers 绑定账户只有名字
-注意：此字段可能返回 null，表示取不到有效值。
+     * @param string $AccountUsers 绑定账户名称
      * @param string $IdentityStrategyVer 身份策略版本
-注意：此字段可能返回 null，表示取不到有效值。
      * @param string $IdentityNewStrategyVer 身份策略新版本
-注意：此字段可能返回 null，表示取不到有效值。
      * @param string $AccountGroupName 最近登录账号部门
-注意：此字段可能返回 null，表示取不到有效值。
-     * @param string $AccountName 登录账号姓名
-注意：此字段可能返回 null，表示取不到有效值。
+     * @param string $AccountName 最近登录账户的姓名(账号系统用户姓名)
      * @param integer $AccountGroupId 账号组id
-注意：此字段可能返回 null，表示取不到有效值。
+     * @param string $RemarkName 终端备注名
      */
     function __construct()
     {
@@ -724,6 +560,10 @@ class DeviceDetail extends AbstractModel
 
         if (array_key_exists("AccountGroupId",$param) and $param["AccountGroupId"] !== null) {
             $this->AccountGroupId = $param["AccountGroupId"];
+        }
+
+        if (array_key_exists("RemarkName",$param) and $param["RemarkName"] !== null) {
+            $this->RemarkName = $param["RemarkName"];
         }
     }
 }

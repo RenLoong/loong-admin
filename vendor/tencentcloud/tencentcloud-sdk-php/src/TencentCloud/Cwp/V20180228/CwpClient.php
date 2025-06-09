@@ -36,7 +36,6 @@ use TencentCloud\Cwp\V20180228\Models as Models;
  * @method Models\CreateBanWhiteListResponse CreateBanWhiteList(Models\CreateBanWhiteListRequest $req) 添加阻断白名单列表
  * @method Models\CreateBaselineStrategyResponse CreateBaselineStrategy(Models\CreateBaselineStrategyRequest $req) 根据策略信息创建基线策略
  * @method Models\CreateBuyBindTaskResponse CreateBuyBindTask(Models\CreateBuyBindTaskRequest $req) 新购授权自动绑定任务
- * @method Models\CreateCloudProtectServiceOrderRecordResponse CreateCloudProtectServiceOrderRecord(Models\CreateCloudProtectServiceOrderRecordRequest $req) 云护航服务使用完成后，该接口可以确认收货
  * @method Models\CreateEmergencyVulScanResponse CreateEmergencyVulScan(Models\CreateEmergencyVulScanRequest $req) 创建应急漏洞扫描任务
  * @method Models\CreateIncidentBacktrackingResponse CreateIncidentBacktracking(Models\CreateIncidentBacktrackingRequest $req) 对旗舰版机器单次触发事件调查及告警回溯
  * @method Models\CreateLicenseOrderResponse CreateLicenseOrder(Models\CreateLicenseOrderRequest $req) CreateLicenseOrder 该接口可以创建专业版/旗舰版订单
@@ -55,9 +54,6 @@ use TencentCloud\Cwp\V20180228\Models as Models;
  * @method Models\CreateVulFixResponse CreateVulFix(Models\CreateVulFixRequest $req) 提交漏洞修护
  * @method Models\CreateWhiteListOrderResponse CreateWhiteListOrder(Models\CreateWhiteListOrderRequest $req) 该接口可以创建白名单订单
  * @method Models\DeleteAllJavaMemShellsResponse DeleteAllJavaMemShells(Models\DeleteAllJavaMemShellsRequest $req) 删除全部java内存马事件
- * @method Models\DeleteAttackLogsResponse DeleteAttackLogs(Models\DeleteAttackLogsRequest $req) ModifyEventAttackStatus 接口替代
-
-删除网络攻击日志
  * @method Models\DeleteBanWhiteListResponse DeleteBanWhiteList(Models\DeleteBanWhiteListRequest $req) 删除阻断白名单列表
  * @method Models\DeleteBaselinePolicyResponse DeleteBaselinePolicy(Models\DeleteBaselinePolicyRequest $req) 删除基线策略配置
  * @method Models\DeleteBaselineRuleResponse DeleteBaselineRule(Models\DeleteBaselineRuleRequest $req) 删除基线规则
@@ -85,6 +81,7 @@ use TencentCloud\Cwp\V20180228\Models as Models;
  * @method Models\DeletePrivilegeEventsResponse DeletePrivilegeEvents(Models\DeletePrivilegeEventsRequest $req) 根据Ids删除本地提权
  * @method Models\DeletePrivilegeRulesResponse DeletePrivilegeRules(Models\DeletePrivilegeRulesRequest $req) 删除本地提权规则
  * @method Models\DeleteProtectDirResponse DeleteProtectDir(Models\DeleteProtectDirRequest $req) 删除防护网站
+ * @method Models\DeleteRaspRulesResponse DeleteRaspRules(Models\DeleteRaspRulesRequest $req) 删除漏洞防御白名单
  * @method Models\DeleteReverseShellEventsResponse DeleteReverseShellEvents(Models\DeleteReverseShellEventsRequest $req) 根据Ids删除反弹Shell事件
  * @method Models\DeleteReverseShellRulesResponse DeleteReverseShellRules(Models\DeleteReverseShellRulesRequest $req) 删除反弹Shell规则
  * @method Models\DeleteRiskDnsEventResponse DeleteRiskDnsEvent(Models\DeleteRiskDnsEventRequest $req) 删除恶意请求事件
@@ -150,9 +147,6 @@ use TencentCloud\Cwp\V20180228\Models as Models;
  * @method Models\DescribeAssetWebServiceProcessListResponse DescribeAssetWebServiceProcessList(Models\DescribeAssetWebServiceProcessListRequest $req) 获取Web服务关联进程列表
  * @method Models\DescribeAttackEventInfoResponse DescribeAttackEventInfo(Models\DescribeAttackEventInfoRequest $req) 网络攻击事件详情
  * @method Models\DescribeAttackEventsResponse DescribeAttackEvents(Models\DescribeAttackEventsRequest $req) 按分页形式展示网络攻击检测事件列表
- * @method Models\DescribeAttackLogsResponse DescribeAttackLogs(Models\DescribeAttackLogsRequest $req) 按分页形式展示网络攻击日志列表
- * @method Models\DescribeAttackSourceResponse DescribeAttackSource(Models\DescribeAttackSourceRequest $req) 查询攻击溯源
- * @method Models\DescribeAttackSourceEventsResponse DescribeAttackSourceEvents(Models\DescribeAttackSourceEventsRequest $req) 查询攻击溯源事件
  * @method Models\DescribeAttackStatisticsResponse DescribeAttackStatistics(Models\DescribeAttackStatisticsRequest $req) 网络攻击数据统计
  * @method Models\DescribeAttackTopResponse DescribeAttackTop(Models\DescribeAttackTopRequest $req) 网络攻击top5数据列表
  * @method Models\DescribeAttackTrendsResponse DescribeAttackTrends(Models\DescribeAttackTrendsRequest $req) 网络攻击趋势数据
@@ -203,8 +197,6 @@ use TencentCloud\Cwp\V20180228\Models as Models;
  * @method Models\DescribeCanFixVulMachineResponse DescribeCanFixVulMachine(Models\DescribeCanFixVulMachineRequest $req) 漏洞修护-查询可修护主机信息
  * @method Models\DescribeCanNotSeparateMachineResponse DescribeCanNotSeparateMachine(Models\DescribeCanNotSeparateMachineRequest $req) 获取木马不可隔离的主机
  * @method Models\DescribeClientExceptionResponse DescribeClientException(Models\DescribeClientExceptionRequest $req) 获取客户端异常事件
- * @method Models\DescribeCloudProtectServiceOrderListResponse DescribeCloudProtectServiceOrderList(Models\DescribeCloudProtectServiceOrderListRequest $req) 查询云护航服务订单列表
- * @method Models\DescribeComponentStatisticsResponse DescribeComponentStatistics(Models\DescribeComponentStatisticsRequest $req) 本接口 (DescribeComponentStatistics) 用于获取组件统计列表数据。
  * @method Models\DescribeDefenceEventDetailResponse DescribeDefenceEventDetail(Models\DescribeDefenceEventDetailRequest $req) 获取漏洞防御事件详情
  * @method Models\DescribeDirectConnectInstallCommandResponse DescribeDirectConnectInstallCommand(Models\DescribeDirectConnectInstallCommandRequest $req) 获取专线agent安装命令，包含token
  * @method Models\DescribeESAggregationsResponse DescribeESAggregations(Models\DescribeESAggregationsRequest $req) 获取ES字段聚合结果
@@ -224,13 +216,12 @@ use TencentCloud\Cwp\V20180228\Models as Models;
  * @method Models\DescribeHistoryAccountsResponse DescribeHistoryAccounts(Models\DescribeHistoryAccountsRequest $req) 本接口 (DescribeHistoryAccounts) 用于获取帐号变更历史列表数据。
  * @method Models\DescribeHistoryServiceResponse DescribeHistoryService(Models\DescribeHistoryServiceRequest $req) 查询日志检索服务信息
  * @method Models\DescribeHostInfoResponse DescribeHostInfo(Models\DescribeHostInfoRequest $req) 主机信息与标签信息查询
- * @method Models\DescribeHostLoginListResponse DescribeHostLoginList(Models\DescribeHostLoginListRequest $req) 获取登录审计列表
+ * @method Models\DescribeHostLoginListResponse DescribeHostLoginList(Models\DescribeHostLoginListRequest $req) 获取异常登录列表
  * @method Models\DescribeHotVulTopResponse DescribeHotVulTop(Models\DescribeHotVulTopRequest $req) 获取全网热点漏洞
  * @method Models\DescribeIgnoreBaselineRuleResponse DescribeIgnoreBaselineRule(Models\DescribeIgnoreBaselineRuleRequest $req) 查询已经忽略的检测项信息
  * @method Models\DescribeIgnoreHostAndItemConfigResponse DescribeIgnoreHostAndItemConfig(Models\DescribeIgnoreHostAndItemConfigRequest $req) 获取一键忽略受影响的检测项和主机信息
  * @method Models\DescribeIgnoreRuleEffectHostListResponse DescribeIgnoreRuleEffectHostList(Models\DescribeIgnoreRuleEffectHostListRequest $req) 根据检测项id与筛选条件查询忽略检测项影响主机列表信息
  * @method Models\DescribeImportMachineInfoResponse DescribeImportMachineInfo(Models\DescribeImportMachineInfoRequest $req) 查询批量导入机器信息
- * @method Models\DescribeIndexListResponse DescribeIndexList(Models\DescribeIndexListRequest $req) 获取索引列表
  * @method Models\DescribeJavaMemShellInfoResponse DescribeJavaMemShellInfo(Models\DescribeJavaMemShellInfoRequest $req) 查询java内存马事件详细信息
  * @method Models\DescribeJavaMemShellListResponse DescribeJavaMemShellList(Models\DescribeJavaMemShellListRequest $req) 查询java内存马事件列表
  * @method Models\DescribeJavaMemShellPluginInfoResponse DescribeJavaMemShellPluginInfo(Models\DescribeJavaMemShellPluginInfoRequest $req) 查询给定主机java内存马插件信息
@@ -302,6 +293,9 @@ use TencentCloud\Cwp\V20180228\Models as Models;
  * @method Models\DescribeRansomDefenseStrategyListResponse DescribeRansomDefenseStrategyList(Models\DescribeRansomDefenseStrategyListRequest $req) 查询防勒索策略列表
  * @method Models\DescribeRansomDefenseStrategyMachinesResponse DescribeRansomDefenseStrategyMachines(Models\DescribeRansomDefenseStrategyMachinesRequest $req) 查询防勒索策略绑定机器列表
  * @method Models\DescribeRansomDefenseTrendResponse DescribeRansomDefenseTrend(Models\DescribeRansomDefenseTrendRequest $req) 获取全网勒索态势
+ * @method Models\DescribeRaspMaxCpuResponse DescribeRaspMaxCpu(Models\DescribeRaspMaxCpuRequest $req) 查看漏洞防御最大cpu限制
+ * @method Models\DescribeRaspRuleVulsResponse DescribeRaspRuleVuls(Models\DescribeRaspRuleVulsRequest $req) 获取漏洞防御白名单漏洞列表
+ * @method Models\DescribeRaspRulesResponse DescribeRaspRules(Models\DescribeRaspRulesRequest $req) 查询漏洞防御白名单
  * @method Models\DescribeRecommendedProtectCpuResponse DescribeRecommendedProtectCpu(Models\DescribeRecommendedProtectCpuRequest $req) 查询推荐购买防护核数
  * @method Models\DescribeReverseShellEventInfoResponse DescribeReverseShellEventInfo(Models\DescribeReverseShellEventInfoRequest $req) 反弹shell信息详情
  * @method Models\DescribeReverseShellEventsResponse DescribeReverseShellEvents(Models\DescribeReverseShellEventsRequest $req) 获取反弹Shell列表
@@ -339,7 +333,6 @@ use TencentCloud\Cwp\V20180228\Models as Models;
  * @method Models\DescribeSecurityDynamicsResponse DescribeSecurityDynamics(Models\DescribeSecurityDynamicsRequest $req) 本接口 (DescribeSecurityDynamics) 用于获取安全事件动态消息数据。
  * @method Models\DescribeSecurityEventStatResponse DescribeSecurityEventStat(Models\DescribeSecurityEventStatRequest $req) 获取安全事件统计
  * @method Models\DescribeSecurityEventsCntResponse DescribeSecurityEventsCnt(Models\DescribeSecurityEventsCntRequest $req) 获取安全概览相关事件统计数据接口
- * @method Models\DescribeSecurityProtectionStatResponse DescribeSecurityProtectionStat(Models\DescribeSecurityProtectionStatRequest $req) 获取安全防护状态汇总
  * @method Models\DescribeSecurityTrendsResponse DescribeSecurityTrends(Models\DescribeSecurityTrendsRequest $req) 本接口 (DescribeSecurityTrends) 用于获取安全事件统计数据。
  * @method Models\DescribeServerRelatedDirInfoResponse DescribeServerRelatedDirInfo(Models\DescribeServerRelatedDirInfoRequest $req) 查询服务区关联目录详情
  * @method Models\DescribeServersAndRiskAndFirstInfoResponse DescribeServersAndRiskAndFirstInfo(Models\DescribeServersAndRiskAndFirstInfoRequest $req) 获取待处理风险文件数+影响服务器数+是否试用检测+最近检测时间
@@ -392,7 +385,6 @@ use TencentCloud\Cwp\V20180228\Models as Models;
  * @method Models\EditBashRulesResponse EditBashRules(Models\EditBashRulesRequest $req) 新增或修改高危命令规则
  * @method Models\EditPrivilegeRulesResponse EditPrivilegeRules(Models\EditPrivilegeRulesRequest $req) 新增或修改本地提权规则（支持多服务器选择）
  * @method Models\EditReverseShellRulesResponse EditReverseShellRules(Models\EditReverseShellRulesRequest $req) 编辑反弹Shell规则（支持多服务器选择）
-
  * @method Models\EditTagsResponse EditTags(Models\EditTagsRequest $req) 新增或编辑标签
  * @method Models\ExportAssetAppListResponse ExportAssetAppList(Models\ExportAssetAppListRequest $req) 导出资产管理应用列表
  * @method Models\ExportAssetCoreModuleListResponse ExportAssetCoreModuleList(Models\ExportAssetCoreModuleListRequest $req) 导出资产管理内核模块列表
@@ -413,9 +405,6 @@ use TencentCloud\Cwp\V20180228\Models as Models;
  * @method Models\ExportAssetWebLocationListResponse ExportAssetWebLocationList(Models\ExportAssetWebLocationListRequest $req) 导出Web站点列表
  * @method Models\ExportAssetWebServiceInfoListResponse ExportAssetWebServiceInfoList(Models\ExportAssetWebServiceInfoListRequest $req) 导出资产管理Web服务列表
  * @method Models\ExportAttackEventsResponse ExportAttackEvents(Models\ExportAttackEventsRequest $req) 导出网络攻击事件
- * @method Models\ExportAttackLogsResponse ExportAttackLogs(Models\ExportAttackLogsRequest $req) ExportAttackEvents接口替代
-
-导出网络攻击日志
  * @method Models\ExportBaselineEffectHostListResponse ExportBaselineEffectHostList(Models\ExportBaselineEffectHostListRequest $req) 导出基线影响主机列表
  * @method Models\ExportBaselineFixListResponse ExportBaselineFixList(Models\ExportBaselineFixListRequest $req) 导出修复列表
  * @method Models\ExportBaselineHostDetectListResponse ExportBaselineHostDetectList(Models\ExportBaselineHostDetectListRequest $req) 导出基线主机检测
@@ -502,6 +491,9 @@ use TencentCloud\Cwp\V20180228\Models as Models;
  * @method Models\ModifyOrderAttributeResponse ModifyOrderAttribute(Models\ModifyOrderAttributeRequest $req) 对订单属性编辑
  * @method Models\ModifyRansomDefenseEventsStatusResponse ModifyRansomDefenseEventsStatus(Models\ModifyRansomDefenseEventsStatusRequest $req) 修改防勒索事件状态
  * @method Models\ModifyRansomDefenseStrategyStatusResponse ModifyRansomDefenseStrategyStatus(Models\ModifyRansomDefenseStrategyStatusRequest $req) 批量修改防勒索策略状态
+ * @method Models\ModifyRaspMaxCpuResponse ModifyRaspMaxCpu(Models\ModifyRaspMaxCpuRequest $req) 编辑漏洞防御最大cpu配置
+ * @method Models\ModifyRaspRulesResponse ModifyRaspRules(Models\ModifyRaspRulesRequest $req) 添加漏洞防御白名单
+ * @method Models\ModifyReverseShellRulesAggregationResponse ModifyReverseShellRulesAggregation(Models\ModifyReverseShellRulesAggregationRequest $req) 编辑反弹Shell规则（支持多服务器选择）
  * @method Models\ModifyRiskDnsPolicyResponse ModifyRiskDnsPolicy(Models\ModifyRiskDnsPolicyRequest $req) 更改恶意请求策略
  * @method Models\ModifyRiskDnsPolicyStatusResponse ModifyRiskDnsPolicyStatus(Models\ModifyRiskDnsPolicyStatusRequest $req) 更改恶意请求策略状态
  * @method Models\ModifyRiskEventsStatusResponse ModifyRiskEventsStatus(Models\ModifyRiskEventsStatusRequest $req) 入侵检测所有事件的状态，包括：文件查杀，异常登录，密码破解，高危命令，反弹shell，本地提取

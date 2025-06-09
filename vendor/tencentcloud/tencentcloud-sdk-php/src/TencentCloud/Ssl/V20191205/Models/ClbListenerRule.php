@@ -27,13 +27,11 @@ use TencentCloud\Common\AbstractModel;
  * @method boolean getIsMatch() 获取规则是否匹配待绑定证书的域名
  * @method void setIsMatch(boolean $IsMatch) 设置规则是否匹配待绑定证书的域名
  * @method Certificate getCertificate() 获取规则已绑定的证书数据
-注意：此字段可能返回 null，表示取不到有效值。
  * @method void setCertificate(Certificate $Certificate) 设置规则已绑定的证书数据
-注意：此字段可能返回 null，表示取不到有效值。
  * @method array getNoMatchDomains() 获取不匹配域名列表
-注意：此字段可能返回 null，表示取不到有效值。
  * @method void setNoMatchDomains(array $NoMatchDomains) 设置不匹配域名列表
-注意：此字段可能返回 null，表示取不到有效值。
+ * @method string getUrl() 获取规则绑定的路径
+ * @method void setUrl(string $Url) 设置规则绑定的路径
  */
 class ClbListenerRule extends AbstractModel
 {
@@ -54,24 +52,26 @@ class ClbListenerRule extends AbstractModel
 
     /**
      * @var Certificate 规则已绑定的证书数据
-注意：此字段可能返回 null，表示取不到有效值。
      */
     public $Certificate;
 
     /**
      * @var array 不匹配域名列表
-注意：此字段可能返回 null，表示取不到有效值。
      */
     public $NoMatchDomains;
+
+    /**
+     * @var string 规则绑定的路径
+     */
+    public $Url;
 
     /**
      * @param string $LocationId 规则ID
      * @param string $Domain 规则绑定的域名
      * @param boolean $IsMatch 规则是否匹配待绑定证书的域名
      * @param Certificate $Certificate 规则已绑定的证书数据
-注意：此字段可能返回 null，表示取不到有效值。
      * @param array $NoMatchDomains 不匹配域名列表
-注意：此字段可能返回 null，表示取不到有效值。
+     * @param string $Url 规则绑定的路径
      */
     function __construct()
     {
@@ -105,6 +105,10 @@ class ClbListenerRule extends AbstractModel
 
         if (array_key_exists("NoMatchDomains",$param) and $param["NoMatchDomains"] !== null) {
             $this->NoMatchDomains = $param["NoMatchDomains"];
+        }
+
+        if (array_key_exists("Url",$param) and $param["Url"] !== null) {
+            $this->Url = $param["Url"];
         }
     }
 }

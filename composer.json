@@ -63,7 +63,8 @@
     "workerman/workerman": "~v5.1",
     "webman/redis": "^2.1",
     "webman/cache": "^2.1",
-    "textalk/websocket": "^1.5"
+    "textalk/websocket": "^1.5",
+    "webman/push": "^1.1"
   },
   "suggest": {
     "ext-event": "For better performance. "

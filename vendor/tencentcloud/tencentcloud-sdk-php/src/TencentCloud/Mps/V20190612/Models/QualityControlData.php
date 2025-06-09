@@ -18,7 +18,7 @@ namespace TencentCloud\Mps\V20190612\Models;
 use TencentCloud\Common\AbstractModel;
 
 /**
- * 质检结果输出。
+ * 媒体质检结果输出。
  *
  * @method boolean getNoAudio() 获取为true时表示视频无音频轨。
 注意：此字段可能返回 null，表示取不到有效值。
@@ -28,13 +28,21 @@ use TencentCloud\Common\AbstractModel;
 注意：此字段可能返回 null，表示取不到有效值。
  * @method void setNoVideo(boolean $NoVideo) 设置为true时表示视频无视频轨。
 注意：此字段可能返回 null，表示取不到有效值。
- * @method integer getQualityEvaluationScore() 获取视频无参考质量打分，百分制。
+ * @method integer getQualityEvaluationScore() 获取视频无参考质量评分，百分制。
 注意：此字段可能返回 null，表示取不到有效值。
- * @method void setQualityEvaluationScore(integer $QualityEvaluationScore) 设置视频无参考质量打分，百分制。
+ * @method void setQualityEvaluationScore(integer $QualityEvaluationScore) 设置视频无参考质量评分，百分制。
 注意：此字段可能返回 null，表示取不到有效值。
- * @method array getQualityControlResultSet() 获取质检检出异常项。
+ * @method float getQualityEvaluationMeanOpinionScore() 获取视频无参考质量评分，MOS分数。
 注意：此字段可能返回 null，表示取不到有效值。
- * @method void setQualityControlResultSet(array $QualityControlResultSet) 设置质检检出异常项。
+ * @method void setQualityEvaluationMeanOpinionScore(float $QualityEvaluationMeanOpinionScore) 设置视频无参考质量评分，MOS分数。
+注意：此字段可能返回 null，表示取不到有效值。
+ * @method array getQualityControlResultSet() 获取内容质检检出异常项。
+注意：此字段可能返回 null，表示取不到有效值。
+ * @method void setQualityControlResultSet(array $QualityControlResultSet) 设置内容质检检出异常项。
+注意：此字段可能返回 null，表示取不到有效值。
+ * @method array getContainerDiagnoseResultSet() 获取格式诊断检出异常项
+注意：此字段可能返回 null，表示取不到有效值。
+ * @method void setContainerDiagnoseResultSet(array $ContainerDiagnoseResultSet) 设置格式诊断检出异常项
 注意：此字段可能返回 null，表示取不到有效值。
  */
 class QualityControlData extends AbstractModel
@@ -52,25 +60,41 @@ class QualityControlData extends AbstractModel
     public $NoVideo;
 
     /**
-     * @var integer 视频无参考质量打分，百分制。
+     * @var integer 视频无参考质量评分，百分制。
 注意：此字段可能返回 null，表示取不到有效值。
      */
     public $QualityEvaluationScore;
 
     /**
-     * @var array 质检检出异常项。
+     * @var float 视频无参考质量评分，MOS分数。
+注意：此字段可能返回 null，表示取不到有效值。
+     */
+    public $QualityEvaluationMeanOpinionScore;
+
+    /**
+     * @var array 内容质检检出异常项。
 注意：此字段可能返回 null，表示取不到有效值。
      */
     public $QualityControlResultSet;
+
+    /**
+     * @var array 格式诊断检出异常项
+注意：此字段可能返回 null，表示取不到有效值。
+     */
+    public $ContainerDiagnoseResultSet;
 
     /**
      * @param boolean $NoAudio 为true时表示视频无音频轨。
 注意：此字段可能返回 null，表示取不到有效值。
      * @param boolean $NoVideo 为true时表示视频无视频轨。
 注意：此字段可能返回 null，表示取不到有效值。
-     * @param integer $QualityEvaluationScore 视频无参考质量打分，百分制。
+     * @param integer $QualityEvaluationScore 视频无参考质量评分，百分制。
 注意：此字段可能返回 null，表示取不到有效值。
-     * @param array $QualityControlResultSet 质检检出异常项。
+     * @param float $QualityEvaluationMeanOpinionScore 视频无参考质量评分，MOS分数。
+注意：此字段可能返回 null，表示取不到有效值。
+     * @param array $QualityControlResultSet 内容质检检出异常项。
+注意：此字段可能返回 null，表示取不到有效值。
+     * @param array $ContainerDiagnoseResultSet 格式诊断检出异常项
 注意：此字段可能返回 null，表示取不到有效值。
      */
     function __construct()
@@ -98,12 +122,25 @@ class QualityControlData extends AbstractModel
             $this->QualityEvaluationScore = $param["QualityEvaluationScore"];
         }
 
+        if (array_key_exists("QualityEvaluationMeanOpinionScore",$param) and $param["QualityEvaluationMeanOpinionScore"] !== null) {
+            $this->QualityEvaluationMeanOpinionScore = $param["QualityEvaluationMeanOpinionScore"];
+        }
+
         if (array_key_exists("QualityControlResultSet",$param) and $param["QualityControlResultSet"] !== null) {
             $this->QualityControlResultSet = [];
             foreach ($param["QualityControlResultSet"] as $key => $value){
                 $obj = new QualityControlResult();
                 $obj->deserialize($value);
                 array_push($this->QualityControlResultSet, $obj);
+            }
+        }
+
+        if (array_key_exists("ContainerDiagnoseResultSet",$param) and $param["ContainerDiagnoseResultSet"] !== null) {
+            $this->ContainerDiagnoseResultSet = [];
+            foreach ($param["ContainerDiagnoseResultSet"] as $key => $value){
+                $obj = new ContainerDiagnoseResultItem();
+                $obj->deserialize($value);
+                array_push($this->ContainerDiagnoseResultSet, $obj);
             }
         }
     }

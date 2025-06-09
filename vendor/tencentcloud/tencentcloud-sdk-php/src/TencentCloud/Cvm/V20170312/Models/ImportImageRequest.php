@@ -48,6 +48,10 @@ TencentCloud: 腾讯云官方许可
 BYOL: 自带许可（Bring Your Own License）
  * @method string getBootMode() 获取启动模式
  * @method void setBootMode(string $BootMode) 设置启动模式
+ * @method string getImageFamily() 获取 镜像族
+ * @method void setImageFamily(string $ImageFamily) 设置 镜像族
+ * @method array getImportImageDataDiskList() 获取导入的数据盘列表
+ * @method void setImportImageDataDiskList(array $ImportImageDataDiskList) 设置导入的数据盘列表
  */
 class ImportImageRequest extends AbstractModel
 {
@@ -110,6 +114,16 @@ BYOL: 自带许可（Bring Your Own License）
     public $BootMode;
 
     /**
+     * @var string  镜像族
+     */
+    public $ImageFamily;
+
+    /**
+     * @var array 导入的数据盘列表
+     */
+    public $ImportImageDataDiskList;
+
+    /**
      * @param string $Architecture 导入镜像的操作系统架构，`x86_64` 或 `i386`
      * @param string $OsType 导入镜像的操作系统类型，通过`DescribeImportImageOs`获取
      * @param string $OsVersion 导入镜像的操作系统版本，通过`DescribeImportImageOs`获取
@@ -124,6 +138,8 @@ BYOL: 自带许可（Bring Your Own License）
 TencentCloud: 腾讯云官方许可
 BYOL: 自带许可（Bring Your Own License）
      * @param string $BootMode 启动模式
+     * @param string $ImageFamily  镜像族
+     * @param array $ImportImageDataDiskList 导入的数据盘列表
      */
     function __construct()
     {
@@ -185,6 +201,19 @@ BYOL: 自带许可（Bring Your Own License）
 
         if (array_key_exists("BootMode",$param) and $param["BootMode"] !== null) {
             $this->BootMode = $param["BootMode"];
+        }
+
+        if (array_key_exists("ImageFamily",$param) and $param["ImageFamily"] !== null) {
+            $this->ImageFamily = $param["ImageFamily"];
+        }
+
+        if (array_key_exists("ImportImageDataDiskList",$param) and $param["ImportImageDataDiskList"] !== null) {
+            $this->ImportImageDataDiskList = [];
+            foreach ($param["ImportImageDataDiskList"] as $key => $value){
+                $obj = new ImportImageDataDisk();
+                $obj->deserialize($value);
+                array_push($this->ImportImageDataDiskList, $obj);
+            }
         }
     }
 }

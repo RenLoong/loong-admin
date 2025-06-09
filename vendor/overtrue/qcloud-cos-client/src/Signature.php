@@ -29,7 +29,7 @@ class Signature
     {
     }
 
-    public function createAuthorizationHeader(RequestInterface $request, int|string|\DateTimeInterface $expires = null): string
+    public function createAuthorizationHeader(RequestInterface $request, int|string|\DateTimeInterface|null $expires = null): string
     {
         $signTime = self::getTimeSegments($expires ?? '+60 minutes');
         $queryToBeSigned = self::getQueryToBeSigned($request);
@@ -95,7 +95,7 @@ class Signature
     {
         $timezone = \date_default_timezone_get();
 
-        date_default_timezone_set('PRC');
+        date_default_timezone_set('Asia/Shanghai');
 
         // '900'/900
         if (is_numeric($expires)) {

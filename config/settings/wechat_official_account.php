@@ -32,7 +32,7 @@ return [
             ],
             'prompt' => [
                 $Component->add('text', ['default' => '微信公众号开发者ID(AppID)，'], ['type' => 'info', 'size' => 'small'])
-                    ->add('link', ['default' => '微信公众平台'], ['href' => 'https://mp.weixin.qq.com/', 'underline' => false, 'target' => '_blank', 'type' => 'primary', 'size' => 'small'])
+                    ->add('link', ['default' => '微信公众平台'], ['href' => 'https://mp.weixin.qq.com/', 'underline' => 'never', 'target' => '_blank', 'type' => 'primary', 'size' => 'small'])
                     ->builder()
             ],
             'props' => [
@@ -52,7 +52,7 @@ return [
             ],
             'prompt' => [
                 $Component->add('text', ['default' => '微信公众号开发者密码(AppSecret)，'], ['type' => 'info', 'size' => 'small'])
-                    ->add('link', ['default' => '微信公众平台'], ['href' => 'https://mp.weixin.qq.com/', 'underline' => false, 'target' => '_blank', 'type' => 'primary', 'size' => 'small'])
+                    ->add('link', ['default' => '微信公众平台'], ['href' => 'https://mp.weixin.qq.com/', 'underline' => 'never', 'target' => '_blank', 'type' => 'primary', 'size' => 'small'])
                     ->builder()
             ],
             'props' => [

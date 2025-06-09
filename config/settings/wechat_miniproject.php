@@ -30,7 +30,7 @@ return [
             ],
             'prompt' => [
                 $Component->add('text', ['default' => '微信小程序AppID(小程序ID)，'], ['type' => 'info', 'size' => 'small'])
-                    ->add('link', ['default' => '微信公众平台'], ['href' => 'https://mp.weixin.qq.com/', 'underline' => false, 'target' => '_blank', 'type' => 'primary', 'size' => 'small'])
+                    ->add('link', ['default' => '微信公众平台'], ['href' => 'https://mp.weixin.qq.com/', 'underline' => 'never', 'target' => '_blank', 'type' => 'primary', 'size' => 'small'])
                     ->builder()
             ],
             'props' => [
@@ -50,7 +50,7 @@ return [
             ],
             'prompt' => [
                 $Component->add('text', ['default' => '微信小程序AppSecret(小程序密钥)	，'], ['type' => 'info', 'size' => 'small'])
-                    ->add('link', ['default' => '微信公众平台'], ['href' => 'https://mp.weixin.qq.com/', 'underline' => false, 'target' => '_blank', 'type' => 'primary', 'size' => 'small'])
+                    ->add('link', ['default' => '微信公众平台'], ['href' => 'https://mp.weixin.qq.com/', 'underline' => 'never', 'target' => '_blank', 'type' => 'primary', 'size' => 'small'])
                     ->builder()
             ],
             'props' => [
@@ -69,7 +69,7 @@ return [
             ],
             'prompt' => [
                 $Component->add('text', ['default' => '微信小程序代码上传密钥	，'], ['type' => 'info', 'size' => 'small'])
-                    ->add('link', ['default' => '微信公众平台'], ['href' => 'https://mp.weixin.qq.com/', 'underline' => false, 'target' => '_blank', 'type' => 'primary', 'size' => 'small'])
+                    ->add('link', ['default' => '微信公众平台'], ['href' => 'https://mp.weixin.qq.com/', 'underline' => 'never', 'target' => '_blank', 'type' => 'primary', 'size' => 'small'])
                     ->builder()
             ],
             'props' => [

@@ -23,15 +23,69 @@ use TencentCloud\Common\Credential;
 use TencentCloud\Gs\V20191118\Models as Models;
 
 /**
+ * @method Models\BackUpAndroidInstanceToStorageResponse BackUpAndroidInstanceToStorage(Models\BackUpAndroidInstanceToStorageRequest $req) 备份云手机到指定存储
+ * @method Models\ConnectAndroidInstanceResponse ConnectAndroidInstance(Models\ConnectAndroidInstanceRequest $req) 连接安卓实例
+ * @method Models\CopyAndroidInstanceResponse CopyAndroidInstance(Models\CopyAndroidInstanceRequest $req) 复制安卓实例：
+1. 排除和包含文件只能指定/data下的文件，不指定时复制整个/data目录
+2. 源实例和目的实例必须在同一区域
+3. 复制时，源实例和目的实例都会停机，复制完后实例会自动启动
+4. 复制时会产生大量内网流量，请限制并发
+ * @method Models\CreateAndroidAppResponse CreateAndroidApp(Models\CreateAndroidAppRequest $req) 创建安卓应用
+ * @method Models\CreateAndroidAppVersionResponse CreateAndroidAppVersion(Models\CreateAndroidAppVersionRequest $req) 创建安卓应用版本
+ * @method Models\CreateAndroidInstanceImageResponse CreateAndroidInstanceImage(Models\CreateAndroidInstanceImageRequest $req) 创建安卓实例镜像
+ * @method Models\CreateAndroidInstanceLabelResponse CreateAndroidInstanceLabel(Models\CreateAndroidInstanceLabelRequest $req) 创建安卓实例
+ * @method Models\CreateAndroidInstanceSSHResponse CreateAndroidInstanceSSH(Models\CreateAndroidInstanceSSHRequest $req) 创建安卓实例 SSH 连接
+ * @method Models\CreateAndroidInstanceWebShellResponse CreateAndroidInstanceWebShell(Models\CreateAndroidInstanceWebShellRequest $req) 创建安卓实例 WebShell 连接
+ * @method Models\CreateAndroidInstancesResponse CreateAndroidInstances(Models\CreateAndroidInstancesRequest $req) 创建安卓实例
+ * @method Models\CreateAndroidInstancesScreenshotResponse CreateAndroidInstancesScreenshot(Models\CreateAndroidInstancesScreenshotRequest $req) 安卓实例截图
+ * @method Models\CreateCosCredentialResponse CreateCosCredential(Models\CreateCosCredentialRequest $req) 用于创建 Cos 临时密钥
  * @method Models\CreateSessionResponse CreateSession(Models\CreateSessionRequest $req) 创建会话
+ * @method Models\DeleteAndroidAppResponse DeleteAndroidApp(Models\DeleteAndroidAppRequest $req) 删除安卓应用
+ * @method Models\DeleteAndroidAppVersionResponse DeleteAndroidAppVersion(Models\DeleteAndroidAppVersionRequest $req) 删除安卓应用版本
+ * @method Models\DeleteAndroidInstanceImagesResponse DeleteAndroidInstanceImages(Models\DeleteAndroidInstanceImagesRequest $req) 删除安卓实例镜像
+ * @method Models\DeleteAndroidInstanceLabelResponse DeleteAndroidInstanceLabel(Models\DeleteAndroidInstanceLabelRequest $req) 创建安卓实例
+ * @method Models\DescribeAndroidAppsResponse DescribeAndroidApps(Models\DescribeAndroidAppsRequest $req) 查询安卓应用信息
+ * @method Models\DescribeAndroidInstanceAppsResponse DescribeAndroidInstanceApps(Models\DescribeAndroidInstanceAppsRequest $req) 查询安卓实例应用
+ * @method Models\DescribeAndroidInstanceImagesResponse DescribeAndroidInstanceImages(Models\DescribeAndroidInstanceImagesRequest $req) 查询安卓实例镜像
+ * @method Models\DescribeAndroidInstanceLabelsResponse DescribeAndroidInstanceLabels(Models\DescribeAndroidInstanceLabelsRequest $req) 创建安卓实例
+ * @method Models\DescribeAndroidInstanceTasksStatusResponse DescribeAndroidInstanceTasksStatus(Models\DescribeAndroidInstanceTasksStatusRequest $req) 查询安卓实例任务状态
+ * @method Models\DescribeAndroidInstancesResponse DescribeAndroidInstances(Models\DescribeAndroidInstancesRequest $req) 查询安卓实例
  * @method Models\DescribeInstancesCountResponse DescribeInstancesCount(Models\DescribeInstancesCountRequest $req) 获取并发总数和运行数
+ * @method Models\DestroyAndroidInstancesResponse DestroyAndroidInstances(Models\DestroyAndroidInstancesRequest $req) 销毁安卓实例
+ * @method Models\ExecuteCommandOnAndroidInstancesResponse ExecuteCommandOnAndroidInstances(Models\ExecuteCommandOnAndroidInstancesRequest $req) 在安卓实例上异步执行命令，命令输出结果如果内容过长会被截断
+ * @method Models\FetchAndroidInstancesLogsResponse FetchAndroidInstancesLogs(Models\FetchAndroidInstancesLogsRequest $req) 批量获取安卓实例日志
+ * @method Models\InstallAndroidInstancesAppResponse InstallAndroidInstancesApp(Models\InstallAndroidInstancesAppRequest $req) 安装安卓实例应用
+ * @method Models\ModifyAndroidAppResponse ModifyAndroidApp(Models\ModifyAndroidAppRequest $req) 修改安卓应用信息
+ * @method Models\ModifyAndroidAppVersionResponse ModifyAndroidAppVersion(Models\ModifyAndroidAppVersionRequest $req) 修改安卓应用版本
+ * @method Models\ModifyAndroidInstanceInformationResponse ModifyAndroidInstanceInformation(Models\ModifyAndroidInstanceInformationRequest $req) 修改安卓实例的信息
+ * @method Models\ModifyAndroidInstanceResolutionResponse ModifyAndroidInstanceResolution(Models\ModifyAndroidInstanceResolutionRequest $req) 修改安卓实例分辨率。需要注意的是该接口可能导致正在运行的应用出现闪退，所以建议在实例维护时期才进行调用。
+ * @method Models\ModifyAndroidInstancesInformationResponse ModifyAndroidInstancesInformation(Models\ModifyAndroidInstancesInformationRequest $req) 批量修改安卓实例信息
+ * @method Models\ModifyAndroidInstancesLabelsResponse ModifyAndroidInstancesLabels(Models\ModifyAndroidInstancesLabelsRequest $req) 修改安卓实例分辨率。需要注意的是该接口可能导致正在运行的应用出现闪退，所以建议在实例维护时期才进行调用。
+ * @method Models\ModifyAndroidInstancesResolutionResponse ModifyAndroidInstancesResolution(Models\ModifyAndroidInstancesResolutionRequest $req) 修改安卓实例分辨率。需要注意的是该接口需要重启才能生效。
+ * @method Models\ModifyAndroidInstancesUserIdResponse ModifyAndroidInstancesUserId(Models\ModifyAndroidInstancesUserIdRequest $req) 批量修改安卓实例的用户ID
+ * @method Models\RebootAndroidInstanceHostsResponse RebootAndroidInstanceHosts(Models\RebootAndroidInstanceHostsRequest $req) 重启安卓实例宿主机。请注意：
+
+- 当前每 15 分钟只能重启一次
+- 一个宿主机可能有多个云手机实例，重启宿主机会影响运行在上面的所有实例，请确保该宿主机上的所有云手机实例未投入业务使用
+ * @method Models\RebootAndroidInstancesResponse RebootAndroidInstances(Models\RebootAndroidInstancesRequest $req) 重启安卓实例
+ * @method Models\ResetAndroidInstancesResponse ResetAndroidInstances(Models\ResetAndroidInstancesRequest $req) 重置安卓实例
+ * @method Models\RestartAndroidInstancesAppResponse RestartAndroidInstancesApp(Models\RestartAndroidInstancesAppRequest $req) 启动安卓实例应用
+ * @method Models\RestoreAndroidInstanceFromStorageResponse RestoreAndroidInstanceFromStorage(Models\RestoreAndroidInstanceFromStorageRequest $req) 指定存储还原云手机
  * @method Models\SaveGameArchiveResponse SaveGameArchive(Models\SaveGameArchiveRequest $req) 保存游戏存档
+ * @method Models\StartAndroidInstancesResponse StartAndroidInstances(Models\StartAndroidInstancesRequest $req) 重启安卓实例
+ * @method Models\StartAndroidInstancesAppResponse StartAndroidInstancesApp(Models\StartAndroidInstancesAppRequest $req) 启动安卓实例应用
  * @method Models\StartPublishStreamResponse StartPublishStream(Models\StartPublishStreamRequest $req) 开始云端推流
  * @method Models\StartPublishStreamToCSSResponse StartPublishStreamToCSS(Models\StartPublishStreamToCSSRequest $req) 开始云端推流
+ * @method Models\StopAndroidInstancesResponse StopAndroidInstances(Models\StopAndroidInstancesRequest $req) 重启安卓实例
+ * @method Models\StopAndroidInstancesAppResponse StopAndroidInstancesApp(Models\StopAndroidInstancesAppRequest $req) 停止安卓实例应用
  * @method Models\StopGameResponse StopGame(Models\StopGameRequest $req) 强制退出游戏
  * @method Models\StopPublishStreamResponse StopPublishStream(Models\StopPublishStreamRequest $req) 停止云端推流
  * @method Models\SwitchGameArchiveResponse SwitchGameArchive(Models\SwitchGameArchiveRequest $req) 切换游戏存档
+ * @method Models\SyncAndroidInstanceImageResponse SyncAndroidInstanceImage(Models\SyncAndroidInstanceImageRequest $req) 同步安卓实例镜像
+ * @method Models\SyncExecuteCommandOnAndroidInstancesResponse SyncExecuteCommandOnAndroidInstances(Models\SyncExecuteCommandOnAndroidInstancesRequest $req) 在安卓实例上同步执行命令，仅支持1秒内可以返回结果的命令，例如：ls、cd。同时执行的实例数量不能过多，否则可能云api返回超时。不支持超过1秒无法返回或无法自主结束的命令，例如：top、vim，执行结果最大1KB
  * @method Models\TrylockWorkerResponse TrylockWorker(Models\TrylockWorkerRequest $req) 尝试锁定机器
+ * @method Models\UninstallAndroidInstancesAppResponse UninstallAndroidInstancesApp(Models\UninstallAndroidInstancesAppRequest $req) 卸载安卓实例应用
+ * @method Models\UploadFileToAndroidInstancesResponse UploadFileToAndroidInstances(Models\UploadFileToAndroidInstancesRequest $req) 上传文件到安卓实例
  */
 
 class GsClient extends AbstractClient

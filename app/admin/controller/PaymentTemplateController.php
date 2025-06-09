@@ -244,9 +244,9 @@ class PaymentTemplateController extends Basic
             'required' => true,
             'prompt' => [
                 $Component->add('text', ['default' => '保存以后支付方式将不可修改，请谨慎操作，'], ['type' => 'info', 'size' => 'small'])
-                    ->add('link', ['default' => '微信商户平台'], ['type' => 'success', 'href' => 'https://pay.weixin.qq.com', 'target' => '_blank', 'underline' => false, 'size' => 'small'])
+                    ->add('link', ['default' => '微信商户平台'], ['type' => 'success', 'href' => 'https://pay.weixin.qq.com', 'target' => '_blank', 'underline' => 'never', 'size' => 'small'])
                     ->add('text', ['default' => '，'], ['type' => 'info', 'size' => 'small'])
-                    ->add('link', ['default' => '支付宝开放平台'], ['type' => 'primary', 'href' => 'https://alipay.com', 'target' => '_blank', 'underline' => false, 'size' => 'small'])
+                    ->add('link', ['default' => '支付宝开放平台'], ['type' => 'primary', 'href' => 'https://alipay.com', 'target' => '_blank', 'underline' => 'never', 'size' => 'small'])
                     ->builder()
             ],
             'options' => PaymentChannels::getOptions(),

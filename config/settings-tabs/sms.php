@@ -52,7 +52,7 @@ return [
                         ],
                         'prompt' => [
                             $Component->add('text', ['default' => '阿里云-AccessKey管理-AccessKey ID，'], ['type' => 'info', 'size' => 'small'])
-                                ->add('link', ['default' => '阿里云AccessKey'], ['target' => '_blank', 'href' => 'https://ram.console.aliyun.com/manage/ak', 'type' => 'info', 'underline' => false, 'size' => 'small'])
+                                ->add('link', ['default' => '阿里云AccessKey'], ['target' => '_blank', 'href' => 'https://ram.console.aliyun.com/manage/ak', 'type' => 'info', 'underline' => 'never', 'size' => 'small'])
                                 ->builder()
                         ]
                     ]
@@ -85,7 +85,7 @@ return [
                         ],
                         'prompt' => [
                             $Component->add('text', ['default' => '阿里云-短信服务-国内消息-签名管理，'], ['type' => 'info', 'size' => 'small'])
-                                ->add('link', ['default' => '阿里云短信签名'], ['target' => '_blank', 'href' => 'https://dysms.console.aliyun.com/domestic/text', 'type' => 'info', 'underline' => false, 'size' => 'small'])
+                                ->add('link', ['default' => '阿里云短信签名'], ['target' => '_blank', 'href' => 'https://dysms.console.aliyun.com/domestic/text', 'type' => 'info', 'underline' => 'never', 'size' => 'small'])
                                 ->builder()
                         ]
                     ]
@@ -102,7 +102,7 @@ return [
                         ],
                         'prompt' => [
                             $Component->add('text', ['default' => '阿里云-短信服务-国内消息-模板管理，'], ['type' => 'info', 'size' => 'small'])
-                                ->add('link', ['default' => '阿里云短信模板'], ['target' => '_blank', 'href' => 'https://dysms.console.aliyun.com/domestic/text/template', 'type' => 'info', 'underline' => false, 'size' => 'small'])
+                                ->add('link', ['default' => '阿里云短信模板'], ['target' => '_blank', 'href' => 'https://dysms.console.aliyun.com/domestic/text/template', 'type' => 'info', 'underline' => 'never', 'size' => 'small'])
                                 ->builder()
                         ]
                     ]
@@ -137,7 +137,7 @@ return [
                         ],
                         "prompt" => [
                             $Component->add("text", ["default" => "腾讯云-访问管理-访问密钥-AccessKey ID，"], ["type" => "info", "size" => "small"])
-                                ->add("link", ["default" => "腾讯云SecretId"], ["target" => "_blank", "href" => "https://console.cloud.tencent.com/cam/capi", "type" => "info", "underline" => false, "size" => "small"])
+                                ->add("link", ["default" => "腾讯云SecretId"], ["target" => "_blank", "href" => "https://console.cloud.tencent.com/cam/capi", "type" => "info", 'underline' => 'never', "size" => "small"])
                                 ->builder()
                         ]
                     ]
@@ -154,7 +154,7 @@ return [
                         ],
                         "prompt" => [
                             $Component->add("text", ["default" => "腾讯云-访问管理-访问密钥-AccessKey Secret，"], ["type" => "info", "size" => "small"])
-                                ->add("link", ["default" => "腾讯云SecretKey"], ["target" => "_blank", "href" => "https://console.cloud.tencent.com/cam/capi", "type" => "info", "underline" => false, "size" => "small"])
+                                ->add("link", ["default" => "腾讯云SecretKey"], ["target" => "_blank", "href" => "https://console.cloud.tencent.com/cam/capi", "type" => "info", 'underline' => 'never', "size" => "small"])
                                 ->builder()
                         ]
                     ]
@@ -171,7 +171,7 @@ return [
                         ],
                         "prompt" => [
                             $Component->add("text", ["default" => "腾讯云-短信-应用管理-应用 ID，"], ["type" => "info", "size" => "small"])
-                                ->add("link", ["default" => "腾讯云应用 ID"], ["target" => "_blank", "href" => "https://console.cloud.tencent.com/smsv2/app-manage", "type" => "info", "underline" => false, "size" => "small"])
+                                ->add("link", ["default" => "腾讯云应用 ID"], ["target" => "_blank", "href" => "https://console.cloud.tencent.com/smsv2/app-manage", "type" => "info", 'underline' => 'never', "size" => "small"])
                                 ->builder()
                         ]
                     ]
@@ -188,7 +188,7 @@ return [
                         ],
                         "prompt" => [
                             $Component->add("text", ["default" => "腾讯云-短信-国内短信-签名管理，"], ["type" => "info", "size" => "small"])
-                                ->add("link", ["default" => "腾讯云短信签名"], ["target" => "_blank", "href" => "https://console.cloud.tencent.com/smsv2/csms-sign", "type" => "info", "underline" => false, "size" => "small"])
+                                ->add("link", ["default" => "腾讯云短信签名"], ["target" => "_blank", "href" => "https://console.cloud.tencent.com/smsv2/csms-sign", "type" => "info", 'underline' => 'never', "size" => "small"])
                                 ->builder()
                         ]
                     ]
@@ -205,7 +205,7 @@ return [
                         ],
                         "prompt" => [
                             $Component->add("text", ["default" => "腾讯云-短信-国内短信-模板管理，"], ["type" => "info", "size" => "small"])
-                                ->add("link", ["default" => "腾讯云短信模板"], ["target" => "_blank", "href" => "https://console.cloud.tencent.com/smsv2/csms-template", "type" => "info", "underline" => false, "size" => "small"])
+                                ->add("link", ["default" => "腾讯云短信模板"], ["target" => "_blank", "href" => "https://console.cloud.tencent.com/smsv2/csms-template", "type" => "info", 'underline' => 'never', "size" => "small"])
                                 ->builder()
                         ]
                     ]

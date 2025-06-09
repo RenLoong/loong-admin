@@ -67,9 +67,9 @@ trait WhereQuery
      */
     protected function parseQueryWhere(BaseQuery $query): void
     {
-        $this->options['where'] = $query->getOptions('where') ?? [];
+        $this->options['where'] = $query->getOption('where', []);
 
-        $via = $query->getOptions('via');
+        $via = $query->getOption('via');
         if ($via) {
             foreach ($this->options['where'] as $logic => &$where) {
                 foreach ($where as $key => &$val) {
@@ -304,15 +304,13 @@ trait WhereQuery
      */
     public function whereJsonContains(string $field, $condition, string $logic = 'AND')
     {
-        if (str_contains($field, '->')) {
-            [$field1, $field2] = explode('->', $field);
-            $field             = 'json_extract(' . $field1 . ',\'$.' . $field2 . '\')';
-        }
+        $value = is_null($condition) ? 'NULL' : '\'' . json_encode($condition) . '\'';
 
-        $value       = is_string($condition) ? '"' . $condition . '"' : $condition;
-        $name        = $this->bindValue($value);
-        $bind[$name] = $value;
-        return $this->whereRaw('json_contains(' . $field . ',:' . $name . ')', $bind, $logic);
+        if (str_contains($field, '->')) {
+            [$field, $path] = explode('->', $field, 2);
+            return $this->whereRaw('json_contains(' . $field . ', ' . $value . ', \'$.'. str_replace('->', '.', $path) . '\')', [], $logic);
+        }
+        return $this->whereRaw('json_contains(' . $field . ', ' . $value . ')', [], $logic);
     }
 
     public function whereOrJsonContains(string $field, $condition)
@@ -455,8 +453,14 @@ trait WhereQuery
     {
         $logic = strtoupper($logic);
 
+        // 字段映射
+        $map   = $this->getOption('field_map', []);
+        if (is_string($field) && isset($map[$field])) {
+            $field = $map[$field];
+        }
+
         // 处理 via
-        if (is_string($field) && !empty($this->options['via']) && !str_contains($field, '.')) {
+        if (is_string($field) && !empty($this->options['via']) && !str_contains($field, '.') && !str_contains($field, '->')) {
             $field = $this->options['via'] . '.' . $field;
         }
 
@@ -523,6 +527,17 @@ trait WhereQuery
             // 同一字段多条件查询
             array_unshift($param, $field);
             return $param;
+        }
+
+        if (is_string($field) && strpos($field, '->')) {
+            [$relation, $attr] = explode('->', $field, 2);
+
+            $type = $this->getFieldType($relation);
+            if (is_null($type)) {
+                // 自动关联查询
+                $this->hasWhere($relation, [[$attr , is_null($condition) ? '=' : $op, $condition ?? $op]]);                    
+                return [];
+            }
         }
 
         if ($field && is_null($condition)) {
@@ -627,7 +642,7 @@ trait WhereQuery
      *
      * @return $this
      */
-    public function when($condition, Closure | array $query, Closure | array | null $otherwise = null): self
+    public function when($condition, Closure | array $query, Closure | array | null $otherwise = null)
     {
         // 处理条件为 Closure 的情况
         if ($condition instanceof Closure) {

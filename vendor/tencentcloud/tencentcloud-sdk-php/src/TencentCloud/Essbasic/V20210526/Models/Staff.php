@@ -23,25 +23,21 @@ use TencentCloud\Common\AbstractModel;
  * @method string getUserId() 获取员工在电子签平台的用户ID
  * @method void setUserId(string $UserId) 设置员工在电子签平台的用户ID
  * @method string getDisplayName() 获取显示的员工名
+注意：2024-07-08 及之后创建的应用号，该字段返回的是打码信息
  * @method void setDisplayName(string $DisplayName) 设置显示的员工名
+注意：2024-07-08 及之后创建的应用号，该字段返回的是打码信息
  * @method string getMobile() 获取员工手机号
+注意：2024-07-08 及之后创建的应用号，该字段返回的是打码信息
  * @method void setMobile(string $Mobile) 设置员工手机号
+注意：2024-07-08 及之后创建的应用号，该字段返回的是打码信息
  * @method string getEmail() 获取员工邮箱
-注意：此字段可能返回 null，表示取不到有效值。
  * @method void setEmail(string $Email) 设置员工邮箱
-注意：此字段可能返回 null，表示取不到有效值。
  * @method string getOpenId() 获取员工在第三方应用平台的用户ID
-注意：此字段可能返回 null，表示取不到有效值。
  * @method void setOpenId(string $OpenId) 设置员工在第三方应用平台的用户ID
-注意：此字段可能返回 null，表示取不到有效值。
  * @method array getRoles() 获取员工角色
-注意：此字段可能返回 null，表示取不到有效值。
  * @method void setRoles(array $Roles) 设置员工角色
-注意：此字段可能返回 null，表示取不到有效值。
  * @method Department getDepartment() 获取员工部门
-注意：此字段可能返回 null，表示取不到有效值。
  * @method void setDepartment(Department $Department) 设置员工部门
-注意：此字段可能返回 null，表示取不到有效值。
  * @method boolean getVerified() 获取员工是否实名
  * @method void setVerified(boolean $Verified) 设置员工是否实名
  * @method integer getCreatedOn() 获取员工创建时间戳，单位秒
@@ -60,35 +56,33 @@ class Staff extends AbstractModel
 
     /**
      * @var string 显示的员工名
+注意：2024-07-08 及之后创建的应用号，该字段返回的是打码信息
      */
     public $DisplayName;
 
     /**
      * @var string 员工手机号
+注意：2024-07-08 及之后创建的应用号，该字段返回的是打码信息
      */
     public $Mobile;
 
     /**
      * @var string 员工邮箱
-注意：此字段可能返回 null，表示取不到有效值。
      */
     public $Email;
 
     /**
      * @var string 员工在第三方应用平台的用户ID
-注意：此字段可能返回 null，表示取不到有效值。
      */
     public $OpenId;
 
     /**
      * @var array 员工角色
-注意：此字段可能返回 null，表示取不到有效值。
      */
     public $Roles;
 
     /**
      * @var Department 员工部门
-注意：此字段可能返回 null，表示取不到有效值。
      */
     public $Department;
 
@@ -115,15 +109,13 @@ class Staff extends AbstractModel
     /**
      * @param string $UserId 员工在电子签平台的用户ID
      * @param string $DisplayName 显示的员工名
+注意：2024-07-08 及之后创建的应用号，该字段返回的是打码信息
      * @param string $Mobile 员工手机号
+注意：2024-07-08 及之后创建的应用号，该字段返回的是打码信息
      * @param string $Email 员工邮箱
-注意：此字段可能返回 null，表示取不到有效值。
      * @param string $OpenId 员工在第三方应用平台的用户ID
-注意：此字段可能返回 null，表示取不到有效值。
      * @param array $Roles 员工角色
-注意：此字段可能返回 null，表示取不到有效值。
      * @param Department $Department 员工部门
-注意：此字段可能返回 null，表示取不到有效值。
      * @param boolean $Verified 员工是否实名
      * @param integer $CreatedOn 员工创建时间戳，单位秒
      * @param integer $VerifiedOn 员工实名时间戳，单位秒

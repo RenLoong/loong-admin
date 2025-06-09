@@ -88,6 +88,8 @@ class OpenApiClient
 
     protected $_disableHttp2;
 
+    protected $_tlsMinVersion;
+
     /**
      * Init client with Config
      * @param config config contains the necessary information to create a client
@@ -145,6 +147,7 @@ class OpenApiClient
         $this->_cert = $config->cert;
         $this->_ca = $config->ca;
         $this->_disableHttp2 = $config->disableHttp2;
+        $this->_tlsMinVersion = $config->tlsMinVersion;
     }
 
     /**
@@ -187,7 +190,8 @@ class OpenApiClient
                 "policy" => Utils::defaultString($runtime->backoffPolicy, "no"),
                 "period" => Utils::defaultNumber($runtime->backoffPeriod, 1)
             ],
-            "ignoreSSL" => $runtime->ignoreSSL
+            "ignoreSSL" => $runtime->ignoreSSL,
+            "tlsMinVersion" => $this->_tlsMinVersion
         ];
         $_lastRequest = null;
         $_lastException = null;
@@ -243,14 +247,14 @@ class OpenApiClient
                         "x-acs-version" => $version,
                         "x-acs-action" => $action,
                         "user-agent" => $this->getUserAgent()
-                    ], $globalHeaders, $extendsHeaders);
+                    ], $globalHeaders, $extendsHeaders, $request->headers);
                 } else {
                     $_request->headers = Tea::merge([
                         "host" => $this->_endpoint,
                         "x-acs-version" => $version,
                         "x-acs-action" => $action,
                         "user-agent" => $this->getUserAgent()
-                    ], $globalHeaders, $extendsHeaders, $headers);
+                    ], $globalHeaders, $extendsHeaders, $request->headers, $headers);
                 }
                 if (!Utils::isUnset($request->body)) {
                     $m = Utils::assertAsMap($request->body);
@@ -259,15 +263,28 @@ class OpenApiClient
                     $_request->headers["content-type"] = "application/x-www-form-urlencoded";
                 }
                 if (!Utils::equalString($authType, "Anonymous")) {
-                    $credentialType = $this->getType();
+                    if (Utils::isUnset($this->_credential)) {
+                        throw new TeaError([
+                            "code" => "InvalidCredentials",
+                            "message" => "Please set up the credentials correctly. If you are setting them through environment variables, please ensure that ALIBABA_CLOUD_ACCESS_KEY_ID and ALIBABA_CLOUD_ACCESS_KEY_SECRET are set correctly. See https://help.aliyun.com/zh/sdk/developer-reference/configure-the-alibaba-cloud-accesskey-environment-variable-on-linux-macos-and-windows-systems for more details."
+                        ]);
+                    }
+                    $credentialModel = $this->_credential->getCredential();
+                    if (!Utils::empty_($credentialModel->providerName)) {
+                        $_request->headers["x-acs-credentials-provider"] = $credentialModel->providerName;
+                    }
+                    $credentialType = $credentialModel->type;
                     if (Utils::equalString($credentialType, "bearer")) {
-                        $bearerToken = $this->getBearerToken();
+                        $bearerToken = $credentialModel->bearerToken;
                         $_request->query["BearerToken"] = $bearerToken;
                         $_request->query["SignatureType"] = "BEARERTOKEN";
+                    } else if (Utils::equalString($credentialType, "id_token")) {
+                        $idToken = $credentialModel->securityToken;
+                        $_request->headers["x-acs-zero-trust-idtoken"] = $idToken;
                     } else {
-                        $accessKeyId = $this->getAccessKeyId();
-                        $accessKeySecret = $this->getAccessKeySecret();
-                        $securityToken = $this->getSecurityToken();
+                        $accessKeyId = $credentialModel->accessKeyId;
+                        $accessKeySecret = $credentialModel->accessKeySecret;
+                        $securityToken = $credentialModel->securityToken;
                         if (!Utils::empty_($securityToken)) {
                             $_request->query["SecurityToken"] = $securityToken;
                         }
@@ -387,14 +404,15 @@ class OpenApiClient
             "socks5NetWork" => Utils::defaultString($runtime->socks5NetWork, $this->_socks5NetWork),
             "maxIdleConns" => Utils::defaultNumber($runtime->maxIdleConns, $this->_maxIdleConns),
             "retry" => [
-                    "retryable" => $runtime->autoretry,
-                    "maxAttempts" => Utils::defaultNumber($runtime->maxAttempts, 3)
-                ],
+                "retryable" => $runtime->autoretry,
+                "maxAttempts" => Utils::defaultNumber($runtime->maxAttempts, 3)
+            ],
             "backoff" => [
-                    "policy" => Utils::defaultString($runtime->backoffPolicy, "no"),
-                    "period" => Utils::defaultNumber($runtime->backoffPeriod, 1)
-                ],
-            "ignoreSSL" => $runtime->ignoreSSL
+                "policy" => Utils::defaultString($runtime->backoffPolicy, "no"),
+                "period" => Utils::defaultNumber($runtime->backoffPeriod, 1)
+            ],
+            "ignoreSSL" => $runtime->ignoreSSL,
+            "tlsMinVersion" => $this->_tlsMinVersion
         ];
         $_lastRequest = null;
         $_lastException = null;
@@ -455,15 +473,28 @@ class OpenApiClient
                     $_request->query = Tea::merge($_request->query, $request->query);
                 }
                 if (!Utils::equalString($authType, "Anonymous")) {
-                    $credentialType = $this->getType();
+                    if (Utils::isUnset($this->_credential)) {
+                        throw new TeaError([
+                            "code" => "InvalidCredentials",
+                            "message" => "Please set up the credentials correctly. If you are setting them through environment variables, please ensure that ALIBABA_CLOUD_ACCESS_KEY_ID and ALIBABA_CLOUD_ACCESS_KEY_SECRET are set correctly. See https://help.aliyun.com/zh/sdk/developer-reference/configure-the-alibaba-cloud-accesskey-environment-variable-on-linux-macos-and-windows-systems for more details."
+                        ]);
+                    }
+                    $credentialModel = $this->_credential->getCredential();
+                    if (!Utils::empty_($credentialModel->providerName)) {
+                        $_request->headers["x-acs-credentials-provider"] = $credentialModel->providerName;
+                    }
+                    $credentialType = $credentialModel->type;
                     if (Utils::equalString($credentialType, "bearer")) {
-                        $bearerToken = $this->getBearerToken();
+                        $bearerToken = $credentialModel->bearerToken;
                         $_request->headers["x-acs-bearer-token"] = $bearerToken;
                         $_request->headers["x-acs-signature-type"] = "BEARERTOKEN";
+                    } else if (Utils::equalString($credentialType, "id_token")) {
+                        $idToken = $credentialModel->securityToken;
+                        $_request->headers["x-acs-zero-trust-idtoken"] = $idToken;
                     } else {
-                        $accessKeyId = $this->getAccessKeyId();
-                        $accessKeySecret = $this->getAccessKeySecret();
-                        $securityToken = $this->getSecurityToken();
+                        $accessKeyId = $credentialModel->accessKeyId;
+                        $accessKeySecret = $credentialModel->accessKeySecret;
+                        $securityToken = $credentialModel->securityToken;
                         if (!Utils::empty_($securityToken)) {
                             $_request->headers["x-acs-accesskey-id"] = $accessKeyId;
                             $_request->headers["x-acs-security-token"] = $securityToken;
@@ -587,10 +618,11 @@ class OpenApiClient
                 "maxAttempts" => Utils::defaultNumber($runtime->maxAttempts, 3)
             ],
             "backoff" => [
-                    "policy" => Utils::defaultString($runtime->backoffPolicy, "no"),
-                    "period" => Utils::defaultNumber($runtime->backoffPeriod, 1)
-                ],
-            "ignoreSSL" => $runtime->ignoreSSL
+                "policy" => Utils::defaultString($runtime->backoffPolicy, "no"),
+                "period" => Utils::defaultNumber($runtime->backoffPeriod, 1)
+            ],
+            "ignoreSSL" => $runtime->ignoreSSL,
+            "tlsMinVersion" => $this->_tlsMinVersion
         ];
         $_lastRequest = null;
         $_lastException = null;
@@ -652,15 +684,28 @@ class OpenApiClient
                     $_request->query = Tea::merge($_request->query, $request->query);
                 }
                 if (!Utils::equalString($authType, "Anonymous")) {
-                    $credentialType = $this->getType();
+                    if (Utils::isUnset($this->_credential)) {
+                        throw new TeaError([
+                            "code" => "InvalidCredentials",
+                            "message" => "Please set up the credentials correctly. If you are setting them through environment variables, please ensure that ALIBABA_CLOUD_ACCESS_KEY_ID and ALIBABA_CLOUD_ACCESS_KEY_SECRET are set correctly. See https://help.aliyun.com/zh/sdk/developer-reference/configure-the-alibaba-cloud-accesskey-environment-variable-on-linux-macos-and-windows-systems for more details."
+                        ]);
+                    }
+                    $credentialModel = $this->_credential->getCredential();
+                    if (!Utils::empty_($credentialModel->providerName)) {
+                        $_request->headers["x-acs-credentials-provider"] = $credentialModel->providerName;
+                    }
+                    $credentialType = $credentialModel->type;
                     if (Utils::equalString($credentialType, "bearer")) {
-                        $bearerToken = $this->getBearerToken();
+                        $bearerToken = $credentialModel->bearerToken;
                         $_request->headers["x-acs-bearer-token"] = $bearerToken;
                         $_request->headers["x-acs-signature-type"] = "BEARERTOKEN";
+                    } else if (Utils::equalString($credentialType, "id_token")) {
+                        $idToken = $credentialModel->securityToken;
+                        $_request->headers["x-acs-zero-trust-idtoken"] = $idToken;
                     } else {
-                        $accessKeyId = $this->getAccessKeyId();
-                        $accessKeySecret = $this->getAccessKeySecret();
-                        $securityToken = $this->getSecurityToken();
+                        $accessKeyId = $credentialModel->accessKeyId;
+                        $accessKeySecret = $credentialModel->accessKeySecret;
+                        $securityToken = $credentialModel->securityToken;
                         if (!Utils::empty_($securityToken)) {
                             $_request->headers["x-acs-accesskey-id"] = $accessKeyId;
                             $_request->headers["x-acs-security-token"] = $securityToken;
@@ -780,7 +825,8 @@ class OpenApiClient
                 "policy" => Utils::defaultString($runtime->backoffPolicy, "no"),
                 "period" => Utils::defaultNumber($runtime->backoffPeriod, 1)
             ],
-            "ignoreSSL" => $runtime->ignoreSSL
+            "ignoreSSL" => $runtime->ignoreSSL,
+            "tlsMinVersion" => $this->_tlsMinVersion
         ];
         $_lastRequest = null;
         $_lastException = null;
@@ -867,19 +913,32 @@ class OpenApiClient
                 }
                 $_request->headers["x-acs-content-sha256"] = $hashedRequestPayload;
                 if (!Utils::equalString($params->authType, "Anonymous")) {
-                    $authType = $this->getType();
+                    if (Utils::isUnset($this->_credential)) {
+                        throw new TeaError([
+                            "code" => "InvalidCredentials",
+                            "message" => "Please set up the credentials correctly. If you are setting them through environment variables, please ensure that ALIBABA_CLOUD_ACCESS_KEY_ID and ALIBABA_CLOUD_ACCESS_KEY_SECRET are set correctly. See https://help.aliyun.com/zh/sdk/developer-reference/configure-the-alibaba-cloud-accesskey-environment-variable-on-linux-macos-and-windows-systems for more details."
+                        ]);
+                    }
+                    $credentialModel = $this->_credential->getCredential();
+                    if (!Utils::empty_($credentialModel->providerName)) {
+                        $_request->headers["x-acs-credentials-provider"] = $credentialModel->providerName;
+                    }
+                    $authType = $credentialModel->type;
                     if (Utils::equalString($authType, "bearer")) {
-                        $bearerToken = $this->getBearerToken();
+                        $bearerToken = $credentialModel->bearerToken;
                         $_request->headers["x-acs-bearer-token"] = $bearerToken;
                         if (Utils::equalString($params->style, "RPC")) {
                             $_request->query["SignatureType"] = "BEARERTOKEN";
                         } else {
                             $_request->headers["x-acs-signature-type"] = "BEARERTOKEN";
                         }
+                    } else if (Utils::equalString($authType, "id_token")) {
+                        $idToken = $credentialModel->securityToken;
+                        $_request->headers["x-acs-zero-trust-idtoken"] = $idToken;
                     } else {
-                        $accessKeyId = $this->getAccessKeyId();
-                        $accessKeySecret = $this->getAccessKeySecret();
-                        $securityToken = $this->getSecurityToken();
+                        $accessKeyId = $credentialModel->accessKeyId;
+                        $accessKeySecret = $credentialModel->accessKeySecret;
+                        $securityToken = $credentialModel->securityToken;
                         if (!Utils::empty_($securityToken)) {
                             $_request->headers["x-acs-accesskey-id"] = $accessKeyId;
                             $_request->headers["x-acs-security-token"] = $securityToken;
@@ -890,8 +949,15 @@ class OpenApiClient
                 $_lastRequest = $_request;
                 $_response = Tea::send($_request, $_runtime);
                 if (Utils::is4xx($_response->statusCode) || Utils::is5xx($_response->statusCode)) {
-                    $_res = Utils::readAsJSON($_response->body);
-                    $err = Utils::assertAsMap($_res);
+                    $err = [];
+                    if (!Utils::isUnset(@$_response->headers["content-type"]) && Utils::equalString(@$_response->headers["content-type"], "text/xml;charset=utf-8")) {
+                        $_str = Utils::readAsString($_response->body);
+                        $respMap = XML::parseXml($_str, null);
+                        $err = Utils::assertAsMap(@$respMap["Error"]);
+                    } else {
+                        $_res = Utils::readAsJSON($_response->body);
+                        $err = Utils::assertAsMap($_res);
+                    }
                     @$err["statusCode"] = $_response->statusCode;
                     throw new TeaError([
                         "code" => "" . (string) (self::defaultAny(@$err["Code"], @$err["code"])) . "",
@@ -996,7 +1062,8 @@ class OpenApiClient
                 "period" => Utils::defaultNumber($runtime->backoffPeriod, 1)
             ],
             "ignoreSSL" => $runtime->ignoreSSL,
-            "disableHttp2" => self::defaultAny($this->_disableHttp2, false)
+            "disableHttp2" => self::defaultAny($this->_disableHttp2, false),
+            "tlsMinVersion" => $this->_tlsMinVersion
         ];
         $_lastRequest = null;
         $_lastException = null;
@@ -1125,14 +1192,18 @@ class OpenApiClient
                 "message" => "'params' can not be unset"
             ]);
         }
-        if (Utils::isUnset($this->_signatureAlgorithm) || !Utils::equalString($this->_signatureAlgorithm, "v2")) {
-            return $this->doRequest($params, $request, $runtime);
-        } else if (Utils::equalString($params->style, "ROA") && Utils::equalString($params->reqBodyType, "json")) {
-            return $this->doROARequest($params->action, $params->version, $params->protocol, $params->method, $params->authType, $params->pathname, $params->bodyType, $request, $runtime);
-        } else if (Utils::equalString($params->style, "ROA")) {
-            return $this->doROARequestWithForm($params->action, $params->version, $params->protocol, $params->method, $params->authType, $params->pathname, $params->bodyType, $request, $runtime);
+        if (Utils::isUnset($this->_signatureVersion) || !Utils::equalString($this->_signatureVersion, "v4")) {
+            if (Utils::isUnset($this->_signatureAlgorithm) || !Utils::equalString($this->_signatureAlgorithm, "v2")) {
+                return $this->doRequest($params, $request, $runtime);
+            } else if (Utils::equalString($params->style, "ROA") && Utils::equalString($params->reqBodyType, "json")) {
+                return $this->doROARequest($params->action, $params->version, $params->protocol, $params->method, $params->authType, $params->pathname, $params->bodyType, $request, $runtime);
+            } else if (Utils::equalString($params->style, "ROA")) {
+                return $this->doROARequestWithForm($params->action, $params->version, $params->protocol, $params->method, $params->authType, $params->pathname, $params->bodyType, $request, $runtime);
+            } else {
+                return $this->doRPCRequest($params->action, $params->version, $params->protocol, $params->method, $params->authType, $params->bodyType, $request, $runtime);
+            }
         } else {
-            return $this->doRPCRequest($params->action, $params->version, $params->protocol, $params->method, $params->authType, $params->bodyType, $request, $runtime);
+            return $this->execute($params, $request, $runtime);
         }
     }
 

@@ -21,21 +21,25 @@ use TencentCloud\Common\AbstractModel;
  * 文本类型列表块
  *
  * @method array getTextTypeList() 获取文本类型列表
-注意：此字段可能返回 null，表示取不到有效值。
  * @method void setTextTypeList(array $TextTypeList) 设置文本类型列表
-注意：此字段可能返回 null，表示取不到有效值。
+ * @method integer getPage() 获取数据在原PDF文件中的第几页
+ * @method void setPage(integer $Page) 设置数据在原PDF文件中的第几页
  */
 class TextTypeListBlock extends AbstractModel
 {
     /**
      * @var array 文本类型列表
-注意：此字段可能返回 null，表示取不到有效值。
      */
     public $TextTypeList;
 
     /**
+     * @var integer 数据在原PDF文件中的第几页
+     */
+    public $Page;
+
+    /**
      * @param array $TextTypeList 文本类型列表
-注意：此字段可能返回 null，表示取不到有效值。
+     * @param integer $Page 数据在原PDF文件中的第几页
      */
     function __construct()
     {
@@ -57,6 +61,10 @@ class TextTypeListBlock extends AbstractModel
                 $obj->deserialize($value);
                 array_push($this->TextTypeList, $obj);
             }
+        }
+
+        if (array_key_exists("Page",$param) and $param["Page"] !== null) {
+            $this->Page = $param["Page"];
         }
     }
 }

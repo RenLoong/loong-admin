@@ -220,15 +220,21 @@ class QiniuAdapter implements FilesystemAdapter
      */
     public function getTemporaryUrl($path, int|string|\DateTimeInterface $expiration): string
     {
+        $now = time();
+
         if ($expiration instanceof \DateTimeInterface) {
-            $expiration = $expiration->getTimestamp();
+            $expires = $expiration->getTimestamp() - $now;
+        } elseif (is_string($expiration)) {
+            $expires = strtotime($expiration) - $now;
+        } else {
+            $expires = ($expiration > $now) ? ($expiration - $now) : $expiration;
         }
 
-        if (is_string($expiration)) {
-            $expiration = strtotime($expiration);
+        if ($expires <= 0) {
+            $expires = 3600;
         }
 
-        return $this->privateDownloadUrl($path, $expiration);
+        return $this->privateDownloadUrl($path, $expires);
     }
 
     public function privateDownloadUrl(string $path, int $expires = 3600): string
@@ -297,12 +303,12 @@ class QiniuAdapter implements FilesystemAdapter
         return $this->bucket;
     }
 
-    public function getUploadToken(string $key = null, int $expires = 3600, array $policy = null, string $strictPolice = null): string
+    public function getUploadToken(?string $key = null, int $expires = 3600, ?array $policy = null, ?string $strictPolice = null): string
     {
         return $this->getAuthManager()->uploadToken($this->bucket, $key, $expires, $policy, $strictPolice);
     }
 
-    public function verifyCallback(string $contentType = null, string $originAuthorization = null, string $url = null, string $body = null)
+    public function verifyCallback(?string $contentType = null, ?string $originAuthorization = null, ?string $url = null, ?string $body = null)
     {
         return $this->getAuthManager()->verifyCallback($contentType, $originAuthorization, $url, $body);
     }

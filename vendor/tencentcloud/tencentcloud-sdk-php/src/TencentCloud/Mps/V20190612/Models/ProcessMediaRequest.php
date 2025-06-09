@@ -23,7 +23,9 @@ use TencentCloud\Common\AbstractModel;
  * @method MediaInputInfo getInputInfo() 获取媒体处理的文件输入信息。
  * @method void setInputInfo(MediaInputInfo $InputInfo) 设置媒体处理的文件输入信息。
  * @method TaskOutputStorage getOutputStorage() 获取媒体处理输出文件的目标存储。不填则继承 InputInfo 中的存储位置。
+注意：当InputInfo.Type为URL时，该参数是必填项
  * @method void setOutputStorage(TaskOutputStorage $OutputStorage) 设置媒体处理输出文件的目标存储。不填则继承 InputInfo 中的存储位置。
+注意：当InputInfo.Type为URL时，该参数是必填项
  * @method string getOutputDir() 获取媒体处理生成的文件输出的目标目录，必选以 / 开头和结尾，如`/movie/201907/`。
 如果不填，表示与 InputInfo 中文件所在的目录一致。
  * @method void setOutputDir(string $OutputDir) 设置媒体处理生成的文件输出的目标目录，必选以 / 开头和结尾，如`/movie/201907/`。
@@ -52,14 +54,14 @@ use TencentCloud\Common\AbstractModel;
  * @method void setAiAnalysisTask(AiAnalysisTaskInput $AiAnalysisTask) 设置视频内容分析类型任务参数。
  * @method AiRecognitionTaskInput getAiRecognitionTask() 获取视频内容识别类型任务参数。
  * @method void setAiRecognitionTask(AiRecognitionTaskInput $AiRecognitionTask) 设置视频内容识别类型任务参数。
- * @method AiQualityControlTaskInput getAiQualityControlTask() 获取视频质检类型任务参数。
- * @method void setAiQualityControlTask(AiQualityControlTaskInput $AiQualityControlTask) 设置视频质检类型任务参数。
+ * @method AiQualityControlTaskInput getAiQualityControlTask() 获取媒体质检类型任务参数。
+ * @method void setAiQualityControlTask(AiQualityControlTaskInput $AiQualityControlTask) 设置媒体质检类型任务参数。
  * @method TaskNotifyConfig getTaskNotifyConfig() 获取任务的事件通知信息，不填代表不获取事件通知。
  * @method void setTaskNotifyConfig(TaskNotifyConfig $TaskNotifyConfig) 设置任务的事件通知信息，不填代表不获取事件通知。
  * @method integer getTasksPriority() 获取任务流的优先级，数值越大优先级越高，取值范围是-10到 10，不填代表0。
  * @method void setTasksPriority(integer $TasksPriority) 设置任务流的优先级，数值越大优先级越高，取值范围是-10到 10，不填代表0。
- * @method string getSessionId() 获取用于去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
- * @method void setSessionId(string $SessionId) 设置用于去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
+ * @method string getSessionId() 获取用于去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不传该参数或者参数为空字符串则本次请求不做去重操作。
+ * @method void setSessionId(string $SessionId) 设置用于去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不传该参数或者参数为空字符串则本次请求不做去重操作。
  * @method string getSessionContext() 获取来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。
  * @method void setSessionContext(string $SessionContext) 设置来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。
  * @method string getTaskType() 获取任务类型，默认Online
@@ -68,6 +70,18 @@ use TencentCloud\Common\AbstractModel;
  * @method void setTaskType(string $TaskType) 设置任务类型，默认Online
 <li> Online：实时任务</li>
 <li> Offline：闲时任务，不保证实效性，默认3天内处理完</li>
+ * @method string getResourceId() 获取资源ID，需要保证对应资源是开启状态。默认为帐号主资源ID。
+ * @method void setResourceId(string $ResourceId) 设置资源ID，需要保证对应资源是开启状态。默认为帐号主资源ID。
+ * @method SmartSubtitlesTaskInput getSmartSubtitlesTask() 获取智能字幕
+ * @method void setSmartSubtitlesTask(SmartSubtitlesTaskInput $SmartSubtitlesTask) 设置智能字幕
+ * @method integer getSkipMateData() 获取是否跳过元信息获取，可选值： 
+0：表示不跳过 
+1：表示跳过 
+默认值：0	
+ * @method void setSkipMateData(integer $SkipMateData) 设置是否跳过元信息获取，可选值： 
+0：表示不跳过 
+1：表示跳过 
+默认值：0	
  */
 class ProcessMediaRequest extends AbstractModel
 {
@@ -78,6 +92,7 @@ class ProcessMediaRequest extends AbstractModel
 
     /**
      * @var TaskOutputStorage 媒体处理输出文件的目标存储。不填则继承 InputInfo 中的存储位置。
+注意：当InputInfo.Type为URL时，该参数是必填项
      */
     public $OutputStorage;
 
@@ -120,7 +135,7 @@ class ProcessMediaRequest extends AbstractModel
     public $AiRecognitionTask;
 
     /**
-     * @var AiQualityControlTaskInput 视频质检类型任务参数。
+     * @var AiQualityControlTaskInput 媒体质检类型任务参数。
      */
     public $AiQualityControlTask;
 
@@ -135,7 +150,7 @@ class ProcessMediaRequest extends AbstractModel
     public $TasksPriority;
 
     /**
-     * @var string 用于去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
+     * @var string 用于去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不传该参数或者参数为空字符串则本次请求不做去重操作。
      */
     public $SessionId;
 
@@ -152,8 +167,27 @@ class ProcessMediaRequest extends AbstractModel
     public $TaskType;
 
     /**
+     * @var string 资源ID，需要保证对应资源是开启状态。默认为帐号主资源ID。
+     */
+    public $ResourceId;
+
+    /**
+     * @var SmartSubtitlesTaskInput 智能字幕
+     */
+    public $SmartSubtitlesTask;
+
+    /**
+     * @var integer 是否跳过元信息获取，可选值： 
+0：表示不跳过 
+1：表示跳过 
+默认值：0	
+     */
+    public $SkipMateData;
+
+    /**
      * @param MediaInputInfo $InputInfo 媒体处理的文件输入信息。
      * @param TaskOutputStorage $OutputStorage 媒体处理输出文件的目标存储。不填则继承 InputInfo 中的存储位置。
+注意：当InputInfo.Type为URL时，该参数是必填项
      * @param string $OutputDir 媒体处理生成的文件输出的目标目录，必选以 / 开头和结尾，如`/movie/201907/`。
 如果不填，表示与 InputInfo 中文件所在的目录一致。
      * @param integer $ScheduleId 编排ID。
@@ -168,14 +202,20 @@ class ProcessMediaRequest extends AbstractModel
      * @param AiContentReviewTaskInput $AiContentReviewTask 视频内容审核类型任务参数。
      * @param AiAnalysisTaskInput $AiAnalysisTask 视频内容分析类型任务参数。
      * @param AiRecognitionTaskInput $AiRecognitionTask 视频内容识别类型任务参数。
-     * @param AiQualityControlTaskInput $AiQualityControlTask 视频质检类型任务参数。
+     * @param AiQualityControlTaskInput $AiQualityControlTask 媒体质检类型任务参数。
      * @param TaskNotifyConfig $TaskNotifyConfig 任务的事件通知信息，不填代表不获取事件通知。
      * @param integer $TasksPriority 任务流的优先级，数值越大优先级越高，取值范围是-10到 10，不填代表0。
-     * @param string $SessionId 用于去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不带或者带空字符串表示不做去重。
+     * @param string $SessionId 用于去重的识别码，如果三天内曾有过相同的识别码的请求，则本次的请求会返回错误。最长 50 个字符，不传该参数或者参数为空字符串则本次请求不做去重操作。
      * @param string $SessionContext 来源上下文，用于透传用户请求信息，任务流状态变更回调将返回该字段值，最长 1000 个字符。
      * @param string $TaskType 任务类型，默认Online
 <li> Online：实时任务</li>
 <li> Offline：闲时任务，不保证实效性，默认3天内处理完</li>
+     * @param string $ResourceId 资源ID，需要保证对应资源是开启状态。默认为帐号主资源ID。
+     * @param SmartSubtitlesTaskInput $SmartSubtitlesTask 智能字幕
+     * @param integer $SkipMateData 是否跳过元信息获取，可选值： 
+0：表示不跳过 
+1：表示跳过 
+默认值：0	
      */
     function __construct()
     {
@@ -252,6 +292,19 @@ class ProcessMediaRequest extends AbstractModel
 
         if (array_key_exists("TaskType",$param) and $param["TaskType"] !== null) {
             $this->TaskType = $param["TaskType"];
+        }
+
+        if (array_key_exists("ResourceId",$param) and $param["ResourceId"] !== null) {
+            $this->ResourceId = $param["ResourceId"];
+        }
+
+        if (array_key_exists("SmartSubtitlesTask",$param) and $param["SmartSubtitlesTask"] !== null) {
+            $this->SmartSubtitlesTask = new SmartSubtitlesTaskInput();
+            $this->SmartSubtitlesTask->deserialize($param["SmartSubtitlesTask"]);
+        }
+
+        if (array_key_exists("SkipMateData",$param) and $param["SkipMateData"] !== null) {
+            $this->SkipMateData = $param["SkipMateData"];
         }
     }
 }

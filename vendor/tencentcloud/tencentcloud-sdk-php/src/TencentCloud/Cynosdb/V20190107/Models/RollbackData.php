@@ -35,17 +35,11 @@ use TencentCloud\Common\AbstractModel;
  * @method string getSnapshotTime() 获取快照时间
  * @method void setSnapshotTime(string $SnapshotTime) 设置快照时间
  * @method integer getMinCpu() 获取回档到serverlessls集群时最小CPU
-注意：此字段可能返回 null，表示取不到有效值。
  * @method void setMinCpu(integer $MinCpu) 设置回档到serverlessls集群时最小CPU
-注意：此字段可能返回 null，表示取不到有效值。
  * @method integer getMaxCpu() 获取回档到serverlessls集群时最大CPU
-注意：此字段可能返回 null，表示取不到有效值。
  * @method void setMaxCpu(integer $MaxCpu) 设置回档到serverlessls集群时最大CPU
-注意：此字段可能返回 null，表示取不到有效值。
  * @method integer getSnapShotId() 获取快照ID
-注意：此字段可能返回 null，表示取不到有效值。
  * @method void setSnapShotId(integer $SnapShotId) 设置快照ID
-注意：此字段可能返回 null，表示取不到有效值。
  * @method array getRollbackDatabases() 获取回档数据库
 注意：此字段可能返回 null，表示取不到有效值。
  * @method void setRollbackDatabases(array $RollbackDatabases) 设置回档数据库
@@ -55,9 +49,9 @@ use TencentCloud\Common\AbstractModel;
  * @method void setRollbackTables(array $RollbackTables) 设置回档数据表
 注意：此字段可能返回 null，表示取不到有效值。
  * @method string getBackupFileName() 获取备份文件名称
-注意：此字段可能返回 null，表示取不到有效值。
  * @method void setBackupFileName(string $BackupFileName) 设置备份文件名称
-注意：此字段可能返回 null，表示取不到有效值。
+ * @method RollbackProcessInfo getRollbackProcess() 获取回档进程
+ * @method void setRollbackProcess(RollbackProcessInfo $RollbackProcess) 设置回档进程
  */
 class RollbackData extends AbstractModel
 {
@@ -98,19 +92,16 @@ class RollbackData extends AbstractModel
 
     /**
      * @var integer 回档到serverlessls集群时最小CPU
-注意：此字段可能返回 null，表示取不到有效值。
      */
     public $MinCpu;
 
     /**
      * @var integer 回档到serverlessls集群时最大CPU
-注意：此字段可能返回 null，表示取不到有效值。
      */
     public $MaxCpu;
 
     /**
      * @var integer 快照ID
-注意：此字段可能返回 null，表示取不到有效值。
      */
     public $SnapShotId;
 
@@ -128,9 +119,13 @@ class RollbackData extends AbstractModel
 
     /**
      * @var string 备份文件名称
-注意：此字段可能返回 null，表示取不到有效值。
      */
     public $BackupFileName;
+
+    /**
+     * @var RollbackProcessInfo 回档进程
+     */
+    public $RollbackProcess;
 
     /**
      * @param integer $Cpu 实例CPU
@@ -141,17 +136,14 @@ class RollbackData extends AbstractModel
      * @param string $RollbackStrategy 回档方式
      * @param string $SnapshotTime 快照时间
      * @param integer $MinCpu 回档到serverlessls集群时最小CPU
-注意：此字段可能返回 null，表示取不到有效值。
      * @param integer $MaxCpu 回档到serverlessls集群时最大CPU
-注意：此字段可能返回 null，表示取不到有效值。
      * @param integer $SnapShotId 快照ID
-注意：此字段可能返回 null，表示取不到有效值。
      * @param array $RollbackDatabases 回档数据库
 注意：此字段可能返回 null，表示取不到有效值。
      * @param array $RollbackTables 回档数据表
 注意：此字段可能返回 null，表示取不到有效值。
      * @param string $BackupFileName 备份文件名称
-注意：此字段可能返回 null，表示取不到有效值。
+     * @param RollbackProcessInfo $RollbackProcess 回档进程
      */
     function __construct()
     {
@@ -226,6 +218,11 @@ class RollbackData extends AbstractModel
 
         if (array_key_exists("BackupFileName",$param) and $param["BackupFileName"] !== null) {
             $this->BackupFileName = $param["BackupFileName"];
+        }
+
+        if (array_key_exists("RollbackProcess",$param) and $param["RollbackProcess"] !== null) {
+            $this->RollbackProcess = new RollbackProcessInfo();
+            $this->RollbackProcess->deserialize($param["RollbackProcess"]);
         }
     }
 }

@@ -42,6 +42,12 @@ use TencentCloud\Common\AbstractModel;
  * @method void setInsecure(integer $Insecure) 设置安全模式（证书校验）：0（默认） 非安全模式（跳过证书校验）：1
  * @method array getConnDetectConfig() 获取联通性检测的配置
  * @method void setConnDetectConfig(array $ConnDetectConfig) 设置联通性检测的配置
+ * @method integer getRegistryId() 获取仓库唯一id
+ * @method void setRegistryId(integer $RegistryId) 设置仓库唯一id
+ * @method integer getSyncMode() 获取同步方式，0全量同步，1增量同步
+ * @method void setSyncMode(integer $SyncMode) 设置同步方式，0全量同步，1增量同步
+ * @method boolean getNeedScan() 获取是否自动授权&扫描，选择增量同步时参数生效，包含所有新增镜像
+ * @method void setNeedScan(boolean $NeedScan) 设置是否自动授权&扫描，选择增量同步时参数生效，包含所有新增镜像
  */
 class UpdateAssetImageRegistryRegistryDetailRequest extends AbstractModel
 {
@@ -101,6 +107,21 @@ class UpdateAssetImageRegistryRegistryDetailRequest extends AbstractModel
     public $ConnDetectConfig;
 
     /**
+     * @var integer 仓库唯一id
+     */
+    public $RegistryId;
+
+    /**
+     * @var integer 同步方式，0全量同步，1增量同步
+     */
+    public $SyncMode;
+
+    /**
+     * @var boolean 是否自动授权&扫描，选择增量同步时参数生效，包含所有新增镜像
+     */
+    public $NeedScan;
+
+    /**
      * @param string $Name 仓库名
      * @param string $Username 用户名
      * @param string $Password 密码
@@ -112,6 +133,9 @@ class UpdateAssetImageRegistryRegistryDetailRequest extends AbstractModel
      * @param integer $SpeedLimit 限速
      * @param integer $Insecure 安全模式（证书校验）：0（默认） 非安全模式（跳过证书校验）：1
      * @param array $ConnDetectConfig 联通性检测的配置
+     * @param integer $RegistryId 仓库唯一id
+     * @param integer $SyncMode 同步方式，0全量同步，1增量同步
+     * @param boolean $NeedScan 是否自动授权&扫描，选择增量同步时参数生效，包含所有新增镜像
      */
     function __construct()
     {
@@ -173,6 +197,18 @@ class UpdateAssetImageRegistryRegistryDetailRequest extends AbstractModel
                 $obj->deserialize($value);
                 array_push($this->ConnDetectConfig, $obj);
             }
+        }
+
+        if (array_key_exists("RegistryId",$param) and $param["RegistryId"] !== null) {
+            $this->RegistryId = $param["RegistryId"];
+        }
+
+        if (array_key_exists("SyncMode",$param) and $param["SyncMode"] !== null) {
+            $this->SyncMode = $param["SyncMode"];
+        }
+
+        if (array_key_exists("NeedScan",$param) and $param["NeedScan"] !== null) {
+            $this->NeedScan = $param["NeedScan"];
         }
     }
 }

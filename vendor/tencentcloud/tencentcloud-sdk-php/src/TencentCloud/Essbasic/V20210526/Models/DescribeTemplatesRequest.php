@@ -56,7 +56,7 @@ use TencentCloud\Common\AbstractModel;
 
 <ul><li>**0**：（默认）模板列表及详情</li>
 <li>**1**：仅模板列表, 不会返回模板中的签署控件, 填写控件, 参与方角色列表等信息</li></ul>
- * @method array getTemplateIds() 获取合同模板ID数组，每一个合同模板ID为32位字符串,  最多支持200个模板的批量查询。
+ * @method array getTemplateIds() 获取合同模板ID数组，每一个合同模板ID为32位字符串,  最多支持100个模板的批量查询。
 
 注意: 
 1.` 此参数TemplateIds与TemplateId互为独立，若两者均传入，以TemplateId为准。`
@@ -66,7 +66,7 @@ use TencentCloud\Common\AbstractModel;
 
 [点击查看模板Id在控制台上的位置](https://qcloudimg.tencent-cloud.cn/raw/e988be12bf28a89b4716aed4502c2e02.png)
 
- * @method void setTemplateIds(array $TemplateIds) 设置合同模板ID数组，每一个合同模板ID为32位字符串,  最多支持200个模板的批量查询。
+ * @method void setTemplateIds(array $TemplateIds) 设置合同模板ID数组，每一个合同模板ID为32位字符串,  最多支持100个模板的批量查询。
 
 注意: 
 1.` 此参数TemplateIds与TemplateId互为独立，若两者均传入，以TemplateId为准。`
@@ -78,10 +78,10 @@ use TencentCloud\Common\AbstractModel;
 
  * @method integer getLimit() 获取指定每页返回的数据条数，和Offset参数配合使用。
 
-注：`1.默认值为20，单页做大值为200。`
+注：`1.默认值为20，单页做大值为100。`
  * @method void setLimit(integer $Limit) 设置指定每页返回的数据条数，和Offset参数配合使用。
 
-注：`1.默认值为20，单页做大值为200。`
+注：`1.默认值为20，单页做大值为100。`
  * @method integer getOffset() 获取查询结果分页返回，指定从第几页返回数据，和Limit参数配合使用。
 
 注：`1.offset从0开始，即第一页为0。`
@@ -123,7 +123,7 @@ use TencentCloud\Common\AbstractModel;
 
 设置为true之后， 返回参数PdfUrl，为模板PDF文件链接，有效期5分钟, 可以用于将PDF文件下载到本地
 
-注: `此功能为白名单功能，使用前请联系对接的客户经理沟通。`
+注: `此功能需要开通功能白名单【第三方应用集成企业获取模版PDF下载链接】，使用前请联系对接的客户经理沟通。`
  * @method void setWithPdfUrl(boolean $WithPdfUrl) 设置是否获取模板的PDF文件链接。
 
 <ul><li>**false**：不获取（默认）</li>
@@ -131,9 +131,11 @@ use TencentCloud\Common\AbstractModel;
 
 设置为true之后， 返回参数PdfUrl，为模板PDF文件链接，有效期5分钟, 可以用于将PDF文件下载到本地
 
-注: `此功能为白名单功能，使用前请联系对接的客户经理沟通。`
+注: `此功能需要开通功能白名单【第三方应用集成企业获取模版PDF下载链接】，使用前请联系对接的客户经理沟通。`
  * @method UserInfo getOperator() 获取操作者的信息
  * @method void setOperator(UserInfo $Operator) 设置操作者的信息
+ * @method string getUserFlowTypeId() 获取用户合同类型id
+ * @method void setUserFlowTypeId(string $UserFlowTypeId) 设置用户合同类型id
  */
 class DescribeTemplatesRequest extends AbstractModel
 {
@@ -168,7 +170,7 @@ class DescribeTemplatesRequest extends AbstractModel
     public $ContentType;
 
     /**
-     * @var array 合同模板ID数组，每一个合同模板ID为32位字符串,  最多支持200个模板的批量查询。
+     * @var array 合同模板ID数组，每一个合同模板ID为32位字符串,  最多支持100个模板的批量查询。
 
 注意: 
 1.` 此参数TemplateIds与TemplateId互为独立，若两者均传入，以TemplateId为准。`
@@ -184,7 +186,7 @@ class DescribeTemplatesRequest extends AbstractModel
     /**
      * @var integer 指定每页返回的数据条数，和Offset参数配合使用。
 
-注：`1.默认值为20，单页做大值为200。`
+注：`1.默认值为20，单页做大值为100。`
      */
     public $Limit;
 
@@ -233,7 +235,7 @@ class DescribeTemplatesRequest extends AbstractModel
 
 设置为true之后， 返回参数PdfUrl，为模板PDF文件链接，有效期5分钟, 可以用于将PDF文件下载到本地
 
-注: `此功能为白名单功能，使用前请联系对接的客户经理沟通。`
+注: `此功能需要开通功能白名单【第三方应用集成企业获取模版PDF下载链接】，使用前请联系对接的客户经理沟通。`
      */
     public $WithPdfUrl;
 
@@ -242,6 +244,11 @@ class DescribeTemplatesRequest extends AbstractModel
      * @deprecated
      */
     public $Operator;
+
+    /**
+     * @var string 用户合同类型id
+     */
+    public $UserFlowTypeId;
 
     /**
      * @param Agent $Agent 关于渠道应用的相关信息，包括渠道应用标识、第三方平台子客企业标识及第三方平台子客企业中的员工标识等内容，您可以参阅开发者中心所提供的 Agent 结构体以获取详细定义。
@@ -262,7 +269,7 @@ class DescribeTemplatesRequest extends AbstractModel
 
 <ul><li>**0**：（默认）模板列表及详情</li>
 <li>**1**：仅模板列表, 不会返回模板中的签署控件, 填写控件, 参与方角色列表等信息</li></ul>
-     * @param array $TemplateIds 合同模板ID数组，每一个合同模板ID为32位字符串,  最多支持200个模板的批量查询。
+     * @param array $TemplateIds 合同模板ID数组，每一个合同模板ID为32位字符串,  最多支持100个模板的批量查询。
 
 注意: 
 1.` 此参数TemplateIds与TemplateId互为独立，若两者均传入，以TemplateId为准。`
@@ -274,7 +281,7 @@ class DescribeTemplatesRequest extends AbstractModel
 
      * @param integer $Limit 指定每页返回的数据条数，和Offset参数配合使用。
 
-注：`1.默认值为20，单页做大值为200。`
+注：`1.默认值为20，单页做大值为100。`
      * @param integer $Offset 查询结果分页返回，指定从第几页返回数据，和Limit参数配合使用。
 
 注：`1.offset从0开始，即第一页为0。`
@@ -299,8 +306,9 @@ class DescribeTemplatesRequest extends AbstractModel
 
 设置为true之后， 返回参数PdfUrl，为模板PDF文件链接，有效期5分钟, 可以用于将PDF文件下载到本地
 
-注: `此功能为白名单功能，使用前请联系对接的客户经理沟通。`
+注: `此功能需要开通功能白名单【第三方应用集成企业获取模版PDF下载链接】，使用前请联系对接的客户经理沟通。`
      * @param UserInfo $Operator 操作者的信息
+     * @param string $UserFlowTypeId 用户合同类型id
      */
     function __construct()
     {
@@ -363,6 +371,10 @@ class DescribeTemplatesRequest extends AbstractModel
         if (array_key_exists("Operator",$param) and $param["Operator"] !== null) {
             $this->Operator = new UserInfo();
             $this->Operator->deserialize($param["Operator"]);
+        }
+
+        if (array_key_exists("UserFlowTypeId",$param) and $param["UserFlowTypeId"] !== null) {
+            $this->UserFlowTypeId = $param["UserFlowTypeId"];
         }
     }
 }

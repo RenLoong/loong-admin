@@ -132,6 +132,18 @@ use TencentCloud\Common\AbstractModel;
 注意：此字段可能返回 null，表示取不到有效值。
  * @method void setLarkWebHooks(string $LarkWebHooks) 设置飞书群Hook地址，多个hook地址使用,隔开
 注意：此字段可能返回 null，表示取不到有效值。
+ * @method string getDingDingWebHooks() 获取钉钉群Hook地址，多个hook地址使用,隔开
+注意：此字段可能返回 null，表示取不到有效值。
+ * @method void setDingDingWebHooks(string $DingDingWebHooks) 设置钉钉群Hook地址，多个hook地址使用,隔开
+注意：此字段可能返回 null，表示取不到有效值。
+ * @method integer getBusinessType() 获取业务类型, 0-非默认, 1-默认
+注意：此字段可能返回 null，表示取不到有效值。
+ * @method void setBusinessType(integer $BusinessType) 设置业务类型, 0-非默认, 1-默认
+注意：此字段可能返回 null，表示取不到有效值。
+ * @method string getAlarmMessageRule() 获取alarm message rule
+注意：此字段可能返回 null，表示取不到有效值。
+ * @method void setAlarmMessageRule(string $AlarmMessageRule) 设置alarm message rule
+注意：此字段可能返回 null，表示取不到有效值。
  */
 class TaskAlarmInfo extends AbstractModel
 {
@@ -320,6 +332,24 @@ class TaskAlarmInfo extends AbstractModel
     public $LarkWebHooks;
 
     /**
+     * @var string 钉钉群Hook地址，多个hook地址使用,隔开
+注意：此字段可能返回 null，表示取不到有效值。
+     */
+    public $DingDingWebHooks;
+
+    /**
+     * @var integer 业务类型, 0-非默认, 1-默认
+注意：此字段可能返回 null，表示取不到有效值。
+     */
+    public $BusinessType;
+
+    /**
+     * @var string alarm message rule
+注意：此字段可能返回 null，表示取不到有效值。
+     */
+    public $AlarmMessageRule;
+
+    /**
      * @param string $TaskId 任务ID
      * @param string $RegularName 规则名称
      * @param integer $RegularStatus 规则状态(0表示关闭，1表示打开)
@@ -375,6 +405,12 @@ class TaskAlarmInfo extends AbstractModel
      * @param string $Description 告警规则描述
 注意：此字段可能返回 null，表示取不到有效值。
      * @param string $LarkWebHooks 飞书群Hook地址，多个hook地址使用,隔开
+注意：此字段可能返回 null，表示取不到有效值。
+     * @param string $DingDingWebHooks 钉钉群Hook地址，多个hook地址使用,隔开
+注意：此字段可能返回 null，表示取不到有效值。
+     * @param integer $BusinessType 业务类型, 0-非默认, 1-默认
+注意：此字段可能返回 null，表示取不到有效值。
+     * @param string $AlarmMessageRule alarm message rule
 注意：此字段可能返回 null，表示取不到有效值。
      */
     function __construct()
@@ -526,6 +562,18 @@ class TaskAlarmInfo extends AbstractModel
 
         if (array_key_exists("LarkWebHooks",$param) and $param["LarkWebHooks"] !== null) {
             $this->LarkWebHooks = $param["LarkWebHooks"];
+        }
+
+        if (array_key_exists("DingDingWebHooks",$param) and $param["DingDingWebHooks"] !== null) {
+            $this->DingDingWebHooks = $param["DingDingWebHooks"];
+        }
+
+        if (array_key_exists("BusinessType",$param) and $param["BusinessType"] !== null) {
+            $this->BusinessType = $param["BusinessType"];
+        }
+
+        if (array_key_exists("AlarmMessageRule",$param) and $param["AlarmMessageRule"] !== null) {
+            $this->AlarmMessageRule = $param["AlarmMessageRule"];
         }
     }
 }

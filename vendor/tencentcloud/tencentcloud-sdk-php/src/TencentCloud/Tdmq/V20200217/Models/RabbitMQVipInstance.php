@@ -25,9 +25,7 @@ use TencentCloud\Common\AbstractModel;
  * @method string getInstanceName() 获取实例名称
  * @method void setInstanceName(string $InstanceName) 设置实例名称
  * @method string getInstanceVersion() 获取实例版本
-注意：此字段可能返回 null，表示取不到有效值。
  * @method void setInstanceVersion(string $InstanceVersion) 设置实例版本
-注意：此字段可能返回 null，表示取不到有效值。
  * @method integer getStatus() 获取实例状态，0表示创建中，1表示正常，2表示隔离中，3表示已销毁，4 - 异常, 5 - 发货失败
  * @method void setStatus(integer $Status) 设置实例状态，0表示创建中，1表示正常，2表示隔离中，3表示已销毁，4 - 异常, 5 - 发货失败
  * @method integer getNodeCount() 获取节点数量
@@ -47,9 +45,7 @@ use TencentCloud\Common\AbstractModel;
  * @method integer getPayMode() 获取0-后付费，1-预付费
  * @method void setPayMode(integer $PayMode) 设置0-后付费，1-预付费
  * @method string getRemark() 获取备注信息
-注意：此字段可能返回 null，表示取不到有效值。
  * @method void setRemark(string $Remark) 设置备注信息
-注意：此字段可能返回 null，表示取不到有效值。
  * @method string getSpecName() 获取实例配置ID
  * @method void setSpecName(string $SpecName) 设置实例配置ID
  * @method string getExceptionInformation() 获取集群异常。
@@ -65,9 +61,13 @@ use TencentCloud\Common\AbstractModel;
  * @method void setPublicAccessEndpoint(string $PublicAccessEndpoint) 设置公网接入点
 注意：此字段可能返回 null，表示取不到有效值。
  * @method array getVpcs() 获取VPC 接入点列表
-注意：此字段可能返回 null，表示取不到有效值。
  * @method void setVpcs(array $Vpcs) 设置VPC 接入点列表
-注意：此字段可能返回 null，表示取不到有效值。
+ * @method integer getCreateTime() 获取创建时间，毫秒为单位
+ * @method void setCreateTime(integer $CreateTime) 设置创建时间，毫秒为单位
+ * @method integer getInstanceType() 获取实例类型，0 专享版、1 Serverless 版
+ * @method void setInstanceType(integer $InstanceType) 设置实例类型，0 专享版、1 Serverless 版
+ * @method integer getIsolatedTime() 获取隔离时间，毫秒为单位
+ * @method void setIsolatedTime(integer $IsolatedTime) 设置隔离时间，毫秒为单位
  */
 class RabbitMQVipInstance extends AbstractModel
 {
@@ -83,7 +83,6 @@ class RabbitMQVipInstance extends AbstractModel
 
     /**
      * @var string 实例版本
-注意：此字段可能返回 null，表示取不到有效值。
      */
     public $InstanceVersion;
 
@@ -134,7 +133,6 @@ class RabbitMQVipInstance extends AbstractModel
 
     /**
      * @var string 备注信息
-注意：此字段可能返回 null，表示取不到有效值。
      */
     public $Remark;
 
@@ -163,15 +161,28 @@ class RabbitMQVipInstance extends AbstractModel
 
     /**
      * @var array VPC 接入点列表
-注意：此字段可能返回 null，表示取不到有效值。
      */
     public $Vpcs;
+
+    /**
+     * @var integer 创建时间，毫秒为单位
+     */
+    public $CreateTime;
+
+    /**
+     * @var integer 实例类型，0 专享版、1 Serverless 版
+     */
+    public $InstanceType;
+
+    /**
+     * @var integer 隔离时间，毫秒为单位
+     */
+    public $IsolatedTime;
 
     /**
      * @param string $InstanceId 实例id
      * @param string $InstanceName 实例名称
      * @param string $InstanceVersion 实例版本
-注意：此字段可能返回 null，表示取不到有效值。
      * @param integer $Status 实例状态，0表示创建中，1表示正常，2表示隔离中，3表示已销毁，4 - 异常, 5 - 发货失败
      * @param integer $NodeCount 节点数量
      * @param string $ConfigDisplay 实例配置规格名称
@@ -182,7 +193,6 @@ class RabbitMQVipInstance extends AbstractModel
      * @param integer $AutoRenewFlag 自动续费标记，0表示默认状态(用户未设置，即初始状态即手动续费)， 1表示自动续费，2表示明确不自动续费(用户设置)
      * @param integer $PayMode 0-后付费，1-预付费
      * @param string $Remark 备注信息
-注意：此字段可能返回 null，表示取不到有效值。
      * @param string $SpecName 实例配置ID
      * @param string $ExceptionInformation 集群异常。
 注意：此字段可能返回 null，表示取不到有效值。
@@ -191,7 +201,9 @@ class RabbitMQVipInstance extends AbstractModel
      * @param string $PublicAccessEndpoint 公网接入点
 注意：此字段可能返回 null，表示取不到有效值。
      * @param array $Vpcs VPC 接入点列表
-注意：此字段可能返回 null，表示取不到有效值。
+     * @param integer $CreateTime 创建时间，毫秒为单位
+     * @param integer $InstanceType 实例类型，0 专享版、1 Serverless 版
+     * @param integer $IsolatedTime 隔离时间，毫秒为单位
      */
     function __construct()
     {
@@ -281,6 +293,18 @@ class RabbitMQVipInstance extends AbstractModel
                 $obj->deserialize($value);
                 array_push($this->Vpcs, $obj);
             }
+        }
+
+        if (array_key_exists("CreateTime",$param) and $param["CreateTime"] !== null) {
+            $this->CreateTime = $param["CreateTime"];
+        }
+
+        if (array_key_exists("InstanceType",$param) and $param["InstanceType"] !== null) {
+            $this->InstanceType = $param["InstanceType"];
+        }
+
+        if (array_key_exists("IsolatedTime",$param) and $param["IsolatedTime"] !== null) {
+            $this->IsolatedTime = $param["IsolatedTime"];
         }
     }
 }

@@ -44,6 +44,8 @@ use TencentCloud\Common\AbstractModel;
 普通实例内存,单位GB
  * @method void setMemory(integer $Memory) 设置当DbMode为NORMAL或不填时必选
 普通实例内存,单位GB
+ * @method integer getInstanceCount() 获取实例数量，数量范围为(0,16]，默认值为2（即一个rw实例+一个ro实例），传递的n表示1个rw实例+n-1个ro实例（规格相同），如需要更精确的集群组成搭配，请使用InstanceInitInfos
+ * @method void setInstanceCount(integer $InstanceCount) 设置实例数量，数量范围为(0,16]，默认值为2（即一个rw实例+一个ro实例），传递的n表示1个rw实例+n-1个ro实例（规格相同），如需要更精确的集群组成搭配，请使用InstanceInitInfos
  * @method integer getStorage() 获取该参数无实际意义，已废弃。
 存储大小，单位GB。
  * @method void setStorage(integer $Storage) 设置该参数无实际意义，已废弃。
@@ -80,16 +82,14 @@ timeRollback，时间点回档
 当DbType为MYSQL，且存储计费模式为预付费时，该参数需不大于cpu与memory对应存储规格上限
  * @method void setStorageLimit(integer $StorageLimit) 设置普通实例存储上限，单位GB
 当DbType为MYSQL，且存储计费模式为预付费时，该参数需不大于cpu与memory对应存储规格上限
- * @method integer getInstanceCount() 获取实例数量，数量范围为(0,16]
- * @method void setInstanceCount(integer $InstanceCount) 设置实例数量，数量范围为(0,16]
  * @method integer getTimeSpan() 获取包年包月购买时长
  * @method void setTimeSpan(integer $TimeSpan) 设置包年包月购买时长
  * @method string getTimeUnit() 获取包年包月购买时长单位，['s','d','m','y']
  * @method void setTimeUnit(string $TimeUnit) 设置包年包月购买时长单位，['s','d','m','y']
  * @method integer getAutoRenewFlag() 获取包年包月购买是否自动续费，默认为0。
-0标识默认续费方式，1表示自动续费，2表示手不自动续费。
+0标识默认续费方式，1表示自动续费，2表示不自动续费。
  * @method void setAutoRenewFlag(integer $AutoRenewFlag) 设置包年包月购买是否自动续费，默认为0。
-0标识默认续费方式，1表示自动续费，2表示手不自动续费。
+0标识默认续费方式，1表示自动续费，2表示不自动续费。
  * @method integer getAutoVoucher() 获取是否自动选择代金券 1是 0否 默认为0
  * @method void setAutoVoucher(integer $AutoVoucher) 设置是否自动选择代金券 1是 0否 默认为0
  * @method integer getHaCount() 获取实例数量（该参数已不再使用，只做存量兼容处理）
@@ -194,6 +194,11 @@ class CreateClustersRequest extends AbstractModel
     public $Memory;
 
     /**
+     * @var integer 实例数量，数量范围为(0,16]，默认值为2（即一个rw实例+一个ro实例），传递的n表示1个rw实例+n-1个ro实例（规格相同），如需要更精确的集群组成搭配，请使用InstanceInitInfos
+     */
+    public $InstanceCount;
+
+    /**
      * @var integer 该参数无实际意义，已废弃。
 存储大小，单位GB。
      */
@@ -260,11 +265,6 @@ timeRollback，时间点回档
     public $StorageLimit;
 
     /**
-     * @var integer 实例数量，数量范围为(0,16]
-     */
-    public $InstanceCount;
-
-    /**
      * @var integer 包年包月购买时长
      */
     public $TimeSpan;
@@ -276,7 +276,7 @@ timeRollback，时间点回档
 
     /**
      * @var integer 包年包月购买是否自动续费，默认为0。
-0标识默认续费方式，1表示自动续费，2表示手不自动续费。
+0标识默认续费方式，1表示自动续费，2表示不自动续费。
      */
     public $AutoRenewFlag;
 
@@ -389,6 +389,7 @@ cpu最大值，可选范围参考DescribeServerlessInstanceSpecs接口返回
 普通实例Cpu核数
      * @param integer $Memory 当DbMode为NORMAL或不填时必选
 普通实例内存,单位GB
+     * @param integer $InstanceCount 实例数量，数量范围为(0,16]，默认值为2（即一个rw实例+一个ro实例），传递的n表示1个rw实例+n-1个ro实例（规格相同），如需要更精确的集群组成搭配，请使用InstanceInitInfos
      * @param integer $Storage 该参数无实际意义，已废弃。
 存储大小，单位GB。
      * @param string $ClusterName 集群名称，长度小于64个字符，每个字符取值范围：大/小写字母，数字，特殊符号（'-','_','.'）
@@ -407,11 +408,10 @@ timeRollback，时间点回档
 时间点回档，指定时间允许范围
      * @param integer $StorageLimit 普通实例存储上限，单位GB
 当DbType为MYSQL，且存储计费模式为预付费时，该参数需不大于cpu与memory对应存储规格上限
-     * @param integer $InstanceCount 实例数量，数量范围为(0,16]
      * @param integer $TimeSpan 包年包月购买时长
      * @param string $TimeUnit 包年包月购买时长单位，['s','d','m','y']
      * @param integer $AutoRenewFlag 包年包月购买是否自动续费，默认为0。
-0标识默认续费方式，1表示自动续费，2表示手不自动续费。
+0标识默认续费方式，1表示自动续费，2表示不自动续费。
      * @param integer $AutoVoucher 是否自动选择代金券 1是 0否 默认为0
      * @param integer $HaCount 实例数量（该参数已不再使用，只做存量兼容处理）
      * @param string $OrderSource 订单来源
@@ -486,6 +486,10 @@ cpu最大值，可选范围参考DescribeServerlessInstanceSpecs接口返回
             $this->Memory = $param["Memory"];
         }
 
+        if (array_key_exists("InstanceCount",$param) and $param["InstanceCount"] !== null) {
+            $this->InstanceCount = $param["InstanceCount"];
+        }
+
         if (array_key_exists("Storage",$param) and $param["Storage"] !== null) {
             $this->Storage = $param["Storage"];
         }
@@ -532,10 +536,6 @@ cpu最大值，可选范围参考DescribeServerlessInstanceSpecs接口返回
 
         if (array_key_exists("StorageLimit",$param) and $param["StorageLimit"] !== null) {
             $this->StorageLimit = $param["StorageLimit"];
-        }
-
-        if (array_key_exists("InstanceCount",$param) and $param["InstanceCount"] !== null) {
-            $this->InstanceCount = $param["InstanceCount"];
         }
 
         if (array_key_exists("TimeSpan",$param) and $param["TimeSpan"] !== null) {

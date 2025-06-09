@@ -74,6 +74,12 @@ use TencentCloud\Common\AbstractModel;
 <li>Bucket：指定的某一个存储桶。</li>
  * @method string getVodeoBucketId() 获取VODEO 存储桶 ID，该参数当 OriginType = VODEO 且 VodeoDistributionRange = Bucket 时必填。
  * @method void setVodeoBucketId(string $VodeoBucketId) 设置VODEO 存储桶 ID，该参数当 OriginType = VODEO 且 VodeoDistributionRange = Bucket 时必填。
+ * @method string getVodOriginScope() 获取云点播回源范围，该参数当 OriginType = VOD 时生效。取值有：<li>all：当前源站对应的云点播应用内所有文件，默认值为 all；</li><li>bucket：当前源站对应的云点播应用下指定某一个存储桶内的文件。通过参数 VodBucketId 来指定存储桶。
+</li>
+ * @method void setVodOriginScope(string $VodOriginScope) 设置云点播回源范围，该参数当 OriginType = VOD 时生效。取值有：<li>all：当前源站对应的云点播应用内所有文件，默认值为 all；</li><li>bucket：当前源站对应的云点播应用下指定某一个存储桶内的文件。通过参数 VodBucketId 来指定存储桶。
+</li>
+ * @method string getVodBucketId() 获取VOD 存储桶 ID，该参数当 OriginType = VOD 且 VodOriginScope = bucket 时必填。数据来源：云点播专业版应用下存储桶的存储 ID 。
+ * @method void setVodBucketId(string $VodBucketId) 设置VOD 存储桶 ID，该参数当 OriginType = VOD 且 VodOriginScope = bucket 时必填。数据来源：云点播专业版应用下存储桶的存储 ID 。
  */
 class OriginInfo extends AbstractModel
 {
@@ -121,6 +127,7 @@ class OriginInfo extends AbstractModel
 
     /**
      * @var integer VODEO 子应用 ID。该参数当 OriginType = VODEO 时必填。
+     * @deprecated
      */
     public $VodeoSubAppId;
 
@@ -128,13 +135,26 @@ class OriginInfo extends AbstractModel
      * @var string VODEO 分发范围，该参数当 OriginType = VODEO 时必填。取值有： 
 <li>All：当前应用下所有存储桶；</li> 
 <li>Bucket：指定的某一个存储桶。</li>
+     * @deprecated
      */
     public $VodeoDistributionRange;
 
     /**
      * @var string VODEO 存储桶 ID，该参数当 OriginType = VODEO 且 VodeoDistributionRange = Bucket 时必填。
+     * @deprecated
      */
     public $VodeoBucketId;
+
+    /**
+     * @var string 云点播回源范围，该参数当 OriginType = VOD 时生效。取值有：<li>all：当前源站对应的云点播应用内所有文件，默认值为 all；</li><li>bucket：当前源站对应的云点播应用下指定某一个存储桶内的文件。通过参数 VodBucketId 来指定存储桶。
+</li>
+     */
+    public $VodOriginScope;
+
+    /**
+     * @var string VOD 存储桶 ID，该参数当 OriginType = VOD 且 VodOriginScope = bucket 时必填。数据来源：云点播专业版应用下存储桶的存储 ID 。
+     */
+    public $VodBucketId;
 
     /**
      * @param string $OriginType 源站类型，取值有：
@@ -164,6 +184,9 @@ class OriginInfo extends AbstractModel
 <li>All：当前应用下所有存储桶；</li> 
 <li>Bucket：指定的某一个存储桶。</li>
      * @param string $VodeoBucketId VODEO 存储桶 ID，该参数当 OriginType = VODEO 且 VodeoDistributionRange = Bucket 时必填。
+     * @param string $VodOriginScope 云点播回源范围，该参数当 OriginType = VOD 时生效。取值有：<li>all：当前源站对应的云点播应用内所有文件，默认值为 all；</li><li>bucket：当前源站对应的云点播应用下指定某一个存储桶内的文件。通过参数 VodBucketId 来指定存储桶。
+</li>
+     * @param string $VodBucketId VOD 存储桶 ID，该参数当 OriginType = VOD 且 VodOriginScope = bucket 时必填。数据来源：云点播专业版应用下存储桶的存储 ID 。
      */
     function __construct()
     {
@@ -213,6 +236,14 @@ class OriginInfo extends AbstractModel
 
         if (array_key_exists("VodeoBucketId",$param) and $param["VodeoBucketId"] !== null) {
             $this->VodeoBucketId = $param["VodeoBucketId"];
+        }
+
+        if (array_key_exists("VodOriginScope",$param) and $param["VodOriginScope"] !== null) {
+            $this->VodOriginScope = $param["VodOriginScope"];
+        }
+
+        if (array_key_exists("VodBucketId",$param) and $param["VodBucketId"] !== null) {
+            $this->VodBucketId = $param["VodBucketId"];
         }
     }
 }

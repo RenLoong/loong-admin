@@ -60,6 +60,23 @@ use TencentCloud\Common\AbstractModel;
  * @method void setZoneId(string $ZoneId) 设置主节点可用区，该值仅在跨区迁移时生效。仅支持同地域下的可用区进行迁移。
  * @method string getRoTransType() 获取针对跨集群搬迁场景，选择同可用区RO的处理逻辑。together-同可用区RO跟随主实例迁移至目标可用区（默认选项），severally-同可用区RO保持原部署模式、不迁移至目标可用区。
  * @method void setRoTransType(string $RoTransType) 设置针对跨集群搬迁场景，选择同可用区RO的处理逻辑。together-同可用区RO跟随主实例迁移至目标可用区（默认选项），severally-同可用区RO保持原部署模式、不迁移至目标可用区。
+ * @method ClusterTopology getClusterTopology() 获取集群版节点拓扑配置。
+ * @method void setClusterTopology(ClusterTopology $ClusterTopology) 设置集群版节点拓扑配置。
+ * @method integer getCheckFastUpgradeReboot() 获取检查原地升级是否需要重启，1 检查， 0 不检查。如果值为1，检查为原地升级需要重启，则会停止升级并进行返回提示，如果为原地升级不重启，则正常执行升级流程。
+ * @method void setCheckFastUpgradeReboot(integer $CheckFastUpgradeReboot) 设置检查原地升级是否需要重启，1 检查， 0 不检查。如果值为1，检查为原地升级需要重启，则会停止升级并进行返回提示，如果为原地升级不重启，则正常执行升级流程。
+ * @method string getDataCheckSensitive() 获取数据校验敏感度，非极速变配时使用此参数，敏感度根据当前实例规格计算迁移过程中的数据对比使用的cpu资源
+对应的选项为: "high"、"normal"、"low"，默认为空
+参数详解，：
+"high": 对应控制台中的高，数据库负载过高不建议使用
+"normal"：对应控制台中的标准
+"low"：对应控制台中的低
+
+ * @method void setDataCheckSensitive(string $DataCheckSensitive) 设置数据校验敏感度，非极速变配时使用此参数，敏感度根据当前实例规格计算迁移过程中的数据对比使用的cpu资源
+对应的选项为: "high"、"normal"、"low"，默认为空
+参数详解，：
+"high": 对应控制台中的高，数据库负载过高不建议使用
+"normal"：对应控制台中的标准
+"low"：对应控制台中的低
  */
 class UpgradeDBInstanceRequest extends AbstractModel
 {
@@ -152,6 +169,27 @@ class UpgradeDBInstanceRequest extends AbstractModel
     public $RoTransType;
 
     /**
+     * @var ClusterTopology 集群版节点拓扑配置。
+     */
+    public $ClusterTopology;
+
+    /**
+     * @var integer 检查原地升级是否需要重启，1 检查， 0 不检查。如果值为1，检查为原地升级需要重启，则会停止升级并进行返回提示，如果为原地升级不重启，则正常执行升级流程。
+     */
+    public $CheckFastUpgradeReboot;
+
+    /**
+     * @var string 数据校验敏感度，非极速变配时使用此参数，敏感度根据当前实例规格计算迁移过程中的数据对比使用的cpu资源
+对应的选项为: "high"、"normal"、"low"，默认为空
+参数详解，：
+"high": 对应控制台中的高，数据库负载过高不建议使用
+"normal"：对应控制台中的标准
+"low"：对应控制台中的低
+
+     */
+    public $DataCheckSensitive;
+
+    /**
      * @param string $InstanceId 实例 ID，格式如：cdb-c1nl9rpv 或者 cdbro-c1nl9rpv。与云数据库控制台页面中显示的实例 ID 相同，可使用 [查询实例列表](https://cloud.tencent.com/document/api/236/15872) 接口获取，其值为输出参数中字段 InstanceId 的值。
      * @param integer $Memory 升级后的内存大小，单位：MB，为保证传入 Memory 值有效，请使用 [获取云数据库可售卖规格](https://cloud.tencent.com/document/product/236/17229) 接口获取可升级的内存规格。
 说明：如果进行迁移业务，请一定填写实例规格（CPU、内存），不然系统会默认以最小允许规格传参。
@@ -172,6 +210,14 @@ class UpgradeDBInstanceRequest extends AbstractModel
      * @param integer $CrossCluster 是否跨区迁移。0-普通迁移，1-跨区迁移，默认值为0。该值为1时支持变更实例主节点可用区。
      * @param string $ZoneId 主节点可用区，该值仅在跨区迁移时生效。仅支持同地域下的可用区进行迁移。
      * @param string $RoTransType 针对跨集群搬迁场景，选择同可用区RO的处理逻辑。together-同可用区RO跟随主实例迁移至目标可用区（默认选项），severally-同可用区RO保持原部署模式、不迁移至目标可用区。
+     * @param ClusterTopology $ClusterTopology 集群版节点拓扑配置。
+     * @param integer $CheckFastUpgradeReboot 检查原地升级是否需要重启，1 检查， 0 不检查。如果值为1，检查为原地升级需要重启，则会停止升级并进行返回提示，如果为原地升级不重启，则正常执行升级流程。
+     * @param string $DataCheckSensitive 数据校验敏感度，非极速变配时使用此参数，敏感度根据当前实例规格计算迁移过程中的数据对比使用的cpu资源
+对应的选项为: "high"、"normal"、"low"，默认为空
+参数详解，：
+"high": 对应控制台中的高，数据库负载过高不建议使用
+"normal"：对应控制台中的标准
+"low"：对应控制台中的低
      */
     function __construct()
     {
@@ -252,6 +298,19 @@ class UpgradeDBInstanceRequest extends AbstractModel
 
         if (array_key_exists("RoTransType",$param) and $param["RoTransType"] !== null) {
             $this->RoTransType = $param["RoTransType"];
+        }
+
+        if (array_key_exists("ClusterTopology",$param) and $param["ClusterTopology"] !== null) {
+            $this->ClusterTopology = new ClusterTopology();
+            $this->ClusterTopology->deserialize($param["ClusterTopology"]);
+        }
+
+        if (array_key_exists("CheckFastUpgradeReboot",$param) and $param["CheckFastUpgradeReboot"] !== null) {
+            $this->CheckFastUpgradeReboot = $param["CheckFastUpgradeReboot"];
+        }
+
+        if (array_key_exists("DataCheckSensitive",$param) and $param["DataCheckSensitive"] !== null) {
+            $this->DataCheckSensitive = $param["DataCheckSensitive"];
         }
     }
 }

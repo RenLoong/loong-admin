@@ -53,10 +53,10 @@ use TencentCloud\Tke\V20180525\Models as Models;
  * @method Models\CreatePrometheusAlertPolicyResponse CreatePrometheusAlertPolicy(Models\CreatePrometheusAlertPolicyRequest $req) 创建告警策略
  * @method Models\CreatePrometheusAlertRuleResponse CreatePrometheusAlertRule(Models\CreatePrometheusAlertRuleRequest $req) 创建告警规则
  * @method Models\CreatePrometheusClusterAgentResponse CreatePrometheusClusterAgent(Models\CreatePrometheusClusterAgentRequest $req) 与云监控融合的2.0实例关联集群
- * @method Models\CreatePrometheusConfigResponse CreatePrometheusConfig(Models\CreatePrometheusConfigRequest $req) 创建prometheus配置
+ * @method Models\CreatePrometheusConfigResponse CreatePrometheusConfig(Models\CreatePrometheusConfigRequest $req) 创建集群采集配置
  * @method Models\CreatePrometheusDashboardResponse CreatePrometheusDashboard(Models\CreatePrometheusDashboardRequest $req) 创建grafana监控面板
  * @method Models\CreatePrometheusGlobalNotificationResponse CreatePrometheusGlobalNotification(Models\CreatePrometheusGlobalNotificationRequest $req) 创建全局告警通知渠道
- * @method Models\CreatePrometheusRecordRuleYamlResponse CreatePrometheusRecordRuleYaml(Models\CreatePrometheusRecordRuleYamlRequest $req) 以Yaml的方式创建聚合规则
+ * @method Models\CreatePrometheusRecordRuleYamlResponse CreatePrometheusRecordRuleYaml(Models\CreatePrometheusRecordRuleYamlRequest $req) 创建聚合规则yaml方式
  * @method Models\CreatePrometheusTempResponse CreatePrometheusTemp(Models\CreatePrometheusTempRequest $req) 创建一个云原生Prometheus模板
  * @method Models\CreatePrometheusTemplateResponse CreatePrometheusTemplate(Models\CreatePrometheusTemplateRequest $req) 创建一个云原生Prometheus模板实例
  * @method Models\CreateReservedInstancesResponse CreateReservedInstances(Models\CreateReservedInstancesRequest $req) 预留券实例的购买会预先扣除本次实例购买所需金额，在调用本接口前请确保账户余额充足。
@@ -79,11 +79,12 @@ use TencentCloud\Tke\V20180525\Models as Models;
  * @method Models\DeleteEdgeCVMInstancesResponse DeleteEdgeCVMInstances(Models\DeleteEdgeCVMInstancesRequest $req) 删除边缘容器CVM实例
  * @method Models\DeleteEdgeClusterInstancesResponse DeleteEdgeClusterInstances(Models\DeleteEdgeClusterInstancesRequest $req) 删除边缘计算实例
  * @method Models\DeleteImageCachesResponse DeleteImageCaches(Models\DeleteImageCachesRequest $req) 批量删除镜像缓存
+ * @method Models\DeleteLogConfigsResponse DeleteLogConfigs(Models\DeleteLogConfigsRequest $req) 删除集群内采集规则
  * @method Models\DeletePrometheusAlertPolicyResponse DeletePrometheusAlertPolicy(Models\DeletePrometheusAlertPolicyRequest $req) 删除2.0实例告警策略
  * @method Models\DeletePrometheusAlertRuleResponse DeletePrometheusAlertRule(Models\DeletePrometheusAlertRuleRequest $req) 删除告警规则
  * @method Models\DeletePrometheusClusterAgentResponse DeletePrometheusClusterAgent(Models\DeletePrometheusClusterAgentRequest $req) 解除TMP实例的集群关联
- * @method Models\DeletePrometheusConfigResponse DeletePrometheusConfig(Models\DeletePrometheusConfigRequest $req) 删除Prometheus配置，如果目标不存在，将返回成功
- * @method Models\DeletePrometheusRecordRuleYamlResponse DeletePrometheusRecordRuleYaml(Models\DeletePrometheusRecordRuleYamlRequest $req) 删除聚合实例
+ * @method Models\DeletePrometheusConfigResponse DeletePrometheusConfig(Models\DeletePrometheusConfigRequest $req) 删除集群采集配置
+ * @method Models\DeletePrometheusRecordRuleYamlResponse DeletePrometheusRecordRuleYaml(Models\DeletePrometheusRecordRuleYamlRequest $req) 删除聚合规则
  * @method Models\DeletePrometheusTempResponse DeletePrometheusTemp(Models\DeletePrometheusTempRequest $req) 删除一个云原生Prometheus配置模板
  * @method Models\DeletePrometheusTempSyncResponse DeletePrometheusTempSync(Models\DeletePrometheusTempSyncRequest $req) 解除模板同步，这将会删除目标中该模板所生产的配置，针对V2版本实例
  * @method Models\DeletePrometheusTemplateResponse DeletePrometheusTemplate(Models\DeletePrometheusTemplateRequest $req) 删除一个云原生Prometheus配置模板
@@ -95,6 +96,7 @@ use TencentCloud\Tke\V20180525\Models as Models;
  * @method Models\DescribeAvailableClusterVersionResponse DescribeAvailableClusterVersion(Models\DescribeAvailableClusterVersionRequest $req) 获取集群可以升级的所有版本
  * @method Models\DescribeAvailableTKEEdgeVersionResponse DescribeAvailableTKEEdgeVersion(Models\DescribeAvailableTKEEdgeVersionRequest $req) 边缘计算支持版本和k8s版本
  * @method Models\DescribeBackupStorageLocationsResponse DescribeBackupStorageLocations(Models\DescribeBackupStorageLocationsRequest $req) 查询备份仓库信息
+ * @method Models\DescribeBatchModifyTagsStatusResponse DescribeBatchModifyTagsStatus(Models\DescribeBatchModifyTagsStatusRequest $req) 查询批量修改标签状态
  * @method Models\DescribeClusterAsGroupOptionResponse DescribeClusterAsGroupOption(Models\DescribeClusterAsGroupOptionRequest $req) 集群弹性伸缩配置
  * @method Models\DescribeClusterAsGroupsResponse DescribeClusterAsGroups(Models\DescribeClusterAsGroupsRequest $req) 集群关联的伸缩组列表
  * @method Models\DescribeClusterAuthenticationOptionsResponse DescribeClusterAuthenticationOptions(Models\DescribeClusterAuthenticationOptionsRequest $req) 查看集群认证配置
@@ -138,12 +140,15 @@ use TencentCloud\Tke\V20180525\Models as Models;
  * @method Models\DescribeEnableVpcCniProgressResponse DescribeEnableVpcCniProgress(Models\DescribeEnableVpcCniProgressRequest $req) 本接口用于查询开启vpc-cni模式的任务进度
  * @method Models\DescribeEncryptionStatusResponse DescribeEncryptionStatus(Models\DescribeEncryptionStatusRequest $req) 查询etcd数据是否进行加密
  * @method Models\DescribeExistedInstancesResponse DescribeExistedInstances(Models\DescribeExistedInstancesRequest $req) 查询已经存在的节点，判断是否可以加入集群
- * @method Models\DescribeExternalClusterSpecResponse DescribeExternalClusterSpec(Models\DescribeExternalClusterSpecRequest $req) 获取导入第三方集群YAML定义
  * @method Models\DescribeExternalNodeSupportConfigResponse DescribeExternalNodeSupportConfig(Models\DescribeExternalNodeSupportConfigRequest $req) 查看开启第三方节点池配置信息
  * @method Models\DescribeIPAMDResponse DescribeIPAMD(Models\DescribeIPAMDRequest $req) 获取eniipamd组件信息
  * @method Models\DescribeImageCachesResponse DescribeImageCaches(Models\DescribeImageCachesRequest $req) 查询镜像缓存信息接口
  * @method Models\DescribeImagesResponse DescribeImages(Models\DescribeImagesRequest $req) 获取镜像信息
+ * @method Models\DescribeLogConfigsResponse DescribeLogConfigs(Models\DescribeLogConfigsRequest $req) 查询日志采集规则
  * @method Models\DescribeLogSwitchesResponse DescribeLogSwitches(Models\DescribeLogSwitchesRequest $req) 查询集群日志（审计、事件、普通日志）开关列表
+ * @method Models\DescribeOSImagesResponse DescribeOSImages(Models\DescribeOSImagesRequest $req) 获取OS聚合信息
+ * @method Models\DescribeOpenPolicyListResponse DescribeOpenPolicyList(Models\DescribeOpenPolicyListRequest $req) 查询opa策略列表
+ * @method Models\DescribePodChargeInfoResponse DescribePodChargeInfo(Models\DescribePodChargeInfoRequest $req) 查询正在运行中Pod的计费信息。可以通过 Namespace 和 Name 来查询某个 Pod 的信息，也可以通过 Pod 的 Uid 批量查询。
  * @method Models\DescribePodDeductionRateResponse DescribePodDeductionRate(Models\DescribePodDeductionRateRequest $req) 查询各个规格的 Pod 的抵扣率
  * @method Models\DescribePodsBySpecResponse DescribePodsBySpec(Models\DescribePodsBySpecRequest $req) 查询可以用预留券抵扣的 Pod 信息。
  * @method Models\DescribePostNodeResourcesResponse DescribePostNodeResources(Models\DescribePostNodeResourcesRequest $req) 包括 Pod 资源统计和绑定的预留券资源统计。
@@ -153,7 +158,7 @@ use TencentCloud\Tke\V20180525\Models as Models;
  * @method Models\DescribePrometheusAlertPolicyResponse DescribePrometheusAlertPolicy(Models\DescribePrometheusAlertPolicyRequest $req) 获取2.0实例告警策略列表
  * @method Models\DescribePrometheusAlertRuleResponse DescribePrometheusAlertRule(Models\DescribePrometheusAlertRuleRequest $req) 获取告警规则列表
  * @method Models\DescribePrometheusClusterAgentsResponse DescribePrometheusClusterAgents(Models\DescribePrometheusClusterAgentsRequest $req) 获取TMP实例关联集群列表
- * @method Models\DescribePrometheusConfigResponse DescribePrometheusConfig(Models\DescribePrometheusConfigRequest $req) 拉取Prometheus配置
+ * @method Models\DescribePrometheusConfigResponse DescribePrometheusConfig(Models\DescribePrometheusConfigRequest $req) 获取集群采集配置
  * @method Models\DescribePrometheusGlobalConfigResponse DescribePrometheusGlobalConfig(Models\DescribePrometheusGlobalConfigRequest $req) 获得实例级别抓取配置
  * @method Models\DescribePrometheusGlobalNotificationResponse DescribePrometheusGlobalNotification(Models\DescribePrometheusGlobalNotificationRequest $req) 查询全局告警通知渠道
  * @method Models\DescribePrometheusInstanceResponse DescribePrometheusInstance(Models\DescribePrometheusInstanceRequest $req) 获取实例详细信息
@@ -168,6 +173,7 @@ use TencentCloud\Tke\V20180525\Models as Models;
  * @method Models\DescribePrometheusTemplatesResponse DescribePrometheusTemplates(Models\DescribePrometheusTemplatesRequest $req) 拉取模板列表，默认模板将总是在最前面
  * @method Models\DescribeRIUtilizationDetailResponse DescribeRIUtilizationDetail(Models\DescribeRIUtilizationDetailRequest $req) 预留实例用量查询
  * @method Models\DescribeRegionsResponse DescribeRegions(Models\DescribeRegionsRequest $req) 获取容器服务支持的所有地域
+ * @method Models\DescribeReservedInstanceUtilizationRateResponse DescribeReservedInstanceUtilizationRate(Models\DescribeReservedInstanceUtilizationRateRequest $req) 查询各种规格类型的预留券使用率
  * @method Models\DescribeReservedInstancesResponse DescribeReservedInstances(Models\DescribeReservedInstancesRequest $req) 查询预留实例列表
  * @method Models\DescribeResourceUsageResponse DescribeResourceUsage(Models\DescribeResourceUsageRequest $req) 获取集群资源使用量
  * @method Models\DescribeRouteTableConflictsResponse DescribeRouteTableConflicts(Models\DescribeRouteTableConflictsRequest $req) 查询路由表冲突列表
@@ -206,17 +212,20 @@ use TencentCloud\Tke\V20180525\Models as Models;
  * @method Models\ModifyClusterAttributeResponse ModifyClusterAttribute(Models\ModifyClusterAttributeRequest $req) 修改集群属性
  * @method Models\ModifyClusterAuthenticationOptionsResponse ModifyClusterAuthenticationOptions(Models\ModifyClusterAuthenticationOptionsRequest $req) 修改集群认证配置
  * @method Models\ModifyClusterEndpointSPResponse ModifyClusterEndpointSP(Models\ModifyClusterEndpointSPRequest $req) 修改托管集群外网端口的安全策略（老的方式，仅支持托管集群外网端口）
+ * @method Models\ModifyClusterImageResponse ModifyClusterImage(Models\ModifyClusterImageRequest $req) 修改集群镜像
  * @method Models\ModifyClusterNodePoolResponse ModifyClusterNodePool(Models\ModifyClusterNodePoolRequest $req) 编辑节点池
  * @method Models\ModifyClusterRuntimeConfigResponse ModifyClusterRuntimeConfig(Models\ModifyClusterRuntimeConfigRequest $req) 修改集群及节点池纬度运行时配置
+ * @method Models\ModifyClusterTagsResponse ModifyClusterTags(Models\ModifyClusterTagsRequest $req) 修改集群标签
  * @method Models\ModifyClusterVirtualNodePoolResponse ModifyClusterVirtualNodePool(Models\ModifyClusterVirtualNodePoolRequest $req) 修改超级节点池
  * @method Models\ModifyNodePoolDesiredCapacityAboutAsgResponse ModifyNodePoolDesiredCapacityAboutAsg(Models\ModifyNodePoolDesiredCapacityAboutAsgRequest $req) 修改节点池关联伸缩组的期望实例数
  * @method Models\ModifyNodePoolInstanceTypesResponse ModifyNodePoolInstanceTypes(Models\ModifyNodePoolInstanceTypesRequest $req) 修改节点池的机型配置
+ * @method Models\ModifyOpenPolicyListResponse ModifyOpenPolicyList(Models\ModifyOpenPolicyListRequest $req) 批量修改opa策略
  * @method Models\ModifyPrometheusAgentExternalLabelsResponse ModifyPrometheusAgentExternalLabels(Models\ModifyPrometheusAgentExternalLabelsRequest $req) 修改被关联集群的external labels
  * @method Models\ModifyPrometheusAlertPolicyResponse ModifyPrometheusAlertPolicy(Models\ModifyPrometheusAlertPolicyRequest $req) 修改2.0实例告警策略
  * @method Models\ModifyPrometheusAlertRuleResponse ModifyPrometheusAlertRule(Models\ModifyPrometheusAlertRuleRequest $req) 修改告警规则
- * @method Models\ModifyPrometheusConfigResponse ModifyPrometheusConfig(Models\ModifyPrometheusConfigRequest $req) 修改prometheus配置，如果配置项不存在，则会新增
+ * @method Models\ModifyPrometheusConfigResponse ModifyPrometheusConfig(Models\ModifyPrometheusConfigRequest $req) 修改集群采集配置
  * @method Models\ModifyPrometheusGlobalNotificationResponse ModifyPrometheusGlobalNotification(Models\ModifyPrometheusGlobalNotificationRequest $req) 修改全局告警通知渠道
- * @method Models\ModifyPrometheusRecordRuleYamlResponse ModifyPrometheusRecordRuleYaml(Models\ModifyPrometheusRecordRuleYamlRequest $req) 通过yaml的方式修改Prometheus聚合实例
+ * @method Models\ModifyPrometheusRecordRuleYamlResponse ModifyPrometheusRecordRuleYaml(Models\ModifyPrometheusRecordRuleYamlRequest $req) 修改聚合规则yaml方式
  * @method Models\ModifyPrometheusTempResponse ModifyPrometheusTemp(Models\ModifyPrometheusTempRequest $req) 修改模板内容
  * @method Models\ModifyPrometheusTemplateResponse ModifyPrometheusTemplate(Models\ModifyPrometheusTemplateRequest $req) 修改模板内容
  * @method Models\ModifyReservedInstanceScopeResponse ModifyReservedInstanceScope(Models\ModifyReservedInstanceScopeRequest $req) 修改预留券的抵扣范围，抵扣范围取值：Region、Zone 和 Node。
@@ -236,7 +245,7 @@ use TencentCloud\Tke\V20180525\Models as Models;
  * @method Models\UpdateAddonResponse UpdateAddon(Models\UpdateAddonRequest $req) 更新一个addon的参数和版本
  * @method Models\UpdateClusterKubeconfigResponse UpdateClusterKubeconfig(Models\UpdateClusterKubeconfigRequest $req) 对集群的Kubeconfig信息进行更新
  * @method Models\UpdateClusterVersionResponse UpdateClusterVersion(Models\UpdateClusterVersionRequest $req) 升级集群 Master 组件到指定版本
- * @method Models\UpdateEKSClusterResponse UpdateEKSCluster(Models\UpdateEKSClusterRequest $req) 修改弹性集群名称等属性 
+ * @method Models\UpdateEKSClusterResponse UpdateEKSCluster(Models\UpdateEKSClusterRequest $req) 修改弹性集群名称等属性
  * @method Models\UpdateEKSContainerInstanceResponse UpdateEKSContainerInstance(Models\UpdateEKSContainerInstanceRequest $req) 更新容器实例
  * @method Models\UpdateEdgeClusterVersionResponse UpdateEdgeClusterVersion(Models\UpdateEdgeClusterVersionRequest $req) 升级边缘集群组件到指定版本，此版本为TKEEdge专用版本。
  * @method Models\UpdateImageCacheResponse UpdateImageCache(Models\UpdateImageCacheRequest $req) 更新镜像缓存接口

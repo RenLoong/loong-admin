@@ -48,9 +48,13 @@ use TencentCloud\Common\AbstractModel;
  * @method void setAiAnalysisResultSet(array $AiAnalysisResultSet) 设置视频内容分析任务的执行状态与结果。
  * @method array getAiRecognitionResultSet() 获取视频内容识别任务的执行状态与结果。
  * @method void setAiRecognitionResultSet(array $AiRecognitionResultSet) 设置视频内容识别任务的执行状态与结果。
- * @method ScheduleQualityControlTaskResult getAiQualityControlTaskResult() 获取视频质检任务的执行状态与结果。
+ * @method ScheduleQualityControlTaskResult getAiQualityControlTaskResult() 获取媒体质检任务的执行状态与结果。
 注意：此字段可能返回 null，表示取不到有效值。
- * @method void setAiQualityControlTaskResult(ScheduleQualityControlTaskResult $AiQualityControlTaskResult) 设置视频质检任务的执行状态与结果。
+ * @method void setAiQualityControlTaskResult(ScheduleQualityControlTaskResult $AiQualityControlTaskResult) 设置媒体质检任务的执行状态与结果。
+注意：此字段可能返回 null，表示取不到有效值。
+ * @method array getSmartSubtitlesTaskResult() 获取智能字幕任务的执行结果
+注意：此字段可能返回 null，表示取不到有效值。
+ * @method void setSmartSubtitlesTaskResult(array $SmartSubtitlesTaskResult) 设置智能字幕任务的执行结果
 注意：此字段可能返回 null，表示取不到有效值。
  */
 class WorkflowTask extends AbstractModel
@@ -110,10 +114,16 @@ class WorkflowTask extends AbstractModel
     public $AiRecognitionResultSet;
 
     /**
-     * @var ScheduleQualityControlTaskResult 视频质检任务的执行状态与结果。
+     * @var ScheduleQualityControlTaskResult 媒体质检任务的执行状态与结果。
 注意：此字段可能返回 null，表示取不到有效值。
      */
     public $AiQualityControlTaskResult;
+
+    /**
+     * @var array 智能字幕任务的执行结果
+注意：此字段可能返回 null，表示取不到有效值。
+     */
+    public $SmartSubtitlesTaskResult;
 
     /**
      * @param string $TaskId 媒体处理任务 ID。
@@ -130,7 +140,9 @@ class WorkflowTask extends AbstractModel
      * @param array $AiContentReviewResultSet 视频内容审核任务的执行状态与结果。
      * @param array $AiAnalysisResultSet 视频内容分析任务的执行状态与结果。
      * @param array $AiRecognitionResultSet 视频内容识别任务的执行状态与结果。
-     * @param ScheduleQualityControlTaskResult $AiQualityControlTaskResult 视频质检任务的执行状态与结果。
+     * @param ScheduleQualityControlTaskResult $AiQualityControlTaskResult 媒体质检任务的执行状态与结果。
+注意：此字段可能返回 null，表示取不到有效值。
+     * @param array $SmartSubtitlesTaskResult 智能字幕任务的执行结果
 注意：此字段可能返回 null，表示取不到有效值。
      */
     function __construct()
@@ -211,6 +223,15 @@ class WorkflowTask extends AbstractModel
         if (array_key_exists("AiQualityControlTaskResult",$param) and $param["AiQualityControlTaskResult"] !== null) {
             $this->AiQualityControlTaskResult = new ScheduleQualityControlTaskResult();
             $this->AiQualityControlTaskResult->deserialize($param["AiQualityControlTaskResult"]);
+        }
+
+        if (array_key_exists("SmartSubtitlesTaskResult",$param) and $param["SmartSubtitlesTaskResult"] !== null) {
+            $this->SmartSubtitlesTaskResult = [];
+            foreach ($param["SmartSubtitlesTaskResult"] as $key => $value){
+                $obj = new SmartSubtitlesResult();
+                $obj->deserialize($value);
+                array_push($this->SmartSubtitlesTaskResult, $obj);
+            }
         }
     }
 }

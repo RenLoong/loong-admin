@@ -24,6 +24,7 @@ use TencentCloud\Cfs\V20190719\Models as Models;
 
 /**
  * @method Models\BindAutoSnapshotPolicyResponse BindAutoSnapshotPolicy(Models\BindAutoSnapshotPolicyRequest $req) 文件系统绑定快照策略，可以同时绑定多个fs，一个fs 只能跟一个策略绑定
+ * @method Models\CreateAccessCertResponse CreateAccessCert(Models\CreateAccessCertRequest $req) 创建用于访问文件系统的凭证
  * @method Models\CreateAutoSnapshotPolicyResponse CreateAutoSnapshotPolicy(Models\CreateAutoSnapshotPolicyRequest $req) 创建定期快照策略
  * @method Models\CreateCfsFileSystemResponse CreateCfsFileSystem(Models\CreateCfsFileSystemRequest $req) 用于添加新文件系统
  * @method Models\CreateCfsPGroupResponse CreateCfsPGroup(Models\CreateCfsPGroupRequest $req) 本接口（CreateCfsPGroup）用于创建权限组
@@ -33,14 +34,14 @@ use TencentCloud\Cfs\V20190719\Models as Models;
 此接口需提交工单，开启白名单之后才能使用。
  * @method Models\DeleteAutoSnapshotPolicyResponse DeleteAutoSnapshotPolicy(Models\DeleteAutoSnapshotPolicyRequest $req) 删除快照定期策略
  * @method Models\DeleteCfsFileSystemResponse DeleteCfsFileSystem(Models\DeleteCfsFileSystemRequest $req) 用于删除文件系统
- * @method Models\DeleteCfsPGroupResponse DeleteCfsPGroup(Models\DeleteCfsPGroupRequest $req) 本接口（DeleteCfsPGroup）用于删除权限组。
+ * @method Models\DeleteCfsPGroupResponse DeleteCfsPGroup(Models\DeleteCfsPGroupRequest $req) 本接口（DeleteCfsPGroup）用于删除权限组，只有未绑定文件系统的权限组才能够被此接口删除。
  * @method Models\DeleteCfsRuleResponse DeleteCfsRule(Models\DeleteCfsRuleRequest $req) 本接口（DeleteCfsRule）用于删除权限组规则。
  * @method Models\DeleteCfsSnapshotResponse DeleteCfsSnapshot(Models\DeleteCfsSnapshotRequest $req) 删除文件系统快照
  * @method Models\DeleteMigrationTaskResponse DeleteMigrationTask(Models\DeleteMigrationTaskRequest $req) 用于删除迁移任务。
 此接口需提交工单，开启白名单之后才能使用。
  * @method Models\DeleteMountTargetResponse DeleteMountTarget(Models\DeleteMountTargetRequest $req) 本接口（DeleteMountTarget）用于删除挂载点
 说明：2022年6月1日之后创建的CFS文件系统删除时无需单独调用删除挂载点操作，此API仅适用老版本的CFS实例。
- * @method Models\DeleteUserQuotaResponse DeleteUserQuota(Models\DeleteUserQuotaRequest $req) 指定条件删除文件系统配额
+ * @method Models\DeleteUserQuotaResponse DeleteUserQuota(Models\DeleteUserQuotaRequest $req) 指定条件删除文件系统配额（仅部分Turbo实例能使用，若需要调用请提交工单与我们联系）
  * @method Models\DescribeAutoSnapshotPoliciesResponse DescribeAutoSnapshotPolicies(Models\DescribeAutoSnapshotPoliciesRequest $req) 查询文件系统快照定期策略列表信息
  * @method Models\DescribeAvailableZoneInfoResponse DescribeAvailableZoneInfo(Models\DescribeAvailableZoneInfoRequest $req) 本接口（DescribeAvailableZoneInfo）用于查询区域的可用情况。
  * @method Models\DescribeBucketListResponse DescribeBucketList(Models\DescribeBucketListRequest $req) 用于获取数据源桶列表。
@@ -59,7 +60,7 @@ use TencentCloud\Cfs\V20190719\Models as Models;
  * @method Models\DescribeUserQuotaResponse DescribeUserQuota(Models\DescribeUserQuotaRequest $req) 查询文件系统配额（仅部分Turbo实例能使用，若需要调用请提交工单与我们联系）
  * @method Models\ModifyFileSystemAutoScaleUpRuleResponse ModifyFileSystemAutoScaleUpRule(Models\ModifyFileSystemAutoScaleUpRuleRequest $req) 用来设置文件系统扩容策略
  * @method Models\ScaleUpFileSystemResponse ScaleUpFileSystem(Models\ScaleUpFileSystemRequest $req) 该接口用于对turbo 文件系统扩容使用
- * @method Models\SetUserQuotaResponse SetUserQuota(Models\SetUserQuotaRequest $req) 设置文件系统配额，提供UID/GID的配额设置的接口
+ * @method Models\SetUserQuotaResponse SetUserQuota(Models\SetUserQuotaRequest $req) 设置文件系统配额，提供UID/GID的配额设置的接口（仅部分Turbo实例能使用，若需要调用请提交工单与我们联系）
  * @method Models\SignUpCfsServiceResponse SignUpCfsService(Models\SignUpCfsServiceRequest $req) 本接口（SignUpCfsService）用于开通CFS服务。
  * @method Models\StopMigrationTaskResponse StopMigrationTask(Models\StopMigrationTaskRequest $req) 用于终止迁移任务。
 此接口需提交工单，开启白名单之后才能使用。

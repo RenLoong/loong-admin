@@ -65,9 +65,7 @@ use TencentCloud\Common\AbstractModel;
  * @method void setLastModifiedDate(integer $LastModifiedDate) 设置上次修改时间
 注意：此字段可能返回 null，表示取不到有效值。
  * @method array getCustomAttributes() 获取自定义属性
-注意：此字段可能返回 null，表示取不到有效值。
  * @method void setCustomAttributes(array $CustomAttributes) 设置自定义属性
-注意：此字段可能返回 null，表示取不到有效值。
  * @method string getResidentIdentityCard() 获取身份证号
 注意：此字段可能返回 null，表示取不到有效值。
  * @method void setResidentIdentityCard(string $ResidentIdentityCard) 设置身份证号
@@ -92,6 +90,10 @@ use TencentCloud\Common\AbstractModel;
 注意：此字段可能返回 null，表示取不到有效值。
  * @method void setAlipayUserId(string $AlipayUserId) 设置支付宝的AlipayUserId
 注意：此字段可能返回 null，表示取不到有效值。
+ * @method string getWeComUserId() 获取企业微信的WeComUserId
+注意：此字段可能返回 null，表示取不到有效值。
+ * @method void setWeComUserId(string $WeComUserId) 设置企业微信的WeComUserId
+注意：此字段可能返回 null，表示取不到有效值。
  * @method string getDescription() 获取描述
 注意：此字段可能返回 null，表示取不到有效值。
  * @method void setDescription(string $Description) 设置描述
@@ -113,9 +115,7 @@ use TencentCloud\Common\AbstractModel;
  * @method void setIdentityVerificationMethod(string $IdentityVerificationMethod) 设置实名核验方式
 注意：此字段可能返回 null，表示取不到有效值。
  * @method boolean getIdentityVerified() 获取是否已经实名核验
-注意：此字段可能返回 null，表示取不到有效值。
  * @method void setIdentityVerified(boolean $IdentityVerified) 设置是否已经实名核验
-注意：此字段可能返回 null，表示取不到有效值。
  * @method string getJob() 获取工作
 注意：此字段可能返回 null，表示取不到有效值。
  * @method void setJob(string $Job) 设置工作
@@ -125,25 +125,17 @@ use TencentCloud\Common\AbstractModel;
  * @method void setNationality(string $Nationality) 设置国家
 注意：此字段可能返回 null，表示取不到有效值。
  * @method boolean getPrimary() 获取是否主账号（进行过账号融合后，主账号为true，从账号为false）
-注意：此字段可能返回 null，表示取不到有效值。
  * @method void setPrimary(boolean $Primary) 设置是否主账号（进行过账号融合后，主账号为true，从账号为false）
-注意：此字段可能返回 null，表示取不到有效值。
  * @method string getZone() 获取时区
 注意：此字段可能返回 null，表示取不到有效值。
  * @method void setZone(string $Zone) 设置时区
 注意：此字段可能返回 null，表示取不到有效值。
  * @method boolean getAlreadyFirstLogin() 获取是否已经首次登录
-注意：此字段可能返回 null，表示取不到有效值。
  * @method void setAlreadyFirstLogin(boolean $AlreadyFirstLogin) 设置是否已经首次登录
-注意：此字段可能返回 null，表示取不到有效值。
  * @method string getTenantId() 获取租户id
-注意：此字段可能返回 null，表示取不到有效值。
  * @method void setTenantId(string $TenantId) 设置租户id
-注意：此字段可能返回 null，表示取不到有效值。
  * @method string getUserStoreId() 获取用户目录id
-注意：此字段可能返回 null，表示取不到有效值。
  * @method void setUserStoreId(string $UserStoreId) 设置用户目录id
-注意：此字段可能返回 null，表示取不到有效值。
  * @method integer getVersion() 获取版本
 注意：此字段可能返回 null，表示取不到有效值。
  * @method void setVersion(integer $Version) 设置版本
@@ -255,7 +247,6 @@ class User extends AbstractModel
 
     /**
      * @var array 自定义属性
-注意：此字段可能返回 null，表示取不到有效值。
      */
     public $CustomAttributes;
 
@@ -296,6 +287,12 @@ class User extends AbstractModel
     public $AlipayUserId;
 
     /**
+     * @var string 企业微信的WeComUserId
+注意：此字段可能返回 null，表示取不到有效值。
+     */
+    public $WeComUserId;
+
+    /**
      * @var string 描述
 注意：此字段可能返回 null，表示取不到有效值。
      */
@@ -327,7 +324,6 @@ class User extends AbstractModel
 
     /**
      * @var boolean 是否已经实名核验
-注意：此字段可能返回 null，表示取不到有效值。
      */
     public $IdentityVerified;
 
@@ -345,7 +341,6 @@ class User extends AbstractModel
 
     /**
      * @var boolean 是否主账号（进行过账号融合后，主账号为true，从账号为false）
-注意：此字段可能返回 null，表示取不到有效值。
      */
     public $Primary;
 
@@ -357,19 +352,16 @@ class User extends AbstractModel
 
     /**
      * @var boolean 是否已经首次登录
-注意：此字段可能返回 null，表示取不到有效值。
      */
     public $AlreadyFirstLogin;
 
     /**
      * @var string 租户id
-注意：此字段可能返回 null，表示取不到有效值。
      */
     public $TenantId;
 
     /**
      * @var string 用户目录id
-注意：此字段可能返回 null，表示取不到有效值。
      */
     public $UserStoreId;
 
@@ -445,7 +437,6 @@ class User extends AbstractModel
      * @param integer $LastModifiedDate 上次修改时间
 注意：此字段可能返回 null，表示取不到有效值。
      * @param array $CustomAttributes 自定义属性
-注意：此字段可能返回 null，表示取不到有效值。
      * @param string $ResidentIdentityCard 身份证号
 注意：此字段可能返回 null，表示取不到有效值。
      * @param string $QqOpenId QQ的OpenId
@@ -458,6 +449,8 @@ class User extends AbstractModel
 注意：此字段可能返回 null，表示取不到有效值。
      * @param string $AlipayUserId 支付宝的AlipayUserId
 注意：此字段可能返回 null，表示取不到有效值。
+     * @param string $WeComUserId 企业微信的WeComUserId
+注意：此字段可能返回 null，表示取不到有效值。
      * @param string $Description 描述
 注意：此字段可能返回 null，表示取不到有效值。
      * @param string $Name 姓名
@@ -469,21 +462,16 @@ class User extends AbstractModel
      * @param string $IdentityVerificationMethod 实名核验方式
 注意：此字段可能返回 null，表示取不到有效值。
      * @param boolean $IdentityVerified 是否已经实名核验
-注意：此字段可能返回 null，表示取不到有效值。
      * @param string $Job 工作
 注意：此字段可能返回 null，表示取不到有效值。
      * @param string $Nationality 国家
 注意：此字段可能返回 null，表示取不到有效值。
      * @param boolean $Primary 是否主账号（进行过账号融合后，主账号为true，从账号为false）
-注意：此字段可能返回 null，表示取不到有效值。
      * @param string $Zone 时区
 注意：此字段可能返回 null，表示取不到有效值。
      * @param boolean $AlreadyFirstLogin 是否已经首次登录
-注意：此字段可能返回 null，表示取不到有效值。
      * @param string $TenantId 租户id
-注意：此字段可能返回 null，表示取不到有效值。
      * @param string $UserStoreId 用户目录id
-注意：此字段可能返回 null，表示取不到有效值。
      * @param integer $Version 版本
 注意：此字段可能返回 null，表示取不到有效值。
      * @param string $LockType 锁定类型（分为管理员锁定，和登录策略锁定）
@@ -597,6 +585,10 @@ class User extends AbstractModel
 
         if (array_key_exists("AlipayUserId",$param) and $param["AlipayUserId"] !== null) {
             $this->AlipayUserId = $param["AlipayUserId"];
+        }
+
+        if (array_key_exists("WeComUserId",$param) and $param["WeComUserId"] !== null) {
+            $this->WeComUserId = $param["WeComUserId"];
         }
 
         if (array_key_exists("Description",$param) and $param["Description"] !== null) {

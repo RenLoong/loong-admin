@@ -50,8 +50,8 @@ use TencentCloud\Common\AbstractModel;
 注意：此字段可能返回 null，表示取不到有效值。
  * @method void setNodeIpType(integer $NodeIpType) 设置拨测任务所选的拨测点IP类型，0-不限，1-IPv4，2-IPv6
 注意：此字段可能返回 null，表示取不到有效值。
- * @method integer getInterval() 获取拨测间隔
- * @method void setInterval(integer $Interval) 设置拨测间隔
+ * @method integer getInterval() 获取拨测间隔，单位为分钟
+ * @method void setInterval(integer $Interval) 设置拨测间隔，单位为分钟
  * @method string getParameters() 获取拨测参数
  * @method void setParameters(string $Parameters) 设置拨测参数
  * @method integer getStatus() 获取任务状态
@@ -114,6 +114,10 @@ use TencentCloud\Common\AbstractModel;
 注意：此字段可能返回 null，表示取不到有效值。
  * @method void setTagInfoList(array $TagInfoList) 设置任务当前绑定的标签
 注意：此字段可能返回 null，表示取不到有效值。
+ * @method integer getSubSyncFlag() 获取是否为同步账号
+注意：此字段可能返回 null，表示取不到有效值。
+ * @method void setSubSyncFlag(integer $SubSyncFlag) 设置是否为同步账号
+注意：此字段可能返回 null，表示取不到有效值。
  */
 class ProbeTask extends AbstractModel
 {
@@ -153,7 +157,7 @@ class ProbeTask extends AbstractModel
     public $NodeIpType;
 
     /**
-     * @var integer 拨测间隔
+     * @var integer 拨测间隔，单位为分钟
      */
     public $Interval;
 
@@ -229,6 +233,12 @@ class ProbeTask extends AbstractModel
     public $TagInfoList;
 
     /**
+     * @var integer 是否为同步账号
+注意：此字段可能返回 null，表示取不到有效值。
+     */
+    public $SubSyncFlag;
+
+    /**
      * @param string $Name 任务名
 注意：此字段可能返回 null，表示取不到有效值。
      * @param string $TaskId 任务 ID
@@ -244,7 +254,7 @@ class ProbeTask extends AbstractModel
      * @param array $Nodes 拨测节点列表
      * @param integer $NodeIpType 拨测任务所选的拨测点IP类型，0-不限，1-IPv4，2-IPv6
 注意：此字段可能返回 null，表示取不到有效值。
-     * @param integer $Interval 拨测间隔
+     * @param integer $Interval 拨测间隔，单位为分钟
      * @param string $Parameters 拨测参数
      * @param integer $Status 任务状态
 <li>1 = 创建中</li>
@@ -275,6 +285,8 @@ class ProbeTask extends AbstractModel
 <li> 2 = 定时任务表达式未生效（一般为任务手动暂停）</li>
 注意：此字段可能返回 null，表示取不到有效值。
      * @param array $TagInfoList 任务当前绑定的标签
+注意：此字段可能返回 null，表示取不到有效值。
+     * @param integer $SubSyncFlag 是否为同步账号
 注意：此字段可能返回 null，表示取不到有效值。
      */
     function __construct()
@@ -357,6 +369,10 @@ class ProbeTask extends AbstractModel
                 $obj->deserialize($value);
                 array_push($this->TagInfoList, $obj);
             }
+        }
+
+        if (array_key_exists("SubSyncFlag",$param) and $param["SubSyncFlag"] !== null) {
+            $this->SubSyncFlag = $param["SubSyncFlag"];
         }
     }
 }
