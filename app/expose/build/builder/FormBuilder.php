@@ -24,6 +24,7 @@ class FormBuilder extends DataModel
 {
     protected $data = [];
     protected $url = '';
+    protected $translations=false;
     public function __construct($formName = null, $formTitle = null, $props = [])
     {
         $this->data['props'] = $props;
@@ -33,6 +34,10 @@ class FormBuilder extends DataModel
         $this->data['form'] = [];
         $this->data['group'] = [];
         $this->data['url'] = $this->url;
+    }
+    public function setTranslations(bool $state=true){
+        $this->translations=$state;
+        return $this;
     }
     /**
      * 向表单中添加字段
@@ -146,7 +151,7 @@ class FormBuilder extends DataModel
     }
     public function trans(string|null $val,array $parameters =[])
     {
-        if(!$val){
+        if(!$val||!$this->translations){
             return $val;
         }
         $request=request();
