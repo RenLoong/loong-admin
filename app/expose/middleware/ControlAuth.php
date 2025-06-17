@@ -26,7 +26,7 @@ class ControlAuth implements MiddlewareInterface
         }
         // 鉴权检测
         try {
-            $control_config = Config::get('control');
+            $control_config=new Config('control','');
             if(!$control_config['state']){
                 throw new Exception(trans('Control Not Open', [], $request->app, $request->lang), ResponseCode::FAIL);
             }
