@@ -56,7 +56,7 @@ class Menus extends DataModel
             $plugin = new $class;
             $menus = $plugin->getMenus();
             if ($menus) {
-                if ($lang&&isset($plugin->plugin)) {
+                if ($lang&&$plugin->getPlugin()) {
                     $request->plugin = $plugin_name;
                     $this->translateChildren($menus, $request->app,$lang);
                 }

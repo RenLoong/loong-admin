@@ -69,4 +69,8 @@ trait Install
         }
         return false;
     }
+    public function getPlugin()
+    {
+        return $this->plugin;
+    }
 }
