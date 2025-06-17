@@ -251,7 +251,7 @@ class AdminRoleController extends Basic
                         ->builder()
                 ],
                 'props' => [
-                    'options' => AdminRole::getOptions(null, ['is_system' => 0]),
+                    'options' => AdminRole::options(null, ['is_system' => 0]),
                     'clearable' => true,
                     'filterable' => true,
                     'props' => [

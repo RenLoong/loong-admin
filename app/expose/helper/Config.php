@@ -19,7 +19,7 @@ class Config extends DataModel
      * @param string $group 配置分组，settings目录下的文件名
      * @param string|null $plugin 如若要获取全局配置，请传入''
      */
-    public function __construct(string $group,string $plugin = null)
+    public function __construct(string $group, string $plugin = null)
     {
         if ($plugin === null) {
             $request = request();
@@ -50,14 +50,18 @@ class Config extends DataModel
     {
         $d = [];
         $request = request();
-        $domain='';
-        if($request){
+        $domain = '';
+        $host = '';
+        if ($request) {
             $domain = $request->header('x-forwarded-proto') . '://' . $request->host();
+            $host = $request->host();
         }
         if (!empty($this->groupData)) {
             foreach ($this->groupData as $key => $item) {
-                if (is_string($item['value']) && strpos($item['value'], '{DOMAIN}') !== false&&$domain) {
+                if (is_string($item['value']) && strpos($item['value'], '{DOMAIN}') !== false && $domain) {
                     $d[$item['field']] = str_replace('{DOMAIN}', $domain, $item['value']);
+                } elseif (is_string($item['value']) && strpos($item['value'], '{HOST}') !== false && $host) {
+                    $d[$item['field']] = str_replace('{HOST}', $host, $item['value']);
                 } else {
                     $d[$item['field']] = $item['value'];
                 }
@@ -65,8 +69,10 @@ class Config extends DataModel
             $ConfigModel = ModelConfig::where(['group' => $this->group])->find();
             if ($ConfigModel) {
                 foreach ($ConfigModel->value as $field => $value) {
-                    if (is_string($value) && strpos($value, '{DOMAIN}') !== false&&$domain) {
+                    if (is_string($value) && strpos($value, '{DOMAIN}') !== false && $domain) {
                         $d[$field] =  str_replace('{DOMAIN}', $domain, $value);
+                    } elseif (is_string($value) && strpos($value, '{HOST}') !== false && $host) {
+                        $d[$field] = str_replace('{HOST}', $host, $value);
                     } else {
                         $d[$field] = $value;
                     }

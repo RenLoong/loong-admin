@@ -6,7 +6,7 @@ use app\expose\utils\DataModel;
 
 class Menus extends DataModel
 {
-    public $data;
+    public $data = [];
     public $itemData = [
         # 菜单标题
         "title"         => "Title",
@@ -40,17 +40,50 @@ class Menus extends DataModel
      */
     public function __construct($Install)
     {
+        $request = request();
+        $lang = '';
+        if ($request && $request->lang) {
+            $lang = $request->lang;
+        }
         $data = $Install->getMenus();
+        $request = request();
+        if ($lang) {
+            $this->translateChildren($data, $request->app,$lang);
+        }
         foreach (glob(base_path('plugin/*')) as $path) {
             $plugin_name = basename($path);
             $class = 'plugin\\' . $plugin_name . '\\api\\Install';
             $plugin = new $class;
             $menus = $plugin->getMenus();
             if ($menus) {
+                if ($lang) {
+                    $request->plugin = $plugin_name;
+                    $this->translateChildren($menus, $request->app,$lang);
+                }
                 $data[] = $menus;
             }
         }
         $this->builder($data);
+    }
+    public function translateChildren(&$data, $domain,$lang)
+    {
+        if (is_array($data) && isset($data[0])) {
+            foreach ($data as $key => &$item) {
+                if (isset($item['title'])) {
+                    $data[$key]['title'] = trans($item['title'], [], $domain, $lang);
+                }
+                if (!empty($item['children'])) {
+                    $this->translateChildren($item['children'],$domain, $lang);
+                }
+            }
+        } else {
+            if (isset($data['title'])) {
+                $data['title'] = trans($data['title'], [], $domain, $lang);
+            }
+            if (!empty($data['children'])) {
+                $this->translateChildren($data['children'],$domain, $lang);
+            }
+        }
     }
     /**
      * 递归合并
@@ -58,7 +91,7 @@ class Menus extends DataModel
      * @param array $data
      * @return $data
      */
-    public function mergeMenus(array $data)
+    public function mergeMenus(array $data): array
     {
         $result = [];
         foreach ($data as $key => $item) {

@@ -1,12 +1,12 @@
 [
     {
-        "title": "首页",
+        "title": "Dashboard",
         "icon": "House",
         "path": "Index",
         "sort": 0,
         "children": [
             {
-                "title": "控制台",
+                "title": "Console",
                 "icon": "ElementPlus",
                 "path": "Index/control",
                 "component": "databoard"
@@ -14,35 +14,35 @@
         ]
     },
     {
-        "title": "用户",
+        "title": "User",
         "icon": "User",
         "path": "User",
         "sort": 0,
         "children": [
             {
-                "title": "用户列表",
+                "title": "User List",
                 "icon": "User",
                 "path": "User/group",
                 "children": [
                     {
-                        "title": "用户列表",
+                        "title": "User List",
                         "path": "User/index",
                         "component": "table",
                         "children": [
                             {
-                                "title": "创建用户",
+                                "title": "Create User",
                                 "path": "User/create",
                                 "show": false,
                                 "component": "form"
                             },
                             {
-                                "title": "编辑用户",
+                                "title": "Edit User",
                                 "show": false,
                                 "path": "User/update",
                                 "component": "form"
                             },
                             {
-                                "title": "更新状态",
+                                "title": "Update Status",
                                 "show": false,
                                 "path": "User/indexUpdateState",
                                 "component": ""
@@ -54,77 +54,83 @@
         ]
     },
     {
-        "title": "职能",
+        "title": "Functional",
         "icon": "Stopwatch",
         "path": "Functional",
         "children": [
             {
-                "title": "管理员",
+                "title": "Administrator",
                 "icon": "User",
                 "path": "Admin/group",
                 "component": "table",
                 "children": [
                     {
-                        "title": "人员列表",
+                        "title": "Staff List",
                         "path": "Admin/index",
                         "component": "table",
                         "children": [
                             {
-                                "title": "创建管理员",
+                                "title": "Create Administrator",
                                 "path": "Admin/create",
                                 "show": false,
                                 "component": "form"
                             },
                             {
-                                "title": "编辑管理员",
+                                "title": "Edit Administrator",
                                 "show": false,
                                 "path": "Admin/update",
                                 "component": "form"
                             },
                             {
-                                "title": "删除管理员",
+                                "title": "Delete Administrator",
                                 "show": false,
                                 "path": "Admin/delete"
                             },
                             {
-                                "title": "更新状态",
+                                "title": "Update Status",
                                 "show": false,
                                 "path": "Admin/indexUpdateState"
+                            },
+                            {
+                                "title": "Move Role",
+                                "component": "form",
+                                "show": false,
+                                "path": "Admin/moveRole"
                             }
                         ]
                     }
                 ]
             },
             {
-                "title": "角色",
+                "title": "Role Management",
                 "icon": "PriceTag",
                 "path": "AdminRole/group",
                 "component": "table",
                 "children": [
                     {
-                        "title": "角色管理",
+                        "title": "Role List",
                         "path": "AdminRole/index",
                         "component": "table",
                         "children": [
                             {
-                                "title": "创建角色",
+                                "title": "Create Role",
                                 "path": "AdminRole/create",
                                 "show": false,
                                 "component": "form"
                             },
                             {
-                                "title": "编辑角色",
+                                "title": "Edit Role",
                                 "show": false,
                                 "path": "AdminRole/update",
                                 "component": "form"
                             },
                             {
-                                "title": "删除角色",
+                                "title": "Delete Role",
                                 "show": false,
                                 "path": "AdminRole/delete"
                             },
                             {
-                                "title": "更新状态",
+                                "title": "Update Status",
                                 "show": false,
                                 "path": "AdminRole/indexUpdateState"
                             }
@@ -135,57 +141,63 @@
         ]
     },
     {
-        "title": "系统",
+        "title": "Systems",
         "icon": "Setting",
         "path": "System",
         "children": [
             {
-                "title": "基本配置",
+                "title": "Basic Settings",
                 "icon": "Setting",
                 "path": "System/basic",
                 "component": "form"
             },
             {
-                "title": "上传配置",
+                "title": "Control Settings",
+                "icon": "ElementPlus",
+                "path": "System/control",
+                "component": "form"
+            },
+            {
+                "title": "Upload Settings",
                 "icon": "UploadFilled",
                 "path": "System/upload",
                 "component": "form"
             },
             {
-                "title": "短信配置",
+                "title": "SMS Settings",
                 "icon": "Message",
                 "path": "System/sms",
                 "component": "form"
             },
             {
-                "title": "支付管理",
+                "title": "Payment Management",
                 "icon": "Wallet",
                 "path": "Payment/group",
                 "children": [
                     {
-                        "title": "支付配置",
+                        "title": "Payment Settings",
                         "path": "Payment/index",
                         "component": "payment-form"
                     },
                     {
-                        "title": "支付模板",
+                        "title": "Payment Template",
                         "path": "PaymentTemplate/index",
                         "component": "table",
                         "children": [
                             {
-                                "title": "新增支付模板",
+                                "title": "Create Payment Template",
                                 "path": "PaymentTemplate/create",
                                 "show": false,
                                 "component": "form"
                             },
                             {
-                                "title": "编辑支付模板",
+                                "title": "Edit Payment Template",
                                 "path": "PaymentTemplate/update",
                                 "show": false,
                                 "component": "form"
                             },
                             {
-                                "title": "删除支付模板",
+                                "title": "Delete Payment Template",
                                 "path": "PaymentTemplate/delete",
                                 "show": false,
                                 "component": ""
@@ -195,42 +207,42 @@
                 ]
             },
             {
-                "title": "平台管理",
+                "title": "Platform Management",
                 "icon": "Monitor",
                 "path": "Platform/index",
                 "children": [
                     {
-                        "title": "微信小程序",
+                        "title": "WeChat Mini Program",
                         "path": "Platform/wechat_miniproject",
                         "component": "form"
                     },
                     {
-                        "title": "微信公众号",
+                        "title": "WeChat Official Account",
                         "path": "Platform/wechat_official_account",
                         "component": "form"
                     },
                     {
-                        "title": "支付宝小程序",
+                        "title": "Alipay Mini Program",
                         "path": "Platform/alipay_miniproject",
                         "component": "form"
                     },
                     {
-                        "title": "微信开放平台",
+                        "title": "WeChat Open Platform",
                         "path": "Platform/wechat_open_platform",
                         "component": "form"
                     },
                     {
-                        "title": "APP",
+                        "title": "App Platform",
                         "path": "Platform/app_platform",
                         "component": "form"
                     },
                     {
-                        "title": "H5",
+                        "title": "H5 Platform",
                         "path": "Platform/h5_platform",
                         "component": "form"
                     },
                     {
-                        "title": "PC",
+                        "title": "PC Platform",
                         "path": "Platform/pc_platform",
                         "component": "form"
                     }
@@ -239,66 +251,66 @@
         ]
     },
     {
-        "title": "公共权限",
+        "title": "Public Permissions",
         "path": "Public",
         "show": false,
         "children": [
             {
-                "title": "修改自己的信息",
+                "title": "Edit Profile",
                 "show": false,
                 "path": "Admin/updateSelf",
                 "component": "form"
             },
             {
-                "title": "获取自己的信息",
+                "title": "Get Profile",
                 "show": false,
                 "path": "Admin/getSelfInfo",
                 "component": ""
             },
             {
-                "title": "退出登录",
+                "title": "Logout",
                 "show": false,
                 "path": "Public/outLogin",
                 "component": ""
             },
             {
-                "title": "获取上传分类",
+                "title": "Get Upload Categories",
                 "path": "Uploads/getUploadClassify",
                 "show": false,
                 "component": ""
             },
             {
-                "title": "编辑上传分类",
+                "title": "Edit Upload Category",
                 "path": "Uploads/saveClassify",
                 "show": false,
                 "component": ""
             },
             {
-                "title": "删除上传分类",
+                "title": "Delete Upload Category",
                 "path": "Uploads/deleteClassify",
                 "show": false,
                 "component": ""
             },
             {
-                "title": "上传文件",
+                "title": "Upload File",
                 "path": "Uploads/upload",
                 "show": false,
                 "component": ""
             },
             {
-                "title": "删除上传文件",
+                "title": "Delete Upload File",
                 "path": "Uploads/deleteUploads",
                 "show": false,
                 "component": ""
             },
             {
-                "title": "编辑上传文件",
+                "title": "Edit Upload File",
                 "path": "Uploads/updateUploads",
                 "show": false,
                 "component": ""
             },
             {
-                "title": "获取上传文件列表",
+                "title": "Get Upload File List",
                 "path": "Uploads/getList",
                 "show": false,
                 "component": ""

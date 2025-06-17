@@ -6,7 +6,7 @@ use app\expose\build\builder\SoltBuilder;
 $Component = new ComponentBuilder;
 return [
     [
-        'title' => '应用名称',
+        'title' => 'Settings_basic_web_name',
         'field' => 'web_name',
         'value' => 'RenLoong',
         'component' => 'input',

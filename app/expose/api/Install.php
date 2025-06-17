@@ -2,18 +2,22 @@
 
 namespace app\expose\api;
 
+use support\Log;
+
 trait Install
 {
     protected $path;
+    /**
+     * 多语言必须在构造函数中设置plugin值为插件名
+     */
+    protected $plugin;
     /**
      * 安装
      *
      * @param $version
      * @return void
      */
-    public static function install($version)
-    {
-    }
+    public static function install($version) {}
 
     /**
      * 卸载
@@ -21,9 +25,7 @@ trait Install
      * @param $version
      * @return void
      */
-    public static function uninstall($version)
-    {
-    }
+    public static function uninstall($version) {}
 
     /**
      * 更新
@@ -33,9 +35,7 @@ trait Install
      * @param $context
      * @return void
      */
-    public static function update($from_version, $to_version, $context = null)
-    {
-    }
+    public static function update($from_version, $to_version, $context = null) {}
 
     /**
      * 更新前数据收集等
@@ -60,7 +60,12 @@ trait Install
         clearstatcache();
         # 当前类的运行目录
         if (is_file($menu_file = $this->path . '/../admin.json')) {
-            return json_decode(file_get_contents($menu_file), true);
+            $content = file_get_contents($menu_file);
+            if (!$content) {
+                return false;
+            }
+            $data = json_decode($content, true);
+            return $data;
         }
         return false;
     }

@@ -8,10 +8,15 @@ use loong\oauth\facade\Auth;
 
 class Admin extends Basic
 {
-    protected $json = [
-        'allow_week'
-    ];
-    protected $jsonAssoc = true;
+    protected function getOptions(): array
+    {
+        return [
+            'type' => [
+                // 设置JSON字段的类型
+                'allow_week'	=>	'json'
+            ]
+        ];
+    }
     public function getHeadimgAttr($value)
     {
         return Uploads::url($value);

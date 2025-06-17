@@ -4,6 +4,13 @@ namespace app\model;
 
 class Config extends Basic
 {
-    protected $json = ['value'];
-    protected $jsonAssoc = true;
+    protected function getOptions(): array
+    {
+        return [
+            'type' => [
+                // 设置JSON字段的类型
+                'value'	=>	'json'
+            ]
+        ];
+    }
 }

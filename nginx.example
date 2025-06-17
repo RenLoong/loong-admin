@@ -1,3 +1,12 @@
+# 站内信推送
+location /app/PUSH_KEY {
+    proxy_pass http://127.0.0.1:37001;
+    proxy_http_version 1.1;
+    proxy_set_header Upgrade $http_upgrade;
+    proxy_set_header Connection "Upgrade";
+    proxy_set_header X-Real-IP $remote_addr;
+}
+
 # 将请求转发到webman
 location ^~ / {
     # 接口QPS插件，nginx版本需要选择：nginx openresty

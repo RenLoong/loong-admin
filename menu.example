@@ -17,12 +17,6 @@
             {
                 ...参数与父级一致
             }
-        ],
-        "permission": [
-            "Create",
-            "Delete",
-            "UpdateState",
-            "Update"
         ]
     }
 ]

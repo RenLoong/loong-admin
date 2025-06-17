@@ -46,7 +46,7 @@ class AdminAuth implements MiddlewareInterface
     }
     public function isWehcatBrowser($request)
     {
-        $request->isWehcatBrowser = strpos(strtolower($request->header('user-agent')), 'micromessenger') !== false;
+        $request->isWehcatBrowser = strpos(strtolower($request->header('user-agent')??''), 'micromessenger') !== false;
     }
 
     /**

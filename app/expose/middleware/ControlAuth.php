@@ -3,6 +3,7 @@
 namespace app\expose\middleware;
 
 use app\expose\enum\ResponseCode;
+use app\expose\helper\Config;
 use app\expose\utils\Json;
 use Exception;
 use loong\oauth\exception\LockException;
@@ -13,7 +14,7 @@ use Webman\Http\Request;
 use loong\oauth\facade\Auth;
 
 /**
- * 后台应用必须继承此中间件，否者无法正常访问
+ * 中台应用必须继承此中间件，否者无法正常访问
  */
 class ControlAuth implements MiddlewareInterface
 {
@@ -25,6 +26,10 @@ class ControlAuth implements MiddlewareInterface
         }
         // 鉴权检测
         try {
+            $control_config = Config::get('control');
+            if(!$control_config['state']){
+                throw new Exception(trans('Control Not Open', [], $request->app, $request->lang), ResponseCode::FAIL);
+            }
             $this->Icode($request);
             $this->Authorization($request);
             $response = $next($request);

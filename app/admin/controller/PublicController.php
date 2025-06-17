@@ -23,11 +23,13 @@ class PublicController extends Basic
     protected $notNeedAuth = ['config', 'menus', 'unlock'];
     public function config(Request $request)
     {
+        $lang=$request->lang;
+        $domain=$request->app;
         $config = Config::get('basic');
         $config = new Web($config);
         $captcha_state = Config::get('captcha', 'state');
         $config->useLogin([
-            'title' => '管理员登录',
+            'title' => trans('Login Title', [], $domain, $lang),
             'url' => 'Login/login',
             'user_agreement' => '',
             'captcha' => $captcha_state
@@ -42,45 +44,47 @@ class PublicController extends Basic
         $toolbar = new Action();
         $toolbar->add(EnumAction::LOCK['value'], [
             'icon' => 'Lock',
-            'tips'=>'锁屏'
+            'tips'=>trans('toolbar Lock', [], $domain, $lang),
         ]);
         $toolbar->add(EnumAction::SEARCH['value'], [
             'icon' => 'Search',
-            'tips'=>'搜索菜单'
+            'tips'=>trans('toolbar Search', [], $domain, $lang),
         ]);
         $toolbar->add(EnumAction::NOTIFICATION['value'], [
             'icon' => 'Notification',
-            'tips'=>'查看通知'
+            'tips'=>trans('toolbar Notification', [], $domain, $lang),
         ]);
         $toolbar->add(EnumAction::FULL_SCREEN['value'], [
             'icon' => 'FullScreen',
-            'tips'=>'全屏/退出全屏'
+            'tips'=>trans('toolbar FullScreen', [], $domain, $lang),
         ]);
         $toolbar->add(EnumAction::LINK['value'], [
             'icon' => 'House',
-            'tips'=>'网站首页',
+            'tips'=>trans('toolbar House', [], $domain, $lang),
             'props'=>[
                 'url'=>'/',
                 'target'=>'_blank'
             ]
         ]);
-        $toolbar->add(EnumAction::LINK['value'], [
-            'icon' => 'ElementPlus',
-            'tips'=>'网站前台控制台',
-            'props'=>[
-                'url'=>'/control/',
-                'target'=>'_blank'
-            ]
-        ]);
+        $control_config = Config::get('control');
+        if($control_config['state']){
+            $toolbar->add(EnumAction::LINK['value'], [
+                'icon' => 'ElementPlus',
+                'tips'=>trans('toolbar Control', [], $domain, $lang),
+                'props'=>[
+                    'url'=>'/control/',
+                    'target'=>'_blank'
+                ]
+            ]);
+        }
         $config->useToolbar($toolbar->toArray());
         $userDropdownMenu = new Action();
         $userDropdownMenu->add(EnumAction::DIALOG['value'], [
             'path' => 'Admin/updateSelf',
-            'label' => '管理员信息',
+            'label' => trans('userDropdownMenu updateSelf', [], $domain, $lang),
             'icon' => 'User',
             'props' => [
-                'type' => 'primary',
-                'title' => '管理员信息'
+                'title' => trans('userDropdownMenu updateSelf', [], $domain, $lang)
             ]
         ]);
         $config->useUserDropdownMenu($userDropdownMenu->toArray());
@@ -102,21 +106,21 @@ class PublicController extends Basic
             } catch (\Throwable $th) {
             }
         }
-        return $this->success('退出成功');
+        return $this->success(trans('Logout Success', [], $request->app, $request->lang));
     }
     public function lock(Request $request)
     {
         try {
             $password = $request->post('password');
             if (!$password) {
-                return $this->fail('PIN码不能为空');
+                return $this->fail(trans('PIN Code Cannot Be Empty', [], $request->app, $request->lang));
             }
             if (mb_strlen($password) != 6) {
-                return $this->fail('请输入6位PIN码');
+                return $this->fail(trans('Please Enter 6 Digits PIN Code', [], $request->app, $request->lang));
             }
             $token = $request->header('Authorization');
             Auth::setPrefix('CONTROL')->lock($token, $password);
-            return $this->event(ResponseEvent::UPDATE_USERINFO, '锁定成功');
+            return $this->event(ResponseEvent::UPDATE_USERINFO, trans('Lock Success', [], $request->app, $request->lang));
         } catch (\Throwable $th) {
             return $this->exception($th);
         }
@@ -127,7 +131,7 @@ class PublicController extends Basic
         try {
             $token = $request->header('Authorization');
             Auth::setPrefix('CONTROL')->unlock($token, $password);
-            return $this->success('解锁成功');
+            return $this->success(trans('Unlock Success', [], $request->app, $request->lang));
         } catch (\Throwable $th) {
             return $this->exception($th);
         }

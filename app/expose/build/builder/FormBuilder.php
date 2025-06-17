@@ -10,9 +10,7 @@ use app\expose\utils\DataModel;
  * @package app\expose\build\builder
  * @property string $formName 表单名
  * @property string $formTitle 表单标题
- * @property array $rule 规则
- * @property array $form 表单
- * @property array $group 分组
+ * @property array $props Form Attributes
  * @method FormBuilder add(string $field, string $title, string $component, string $value = null, mixed $extra = []) 向表单中添加字段
  * @method FormBuilder remove(string $field) 从表单中移除字段
  * @method FormBuilder addValue(string $field, mixed $value) 向表单中添加数据
@@ -30,7 +28,7 @@ class FormBuilder extends DataModel
     {
         $this->data['props'] = $props;
         $this->data['name'] = $formName ?? 'basic';
-        $this->data['title'] = $formTitle ?? '基础信息';
+        $this->data['title'] = $this->trans($formTitle) ?? $this->trans('form_basic_title');
         $this->data['rule'] = [];
         $this->data['form'] = [];
         $this->data['group'] = [];
@@ -53,6 +51,7 @@ class FormBuilder extends DataModel
      */
     public function add(string $field, string $title, string $component, mixed $value = null, mixed $extra = []): FormBuilder
     {
+        $title = $this->trans($title);
         $this->data['rule'][] = [
             'field'         => $field,
             'title'         => $title,
@@ -144,5 +143,19 @@ class FormBuilder extends DataModel
         $this->url = $url;
         $this->data['url'] = $url;
         return $this;
+    }
+    public function trans(string|null $val,array $parameters =[])
+    {
+        if(!$val){
+            return $val;
+        }
+        $request=request();
+        $lang = '';
+        $domain=null;
+        if ($request && $request->lang) {
+            $lang = $request->lang;
+            $domain=$request->app;
+        }
+        return trans($val,$parameters,$domain,$lang);
     }
 }

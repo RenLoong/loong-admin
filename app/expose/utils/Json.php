@@ -98,6 +98,10 @@ trait Json
      */
     public static function json($data, $options = JSON_UNESCAPED_UNICODE, $http_code = 200)
     {
+        $request=request();
+        if($request&&$request->lang){
+            $data['msg']=trans($data['msg'],[], null, $request->lang);
+        }
         return new Response($http_code, ['Content-Type' => 'application/json'], json_encode($data, $options));
     }
 }

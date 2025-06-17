@@ -462,7 +462,7 @@ class AdminController extends Basic
         $builder->add('role_id', '所属角色', 'cascader', null, [
             'required' => true,
             'props' => [
-                'options' => AdminRole::getOptions(),
+                'options' => AdminRole::options(),
                 'filterable' => true,
                 'props' => [
                     'checkStrictly' => true,
@@ -507,7 +507,7 @@ class AdminController extends Basic
                 'show-word-limit' => true
             ]
         ]);
-        $SystemRoleId = AdminRole::getSystemRole('id');
+        $SystemRoleId = AdminRole::systemRole('id');
         $builder->add('allow_time', '工作时间范围', 'time-picker', $is_system ? ['00:00:00', '23:59:59'] : ['08:00:00', '18:00:00'], [
             'where' => [
                 ['role_id', 'not in', $SystemRoleId]
@@ -561,7 +561,7 @@ class AdminController extends Basic
         $builder->add('role_id', '所属角色', 'cascader', null, [
             'required' => true,
             'props' => [
-                'options' => AdminRole::getOptions(),
+                'options' => AdminRole::options(),
                 'filterable' => true,
                 'props' => [
                     'checkStrictly' => true,

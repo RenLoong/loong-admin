@@ -17,8 +17,6 @@ use support\Log;
 use support\Request;
 use app\process\Http;
 use app\process\Monitor;
-use process\Test;
-use process\Test1;
 use Workerman\Events\Swoole;
 
 global $argv;
@@ -67,13 +65,5 @@ return [
                 'enable_memory_monitor' => DIRECTORY_SEPARATOR === '/',
             ]
         ]
-    ],
-    'Test' => [
-        'eventLoop' => Swoole::class,
-        'handler'  => Test::class
-    ],
-    'Test1' => [
-        'eventLoop' => Swoole::class,
-        'handler'  => Test1::class
     ]
 ];

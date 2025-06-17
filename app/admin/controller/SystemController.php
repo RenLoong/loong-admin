@@ -17,6 +17,10 @@ class SystemController extends Basic
     {
         return $this->builder();
     }
+    public function control(Request $request)
+    {
+        return $this->builder();
+    }
     public function payment(Request $request)
     {
         return $this->builder();

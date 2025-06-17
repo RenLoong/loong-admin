@@ -21,8 +21,15 @@ class Login extends DataModel
         'image'             => '',
         # 开启图形验证码，在短信登录时默认开启
         'captcha'           => true,
+        # 跳转链接文案
+        'link_text'         => '',
         # 用户协议链接
         'user_agreement'    => '/article/user_agreement.html',
+        # 用户协议自定义配置
+        /* 'user_agreement_config'=>[
+            'title'=>'《用户协议》',
+            'label'=>'点击"登录"即代表你已阅读并同意'
+        ] */
     ];
     public function __construct(array $data = [])
     {

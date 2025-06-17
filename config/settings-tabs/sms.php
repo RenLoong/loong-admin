@@ -18,7 +18,7 @@ return [
             ],
             'options' => SmsChannels::getOptions(),
             'subProps' => [
-                'border' => 1
+                'border' => true
             ]
         ]
     ],

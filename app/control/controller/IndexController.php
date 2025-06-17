@@ -4,6 +4,7 @@ namespace app\control\controller;
 
 use app\Basic;
 use app\expose\build\builder\DataboardBuilder;
+use app\expose\helper\Config;
 use support\Request;
 
 class IndexController extends Basic

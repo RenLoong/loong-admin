@@ -6,7 +6,7 @@ class AdminRole extends Basic
 {
     public $json = ['rule'];
     public $jsonAssoc = true;
-    public static function getOptions($pid = null, $where = [])
+    public static function options($pid = null, $where = [])
     {
         if ($pid) {
             $data = self::where($where)->where(['pid' => $pid])->select();
@@ -22,7 +22,7 @@ class AdminRole extends Basic
                 'value' => $item->id,
                 'label' => $item['name']
             ];
-            $children = self::getOptions($item->id, $where);
+            $children = self::options($item->id, $where);
             if (!empty($children)) {
                 $temp['children'] = $children;
             }
@@ -30,7 +30,7 @@ class AdminRole extends Basic
         }
         return $options;
     }
-    public static function getSystemRole($column = '*')
+    public static function systemRole($column = '*')
     {
         return self::where('is_system', 1)->column($column);
     }

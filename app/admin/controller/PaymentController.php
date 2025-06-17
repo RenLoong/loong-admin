@@ -91,7 +91,7 @@ class PaymentController extends Basic
             'component' => [
                 'name' => 'select',
                 'api' => 'Payment/indexUpdateField',
-                'options' => PaymentTemplate::getOptions(),
+                'options' => PaymentTemplate::options(),
                 'props' => [
                     'clearable' => true
                 ]
