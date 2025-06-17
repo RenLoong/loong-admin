@@ -34,6 +34,6 @@ class CaptchaController extends Basic
 
     public function captchaCode()
     {
-        return $this->success(null, Captcha::captchaCode());
+        return $this->resData( Captcha::captchaCode());
     }
 }
