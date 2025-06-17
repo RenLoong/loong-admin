@@ -100,7 +100,7 @@ trait Json
     {
         $request=request();
         if($request&&$request->lang){
-            $data['msg']=trans($data['msg'],[], null, $request->lang);
+            // $data['msg']=trans($data['msg'],[], null, $request->lang);
         }
         return new Response($http_code, ['Content-Type' => 'application/json'], json_encode($data, $options));
     }

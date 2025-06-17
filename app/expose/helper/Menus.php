@@ -41,7 +41,7 @@ class Menus extends DataModel
     public function __construct($Install)
     {
         $request = request();
-        $lang = '';
+        $lang = null;
         if ($request && $request->lang) {
             $lang = $request->lang;
         }
@@ -56,7 +56,7 @@ class Menus extends DataModel
             $plugin = new $class;
             $menus = $plugin->getMenus();
             if ($menus) {
-                if ($lang) {
+                if ($lang&&isset($plugin->plugin)) {
                     $request->plugin = $plugin_name;
                     $this->translateChildren($menus, $request->app,$lang);
                 }
