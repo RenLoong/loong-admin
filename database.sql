@@ -1,18 +1,3 @@
-/*
- Navicat Premium Data Transfer
-
- Source Server         : Loong199
- Source Server Type    : MySQL
- Source Server Version : 80036 (8.0.36)
- Source Host           : 127.0.0.1:3306
- Source Schema         : cloud_renloong_c
-
- Target Server Type    : MySQL
- Target Server Version : 80036 (8.0.36)
- File Encoding         : 65001
-
- Date: 07/06/2025 17:53:07
-*/
 
 SET NAMES utf8mb4;
 SET FOREIGN_KEY_CHECKS = 0;
@@ -46,7 +31,7 @@ CREATE TABLE `php_admin`  (
 -- ----------------------------
 -- Records of php_admin
 -- ----------------------------
-INSERT INTO `php_admin` VALUES (1, '2024-03-01 18:02:02', '2025-05-20 11:08:19', 1, 'admin', '$2y$10$MWoOQGZIGUBE4fAyB3GrYexNTbAXLh7.cMhLv1OmhERBULB3ZhQDC', 1, '6LaF57qn566h55CG5ZGY', 'uploads/default/20240307/b6bf0d704dfb50dc095ab4570dd64f72_65e9a3dfcf57f.jpeg', '111.121.67.109', '2025-05-20 11:08:19', NULL, '18785305198', NULL, '00:00:00', '23:59:59', '[0,1,2,3,4,5,6]', NULL);
+INSERT INTO `php_admin` VALUES (1, '2024-03-01 18:02:02', '2025-06-19 15:50:22', 1, 'admin', '$2y$10$MWoOQGZIGUBE4fAyB3GrYexNTbAXLh7.cMhLv1OmhERBULB3ZhQDC', 1, '6LaF57qn566h55CG5ZGY', 'uploads/default/20240307/b6bf0d704dfb50dc095ab4570dd64f72_65e9a3dfcf57f.jpeg', '192.168.110.188', '2025-06-19 15:50:22', NULL, '18785305198', NULL, '00:00:00', '23:59:59', '[0,1,2,3,4,5,6]', NULL);
 
 -- ----------------------------
 -- Table structure for php_admin_role
@@ -141,6 +126,10 @@ CREATE TABLE `php_config`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
+-- Records of php_config
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for php_payment_config
 -- ----------------------------
 DROP TABLE IF EXISTS `php_payment_config`;
@@ -153,6 +142,10 @@ CREATE TABLE `php_payment_config`  (
   `is_default` tinyint NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of php_payment_config
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for php_payment_notify_wechat
@@ -176,6 +169,10 @@ CREATE TABLE `php_payment_notify_wechat`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
+-- Records of php_payment_notify_wechat
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for php_payment_template
 -- ----------------------------
 DROP TABLE IF EXISTS `php_payment_template`;
@@ -189,6 +186,29 @@ CREATE TABLE `php_payment_template`  (
   `value` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL,
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of php_payment_template
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for php_plugin_notification_log
+-- ----------------------------
+DROP TABLE IF EXISTS `php_plugin_notification_log`;
+CREATE TABLE `php_plugin_notification_log`  (
+  `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
+  `uid` int NULL DEFAULT NULL,
+  `admin_uid` int NULL DEFAULT NULL,
+  `scene` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `num` int NULL DEFAULT NULL,
+  `create_time` datetime NULL DEFAULT NULL,
+  `update_time` datetime NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of php_plugin_notification_log
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for php_uploads
@@ -211,6 +231,10 @@ CREATE TABLE `php_uploads`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
 
 -- ----------------------------
+-- Records of php_uploads
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for php_uploads_classify
 -- ----------------------------
 DROP TABLE IF EXISTS `php_uploads_classify`;
@@ -224,7 +248,12 @@ CREATE TABLE `php_uploads_classify`  (
   `channels` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `is_system` tinyint NULL DEFAULT 0,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of php_uploads_classify
+-- ----------------------------
+INSERT INTO `php_uploads_classify` VALUES (1, '2025-06-11 12:06:41', '2025-06-11 12:06:41', '默认分类', 'uploads/default', 0, 'public', 1);
 
 -- ----------------------------
 -- Table structure for php_user
@@ -236,17 +265,21 @@ CREATE TABLE `php_user`  (
   `create_time` datetime NULL DEFAULT NULL,
   `update_time` datetime NULL DEFAULT NULL,
   `activation_time` datetime NULL DEFAULT NULL,
-  `username` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `mobile` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `email` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `username` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `password` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `mobile` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `email` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `state` tinyint NULL DEFAULT 1,
-  `nickname` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `headimg` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `login_ip` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `nickname` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `headimg` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `login_ip` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `login_time` datetime NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of php_user
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for php_user_wechat
@@ -255,16 +288,20 @@ DROP TABLE IF EXISTS `php_user_wechat`;
 CREATE TABLE `php_user_wechat`  (
   `id` int UNSIGNED NOT NULL AUTO_INCREMENT,
   `uid` int NULL DEFAULT NULL,
-  `nickname` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `headimg` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `openid` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `unionid` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
-  `mp_openid` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `nickname` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `headimg` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `openid` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `unionid` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
+  `mp_openid` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NULL DEFAULT NULL,
   `subscribe` tinyint(1) NULL DEFAULT 0,
   `update_time` datetime NULL DEFAULT NULL,
   `create_time` datetime NULL DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   UNIQUE INDEX `uid`(`uid` ASC) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci ROW_FORMAT = DYNAMIC;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_0900_ai_ci ROW_FORMAT = DYNAMIC;
+
+-- ----------------------------
+-- Records of php_user_wechat
+-- ----------------------------
 
 SET FOREIGN_KEY_CHECKS = 1;
