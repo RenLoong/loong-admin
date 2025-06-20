@@ -75,6 +75,7 @@ class SystemController extends Basic
         }
         $config = config('plugin.shopwwi.filesystem.app');
         $builder = new FormBuilder(null, null, [
+            'translations'=>true,
             'submitEvent' => SubmitEvent::SILENT
         ]);
         $defaultOptions = Filesystem::getOptions();
