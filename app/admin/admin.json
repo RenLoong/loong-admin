@@ -22,32 +22,26 @@
             {
                 "title": "User List",
                 "icon": "User",
-                "path": "User/group",
+                "path": "User/index",
+                "component": "table",
                 "children": [
                     {
-                        "title": "User List",
-                        "path": "User/index",
-                        "component": "table",
-                        "children": [
-                            {
-                                "title": "Create User",
-                                "path": "User/create",
-                                "show": false,
-                                "component": "form"
-                            },
-                            {
-                                "title": "Edit User",
-                                "show": false,
-                                "path": "User/update",
-                                "component": "form"
-                            },
-                            {
-                                "title": "Update Status",
-                                "show": false,
-                                "path": "User/indexUpdateState",
-                                "component": ""
-                            }
-                        ]
+                        "title": "Create User",
+                        "path": "User/create",
+                        "show": false,
+                        "component": "form"
+                    },
+                    {
+                        "title": "Edit User",
+                        "show": false,
+                        "path": "User/update",
+                        "component": "form"
+                    },
+                    {
+                        "title": "Update Status",
+                        "show": false,
+                        "path": "User/indexUpdateState",
+                        "component": ""
                     }
                 ]
             }
