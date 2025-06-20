@@ -1,7 +1,9 @@
 <?php
 use Webman\Push\Server;
+$enable=file_exists(base_path('plugin/notification'));
 return [
     'server' => [
+        'enable' => $enable,
         'handler' => Server::class,
         'listen' => 'websocket://0.0.0.0:'.getenv('PUSH_WSS_PORT'),
         'count' => 1,

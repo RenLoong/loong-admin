@@ -27,6 +27,10 @@ class FormBuilder extends DataModel
     protected $translations=false;
     public function __construct($formName = null, $formTitle = null, $props = [])
     {
+        if(isset($props['translations'])){
+            $this->translations=$props['translations'];
+            unset($props['translations']);
+        }
         $this->data['props'] = $props;
         $this->data['name'] = $formName ?? 'basic';
         $this->data['title'] = $this->trans($formTitle) ?? $this->trans('form_basic_title');

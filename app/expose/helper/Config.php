@@ -19,7 +19,7 @@ class Config extends DataModel
      * @param string $group 配置分组，settings目录下的文件名
      * @param string|null $plugin 如若要获取全局配置，请传入''
      */
-    public function __construct(string $group, string $plugin = null)
+    public function __construct(string $group, string|null $plugin = null)
     {
         if ($plugin === null) {
             $request = request();
@@ -38,7 +38,7 @@ class Config extends DataModel
      * @param mixed $default 默认数据
      * @return array|mixed
      */
-    public static function get(string $group, string $field = null, mixed $default = null)
+    public static function get(string $group, string|null $field = null, mixed $default = null)
     {
         $self = new self($group);
         if ($field) {
@@ -107,6 +107,7 @@ class Config extends DataModel
         $builder = new FormBuilder(null, null, [
             'submitEvent' => SubmitEvent::SILENT
         ]);
+        $builder->setTranslations();
         $groupData = $self->getGroupData();
         foreach ($groupData as $key => $item) {
             $builder->add($item['field'], $item['title'], $item['component'], $item['value'], $item['extra']);

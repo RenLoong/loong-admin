@@ -81,6 +81,7 @@ class ConfigGroup extends DataModel
     {
         $self = new self($group);
         $builder = new FormBuilder(null, null, [
+            'translations'=>true,
             'submitEvent' => SubmitEvent::SILENT
         ]);
         $groupData = $self->getGroupData();
