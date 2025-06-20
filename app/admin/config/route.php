@@ -14,7 +14,7 @@ $admin_path = getenv('SERVER_ADMIN_PATH');
 if ($admin_path && $admin_path != 'admin') {
     Route::any('/admin/[{path:.+}]', function () {
         $request = request();
-        $error = "ADMIN ROUTE:{$request->getRealIp()} {$request->method()} {$request->uri()} {$request->host(true)}";
+        $error = "ADMIN ROUTE:{$request->getRealIp()} {$request->method()} {$request->host(true)}{$request->uri()}";
         Log::error($error);
         return not_found();
     });
@@ -27,7 +27,7 @@ if ($admin_path && $admin_path != 'admin') {
         $action = empty($pathArr[3]) ? 'index' : $pathArr[3];
         $controller = '\\app\\admin\\controller\\' . $controller . 'Controller';
         if (!class_exists($controller)) {
-            $error = "ADMIN ROUTE:{$request->getRealIp()} {$request->method()} {$request->uri()} {$request->host(true)}";
+            $error = "ADMIN ROUTE:{$request->getRealIp()} {$request->method()} {$request->host(true)}{$request->uri()}";
             Log::error($error);
             return not_found();
         }
