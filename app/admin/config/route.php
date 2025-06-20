@@ -1,19 +1,21 @@
 <?php
+
 /**
  * 自定义Admin入口
  * @authors 余心(RenLoong)
  * @home https://github.com/RenLoong/loong-admin
  */
+
 use app\expose\utils\Str;
+use support\Log;
 use Webman\Route;
 
 $admin_path = getenv('SERVER_ADMIN_PATH');
 if ($admin_path && $admin_path != 'admin') {
-
-    Route::any('/admin', function () {
-        return not_found();
-    });
-    Route::any('/admin/', function () {
+    Route::any('/admin/[{path:.+}]', function () {
+        $request = request();
+        $error = "ADMIN ROUTE:{$request->getRealIp()} {$request->method()} {$request->uri()} {$request->host(true)}";
+        Log::error($error);
         return not_found();
     });
     Route::any('/' . $admin_path . '/[{path:.+}]', function () {
@@ -25,15 +27,17 @@ if ($admin_path && $admin_path != 'admin') {
         $action = empty($pathArr[3]) ? 'index' : $pathArr[3];
         $controller = '\\app\\admin\\controller\\' . $controller . 'Controller';
         if (!class_exists($controller)) {
+            $error = "ADMIN ROUTE:{$request->getRealIp()} {$request->method()} {$request->uri()} {$request->host(true)}";
+            Log::error($error);
             return not_found();
         }
-        $request->app='admin';
-        $request->controller=$controller;
-        $request->action=$action;
-        $config_middlewares=config('middleware');
-        $common_middlewares=isset($config_middlewares[''])?$config_middlewares['']:[];
-        $admin_middlewares=isset($config_middlewares['admin'])?$config_middlewares['admin']:[];
-        $middlewares = array_merge($common_middlewares,$admin_middlewares);
+        $request->app = 'admin';
+        $request->controller = $controller;
+        $request->action = $action;
+        $config_middlewares = config('middleware');
+        $common_middlewares = isset($config_middlewares['']) ? $config_middlewares[''] : [];
+        $admin_middlewares = isset($config_middlewares['admin']) ? $config_middlewares['admin'] : [];
+        $middlewares = array_merge($common_middlewares, $admin_middlewares);
 
         // 最终的控制器处理逻辑（核心 handler）
         $coreHandler = function () use ($controller, $action, $args) {
@@ -45,7 +49,7 @@ if ($admin_path && $admin_path != 'admin') {
             array_reverse($middlewares),
             function ($next, $middleware) {
                 return function ($request) use ($middleware, $next) {
-                    $middleware=new $middleware;
+                    $middleware = new $middleware;
                     return $middleware->process($request, $next);
                 };
             },
