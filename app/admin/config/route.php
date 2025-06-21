@@ -12,6 +12,12 @@ use Webman\Route;
 
 $admin_path = getenv('SERVER_ADMIN_PATH');
 if ($admin_path && $admin_path != 'admin') {
+    Route::any('/admin', function () {
+        $request = request();
+        $error = "ADMIN ROUTE:{$request->getRealIp()} {$request->method()} {$request->host(true)}{$request->uri()}";
+        Log::error($error);
+        return not_found();
+    });
     Route::any('/admin/[{path:.+}]', function () {
         $request = request();
         $error = "ADMIN ROUTE:{$request->getRealIp()} {$request->method()} {$request->host(true)}{$request->uri()}";
