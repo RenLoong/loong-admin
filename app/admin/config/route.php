@@ -18,7 +18,7 @@ if ($admin_path && $admin_path != 'admin') {
         Log::error($error);
         return not_found();
     });
-    Route::any('/' . $admin_path . '/[{path:.+}]', function () {
+    Route::any('/' . $admin_path . '[{path:.+}]', function () {
         $args = func_get_args();
         $request = $args[0];
         $pathArr = explode('/', $request->path());
