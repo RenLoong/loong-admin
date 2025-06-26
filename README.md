@@ -3,6 +3,10 @@
 #### 教程
 
 ```binsh
+composer create-project loong/admin
+```
+
+```binsh
 git clone https://github.com/RenLoong/loong-admin.git
 ```
 

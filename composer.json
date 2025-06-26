@@ -6,7 +6,7 @@
     "后台管理",
     "后端渲染"
   ],
-  "homepage": "https://www.renloong.com",
+  "homepage": "https://github.com/RenLoong/loong-admin.git",
   "license": "MIT",
   "description": "一款让开发者专注后端PHP业务开发的高性能框架,基于Webman框架开发",
   "authors": [
