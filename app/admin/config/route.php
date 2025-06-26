@@ -5,58 +5,69 @@
  * @authors 余心(RenLoong)
  * @home https://github.com/RenLoong/loong-admin
  */
-
-use app\expose\utils\Str;
-use support\Log;
 use Webman\Route;
 
 $admin_path = getenv('SERVER_ADMIN_PATH');
 if ($admin_path && $admin_path != 'admin') {
-    Route::any('/admin[{path:.+}]', function () {
-        $request = request();
-        $error = "ADMIN ROUTE:{$request->getRealIp()} {$request->method()} {$request->host(true)}{$request->uri()}";
-        Log::error($error);
-        return not_found();
-    });
-    Route::any('/' . $admin_path . '[{path:.+}]', function () {
-        $args = func_get_args();
-        $request = $args[0];
-        $pathArr = explode('/', $request->path());
-        // Str::title(),转为首字母大写的标题格式
-        $controller = Str::title(empty($pathArr[2]) ? 'Index' : $pathArr[2]);
-        $action = empty($pathArr[3]) ? 'index' : $pathArr[3];
-        $controller = '\\app\\admin\\controller\\' . $controller . 'Controller';
-        if (!class_exists($controller)) {
-            $error = "ADMIN ROUTE:{$request->getRealIp()} {$request->method()} {$request->host(true)}{$request->uri()}";
-            Log::error($error);
-            return not_found();
+    Route::disableDefaultRoute('', 'admin');
+    $controllersClass = glob(app_path('admin') . '/controller/*Controller.php');
+    $len = count($controllersClass);
+    $routes = [];
+    for ($i = 0; $i < $len; $i++) {
+        $value = $controllersClass[$i];
+        $controllerName = str_replace('Controller', '', basename($value, '.php'));
+        $classStr = 'app' . str_replace([app_path(), '.php', '/'], ['', '', '\\'], $value);
+        $reflection = new \ReflectionClass('\\'.$classStr);
+
+        // 忽略抽象类、接口
+        if ($reflection->isAbstract() || $reflection->isInterface()) {
+            continue;
         }
-        $request->app = 'admin';
-        $request->controller = $controller;
-        $request->action = $action;
-        $config_middlewares = config('middleware');
-        $common_middlewares = isset($config_middlewares['']) ? $config_middlewares[''] : [];
-        $admin_middlewares = isset($config_middlewares['admin']) ? $config_middlewares['admin'] : [];
-        $middlewares = array_merge($common_middlewares, $admin_middlewares);
 
-        // 最终的控制器处理逻辑（核心 handler）
-        $coreHandler = function () use ($controller, $action, $args) {
-            return call_user_func_array([new $controller, $action], $args);
-        };
+        $actions = $reflection->getMethods(ReflectionMethod::IS_PUBLIC);
+        $actionsLen = count($actions);
+        for ($n = 0; $n < $actionsLen; $n++) {
+            $name = $actions[$n]->name;
+            if (!str_starts_with($name, '__')) {
+                $routes["/{$controllerName}/{$name}"] = [$classStr, $name];
+            }
+        }
+    }
+    $controllersVersionClass = glob(app_path('admin') . '/controller/**/*Controller.php');
+    if (!empty($controllersVersionClass)) {
+        $len = count($controllersVersionClass);
+        for ($i = 0; $i < $len; $i++) {
+            $value = $controllersVersionClass[$i];
+            $version=basename(dirname($value));
+            $controllerName = str_replace('Controller', '', basename($value, '.php'));
+            $classStr = 'app' . str_replace([app_path(), '.php', '/'], ['', '', '\\'], $value);
+            $reflection = new \ReflectionClass('\\' . $classStr);
 
-        // 构建中间件洋葱圈
-        $dispatcher = array_reduce(
-            array_reverse($middlewares),
-            function ($next, $middleware) {
-                return function ($request) use ($middleware, $next) {
-                    $middleware = new $middleware;
-                    return $middleware->process($request, $next);
-                };
-            },
-            $coreHandler // 最终业务处理
-        );
+            // 忽略抽象类、接口
+            if ($reflection->isAbstract() || $reflection->isInterface()) {
+                continue;
+            }
 
-        // 执行并返回响应
-        return $dispatcher($request);
+            $actions = $reflection->getMethods(ReflectionMethod::IS_PUBLIC);
+            $actionsLen = count($actions);
+            for ($n = 0; $n < $actionsLen; $n++) {
+                $name = $actions[$n]->name;
+
+                if (!str_starts_with($name, '__')) {
+                    $routes["/{$version}/{$controllerName}/{$name}"] = [$classStr, $name];
+                }
+            }
+        }
+    }
+    Route::group('/' . $admin_path, function ()use($routes) {
+        foreach ($routes as $key => $value) {
+            if(in_array($value[1],['indexUpdateField','indexUpdateState'])){
+                Route::post($key,$value);
+            }else if(strpos($value[1],'GetTable')){
+                Route::get($key,$value);
+            }else{
+                Route::any($key,$value);
+            }
+        }
     });
 }

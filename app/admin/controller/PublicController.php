@@ -89,6 +89,18 @@ class PublicController extends Basic
         ]);
         $config->useUserDropdownMenu($userDropdownMenu->toArray());
         $config->storage = Filesystem::getOptions();
+        $pluginConfig = glob(base_path("plugin/*/api/{$request->app}/PublicController.php"));
+        foreach ($pluginConfig as $path) {
+            $plugin_name = basename(dirname(dirname(dirname($path))));
+            $class = 'plugin\\' . $plugin_name . "\\api\\{$request->app}\\PublicController";
+            if (!class_exists($class)) {
+                continue;
+            }
+            $plugin = new $class;
+            if (method_exists($plugin, 'config')) {
+                $plugin->config($config);
+            }
+        }
         return $this->resData($config);
     }
     public function menus(Request $request)

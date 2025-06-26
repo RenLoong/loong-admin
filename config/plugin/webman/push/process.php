@@ -11,7 +11,7 @@ return [
             'api_listen' => 'http://0.0.0.0:'.getenv('PUSH_API_PORT'),
             'app_info'   => [
                 getenv('PUSH_KEY') => [
-                    'channel_hook' => 'http://127.0.0.1:'.getenv('SERVER_PORT').'/plugin/webman/push/hook',
+                    'channel_hook' => 'http://127.0.0.1:'.getenv('SERVER_PORT').'/app/notification/push/hook',
                     'app_secret'   => getenv('PUSH_SCERET'),
                 ],
             ],

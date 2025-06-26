@@ -68,7 +68,7 @@ class PaymentController extends Basic
         }
         return $this->resData($tabs);
     }
-    public function getFormBuilder($PaymentConfig, $Platform, $channels)
+    private function getFormBuilder($PaymentConfig, $Platform, $channels)
     {
         $builder = new TableBuilder([
             'border' => false,

@@ -309,7 +309,7 @@ class UserController extends Basic
         $builder->setData($User->toArray());
         return $this->resData($builder);
     }
-    public function getFormBuilder()
+    private function getFormBuilder()
     {
         $builder = new FormBuilder;
         $builder->add('nickname', '昵称', 'input', '', [

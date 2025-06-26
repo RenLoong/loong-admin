@@ -456,7 +456,7 @@ class AdminController extends Basic
         $builder->setData($Admin->toArray());
         return $this->resData($builder);
     }
-    public function getFormBuilder($is_system = false)
+    private function getFormBuilder($is_system = false)
     {
         $builder = new FormBuilder;
         $builder->add('role_id', '所属角色', 'cascader', null, [

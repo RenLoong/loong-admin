@@ -240,7 +240,7 @@ class AdminRoleController extends Basic
         $builder->setData($AdminRole->toArray());
         return $this->resData($builder);
     }
-    public function getFormBuilder($update = false)
+    private function getFormBuilder($update = false)
     {
         $builder = new FormBuilder;
         $Component = new ComponentBuilder;

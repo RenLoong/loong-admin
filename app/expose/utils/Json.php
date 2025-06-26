@@ -17,7 +17,7 @@ trait Json
      * @param mixed $data 数据
      * @return Response
      */
-    public static function success($msg = 'success', $data = [])
+    protected static function success($msg = 'success', $data = [])
     {
         return self::json(['code' => ResponseCode::SUCCESS, 'msg' => $msg, 'data' => $data]);
     }
@@ -28,7 +28,7 @@ trait Json
      * @param mixed $data 数据
      * @return Response
      */
-    public static function fail(string $msg = 'fail', $data = [])
+    protected static function fail(string $msg = 'fail', $data = [])
     {
         return self::json(['code' => ResponseCode::FAIL, 'msg' => $msg, 'data' => $data]);
     }
@@ -38,11 +38,11 @@ trait Json
      * @param mixed $data 数据
      * @return Response
      */
-    public static function resData($data)
+    protected static function resData($data)
     {
         return self::json(['code' => ResponseCode::SUCCESS, 'msg' => 'success', 'data' => $data]);
     }
-    public static function event($event, $msg = 'success')
+    protected static function event($event, $msg = 'success')
     {
         return self::code(ResponseCode::SUCCESS_EVENT_PUSH, $msg, [
             'event' => $event
@@ -56,7 +56,7 @@ trait Json
      * @param mixed $data 数据
      * @return Response
      */
-    public static function code($code, $msg = null, $data = [])
+    protected static function code($code, $msg = null, $data = [])
     {
         return self::json(['code' => $code, 'msg' => $msg, 'data' => $data]);
     }
@@ -66,7 +66,7 @@ trait Json
      * @param \Throwable $th 捕获的异常
      * @return Response
      */
-    public static function exception($th)
+    protected static function exception($th)
     {
         $data = [];
         if (config('app.debug')) {
@@ -84,7 +84,7 @@ trait Json
      * @param \Throwable $th 捕获的异常
      * @return Response
      */
-    public static function server($th, $http_code = 500)
+    protected static function server($th, $http_code = 500)
     {
         return self::json(['code' => $th->getCode() ? $th->getCode() : ResponseCode::FAIL, 'msg' => $th->getMessage(), 'data' => ['file' => $th->getFile(), 'line' => $th->getLine()]], JSON_UNESCAPED_UNICODE, $http_code);
     }
@@ -96,7 +96,7 @@ trait Json
      * @param int $http_code 服务器响应代码
      * @return Response
      */
-    public static function json($data, $options = JSON_UNESCAPED_UNICODE, $http_code = 200)
+    protected static function json($data, $options = JSON_UNESCAPED_UNICODE, $http_code = 200)
     {
         $request=request();
         if($request&&$request->lang){

@@ -25,7 +25,7 @@ trait Config
      * 配置管理
      * @return mixed
      */
-    public function builder($callback = null)
+    private function builder($callback = null)
     {
         $request = request();
         if ($request->method() === 'POST') {
@@ -34,7 +34,7 @@ trait Config
         $builder = HelperConfig::formBuilder($request->action);
         return $this->resData($builder);
     }
-    public function tabsBuilder($callback = null)
+    private function tabsBuilder($callback = null)
     {
         $request = request();
         if ($request->method() === 'POST') {
@@ -43,7 +43,7 @@ trait Config
         $builder = ConfigGroup::formBuilder($request->action);
         return $this->resData($builder);
     }
-    public function update($callback = null)
+    private function update($callback = null)
     {
         $request = request();
         $HelperConfig = new HelperConfig($request->action);

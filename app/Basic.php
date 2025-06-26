@@ -9,6 +9,10 @@ class Basic
 {
     protected $model;
     use Json;
+    /**
+     * 更新指定字段
+     * @method POST
+     */
     public function indexUpdateField(Request $request)
     {
         $id = $request->post('id');
@@ -24,6 +28,10 @@ class Basic
         }
         return $this->fail('操作失败');
     }
+    /**
+     * 更新状态字段
+     * @method POST
+     */
     public function indexUpdateState(Request $request)
     {
         $id = $request->post('id');

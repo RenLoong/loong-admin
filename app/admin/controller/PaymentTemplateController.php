@@ -144,7 +144,7 @@ class PaymentTemplateController extends Basic
             }
             return $this->fail('新增失败');
         }
-        $builder = $this->formBuilder();
+        $builder = $this->getFormBuilder();
         return $this->resData($builder);
     }
     public function update(Request $request)
@@ -172,7 +172,7 @@ class PaymentTemplateController extends Basic
         if (!$model) {
             return $this->fail('数据不存在');
         }
-        $builder = $this->formBuilder(true);
+        $builder = $this->getFormBuilder(true);
         $data = [
             'id' => $model->id,
             'title' => $model->title,
@@ -184,7 +184,7 @@ class PaymentTemplateController extends Basic
         $builder->setData($data);
         return $this->resData($builder);
     }
-    public function getValue($channels, $D)
+    private function getValue($channels, $D)
     {
         $value = [];
         switch ($channels) {
@@ -222,7 +222,7 @@ class PaymentTemplateController extends Basic
         }
         return $value;
     }
-    public function formBuilder($update = false)
+    private function getFormBuilder($update = false)
     {
         $builder = new FormBuilder(null, '', [
             'labelWidth' => '300px',
