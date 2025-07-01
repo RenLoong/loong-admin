@@ -23,7 +23,7 @@ class UserController extends Basic
     {
         $builder = new TableBuilder;
         $builder->addAction('操作', [
-            'width' => '200px',
+            'width' => '100px',
             'fixed' => 'right'
         ]);
         $builder->addTableAction('编辑', [
