@@ -136,8 +136,8 @@ class UserController extends Basic
             ]
         ]);
         $builder->add('puserinfo', '上级', [
-            'where'=>[
-                ['puid','!=',null]
+            'where' => [
+                ['puid', '!=', null]
             ],
             'component' => [
                 'name' => 'table-userinfo',
@@ -259,11 +259,17 @@ class UserController extends Basic
             ->join('user p', 'u.puid = p.id', 'LEFT')
             ->field('u.*,p.nickname as  pnickname,p.headimg as pheadimg')
             ->order('u.id desc')->paginate($limit)->each(function ($item) {
-                if($item->pheadimg){
-                    $item->pheadimg=Uploads::url($item->pheadimg);
+                if ($item->pheadimg) {
+                    $item->pheadimg = Uploads::url($item->pheadimg);
                 }
-                if($item->pnickname){
-                    $item->pnickname=base64_decode($item->pnickname);
+                if ($item->pnickname) {
+                    $item->pnickname = base64_decode($item->pnickname);
+                }
+                // 三天以内创建的
+                $create_time = strtotime($item->create_time);
+                $create_time = time() - $create_time;
+                if ($create_time < 3 * 24 * 60 * 60) {
+                    $item->new_text = '新用户';
                 }
             });
         return $this->resData($list);
