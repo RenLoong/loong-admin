@@ -320,7 +320,12 @@ class UserController extends Basic
     }
     private function getFormBuilder()
     {
-        $builder = new FormBuilder;
+        $builder = new FormBuilder(null, null, [
+            'labelPosition' => 'right',
+            'label-width' => "200px",
+            'class' => 'w-80 mx-auto',
+            'size' => 'large',
+        ]);
         $builder->add('nickname', '昵称', 'input', '', [
             'required' => true,
             'maxlength' => 30,
