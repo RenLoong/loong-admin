@@ -22,9 +22,13 @@ trait Uploads
         }
         $accept = $request->get('accept');
         if ($accept) {
-            # 替换掉*号
-            $accept = str_replace('*', '', $accept);
-            $where[] = ['u.mime', 'like', "%{$accept}%"];
+            # 判断是否包含*号
+            if (strpos($accept, '*') !== false) {
+                $accept = str_replace('*', '', $accept);
+                $where[] = ['u.mime', 'like', "%{$accept}%"];
+            } else {
+                $where[] = ['u.mime', 'in', explode(',', $accept)];
+            }
         }
         if ($this->uid) {
             $where[] = ['u.uid', '=', $this->uid];
