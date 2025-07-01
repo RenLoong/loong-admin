@@ -326,12 +326,16 @@ class UserController extends Basic
             'class' => 'w-80 mx-auto',
             'size' => 'large',
         ]);
+        $Component = new ComponentBuilder;
         $builder->add('nickname', '昵称', 'input', '', [
             'required' => true,
             'maxlength' => 30,
             'show-word-limit' => true
         ]);
         $builder->add('headimg', '头像', 'bundle', '', [
+            'prompt' => [
+                $Component->add('text', ['default' => '支持jpg、png、jpeg格式，大小不超过2M'], ['type' => 'info', 'size' => 'small'])->builder()
+            ],
             'props' => [
                 'accept' => 'image/jpeg,image/png,image/jpg',
                 'multiple' => 1,
@@ -339,27 +343,41 @@ class UserController extends Basic
             ]
         ]);
         $builder->add('username', '账号', 'input', '', [
+            'prompt' => [
+                $Component->add('text', ['default' => '支持字母、数字、下划线，长度不超过30个字符'], ['type' => 'info', 'size' => 'small'])->builder(),
+                $Component->add('text', ['default' => '可用于账号登录'], ['type' => 'success', 'size' => 'small'])->builder()
+            ],
             'props' => [
                 'maxlength' => 30,
                 'show-word-limit' => true
             ]
         ]);
         $builder->add('mobile', '手机号', 'input', '', [
+            'prompt' => [
+                $Component->add('text', ['default' => '中国大陆11位手机号'], ['type' => 'info', 'size' => 'small'])->builder(),
+                $Component->add('text', ['default' => '可用于账号，短信验证码登录'], ['type' => 'success', 'size' => 'small'])->builder()
+            ],
             'props' => [
                 'maxlength' => 11,
                 'show-word-limit' => true
             ]
         ]);
-        $builder->add('password', '密码', 'input', '', [
+        $builder->add('email', '邮箱', 'input', '', [
+            'prompt' => [
+                $Component->add('text', ['default' => '可用于账号，邮箱验证码登录'], ['type' => 'success', 'size' => 'small'])->builder()
+            ],
             'props' => [
-                'placeholder' => '不修改密码请留空',
-                'maxlength' => 30,
+                'maxlength' => 100,
                 'show-word-limit' => true
             ]
         ]);
-        $builder->add('email', '邮箱', 'input', '', [
+        $builder->add('password', '密码', 'input', '', [
+            'prompt' => [
+                $Component->add('text', ['default' => '不修改密码请留空'], ['type' => 'info', 'size' => 'small'])->builder()
+            ],
             'props' => [
-                'maxlength' => 100,
+                'placeholder' => '不修改密码请留空',
+                'maxlength' => 30,
                 'show-word-limit' => true
             ]
         ]);
