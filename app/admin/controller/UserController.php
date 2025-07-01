@@ -136,6 +136,9 @@ class UserController extends Basic
             ]
         ]);
         $builder->add('puserinfo', '上级', [
+            'where'=>[
+                ['puid','!=',null]
+            ],
             'component' => [
                 'name' => 'table-userinfo',
                 'props' => [
