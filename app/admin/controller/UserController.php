@@ -124,7 +124,7 @@ class UserController extends Basic
                         [
                             'field' => 'new_text',
                             'props' => [
-                                'type' => 'danger',
+                                'type' => 'success',
                                 'size' => 'small'
                             ]
                         ]
