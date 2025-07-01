@@ -28,7 +28,7 @@ class ControlAuth implements MiddlewareInterface
         try {
             $control_config=new Config('control','');
             if(!$control_config['state']){
-                throw new Exception(trans('Control Not Open', [], $request->app, $request->lang), ResponseCode::FAIL);
+                return not_found();
             }
             $this->Icode($request);
             $this->Authorization($request);

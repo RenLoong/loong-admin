@@ -333,8 +333,9 @@ class UserController extends Basic
         ]);
         $builder->add('headimg', '头像', 'bundle', '', [
             'props' => [
-                'accept' => 'image/*',
-                'multiple' => 1
+                'accept' => 'image/jpeg,image/png,image/jpg',
+                'multiple' => 1,
+                'size' => 2
             ]
         ]);
         $builder->add('username', '账号', 'input', '', [
