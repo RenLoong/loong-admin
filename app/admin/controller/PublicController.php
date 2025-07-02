@@ -66,17 +66,6 @@ class PublicController extends Basic
                 'target'=>'_blank'
             ]
         ]);
-        $control_config = Config::get('control');
-        if($control_config['state']){
-            $toolbar->add(EnumAction::LINK['value'], [
-                'icon' => 'ElementPlus',
-                'tips'=>trans('toolbar Control', [], $domain, $lang),
-                'props'=>[
-                    'url'=>'/control/',
-                    'target'=>'_blank'
-                ]
-            ]);
-        }
         $config->useToolbar($toolbar->toArray());
         $userDropdownMenu = new Action();
         $userDropdownMenu->add(EnumAction::DIALOG['value'], [

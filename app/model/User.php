@@ -2,7 +2,7 @@
 
 namespace app\model;
 
-use app\control\api\Control;
+use plugin\control\api\Control;
 use app\expose\helper\Uploads;
 use app\expose\utils\Password;
 use loong\oauth\facade\Auth;
@@ -32,14 +32,12 @@ class User extends Basic
     public static function getTokenInfo($model)
     {
         $request = request();
-        $Control=new Control;
-        $permissions = $Control->getPermissions();
         /* 重组用户信息 */
         $User = new \stdClass;
         $User->nickname = $model->nickname;
         $User->headimg = $model->headimg;
         $User->username = $model->username;
-        $User->permissions = $permissions;
+        $User->is_system = 1;
 
         $pluginConfig = glob(base_path("plugin/*/api/{$request->app}/PublicController.php"));
         foreach ($pluginConfig as $path) {
@@ -59,7 +57,6 @@ class User extends Basic
         $data->username = $model->username;
         $data->mobile = $model->mobile;
         $data->email = $model->email;
-        $data->permissions = $permissions;
         $User->token = Auth::setPrefix('CONTROL')->encrypt($data);
         return $User;
     }

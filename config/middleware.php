@@ -5,9 +5,6 @@ return [
         app\middleware\Access::class,
         app\middleware\Platform::class
     ],
-    'control' => [
-        app\control\middleware\Auth::class
-    ],
     'admin' => [
         app\admin\middleware\Auth::class
     ]
