@@ -2,9 +2,6 @@
 namespace app\expose\utils\wechat\modules;
 
 use app\expose\enum\EventName;
-use app\expose\enum\State;
-use app\model\User;
-use app\model\UserWechat;
 use support\Redis;
 use Webman\Event\Event as EventEvent;
 
@@ -15,29 +12,10 @@ trait Event
         switch($data['Event'])
         {
             case 'subscribe':
-                $UserWechat=UserWechat::where('openid',$data['FromUserName'])->find();
-                if($UserWechat)
-                {
-                    $UserWechat->subscribe=State::YES['value'];
-                    $UserWechat->save();
-                    if($UserWechat->uid){
-                        $User=User::where('id',$UserWechat->uid)->find();
-                        return $this->replyText($data,'欢迎回来：'.$User->nickname);
-                    }
-                    return $this->replyText($data,'欢迎关注：'.$UserWechat->nickname);
-                }
-                $UserWechat=new UserWechat();
-                $UserWechat->openid=$data['FromUserName'];
-                $UserWechat->subscribe=State::YES['value'];
-                $UserWechat->save();
+                EventEvent::emit(EventName::WECHAT_OFFICIAL_ACCOUNT_SUBSCRLBE['value'],$data);
                 return $this->replyText($data,'欢迎关注');
             case 'unsubscribe':
-                $UserWechat=UserWechat::where('openid',$data['FromUserName'])->find();
-                if($UserWechat)
-                {
-                    $UserWechat->subscribe=State::NO['value'];
-                    $UserWechat->save();
-                }
+                EventEvent::emit(EventName::WECHAT_OFFICIAL_ACCOUNT_UNSUBSCRLBE['value'],$data);
                 return $this->replyText($data,'路远，再会。');
             case 'SCAN':
                 $Scene=Redis::get($data['EventKey']);

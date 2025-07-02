@@ -63,6 +63,6 @@ return [
     'Please Enter 6 Digits PIN Code'=>'Please Enter 6 Digits PIN Code',
     'Lock Success'=>'Lock Success',
     'Unlock Success'=>'Unlock Success',
-    'form_basic_title'=>'Basic Settings',
+    'form_basic_title'=>'Basic',
     'Settings_basic_web_name'=>'Apps Name'
 ];

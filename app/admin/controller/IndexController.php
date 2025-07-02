@@ -4,8 +4,6 @@ namespace app\admin\controller;
 
 use app\Basic;
 use app\expose\build\builder\DataboardBuilder;
-use app\expose\build\builder\databoardBuilder\component\Statistic;
-use app\model\User;
 use support\Request;
 
 class IndexController extends Basic
@@ -29,24 +27,6 @@ class IndexController extends Basic
     {
         $builder = new DataboardBuilder([
             'gutter' => 6
-        ]);
-        $today=User::whereDay('create_time')->count();
-        $yesterday=User::whereDay('create_time','yesterday')->count();
-        $statistic = new Statistic;
-        $statistic->setLabel('今日新注册用户')
-            ->setUnit('人')
-            ->setData([
-                'today' => $today,
-                'yesterday' => $yesterday,
-                'growth_rate' => $yesterday?round(($today-$yesterday)/$yesterday*100,2):0
-            ])
-            ->setClass('p-6');
-        $builder->add($statistic, [
-            'xs' => 24,
-            'sm' => 12,
-            'md' => 6,
-            'lg' => 4,
-            'class' => 'bg-white p-4 rounded-4 shadow-lighter'
         ]);
         $pluginConfig = glob(base_path("plugin/*/api/{$request->app}/IndexController.php"));
         foreach ($pluginConfig as $path) {

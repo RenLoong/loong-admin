@@ -76,6 +76,20 @@ class EventName extends Enum
             'type' => 'primary'
         ]
     ];
+    const WECHAT_OFFICIAL_ACCOUNT_SUBSCRLBE=[
+        'label' => '微信公众号关注',
+        'value' => 'WECHAT_OFFICIAL_ACCOUNT.SUBSCRLBE',
+        'props' => [
+            'type' => 'primary'
+        ]
+    ];
+    const WECHAT_OFFICIAL_ACCOUNT_UNSUBSCRLBE=[
+        'label' => '微信公众号取关',
+        'value' => 'WECHAT_OFFICIAL_ACCOUNT.UNSUBSCRLBE',
+        'props' => [
+            'type' => 'primary'
+        ]
+    ];
     const NOTIFICATION_LIMIT= [
         'label' => '有限通知',
         'value' => 'NOTIFICATION.LIMIT',

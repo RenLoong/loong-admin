@@ -242,30 +242,6 @@ class AdminController extends Basic
                 ]
             ]
         ]);
-        /* $builder->add('state', '状态', [
-            'component' => [
-                'name' => 'tag',
-                'options' => [
-                    [
-                        'label' => '正常',
-                        'value' => 1,
-                        'props' => [
-                            'type' => 'success'
-                        ]
-                    ],
-                    [
-                        'label' => '禁用',
-                        'value' => 0,
-                        'props' => [
-                            'type' => 'danger'
-                        ]
-                    ]
-                ]
-            ],
-            'props' => [
-                'width' => '100px'
-            ]
-        ]); */
         $builder->add('state', '状态', [
             'component' => [
                 'name' => 'switch',

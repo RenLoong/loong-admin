@@ -1,4 +1,5 @@
 <?php
+
 namespace app\expose\utils\wechat;
 
 use app\expose\utils\wechat\modules\Event;
@@ -10,11 +11,11 @@ class OfficialAccount
     use Event;
     public function handle($request, $config)
     {
-        $data = $this->getData($request,$config);
+        $data = $this->getData($request, $config);
         if ($data['MsgType'] === 'event') {
             return $this->handleEvent($data);
         } else {
-            return $this->replyText($data,'hello world');
+            return $this->replyText($data, 'hello world');
         }
     }
     public function checkSignature($request, $config)
@@ -32,24 +33,24 @@ class OfficialAccount
         }
         throw new \Exception('signature error');
     }
-    private function getData($request,$config)
+    private function getData($request, $config)
     {
         $xml = $request->rawBody();
-        $xml = simplexml_load_string($xml, 'SimpleXMLElement', LIBXML_NOCDATA);
-        $xml=json_decode(json_encode($xml),true);
-        if($request->get('encrypt_type')==='aes'){
-            $Encrypt=base64_decode($xml['Encrypt']);
-            $aes_key=$config['aes_key'];
-            $aes_key=base64_decode($aes_key.'=');
-            $iv=substr($aes_key,0,16);
-            $xml=openssl_decrypt($Encrypt,'aes-256-cbc',$aes_key,OPENSSL_RAW_DATA,$iv);
+        $json = simplexml_load_string($xml, 'SimpleXMLElement', LIBXML_NOCDATA);
+        $data = json_decode(json_encode($json), true);
+        if ($request->get('encrypt_type') === 'aes') {
+            $Encrypt = base64_decode($data['Encrypt']);
+            $aes_key = $config['aes_key'];
+            $aes_key = base64_decode($aes_key . '=');
+            $iv = substr($aes_key, 0, 16);
+            $xml = openssl_decrypt($Encrypt, 'aes-256-cbc', $aes_key, OPENSSL_RAW_DATA, $iv);
             $filterHeader = substr($xml, 20);
             $xml = preg_replace('/' . $config['app_id'] . '/', '', $filterHeader);
-            $xml = simplexml_load_string($xml, 'SimpleXMLElement', LIBXML_NOCDATA);
-            $xml=json_decode(json_encode($xml),true);
-            return $xml;
-        }else{
-            return $xml;
+            $json = simplexml_load_string($xml, 'SimpleXMLElement', LIBXML_NOCDATA);
+            $data = json_decode(json_encode($json), true);
+            return $data;
+        } else {
+            return $data;
         }
     }
 }
