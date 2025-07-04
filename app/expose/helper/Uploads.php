@@ -19,7 +19,7 @@ class Uploads
      */
     public static function url(string|array|null $path)
     {
-        if (is_null($path)) {
+        if (empty($path)) {
             return '';
         }
         if (is_array($path)) {
@@ -47,7 +47,7 @@ class Uploads
      */
     public static function path(string|array|null $url)
     {
-        if (is_null($url)) {
+        if (empty($url)) {
             return '';
         }
         if (is_array($url)) {
