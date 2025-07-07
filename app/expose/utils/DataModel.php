@@ -83,8 +83,4 @@ class DataModel implements ArrayAccess, JsonSerializable
     {
         return $this->data;
     }
-    public function setData($data)
-    {
-        $this->data=$data;
-    }
 }
