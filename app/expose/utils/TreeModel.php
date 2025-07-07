@@ -1,6 +1,6 @@
 <?php
 
-namespace app\expose\build\utils;
+namespace app\expose\utils;
 
 use app\expose\utils\DataModel;
 
