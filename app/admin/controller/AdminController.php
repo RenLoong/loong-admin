@@ -62,11 +62,7 @@ class AdminController extends Basic
             'model' => Action::DIALOG['value'],
             'path' => 'Admin/moveRole',
             'props' => [
-                'type' => 'primary',
                 'title' => '移动到',
-                'customStyle' => [
-                    '--el-messagebox-width' => '300px'
-                ]
             ],
             'component' => [
                 'name' => 'button',
@@ -533,7 +529,12 @@ class AdminController extends Basic
             }
             return $this->event(ResponseEvent::UPDATE_USERINFO, '保存成功');
         }
-        $builder = new FormBuilder;
+        $builder = new FormBuilder(null,null,[
+            'labelPosition' => 'right',
+            'label-width' => "400px",
+            'class' => 'w-80 mx-auto',
+            'size' => 'large',
+        ]);
         $builder->add('role_id', '所属角色', 'cascader', null, [
             'required' => true,
             'props' => [

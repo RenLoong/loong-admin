@@ -35,9 +35,9 @@ class AdminAuth implements MiddlewareInterface
             if ($request->expectsJson()) {
                 $response = $this->exception($th);
             } else {
-                if(config('app.debug')){
+                if (config('app.debug')) {
                     throw $th;
-                }else{
+                } else {
                     $response = response($th->getMessage(), 500);
                 }
             }
@@ -46,7 +46,7 @@ class AdminAuth implements MiddlewareInterface
     }
     public function isWehcatBrowser($request)
     {
-        $request->isWehcatBrowser = strpos(strtolower($request->header('user-agent')??''), 'micromessenger') !== false;
+        $request->isWehcatBrowser = strpos(strtolower($request->header('user-agent') ?? ''), 'micromessenger') !== false;
     }
 
     /**
@@ -128,7 +128,7 @@ class AdminAuth implements MiddlewareInterface
         // plugin\api\app\admin\controller\IndexController,只取Index
         $controllers = explode('\\', $request->controller);
         $controller = str_replace('Controller', '', end($controllers));
-        $action = str_replace('GetTable', '', $request->action);
+        $action = str_replace(['GetTable', 'GetGrid'], ['', ''], $request->action);
         $rule = $controller . '/' . $action;
         if ($plugin) {
             $app = $request->app;

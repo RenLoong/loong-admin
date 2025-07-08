@@ -28,15 +28,13 @@ class TableBuilder extends DataModel
         ];
         return $this;
     }
-    public function addSelection(string $prop = '', string $label = '', mixed $extra = [
-        'props' => [
-            'width' => '50px',
-            'type' => 'selection'
-        ]
-    ])
+    public function addSelection(string $prop = '', string $label = '', mixed $extra = [])
     {
         if (!isset($extra['props'])) {
-            $extra['props'] = [];
+            $extra['props'] = [
+                'width' => '50px',
+                'type' => 'selection'
+            ];
         }
         $extra['props']['type'] = 'selection';
         $this->add($prop, $label, $extra);
