@@ -30,8 +30,6 @@ class ExamineBuilder extends DataModel
         $this->data['props'] = $props;
         $this->data['rule'] = [];
         $this->data['form'] = [];
-        $this->data['old'] = [];
-        $this->data['new'] = [];
     }
     public function setTranslations(bool $state=true){
         $this->translations=$state;
