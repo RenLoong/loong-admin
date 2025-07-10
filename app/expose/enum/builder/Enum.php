@@ -4,6 +4,11 @@ namespace app\expose\enum\builder;
 
 class Enum
 {
+    /**
+     * 获取枚举选项
+     * @param callable|null $filter 过滤函数
+     * @return array 选项数组
+     */
     public static function getOptions(?callable $filter = null)
     {
         $class = new \ReflectionClass(static::class);
@@ -33,6 +38,11 @@ class Enum
         }
         return $options;
     }
+    /**
+     * 获取枚举文本
+     * @param mixed $value 值
+     * @return string 文本
+     */
     public static function getText($value)
     {
         $options = static::getOptions();
@@ -43,6 +53,11 @@ class Enum
         }
         return '';
     }
+    /**
+     * 获取枚举选项
+     * @param mixed $value 值
+     * @return array|null 选项
+     */
     public static function get($value)
     {
         $options = static::getOptions();
@@ -53,6 +68,11 @@ class Enum
         }
         return null;
     }
+    /**
+     * 获取枚举值
+     * @param callable|null $filter 过滤函数
+     * @return array 值数组
+     */
     public static function getValues(?callable $filter = null)
     {
         $options = static::getOptions($filter);
@@ -62,6 +82,11 @@ class Enum
         }
         return $values;
     }
+    /**
+     * 判断是否存在
+     * @param mixed $value 值
+     * @return bool 是否存在
+     */
     public static function has($value)
     {
         $options = static::getOptions();
