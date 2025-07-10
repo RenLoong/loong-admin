@@ -4,18 +4,31 @@ namespace app\expose\enum\builder;
 
 class Enum
 {
-    public static function getOptions()
+    public static function getOptions(?callable $filter = null)
     {
         $class = new \ReflectionClass(static::class);
         $options = [];
         foreach ($class->getConstants() as $key => $value) {
-            if (is_array($value)) {
-                $options[] = $value;
-            } else {
-                $options[] = [
-                    'label' => $key,
-                    'value' => $value
-                ];
+            if ($filter) {
+                if ($filter($value)) {
+                    if (is_array($value)) {
+                        $options[] = $value;
+                    } else {
+                        $options[] = [
+                            'label' => $key,
+                            'value' => $value
+                        ];
+                    }
+                }
+            }else{
+                if (is_array($value)) {
+                    $options[] = $value;
+                } else {
+                    $options[] = [
+                        'label' => $key,
+                        'value' => $value
+                    ];
+                }
             }
         }
         return $options;
@@ -40,14 +53,11 @@ class Enum
         }
         return null;
     }
-    public static function getValues($filter = null)
+    public static function getValues(?callable $filter = null)
     {
-        $options = static::getOptions();
+        $options = static::getOptions($filter);
         $values = [];
         foreach ($options as $option) {
-            if ($filter && !in_array($option['value'], $filter)) {
-                continue;
-            }
             $values[] = $option['value'];
         }
         return $values;
