@@ -40,6 +40,12 @@ class Captcha
         $request = request();
         $bg = $request->get('bg');
         $length = $request->get('length',4);
+        if($length < 4){
+            $length = 4;
+        }
+        if($length > 6){
+            $length = 6;
+        }
         $defaultBg = '255,255,255';
         if ($bg) {
             $defaultBg = $bg;
