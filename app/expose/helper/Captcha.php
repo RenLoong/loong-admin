@@ -51,7 +51,7 @@ class Captcha
             $defaultBg = $bg;
         }
         // 初始化验证码类
-        $builder = new CaptchaBuilder($length);
+        $builder = new CaptchaBuilder((int)$length);
         $bgArr = explode(',', $defaultBg);
         $builder->setBackgroundColor($bgArr[0], $bgArr[1], $bgArr[2]);
         $builder->setDistortion(false);
