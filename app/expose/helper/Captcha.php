@@ -78,6 +78,6 @@ class Captcha
         $builder = self::create();
         $request->session()->set('captcha', strtolower($builder->getPhrase()));
         $img_content = $builder->inline();
-        return ['imag' => $img_content, 'token' => $request->sessionId()];
+        return ['base64' => $img_content, 'token' => $request->sessionId()];
     }
 }
