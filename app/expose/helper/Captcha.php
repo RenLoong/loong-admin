@@ -39,6 +39,7 @@ class Captcha
     {
         $request = request();
         $bg = $request->get('bg');
+        $length = $request->get('length',4);
         $defaultBg = '255,255,255';
         if ($bg) {
             $defaultBg = $bg;
@@ -50,6 +51,7 @@ class Captcha
         $builder->setDistortion(false);
         $builder->setInterpolation(false);
         $builder->setTextColor(255 - $bgArr[0], 255 - $bgArr[1], 255 - $bgArr[2]);
+        $builder->setPhrase($length);
         // 生成验证码
         $builder->build();
         return $builder;
