@@ -51,13 +51,12 @@ class Captcha
             $defaultBg = $bg;
         }
         // 初始化验证码类
-        $builder = new CaptchaBuilder;
+        $builder = new CaptchaBuilder($length);
         $bgArr = explode(',', $defaultBg);
         $builder->setBackgroundColor($bgArr[0], $bgArr[1], $bgArr[2]);
         $builder->setDistortion(false);
         $builder->setInterpolation(false);
         $builder->setTextColor(255 - $bgArr[0], 255 - $bgArr[1], 255 - $bgArr[2]);
-        $builder->setPhrase($length);
         // 生成验证码
         $builder->build();
         return $builder;
