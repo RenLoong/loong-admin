@@ -50,8 +50,6 @@ class Uploads
             $data = [];
             $models = ModelUploads::whereIn('path', $path)->select();
             foreach ($models as $model) {
-                $has = Storage::adapter($model->channels)->has($model->path);
-                if ($has) {
                     if (in_array($model->channels, [Filesystem::LOCAL['value'], Filesystem::PUBLIC['value']])) {
                         $config = config('plugin.shopwwi.filesystem.app.storage.' . $model->channels);
                         $data[] = $config['root'] . $model->path;
@@ -59,7 +57,6 @@ class Uploads
                         $url = Storage::adapter($model->channels)->url($model->path);
                         $data[] = self::downloadTemp($url);
                     }
-                }
             }
             return $data;
         }
@@ -67,15 +64,12 @@ class Uploads
         if (!$model) {
             return $path;
         }
-        $has = Storage::adapter($model->channels)->has($model->path);
-        if ($has) {
             if (in_array($model->channels, [Filesystem::LOCAL['value'], Filesystem::PUBLIC['value']])) {
                 $config = config('plugin.shopwwi.filesystem.app.storage.' . $model->channels);
                 return $config['root'] . $model->path;
             } else {
                 return self::downloadTemp(Storage::adapter($model->channels)->url($model->path));
             }
-        }
         return $path;
     }
     /**
@@ -224,11 +218,7 @@ class Uploads
         if (!$model) {
             return true;
         }
-        $has = Storage::adapter($model->channels)->has($model->path);
-        if ($has) {
-            return Storage::adapter($model->channels)->delete($model->path);
-        }
-        return true;
+        return Storage::adapter($model->channels)->delete($model->path);
     }
     /**
      * 重命名文件
@@ -243,19 +233,6 @@ class Uploads
             return false;
         }
         return Storage::adapter($model->channels)->rename($model->path, $newName);
-    }
-    /**
-     * 判断文件是否存在
-     * @param string $path 文件路径
-     * @return bool
-     */
-    public static function has(string $path)
-    {
-        $model = ModelUploads::where(['path' => $path])->find();
-        if (!$model) {
-            return false;
-        }
-        return Storage::adapter($model->channels)->has($model->path);
     }
     /**
      * 复制文件
