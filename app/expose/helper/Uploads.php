@@ -123,7 +123,7 @@ class Uploads
      */
     public static function save(string $path, $channels = Filesystem::PUBLIC['value'], $dir_name = 'uploads/save', $title = '本地保存')
     {
-        $UploadsClassify = UploadsClassify::where(['dir_name' => $dir_name, 'is_system' => 1])->find();
+        $UploadsClassify = UploadsClassify::where(['dir_name' => $dir_name, 'channels' => $channels])->find();
         if (!$UploadsClassify) {
             $UploadsClassify = new UploadsClassify;
             $UploadsClassify->title = $title;
@@ -217,6 +217,36 @@ class Uploads
         return $temp;
     }
     /**
+     * 上传文件
+     * @param string $path 文件路径
+     * @param string $channels 文件存储通道
+     * @param string $dir_name 文件存储目录
+     * @return array
+     */
+    public static function upload(string $path, $channels = Filesystem::PUBLIC['value'], $dir_name = 'uploads/save')
+    {
+        $date_path = date('Ymd');
+        $originName = basename($path);
+        //单文件上传
+        $file = new UploadFile($path, $originName, mime_content_type($path), filesize($path));
+        $result = Storage::adapter($channels)->path($dir_name . '/' . $date_path)->upload($file);
+        $Uploads = new ModelUploads;
+        $Uploads->filename = $result->origin_name;
+        $Uploads->path = $result->file_name;
+        $Uploads->ext = $result->extension;
+        $Uploads->mime = $result->mime_type;
+        $Uploads->size = $result->size;
+        $Uploads->channels = $channels;
+        $Uploads->save();
+        return [
+            'id' => $Uploads->id,
+            'url' => $result->file_url,
+            'path' => $result->file_name,
+            'mime' => $result->mime_type,
+            'dir_name' => $dir_name
+        ];
+    }
+    /**
      * 删除文件
      * @param string $path 文件路径
      * @return bool
@@ -228,7 +258,9 @@ class Uploads
             return true;
         }
         $filesystem =  FilesystemFactory::get($model->channels);
-        return $filesystem->delete($model->path);
+        $filesystem->delete($model->path);
+        $model->delete();
+        return true;
     }
     /**
      * 重命名文件
@@ -243,7 +275,10 @@ class Uploads
             return false;
         }
         $filesystem =  FilesystemFactory::get($model->channels);
-        return $filesystem->move($model->path, $newName);
+        $filesystem->move($model->path, $newName);
+        $model->path = $newName;
+        $model->save();
+        return true;
     }
     /**
      * 判断文件是否存在
@@ -272,7 +307,17 @@ class Uploads
             return false;
         }
         $filesystem =  FilesystemFactory::get($model->channels);
-        return $filesystem->copy($model->path, $newName);
+        $filesystem->copy($model->path, $newName);
+        $model = new ModelUploads;
+        $model->classify_id = $model->classify_id;
+        $model->filename = $model->filename;
+        $model->path = $newName;
+        $model->ext = $model->ext;
+        $model->mime = $model->mime;
+        $model->size = $model->size;
+        $model->path = $newName;
+        $model->save();
+        return true;
     }
     /**
      * 获取文件列表
