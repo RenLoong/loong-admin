@@ -114,15 +114,16 @@ class Uploads
      * 保存文件
      * @param string $path 文件路径
      * @param string $channels 文件存储通道
+     * @param string $dir_name 文件存储目录
+     * @param string $title 文件分类标题
      * @return array
      */
-    public static function save(string $path, $channels = Filesystem::PUBLIC['value'])
+    public static function save(string $path, $channels = Filesystem::PUBLIC['value'], $dir_name = 'uploads/save', $title = '本地保存')
     {
-        $dir_name = 'uploads/save';
         $UploadsClassify = UploadsClassify::where(['dir_name' => $dir_name, 'is_system' => 1])->find();
         if (!$UploadsClassify) {
             $UploadsClassify = new UploadsClassify;
-            $UploadsClassify->title = '本地保存';
+            $UploadsClassify->title = $title;
             $UploadsClassify->dir_name = $dir_name;
             $UploadsClassify->channels = $channels;
             $UploadsClassify->sort = 0;
