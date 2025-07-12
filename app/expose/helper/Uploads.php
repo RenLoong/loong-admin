@@ -20,25 +20,63 @@ class Uploads
     public static function url(string|array|null $path)
     {
         if (empty($path)) {
-            return '';
+            return $path;
         }
         if (is_array($path)) {
             $data = [];
-            foreach ($path as $value) {
-                $model = ModelUploads::where(['path' => $value])->find();
-                if (!$model) {
-                    $data[] = '';
-                } else {
-                    $data[] = Storage::adapter($model->channels)->url($model->path);
+            $models = ModelUploads::whereIn('path', $path)->select();
+            foreach ($models as $model) {
+                $data[] = Storage::adapter($model->channels)->url($model->path);
+            }
+            return $data;
+        }
+        $model = ModelUploads::where(['path' => $path])->find();
+        if (!$model) {
+            return $path;
+        }
+        return Storage::adapter($model->channels)->url($model->path);
+    }
+    /**
+     * 获取文件在本地存储的完整路径
+     * @param string|array|null $path 文件路径
+     * @return string|array
+     */
+    public static function local(string|array|null $path)
+    {
+        if (empty($path)) {
+            return $path;
+        }
+        if (is_array($path)) {
+            $data = [];
+            $models = ModelUploads::whereIn('path', $path)->select();
+            foreach ($models as $model) {
+                $has = Storage::adapter($model->channels)->has($model->path);
+                if ($has) {
+                    if (in_array($model->channels, [Filesystem::LOCAL['value'], Filesystem::PUBLIC['value']])) {
+                        $config = config('plugin.shopwwi.filesystem.app.storage.' . $model->channels);
+                        $data[] = $config['root'] . $model->path;
+                    } else {
+                        $url = Storage::adapter($model->channels)->url($model->path);
+                        $data[] = self::downloadTemp($url);
+                    }
                 }
             }
             return $data;
         }
         $model = ModelUploads::where(['path' => $path])->find();
         if (!$model) {
-            return '';
+            return $path;
         }
-        return Storage::adapter($model->channels)->url($model->path);
+        $has = Storage::adapter($model->channels)->has($model->path);
+        if ($has) {
+            if (in_array($model->channels, [Filesystem::LOCAL['value'], Filesystem::PUBLIC['value']])) {
+                $config = config('plugin.shopwwi.filesystem.app.storage.' . $model->channels);
+                return $config['root'] . $model->path;
+            } else {
+                return self::downloadTemp(Storage::adapter($model->channels)->url($model->path));
+            }
+        }
+        return $path;
     }
     /**
      * 获取文件路径
@@ -78,7 +116,7 @@ class Uploads
      * @param string $channels 文件存储通道
      * @return array
      */
-    public static function save(string $path,$channels=Filesystem::PUBLIC['value'])
+    public static function save(string $path, $channels = Filesystem::PUBLIC['value'])
     {
         $dir_name = 'uploads/save';
         $UploadsClassify = UploadsClassify::where(['dir_name' => $dir_name, 'is_system' => 1])->find();
@@ -92,7 +130,7 @@ class Uploads
             $UploadsClassify->save();
         }
         $date_path = date('Ymd');
-        $originName=basename($path);
+        $originName = basename($path);
         //单文件上传
         $file = new UploadFile($path, $originName, mime_content_type($path), filesize($path));
         $result = Storage::adapter($channels)->path($dir_name . '/' . $date_path)->upload($file);
@@ -155,5 +193,95 @@ class Uploads
         $Uploads->channels = $channels;
         $Uploads->save();
         return $result->file_name;
+    }
+    /**
+     * 下载文件到临时文件
+     * @param string $url 文件URL
+     * @return string 临时文件路径
+     */
+    public static function downloadTemp(string $url)
+    {
+        $client = new Client();
+        $response = $client->get($url);
+        $body = $response->getBody();
+        $file = $body->getContents();
+        $urlPath = parse_url($url, PHP_URL_PATH);
+        $ext = pathinfo($urlPath, PATHINFO_EXTENSION);
+        $fileName = uniqid() . '.' . $ext;
+        $temp = runtime_path('temp/' . $fileName);
+        file_put_contents($temp, $file);
+        return $temp;
+    }
+    /**
+     * 删除文件
+     * @param string $path 文件路径
+     * @return bool
+     */
+    public static function delete(string $path)
+    {
+        $model = ModelUploads::where(['path' => $path])->find();
+        if (!$model) {
+            return true;
+        }
+        $has = Storage::adapter($model->channels)->has($model->path);
+        if ($has) {
+            return Storage::adapter($model->channels)->delete($model->path);
+        }
+        return true;
+    }
+    /**
+     * 重命名文件
+     * @param string $path 文件路径
+     * @param string $newName 新文件名
+     * @return bool
+     */
+    public static function rename(string $path, string $newName)
+    {
+        $model = ModelUploads::where(['path' => $path])->find();
+        if (!$model) {
+            return false;
+        }
+        return Storage::adapter($model->channels)->rename($model->path, $newName);
+    }
+    /**
+     * 判断文件是否存在
+     * @param string $path 文件路径
+     * @return bool
+     */
+    public static function has(string $path)
+    {
+        $model = ModelUploads::where(['path' => $path])->find();
+        if (!$model) {
+            return false;
+        }
+        return Storage::adapter($model->channels)->has($model->path);
+    }
+    /**
+     * 复制文件
+     * @param string $path 文件路径
+     * @param string $newName 新文件名
+     * @return bool
+     */
+    public static function copy(string $path, string $newName)
+    {
+        $model = ModelUploads::where(['path' => $path])->find();
+        if (!$model) {
+            return false;
+        }
+        return Storage::adapter($model->channels)->copy($model->path, $newName);
+    }
+    /**
+     * 获取文件列表
+     * @param string $path 文件路径
+     * @param bool $recursive 是否递归
+     * @return array
+     */
+    public static function listContents(string $path, $recursive = false)
+    {
+        $model = ModelUploads::where(['path' => $path])->find();
+        if (!$model) {
+            return false;
+        }
+        return Storage::adapter($model->channels)->listContents($path, $recursive);
     }
 }

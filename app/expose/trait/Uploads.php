@@ -99,6 +99,62 @@ trait Uploads
             'dir_name' => $dir_name
         ]);
     }
+    public function uploads(Request $request)
+    {
+        $dir_name = $request->post('dir_name');
+        $dir_title = $request->post('dir_title');
+        $UploadsClassify = UploadsClassify::where('dir_name', $dir_name)->find();
+        if (!$UploadsClassify) {
+            $UploadsClassify = UploadsClassify::where(['dir_name' => 'uploads/default', 'is_system' => 1])->find();
+            if (!$UploadsClassify) {
+                if (empty($dir_title)) {
+                    return $this->fail('分类不存在');
+                }
+                $UploadsClassify = new UploadsClassify;
+                $UploadsClassify->title = $dir_title;
+                $UploadsClassify->dir_name = $dir_name;
+                $UploadsClassify->channels = Filesystem::PUBLIC['value'];
+                $UploadsClassify->save();
+            }
+        }
+        $channels = $request->post('channels');
+        if (!$channels) {
+            $channels = $UploadsClassify->channels;
+        }
+        $date_path = date('Ymd');
+        $files = $request->file();
+        try {
+            $results = Storage::adapter($channels)->path($dir_name . '/' . $date_path)->uploads($files);
+        } catch (\Throwable $th) {
+            return $this->exception($th);
+        }
+        $resData = [];
+        try {
+            foreach ($results as $result) {
+                $Uploads = new ModelUploads;
+                $Uploads->uid = $this->uid;
+                $Uploads->admin_uid = $this->admin_uid;
+                $Uploads->classify_id = $UploadsClassify->id;
+                $Uploads->filename = $result->origin_name;
+                $Uploads->path = $result->file_name;
+                $Uploads->ext = $result->extension;
+                $Uploads->mime = $result->mime_type;
+                $Uploads->size = $result->size;
+                $Uploads->channels = $channels;
+                $Uploads->save();
+                $resData[] = [
+                    'id' => $Uploads->id,
+                    'url' => $result->file_url,
+                    'path' => $result->file_name,
+                    'mime' => $result->mime_type,
+                    'dir_name' => $dir_name
+                ];
+            }
+        } catch (\Throwable $th) {
+            return $this->exception($th);
+        }
+        return $this->resData($resData);
+    }
     public function deleteUploads(Request $request)
     {
         $ids = $request->post('ids');
