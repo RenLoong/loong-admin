@@ -7,6 +7,7 @@ use app\model\Uploads as ModelUploads;
 use app\model\UploadsClassify;
 use Shopwwi\WebmanFilesystem\Facade\Storage;
 use Shopwwi\WebmanFilesystem\FilesystemFactory;
+use support\Log;
 use support\Request;
 
 trait Uploads
@@ -164,12 +165,13 @@ trait Uploads
             if ($item->uid != $this->uid && $item->admin_uid != $this->admin_uid) {
                 continue;
             }
-            $item->delete();
             try {
                 $filesystem =  FilesystemFactory::get($item->channels);
                 $filesystem->delete($item->path);
             } catch (\Throwable $th) {
+                Log::error('删除文件"'.$item->path.'"失败：'.$th->getMessage(),$th->getTrace());
             }
+            $item->delete();
         }
         return $this->success('删除成功');
     }
