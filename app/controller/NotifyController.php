@@ -2,6 +2,7 @@
 
 namespace app\controller;
 
+use app\expose\enum\EventName;
 use app\expose\helper\Uploads;
 use app\expose\utils\Json;
 use app\model\PaymentNotifyWechat;
@@ -10,6 +11,7 @@ use Exception;
 use support\Log;
 use support\Request;
 use think\facade\Db;
+use Webman\Event\Event;
 use Yansongda\Pay\Pay;
 
 class NotifyController
@@ -80,11 +82,12 @@ class NotifyController
                 $PaymentNotifyWechat->template_id=$template_id;
                 $PaymentNotifyWechat->save();
                 $class="plugin\\{$plugin}\\api\\notify\\Wechat";
-                if(!class_exists($class)){
-                    throw new Exception("{$plugin}插件下不存在微信支付回调处理类");
+                if(class_exists($class)){
+                    $obj=new $class;
+                    $obj->{$data->resource['original_type']}($data->resource['ciphertext']);
+                }else{
+                    Event::emit(EventName::ORDERS_PAY['value'], array_merge($data->resource['ciphertext'],['plugin'=>$plugin,'template_id'=>$template_id]));
                 }
-                $obj=new $class;
-                $obj->{$data->resource['original_type']}($data->resource['ciphertext']);
                 Db::commit();
             } catch (\Throwable $th) {
                 Db::rollback();
