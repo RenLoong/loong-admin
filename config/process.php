@@ -13,6 +13,7 @@
  * @license   http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
+use app\process\AutoDeleteUpload;
 use support\Log;
 use support\Request;
 use app\process\Http;
@@ -65,5 +66,9 @@ return [
                 'enable_memory_monitor' => DIRECTORY_SEPARATOR === '/',
             ]
         ]
+    ],
+    'AutoDeleteUpload' => [
+        'handler' => AutoDeleteUpload::class,
+        'eventLoop' => Swoole::class,
     ]
 ];
