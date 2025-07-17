@@ -3,6 +3,7 @@
 namespace app\controller;
 
 use app\expose\enum\EventName;
+use app\expose\enum\PaymentChannels;
 use app\expose\helper\Uploads;
 use app\expose\utils\Json;
 use app\model\PaymentNotifyWechat;
@@ -86,7 +87,12 @@ class NotifyController
                     $obj=new $class;
                     $obj->{$data->resource['original_type']}($data->resource['ciphertext']);
                 }else{
-                    Event::emit(EventName::ORDERS_PAY['value'], array_merge($data->resource['ciphertext'],['plugin'=>$plugin,'template_id'=>$template_id]));
+                    Event::emit(EventName::ORDERS_PAY['value'], [
+                        'data'=>$data->resource['ciphertext'],
+                        'payment_channel'=>PaymentChannels::WXPAY['value'],
+                        'plugin'=>$plugin,
+                        'template_id'=>$template_id
+                    ]);
                 }
                 Db::commit();
             } catch (\Throwable $th) {
