@@ -48,6 +48,13 @@ class EventName extends Enum
             'type' => 'danger'
         ]
     ];
+    const ORDERS_PAY_SUCCESS = [
+        'label' => '支付成功',
+        'value' => 'ORDERS.PAY_SUCCESS',
+        'props' => [
+            'type' => 'success'
+        ]
+    ];
     const ORDERS_CANCEL = [
         'label' => '取消订单',
         'value' => 'ORDERS.CANCEL',
