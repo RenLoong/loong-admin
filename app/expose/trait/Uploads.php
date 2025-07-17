@@ -6,6 +6,7 @@ use app\expose\enum\Filesystem;
 use app\model\Uploads as ModelUploads;
 use app\model\UploadsClassify;
 use Shopwwi\WebmanFilesystem\Facade\Storage;
+use Shopwwi\WebmanFilesystem\FilesystemFactory;
 use support\Request;
 
 trait Uploads
@@ -165,7 +166,8 @@ trait Uploads
             }
             $item->delete();
             try {
-                Storage::adapter($item->channels)->delete($item->path);
+                $filesystem =  FilesystemFactory::get($item->channels);
+                $filesystem->delete($item->path);
             } catch (\Throwable $th) {
             }
         }
