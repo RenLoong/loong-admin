@@ -24,7 +24,6 @@ class ComposerStaticInit31dbebff699f6ce4d696d736e935f142
         'd2136ff22b54ac75cd96a40e0022218e' => __DIR__ . '/..' . '/workerman/webman-framework/src/support/helpers.php',
         '6b998e7ad3182c0d21d23780badfa07b' => __DIR__ . '/..' . '/yansongda/supports/src/Functions.php',
         'b067bc7112e384b61c701452d53a14a8' => __DIR__ . '/..' . '/mtdowling/jmespath.php/src/JmesPath.php',
-        'e39a8b23c42d4e1452234d762b03835a' => __DIR__ . '/..' . '/ramsey/uuid/src/functions.php',
         'b6b991a57620e2fb6b2f66f03fe9ddc2' => __DIR__ . '/..' . '/symfony/string/Resources/functions.php',
         '15ec93fa4ce4b2d53816a1a5f2c514e2' => __DIR__ . '/..' . '/topthink/think-validate/src/helper.php',
         '8a9dc1de0ca7e01f3e08231539562f61' => __DIR__ . '/..' . '/aws/aws-sdk-php/src/functions.php',
@@ -81,10 +80,6 @@ class ComposerStaticInit31dbebff699f6ce4d696d736e935f142
             'Webman\\' => 7,
             'WebSocket\\' => 10,
         ),
-        'V' => 
-        array (
-            'Volc\\' => 5,
-        ),
         'T' => 
         array (
             'TheNorthMemory\\Xml\\' => 19,
@@ -113,11 +108,6 @@ class ComposerStaticInit31dbebff699f6ce4d696d736e935f142
             'Spatie\\TemporaryDirectory\\' => 26,
             'Shopwwi\\WebmanFilesystem\\' => 25,
             'Shopwwi\\FilesystemOss\\' => 22,
-        ),
-        'R' => 
-        array (
-            'Ramsey\\Uuid\\' => 12,
-            'Ramsey\\Collection\\' => 18,
         ),
         'Q' => 
         array (
@@ -176,32 +166,10 @@ class ComposerStaticInit31dbebff699f6ce4d696d736e935f142
             'GuzzleHttp\\Psr7\\' => 16,
             'GuzzleHttp\\Promise\\' => 19,
             'GuzzleHttp\\' => 11,
-            'Grpc\\Gcp\\' => 9,
-            'Grpc\\' => 5,
             'GrahamCampbell\\ResultType\\' => 26,
-            'Google\\Type\\' => 12,
-            'Google\\Rpc\\' => 11,
-            'Google\\Protobuf\\' => 16,
-            'Google\\LongRunning\\' => 19,
-            'Google\\Iam\\' => 11,
-            'Google\\Cloud\\' => 13,
-            'Google\\Auth\\' => 12,
-            'Google\\Api\\' => 11,
-            'Google\\ApiCore\\LongRunning\\' => 27,
-            'Google\\ApiCore\\' => 15,
-            'GPBMetadata\\Google\\Type\\' => 24,
-            'GPBMetadata\\Google\\Rpc\\' => 23,
-            'GPBMetadata\\Google\\Protobuf\\' => 28,
-            'GPBMetadata\\Google\\Longrunning\\' => 31,
-            'GPBMetadata\\Google\\Logging\\' => 27,
-            'GPBMetadata\\Google\\Iam\\' => 23,
-            'GPBMetadata\\Google\\Cloud\\' => 25,
-            'GPBMetadata\\Google\\Api\\' => 23,
-            'GPBMetadata\\ApiCore\\' => 20,
         ),
         'F' => 
         array (
-            'Firebase\\JWT\\' => 13,
             'FastRoute\\' => 10,
             'FFMpeg\\' => 7,
         ),
@@ -220,10 +188,6 @@ class ComposerStaticInit31dbebff699f6ce4d696d736e935f142
         array (
             'Carbon\\Doctrine\\' => 16,
             'Carbon\\' => 7,
-        ),
-        'B' => 
-        array (
-            'Brick\\Math\\' => 11,
         ),
         'A' => 
         array (
@@ -334,10 +298,6 @@ class ComposerStaticInit31dbebff699f6ce4d696d736e935f142
         array (
             0 => __DIR__ . '/..' . '/textalk/websocket/lib',
         ),
-        'Volc\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/volcengine/volc-sdk-php/src',
-        ),
         'TheNorthMemory\\Xml\\' => 
         array (
             0 => __DIR__ . '/..' . '/thenorthmemory/xml/src',
@@ -429,14 +389,6 @@ class ComposerStaticInit31dbebff699f6ce4d696d736e935f142
         'Shopwwi\\FilesystemOss\\' => 
         array (
             0 => __DIR__ . '/..' . '/shopwwi/filesystem-oss/src',
-        ),
-        'Ramsey\\Uuid\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/ramsey/uuid/src',
-        ),
-        'Ramsey\\Collection\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/ramsey/collection/src',
         ),
         'Qiniu\\' => 
         array (
@@ -578,97 +530,9 @@ class ComposerStaticInit31dbebff699f6ce4d696d736e935f142
         array (
             0 => __DIR__ . '/..' . '/guzzlehttp/guzzle/src',
         ),
-        'Grpc\\Gcp\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/google/grpc-gcp/src',
-        ),
-        'Grpc\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/grpc/grpc/src/lib',
-        ),
         'GrahamCampbell\\ResultType\\' => 
         array (
             0 => __DIR__ . '/..' . '/graham-campbell/result-type/src',
-        ),
-        'Google\\Type\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/google/common-protos/src/Type',
-        ),
-        'Google\\Rpc\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/google/common-protos/src/Rpc',
-        ),
-        'Google\\Protobuf\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/google/protobuf/src/Google/Protobuf',
-        ),
-        'Google\\LongRunning\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/google/longrunning/src/LongRunning',
-        ),
-        'Google\\Iam\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/google/common-protos/src/Iam',
-        ),
-        'Google\\Cloud\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/google/common-protos/src/Cloud',
-        ),
-        'Google\\Auth\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/google/auth/src',
-        ),
-        'Google\\Api\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/google/common-protos/src/Api',
-        ),
-        'Google\\ApiCore\\LongRunning\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/google/longrunning/src/ApiCore/LongRunning',
-        ),
-        'Google\\ApiCore\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/google/gax/src',
-        ),
-        'GPBMetadata\\Google\\Type\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/google/common-protos/metadata/Type',
-        ),
-        'GPBMetadata\\Google\\Rpc\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/google/common-protos/metadata/Rpc',
-        ),
-        'GPBMetadata\\Google\\Protobuf\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/google/protobuf/src/GPBMetadata/Google/Protobuf',
-        ),
-        'GPBMetadata\\Google\\Longrunning\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/google/longrunning/metadata/Longrunning',
-        ),
-        'GPBMetadata\\Google\\Logging\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/google/common-protos/metadata/Logging',
-        ),
-        'GPBMetadata\\Google\\Iam\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/google/common-protos/metadata/Iam',
-        ),
-        'GPBMetadata\\Google\\Cloud\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/google/common-protos/metadata/Cloud',
-        ),
-        'GPBMetadata\\Google\\Api\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/google/common-protos/metadata/Api',
-        ),
-        'GPBMetadata\\ApiCore\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/google/gax/metadata/ApiCore',
-        ),
-        'Firebase\\JWT\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/firebase/php-jwt/src',
         ),
         'FastRoute\\' => 
         array (
@@ -705,10 +569,6 @@ class ComposerStaticInit31dbebff699f6ce4d696d736e935f142
         'Carbon\\' => 
         array (
             0 => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon',
-        ),
-        'Brick\\Math\\' => 
-        array (
-            0 => __DIR__ . '/..' . '/brick/math/src',
         ),
         'Aws\\' => 
         array (
@@ -786,12 +646,6 @@ class ComposerStaticInit31dbebff699f6ce4d696d736e935f142
         'AWS\\CRT\\Options' => __DIR__ . '/..' . '/aws/aws-crt-php/src/AWS/CRT/Options.php',
         'Attribute' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/Attribute.php',
         'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
-        'GPBMetadata\\GrpcGcp' => __DIR__ . '/..' . '/google/grpc-gcp/src/generated/GPBMetadata/GrpcGcp.php',
-        'Grpc\\Gcp\\AffinityConfig' => __DIR__ . '/..' . '/google/grpc-gcp/src/generated/Grpc/Gcp/AffinityConfig.php',
-        'Grpc\\Gcp\\AffinityConfig_Command' => __DIR__ . '/..' . '/google/grpc-gcp/src/generated/Grpc/Gcp/AffinityConfig_Command.php',
-        'Grpc\\Gcp\\ApiConfig' => __DIR__ . '/..' . '/google/grpc-gcp/src/generated/Grpc/Gcp/ApiConfig.php',
-        'Grpc\\Gcp\\ChannelPoolConfig' => __DIR__ . '/..' . '/google/grpc-gcp/src/generated/Grpc/Gcp/ChannelPoolConfig.php',
-        'Grpc\\Gcp\\MethodConfig' => __DIR__ . '/..' . '/google/grpc-gcp/src/generated/Grpc/Gcp/MethodConfig.php',
         'Normalizer' => __DIR__ . '/..' . '/symfony/polyfill-intl-normalizer/Resources/stubs/Normalizer.php',
         'PhpToken' => __DIR__ . '/..' . '/symfony/polyfill-php80/Resources/stubs/PhpToken.php',
         'QcloudApi' => __DIR__ . '/..' . '/tencentcloud/tencentcloud-sdk-php/src/QcloudApi/QcloudApi.php',

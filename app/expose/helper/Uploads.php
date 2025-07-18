@@ -25,15 +25,22 @@ class Uploads
         }
         if (is_array($path)) {
             $data = [];
-            $models = ModelUploads::whereIn('path', $path)->select();
-            foreach ($models as $model) {
-                $data[] = Storage::adapter($model->channels)->url($model->path);
+            foreach ($path as $value) {
+                $data[] = self::url($value);
             }
             return $data;
         }
-        $model = ModelUploads::where(['path' => $path])->find();
-        if (!$model) {
-            return $path;
+        # 判断path是否以[?]开头,如果是则获取对应的key
+        if (strpos($path, '[') === 0) {
+            $key = substr($path, 1, strpos($path, ']') - 1);
+            $model = new \stdClass;
+            $model->channels = $key;
+            $model->path = substr($path, strpos($path, ']') + 1);
+        }else{
+            $model = ModelUploads::where(['path' => $path])->find();
+            if (!$model) {
+                return $path;
+            }
         }
         return Storage::adapter($model->channels)->url($model->path);
     }
@@ -49,25 +56,21 @@ class Uploads
         }
         if (is_array($path)) {
             $data = [];
-            $models = ModelUploads::whereIn('path', $path)->select();
-            foreach ($models as $model) {
-                $filesystem =  FilesystemFactory::get($model->channels);
-                $has = $filesystem->has($model->path);
-                if ($has) {
-                    if (in_array($model->channels, [Filesystem::LOCAL['value'], Filesystem::PUBLIC['value']])) {
-                        $config = config('plugin.shopwwi.filesystem.app.storage.' . $model->channels);
-                        $data[] = $config['root'] . $model->path;
-                    } else {
-                        $url = Storage::adapter($model->channels)->url($model->path);
-                        $data[] = self::downloadTemp($url);
-                    }
-                }
+            foreach ($path as $value) {
+                $data[] = self::local($value);
             }
             return $data;
         }
-        $model = ModelUploads::where(['path' => $path])->find();
-        if (!$model) {
-            return $path;
+        if (strpos($path, '[') === 0) {
+            $key = substr($path, 1, strpos($path, ']') - 1);
+            $model = new \stdClass;
+            $model->channels = $key;
+            $model->path = substr($path, strpos($path, ']') + 1);
+        }else{
+            $model = ModelUploads::where(['path' => $path])->find();
+            if (!$model) {
+                return $path;
+            }
         }
         $filesystem =  FilesystemFactory::get($model->channels);
         $has = $filesystem->has($model->path);
@@ -96,12 +99,26 @@ class Uploads
             if (count($url) === 1) {
                 return self::path(current($url));
             }
+            $config = config('plugin.shopwwi.filesystem.app.storage');
+            $urls = [];
+            foreach ($config as $key => $value) {
+                if (empty($value['url'])) {
+                    continue;
+                }
+                $urls[$key] = $value['url'];
+            }
             foreach ($url as $value) {
                 if (filter_var($value, FILTER_SANITIZE_URL) === false) {
                     throw new Exception('URL地址不合法');
                 }
                 $parseUrl = parse_url($value);
-                $data[]   = ltrim($parseUrl['path'], '/');
+                $domain = $parseUrl['scheme'] . '://' . $parseUrl['host'];
+                $key = array_search($domain, $urls);
+                if ($key) {
+                    $data[] = '[' . $key . ']' . ltrim($parseUrl['path'], '/');
+                } else {
+                    $data[] = ltrim($parseUrl['path'], '/');
+                }
             }
             return $data;
         } else {
@@ -109,7 +126,21 @@ class Uploads
                 throw new Exception('URL地址不合法');
             }
             $parseUrl = parse_url($url);
-            $data     = ltrim($parseUrl['path'], '/');
+            $config = config('plugin.shopwwi.filesystem.app.storage');
+            $urls = [];
+            foreach ($config as $key => $value) {
+                if (empty($value['url'])) {
+                    continue;
+                }
+                $urls[$key] = $value['url'];
+            }
+            $domain = $parseUrl['scheme'] . '://' . $parseUrl['host'];
+            $key = array_search($domain, $urls);
+            if ($key) {
+                $data = '[' . $key . ']' . ltrim($parseUrl['path'], '/');
+            } else {
+                $data     = ltrim($parseUrl['path'], '/');
+            }
             return $data;
         }
     }
