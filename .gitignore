@@ -11,3 +11,4 @@
 .well-known
 *.ini
 /config/**/*.json
+/plugin
