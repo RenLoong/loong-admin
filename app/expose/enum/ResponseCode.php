@@ -40,9 +40,17 @@ class ResponseCode extends Enum
      */
     const SITE_ERROR = 400;
     /**
+     * 需要支付
+     */
+    const NEED_PAY = 9100;
+    /**
      * 支付成功
      */
     const PAY_SUCCESS = 9000;
+    /**
+     * 支付失败
+     */
+    const PAY_FAIL = 9010;
     /**
      * 重定向
      */
