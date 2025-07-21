@@ -66,11 +66,11 @@ class NotifyController
             ];
             $wxpay=Pay::wechat($config);
             $data = $wxpay->callback($D);
+            $obj=null;
             Db::startTrans();
             try {
                 $PaymentNotifyWechat=new PaymentNotifyWechat;
                 $PaymentNotifyWechat->notify_id=$D['id'];
-                // $PaymentNotifyWechat->create_time=$D['create_time'];
                 $PaymentNotifyWechat->resource_type=$D['resource_type'];
                 $PaymentNotifyWechat->event_type=$D['event_type'];
                 $PaymentNotifyWechat->summary=$D['summary'];

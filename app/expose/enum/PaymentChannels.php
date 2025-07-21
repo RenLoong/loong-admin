@@ -38,10 +38,26 @@ class PaymentChannels extends Enum
             'type' => 'warning'
         ]
     ];
+    const CASH = [
+        'label' => '现金支付',
+        'value' => 'cash',
+        'icon' => '/static/image/cash.png',
+        'props' => [
+            'type' => 'danger'
+        ]
+    ];
+    const COUPON = [
+        'label' => '优惠券支付',
+        'value' => 'coupon',
+        'icon' => '/static/image/coupon.png',
+        'props' => [
+            'type' => 'info'
+        ]
+    ];
     const ADMIN = [
         'label' => '管理员操作',
         'value' => 'admin',
-        'icon' => '/static/image/balance.png',
+        'icon' => '/static/image/admin.png',
         'props' => [
             'type' => 'warning'
         ]
