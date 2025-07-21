@@ -54,6 +54,14 @@ class PaymentChannels extends Enum
             'type' => 'info'
         ]
     ];
+    const FREE = [
+        'label' => '免费',
+        'value' => 'free',
+        'icon' => '/static/image/free.png',
+        'props' => [
+            'type' => 'success'
+        ]
+    ];
     const ADMIN = [
         'label' => '管理员操作',
         'value' => 'admin',
