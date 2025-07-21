@@ -2,7 +2,7 @@
 
 namespace app;
 
-use app\expose\utils\Json;
+use app\expose\trait\Json;
 use support\Request;
 
 class Basic

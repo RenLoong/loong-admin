@@ -5,7 +5,7 @@ namespace app\controller;
 use app\expose\enum\EventName;
 use app\expose\enum\PaymentChannels;
 use app\expose\helper\Uploads;
-use app\expose\utils\Json;
+use app\expose\trait\Json;
 use app\model\PaymentNotifyWechat;
 use app\model\PaymentTemplate;
 use Exception;

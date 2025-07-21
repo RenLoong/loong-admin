@@ -2,7 +2,7 @@
 
 namespace app\exception;
 
-use app\expose\utils\Json;
+use app\expose\trait\Json;
 use Throwable;
 use Webman\Exception\ExceptionHandler;
 use Webman\Http\Request;
