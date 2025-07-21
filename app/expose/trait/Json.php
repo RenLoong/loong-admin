@@ -76,9 +76,9 @@ trait Json
                 'line' => $th->getLine(),
                 'trace' => $th->getTrace(),
             ];
-            if($th instanceof Exception){
-                $data = array_merge($data, $th->getData());
-            }
+        }
+        if ($th instanceof Exception) {
+            $data = array_merge($data, $th->getData());
         }
         return self::json(['code' => $th->getCode() ? $th->getCode() : ResponseCode::FAIL, 'msg' => $th->getMessage(), 'data' => $data]);
     }
@@ -102,9 +102,9 @@ trait Json
      */
     protected static function json($data, $options = JSON_UNESCAPED_UNICODE, $http_code = 200)
     {
-        $request=request();
-        if($request&&$request->lang){
-            $data['msg']=trans($data['msg'],[], null, $request->lang);
+        $request = request();
+        if ($request && $request->lang) {
+            $data['msg'] = trans($data['msg'], [], null, $request->lang);
         }
         return new Response($http_code, ['Content-Type' => 'application/json'], json_encode($data, $options));
     }
