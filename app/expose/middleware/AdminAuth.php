@@ -4,7 +4,7 @@ namespace app\expose\middleware;
 
 use app\expose\enum\ResponseCode;
 use app\expose\enum\State;
-use app\expose\utils\Json;
+use app\expose\trait\Json;
 use app\model\Admin;
 use Exception;
 use loong\oauth\exception\LockException;

@@ -11,7 +11,7 @@ use app\expose\helper\ConfigGroup;
  * 使用该抽象类需要在控制器中引入以下代码
  * 
  * use app\expose\trait\Config;
- * use app\expose\utils\Json;
+ * use app\expose\trait\Json;
  * 
  * Class Config
  * {

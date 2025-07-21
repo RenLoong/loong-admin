@@ -1,13 +1,13 @@
 <?php
 
-namespace app\expose\utils;
+namespace app\expose\trait;
 
 use app\expose\enum\ResponseCode;
+use app\expose\exception\Exception;
 use support\Response;
 
 /**
  * JSON响应工具
- * @deprecated 请使用app\expose\trait\Json替代
  */
 trait Json
 {
@@ -76,6 +76,9 @@ trait Json
                 'line' => $th->getLine(),
                 'trace' => $th->getTrace(),
             ];
+            if($th instanceof Exception){
+                $data = array_merge($data, $th->getData());
+            }
         }
         return self::json(['code' => $th->getCode() ? $th->getCode() : ResponseCode::FAIL, 'msg' => $th->getMessage(), 'data' => $data]);
     }
