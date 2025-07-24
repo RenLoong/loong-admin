@@ -1,0 +1,13 @@
+{
+  "name": "loong-admin",
+  "private": true,
+  "version": "0.0.2",
+  "type": "module",
+  "scripts": {
+    "dev": "php webman start",
+    "start": "php webman start -d",
+    "stop": "php webman stop",
+    "restart": "php webman restart",
+    "status": "php webman status"
+  }
+}
