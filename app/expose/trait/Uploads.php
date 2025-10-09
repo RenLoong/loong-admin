@@ -28,6 +28,14 @@ trait Uploads
             if (strpos($accept, '*') !== false) {
                 $accept = str_replace('*', '', $accept);
                 $where[] = ['u.mime', 'like', "%{$accept}%"];
+            } elseif(strpos($accept, '.') !== false){
+                $accept = str_replace('.', '', $accept);
+                if(strpos($accept, ',') !== false){
+                    $accept = explode(',', $accept);
+                    $where[] = ['u.ext', 'in', $accept];
+                } else {
+                    $where[] = ['u.ext', '=', $accept];
+                }
             } else {
                 $where[] = ['u.mime', 'in', explode(',', $accept)];
             }
