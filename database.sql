@@ -31,7 +31,7 @@ CREATE TABLE `php_admin`  (
 -- ----------------------------
 -- Records of php_admin
 -- ----------------------------
-INSERT INTO `php_admin` VALUES (1, '2024-03-01 18:02:02', '2025-06-19 15:50:22', 1, 'admin', '$2y$10$MWoOQGZIGUBE4fAyB3GrYexNTbAXLh7.cMhLv1OmhERBULB3ZhQDC', 1, '6LaF57qn566h55CG5ZGY', 'uploads/default/20240307/b6bf0d704dfb50dc095ab4570dd64f72_65e9a3dfcf57f.jpeg', '192.168.110.188', '2025-06-19 15:50:22', NULL, '18785305198', NULL, '00:00:00', '23:59:59', '[0,1,2,3,4,5,6]', NULL);
+INSERT INTO `php_admin` VALUES (1, '2024-03-01 18:02:02', '2025-06-19 15:50:22', 1, 'admin', '$2y$10$MWoOQGZIGUBE4fAyB3GrYexNTbAXLh7.cMhLv1OmhERBULB3ZhQDC', 1, '6LaF57qn566h55CG5ZGY', '', '192.168.110.188', '2025-06-19 15:50:22', NULL, '18785305198', NULL, '00:00:00', '23:59:59', '[0,1,2,3,4,5,6]', NULL);
 
 -- ----------------------------
 -- Table structure for php_admin_role
