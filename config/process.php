@@ -26,7 +26,6 @@ return [
     'webman' => [
         'handler' => Http::class,
         'listen' => 'http://0.0.0.0:' . getenv('SERVER_PORT'),
-        'name' => getenv('SERVER_NAME') ? getenv('SERVER_NAME') : 'webman',
         'count' => getenv('DEBUG') == 'true' ? 1 : cpu_count(),
         'user' => '',
         'group' => '',
