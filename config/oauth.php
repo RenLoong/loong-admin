@@ -1,11 +1,12 @@
 <?php
 
+use Illuminate\Support\Env;
 return [
     'certs' => config_path('certs'),
     'rsa_privatekey' => config_path('certs') . '/rsa_private.pem',
     'rsa_publickey' => config_path('certs') . '/rsa_public.pem',
     'prefix' => 'oauth',
-    'expire' => 7200,
+    'expire' => (int)Env::get('OAUTH_EXPIRE', 7200),
     'single' => false,
     'redis' => [
         'host' => getenv('REDIS_HOST'),

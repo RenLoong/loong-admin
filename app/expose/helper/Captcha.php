@@ -23,14 +23,21 @@ class Captcha
      * @param  string  $captcha
      * @return boolean
      */
-    public static function check(string $captcha, string $token = null): bool
+    public static function check(string $captcha, ?string $token = null): bool
     {
         $request = request();
         if ($token) {
             $request->sessionId($token);
         }
+        $captchaData = $request->session()->get('captcha');
+        if (!$captchaData) {
+            throw new Exception('图像验证码不存在');
+        }
+        if ($captchaData['expire'] < time()) {
+            throw new Exception('图像验证码已过期');
+        }
         // 对比session中的captcha值
-        if (strtolower($captcha) !== $request->session()->get('captcha')) {
+        if (strtolower($captcha) !== $captchaData['captcha']) {
             throw new Exception('图像验证码不正确');
         }
         return true;
@@ -70,7 +77,10 @@ class Captcha
     {
         $request = request();
         $builder = self::create();
-        $request->session()->set('captcha', strtolower($builder->getPhrase()));
+        $request->session()->set('captcha', [
+            'captcha' => strtolower($builder->getPhrase()),
+            'expire' => time() + 60 * 5
+        ]);
         $img_content = $builder->inline();
         return response($img_content, 200);
     }
@@ -83,7 +93,10 @@ class Captcha
     {
         $request = request();
         $builder = self::create();
-        $request->session()->set('captcha', strtolower($builder->getPhrase()));
+        $request->session()->set('captcha', [
+            'captcha' => strtolower($builder->getPhrase()),
+            'expire' => time() + 60 * 5
+        ]);
         $img_content = $builder->inline();
         return ['base64' => $img_content, 'token' => $request->sessionId()];
     }
