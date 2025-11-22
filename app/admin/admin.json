@@ -112,12 +112,6 @@
                 "component": "form"
             },
             {
-                "title": "Control Settings",
-                "icon": "ElementPlus",
-                "path": "System/control",
-                "component": "form"
-            },
-            {
                 "title": "Upload Settings",
                 "icon": "UploadFilled",
                 "path": "System/upload",

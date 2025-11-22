@@ -11,7 +11,7 @@ use app\expose\utils\DataModel;
  * @property string $formName 信息展示名
  * @property string $formTitle 信息展示标题
  * @property array $props Form Attributes
- * @method InfoBuilder add(string $field, string $title, string $component, mixed $extra = []) 向信息展示中添加字段
+ * @method InfoBuilder add(string $field, string $title, string $component, mixed $extra = [],?ActionBuilder $action = null) 向信息展示中添加字段
  * @method InfoBuilder remove(string $field) 从信息展示中移除字段
  * @method InfoBuilder addValue(string $field, mixed $value) 向信息展示中添加数据
  * @method InfoBuilder setData(array $data) 设置信息展示数据
@@ -20,11 +20,11 @@ use app\expose\utils\DataModel;
 class InfoBuilder extends DataModel
 {
     protected $data = [];
-    protected $translations=false;
-    public function __construct($formName = null, $formTitle = null,$props = [])
+    protected $translations = false;
+    public function __construct($formName = null, $formTitle = null, $props = [])
     {
-        if(isset($props['translations'])){
-            $this->translations=$props['translations'];
+        if (isset($props['translations'])) {
+            $this->translations = $props['translations'];
             unset($props['translations']);
         }
         $this->data['props'] = $props;
@@ -34,8 +34,9 @@ class InfoBuilder extends DataModel
         $this->data['group'] = [];
         $this->data['data'] = [];
     }
-    public function setTranslations(bool $state=true){
-        $this->translations=$state;
+    public function setTranslations(bool $state = true)
+    {
+        $this->translations = $state;
         return $this;
     }
     /**
@@ -50,16 +51,18 @@ class InfoBuilder extends DataModel
      * @param mixed $extra.subProps 子组件选项属性，和$extra.props类似
      * @param mixed $extra.children 插槽内容，['default' => '内容']或['default' => ComponentBuilder ]
      * @param mixed $extra.prompt 提示信息, 详见 \app\expose\build\builder\ComponentBuilder
+     * @param ActionBuilder|null $action 操作按钮, 详见 \app\expose\build\builder\ActionBuilder
      * @return InfoBuilder
      */
-    public function add(string $field, string $title, string $component, mixed $extra = []): InfoBuilder
+    public function add(string $field, string $title, string $component, mixed $extra = [], ?ActionBuilder $action = null): InfoBuilder
     {
         $title = $this->trans($title);
         $this->data['rule'][] = [
             'field'         => $field,
             'title'         => $title,
             'component'     => $component,
-            'extra'         => $extra
+            'extra'         => $extra,
+            'action'        => $action ? $action->builder() : null
         ];
         return $this;
     }
@@ -134,18 +137,18 @@ class InfoBuilder extends DataModel
         $this->addValue($infoName, $temp['data']);
         return $this;
     }
-    public function trans(string|null $val,array $parameters =[])
+    public function trans(string|null $val, array $parameters = [])
     {
-        if(!$val||!$this->translations){
+        if (!$val || !$this->translations) {
             return $val;
         }
-        $request=request();
+        $request = request();
         $lang = '';
-        $domain=null;
+        $domain = null;
         if ($request && $request->lang) {
             $lang = $request->lang;
-            $domain=$request->app;
+            $domain = $request->app;
         }
-        return trans($val,$parameters,$domain,$lang);
+        return trans($val, $parameters, $domain, $lang);
     }
 }

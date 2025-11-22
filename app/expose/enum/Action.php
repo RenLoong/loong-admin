@@ -26,6 +26,10 @@ class Action extends Enum
         'label' => '弹窗操作',
         'value' => 'dialog'
     ];
+    const REQUEST = [
+        'label' => '请求操作',
+        'value' => 'request'
+    ];
     const LOCK = [
         'label' => '锁屏',
         'value' => 'Lock'

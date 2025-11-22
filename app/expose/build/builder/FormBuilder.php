@@ -11,7 +11,7 @@ use app\expose\utils\DataModel;
  * @property string $formName 表单名
  * @property string $formTitle 表单标题
  * @property array $props Form Attributes
- * @method FormBuilder add(string $field, string $title, string $component, string $value = null, mixed $extra = []) 向表单中添加字段
+ * @method FormBuilder add(string $field, string $title, string $component, string $value = null, mixed $extra = [],?ActionBuilder $action = null) 向表单中添加字段
  * @method FormBuilder remove(string $field) 从表单中移除字段
  * @method FormBuilder addValue(string $field, mixed $value) 向表单中添加数据
  * @method FormBuilder setData(array $data) 设置表单数据
@@ -56,16 +56,18 @@ class FormBuilder extends DataModel
      * @param mixed $extra.subProps 子组件选项属性，和$extra.props类似
      * @param mixed $extra.children 插槽内容，['default' => '内容']或['default' => ComponentBuilder ]
      * @param mixed $extra.prompt 提示信息, 详见 \app\expose\build\builder\ComponentBuilder
+     * @param ActionBuilder|null $action 操作按钮, 详见 \app\expose\build\builder\ActionBuilder
      * @return FormBuilder
      */
-    public function add(string $field, string $title, string $component, mixed $value = null, mixed $extra = []): FormBuilder
+    public function add(string $field, string $title, string $component, mixed $value = null, mixed $extra = [],?ActionBuilder $action = null): FormBuilder
     {
         $title = $this->trans($title);
         $this->data['rule'][] = [
             'field'         => $field,
             'title'         => $title,
             'component'     => $component,
-            'extra'         => $extra
+            'extra'         => $extra,
+            'action'        => $action ? $action->builder() : null
         ];
         $this->addValue($field, $value);
         return $this;

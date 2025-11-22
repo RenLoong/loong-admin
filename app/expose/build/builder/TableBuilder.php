@@ -41,8 +41,12 @@ class TableBuilder extends DataModel
         $this->data['selection'] = true;
         return $this;
     }
-    public function addAction(string $label, mixed $props = [])
+    public function addAction(string|ActionBuilder $label, mixed $props = [])
     {
+        if ($label instanceof ActionBuilder) {
+            $this->data['action'] = $label->builder();
+            return $this;
+        }
         $this->data['action'] = [
             'label' => $label,
             'extra' => [
@@ -81,8 +85,12 @@ class TableBuilder extends DataModel
         ];
         return $this;
     }
-    public function addHeader(mixed $props = [])
+    public function addHeader(array|ActionBuilder $props = [])
     {
+        if ($props instanceof ActionBuilder) {
+            $this->data['header'] = $props->builder();
+            return $this;
+        }
         $this->data['header'] = [
             'extra' => [
                 'group' => [],
