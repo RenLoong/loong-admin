@@ -37,7 +37,9 @@ class ActionBuilder extends DataModel
     {
         $this->data['extra']['group'][] = [
             'label' => $label,
-            'extra' => $extra
+            'extra' => array_merge([
+                'loading' => false,
+            ], $extra)
         ];
         return $this;
     }
