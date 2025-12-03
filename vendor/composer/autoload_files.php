@@ -30,6 +30,7 @@ return array(
     '5dd19d8a547b7318af0c3a93c8bd6565' => $vendorDir . '/qiniu/php-sdk/src/Qiniu/Http/Middleware/Middleware.php',
     '7448f3465e10b5f033e4babb31eb0b06' => $vendorDir . '/topthink/think-orm/src/helper.php',
     '35fab96057f1bf5e7aba31a8a6d5fdde' => $vendorDir . '/topthink/think-orm/stubs/load_stubs.php',
+    'f88f8987adfe3f7cf9978fa9a9d148bc' => $vendorDir . '/workerman/psr7/src/functions_include.php',
     '988d02680beedec88d52f2787b2d2007' => $vendorDir . '/yansongda/artful/src/Functions.php',
     'ef65a1626449d89d0811cf9befce46f0' => $vendorDir . '/illuminate/events/functions.php',
     '8c783b3a3de2f6d9177022b5ccdcc841' => $vendorDir . '/yansongda/pay/src/Functions.php',

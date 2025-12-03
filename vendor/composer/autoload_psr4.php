@@ -15,6 +15,8 @@ return array(
     'Yansongda\\Supports\\' => array($vendorDir . '/yansongda/supports/src'),
     'Yansongda\\Pay\\' => array($vendorDir . '/yansongda/pay/src'),
     'Yansongda\\Artful\\' => array($vendorDir . '/yansongda/artful/src'),
+    'Workerman\\Psr7\\' => array($vendorDir . '/workerman/psr7/src'),
+    'Workerman\\Http\\' => array($vendorDir . '/workerman/http-client/src'),
     'Workerman\\Crontab\\' => array($vendorDir . '/workerman/crontab/src'),
     'Workerman\\Coroutine\\' => array($vendorDir . '/workerman/coroutine/src'),
     'Workerman\\' => array($vendorDir . '/workerman/workerman/src', $vendorDir . '/workerman/coroutine/src'),
