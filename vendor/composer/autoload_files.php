@@ -33,6 +33,7 @@ return array(
     'f88f8987adfe3f7cf9978fa9a9d148bc' => $vendorDir . '/workerman/psr7/src/functions_include.php',
     '988d02680beedec88d52f2787b2d2007' => $vendorDir . '/yansongda/artful/src/Functions.php',
     'ef65a1626449d89d0811cf9befce46f0' => $vendorDir . '/illuminate/events/functions.php',
+    'cd5441689b14144e5573bf989ee47b34' => $vendorDir . '/qcloud/cos-sdk-v5/src/Common.php',
     '8c783b3a3de2f6d9177022b5ccdcc841' => $vendorDir . '/yansongda/pay/src/Functions.php',
     '6de935212a66b0a512dd63d31d6e9f44' => $baseDir . '/support/helpers.php',
 );
