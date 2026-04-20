@@ -28,6 +28,7 @@ use Yansongda\Pay\Provider\Jsb;
 use Yansongda\Pay\Provider\Unipay;
 use Yansongda\Pay\Provider\Wechat;
 use Yansongda\Supports\Collection;
+use Yansongda\Supports\Str;
 
 use function Yansongda\Artful\get_radar_body;
 use function Yansongda\Artful\get_radar_method;
@@ -48,9 +49,13 @@ function get_private_cert(string $key): string
         return file_get_contents($key);
     }
 
-    return "-----BEGIN RSA PRIVATE KEY-----\n".
-        wordwrap($key, 64, "\n", true).
-        "\n-----END RSA PRIVATE KEY-----";
+    if (Str::startsWith($key, '-----BEGIN PRIVATE KEY-----')) {
+        return $key;
+    }
+
+    return "-----BEGIN RSA PRIVATE KEY-----\n"
+        .wordwrap($key, 64, "\n", true)
+        ."\n-----END RSA PRIVATE KEY-----";
 }
 
 function get_radar_url(array $config, ?Collection $payload): ?string
@@ -456,7 +461,7 @@ function get_wechat_public_key(array $config, string $serialNo): string
     $publicKey = $config['wechat_public_cert_path'][$serialNo] ?? null;
 
     if (empty($publicKey)) {
-        throw new InvalidParamsException(Exception::PARAMS_WECHAT_SERIAL_NOT_FOUND, '参数异常: 微信公钥序列号为找到 -'.$serialNo);
+        throw new InvalidParamsException(Exception::PARAMS_WECHAT_SERIAL_NOT_FOUND, '参数异常: 微信公钥序列号未找到 - '.$serialNo);
     }
 
     return $publicKey;
