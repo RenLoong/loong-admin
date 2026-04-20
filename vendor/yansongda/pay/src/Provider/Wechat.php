@@ -10,7 +10,6 @@ use Psr\Http\Message\MessageInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Yansongda\Artful\Artful;
-use Yansongda\Artful\Event;
 use Yansongda\Artful\Exception\ContainerException;
 use Yansongda\Artful\Exception\InvalidParamsException;
 use Yansongda\Artful\Exception\ServiceNotFoundException;
@@ -19,6 +18,7 @@ use Yansongda\Artful\Plugin\ParserPlugin;
 use Yansongda\Artful\Plugin\StartPlugin;
 use Yansongda\Artful\Rocket;
 use Yansongda\Pay\Contract\ProviderInterface;
+use Yansongda\Pay\Event;
 use Yansongda\Pay\Event\CallbackReceived;
 use Yansongda\Pay\Event\MethodCalled;
 use Yansongda\Pay\Pay;
@@ -55,7 +55,7 @@ class Wechat implements ProviderInterface
      * @throws InvalidParamsException
      * @throws ServiceNotFoundException
      */
-    public function __call(string $shortcut, array $params): null|Collection|MessageInterface|Rocket
+    public function __call(string $shortcut, array $params): Collection|MessageInterface|Rocket|null
     {
         $plugin = '\Yansongda\Pay\Shortcut\Wechat\\'.Str::studly($shortcut).'Shortcut';
 
@@ -66,7 +66,7 @@ class Wechat implements ProviderInterface
      * @throws ContainerException
      * @throws InvalidParamsException
      */
-    public function pay(array $plugins, array $params): null|Collection|MessageInterface|Rocket
+    public function pay(array $plugins, array $params): Collection|MessageInterface|Rocket|null
     {
         return Artful::artful($plugins, $params);
     }
@@ -84,7 +84,9 @@ class Wechat implements ProviderInterface
     }
 
     /**
+     * @throws ContainerException
      * @throws InvalidParamsException
+     * @throws ServiceNotFoundException
      */
     public function cancel(array $order): Collection|Rocket
     {
@@ -123,7 +125,7 @@ class Wechat implements ProviderInterface
      * @throws ContainerException
      * @throws InvalidParamsException
      */
-    public function callback(null|array|ServerRequestInterface $contents = null, ?array $params = null): Collection|Rocket
+    public function callback(array|ServerRequestInterface|null $contents = null, ?array $params = null): Collection|Rocket
     {
         $request = $this->getCallbackParams($contents);
 
@@ -153,7 +155,7 @@ class Wechat implements ProviderInterface
         );
     }
 
-    protected function getCallbackParams(null|array|ServerRequestInterface $contents = null): ServerRequestInterface
+    protected function getCallbackParams(array|ServerRequestInterface|null $contents = null): ServerRequestInterface
     {
         if (is_array($contents) && isset($contents['body'], $contents['headers'])) {
             return new ServerRequest('POST', 'http://localhost', $contents['headers'], $contents['body']);

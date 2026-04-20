@@ -10,7 +10,6 @@ use Psr\Http\Message\MessageInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Yansongda\Artful\Artful;
-use Yansongda\Artful\Event;
 use Yansongda\Artful\Exception\ContainerException;
 use Yansongda\Artful\Exception\InvalidParamsException;
 use Yansongda\Artful\Exception\ServiceNotFoundException;
@@ -18,6 +17,7 @@ use Yansongda\Artful\Plugin\AddPayloadBodyPlugin;
 use Yansongda\Artful\Plugin\ParserPlugin;
 use Yansongda\Artful\Rocket;
 use Yansongda\Pay\Contract\ProviderInterface;
+use Yansongda\Pay\Event;
 use Yansongda\Pay\Event\CallbackReceived;
 use Yansongda\Pay\Event\MethodCalled;
 use Yansongda\Pay\Exception\Exception;
@@ -49,7 +49,7 @@ class Unipay implements ProviderInterface
      * @throws InvalidParamsException
      * @throws ServiceNotFoundException
      */
-    public function __call(string $shortcut, array $params): null|Collection|MessageInterface|Rocket
+    public function __call(string $shortcut, array $params): Collection|MessageInterface|Rocket|null
     {
         $plugin = '\Yansongda\Pay\Shortcut\Unipay\\'.Str::studly($shortcut).'Shortcut';
 
@@ -60,7 +60,7 @@ class Unipay implements ProviderInterface
      * @throws ContainerException
      * @throws InvalidParamsException
      */
-    public function pay(array $plugins, array $params): null|Collection|MessageInterface|Rocket
+    public function pay(array $plugins, array $params): Collection|MessageInterface|Rocket|null
     {
         return Artful::artful($plugins, $params);
     }
@@ -113,7 +113,7 @@ class Unipay implements ProviderInterface
      * @throws ContainerException
      * @throws InvalidParamsException
      */
-    public function callback(null|array|ServerRequestInterface $contents = null, ?array $params = null): Collection|Rocket
+    public function callback(array|ServerRequestInterface|null $contents = null, ?array $params = null): Collection|Rocket
     {
         $request = $this->getCallbackParams($contents);
 
@@ -139,7 +139,7 @@ class Unipay implements ProviderInterface
         );
     }
 
-    protected function getCallbackParams(null|array|ServerRequestInterface $contents = null): Collection
+    protected function getCallbackParams(array|ServerRequestInterface|null $contents = null): Collection
     {
         if (is_array($contents)) {
             return Collection::wrap($contents);

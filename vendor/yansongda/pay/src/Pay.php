@@ -7,16 +7,24 @@ namespace Yansongda\Pay;
 use Closure;
 use Psr\Container\ContainerInterface;
 use Yansongda\Artful\Artful;
+use Yansongda\Artful\Event\ArtfulEnd;
+use Yansongda\Artful\Event\ArtfulStart;
+use Yansongda\Artful\Event\HttpEnd;
+use Yansongda\Artful\Event\HttpStart;
 use Yansongda\Artful\Exception\ContainerException;
 use Yansongda\Artful\Exception\ServiceNotFoundException;
 use Yansongda\Pay\Provider\Alipay;
 use Yansongda\Pay\Provider\Douyin;
 use Yansongda\Pay\Provider\Jsb;
+use Yansongda\Pay\Provider\Paypal;
+use Yansongda\Pay\Provider\Stripe;
 use Yansongda\Pay\Provider\Unipay;
 use Yansongda\Pay\Provider\Wechat;
 use Yansongda\Pay\Service\AlipayServiceProvider;
 use Yansongda\Pay\Service\DouyinServiceProvider;
 use Yansongda\Pay\Service\JsbServiceProvider;
+use Yansongda\Pay\Service\PaypalServiceProvider;
+use Yansongda\Pay\Service\StripeServiceProvider;
 use Yansongda\Pay\Service\UnipayServiceProvider;
 use Yansongda\Pay\Service\WechatServiceProvider;
 
@@ -26,6 +34,8 @@ use Yansongda\Pay\Service\WechatServiceProvider;
  * @method static Unipay unipay(array $config = [], $container = null)
  * @method static Jsb    jsb(array $config = [], $container = null)
  * @method static Douyin douyin(array $config = [], $container = null)
+ * @method static Paypal paypal(array $config = [], $container = null)
+ * @method static Stripe stripe(array $config = [], $container = null)
  */
 class Pay
 {
@@ -50,6 +60,8 @@ class Pay
         UnipayServiceProvider::class,
         JsbServiceProvider::class,
         DouyinServiceProvider::class,
+        PaypalServiceProvider::class,
+        StripeServiceProvider::class,
     ];
 
     /**
@@ -68,9 +80,16 @@ class Pay
     /**
      * @throws ContainerException
      */
-    public static function config(array $config = [], null|Closure|ContainerInterface $container = null): bool
+    public static function config(array $config = [], Closure|ContainerInterface|null $container = null): bool
     {
         $result = Artful::config($config, $container);
+
+        if ($result) {
+            Event::addListener(ArtfulStart::class, [PayListener::class, 'artfulStart']);
+            Event::addListener(ArtfulEnd::class, [PayListener::class, 'artfulEnd']);
+            Event::addListener(HttpStart::class, [PayListener::class, 'httpStart']);
+            Event::addListener(HttpEnd::class, [PayListener::class, 'httpEnd']);
+        }
 
         foreach (self::$providers as $provider) {
             Artful::load($provider);
@@ -96,7 +115,7 @@ class Pay
         return Artful::get($service);
     }
 
-    public static function setContainer(null|Closure|ContainerInterface $container): void
+    public static function setContainer(Closure|ContainerInterface|null $container): void
     {
         Artful::setContainer($container);
     }

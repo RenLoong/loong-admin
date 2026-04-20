@@ -1,7 +1,7 @@
 {
   "name": "loong-admin",
   "private": true,
-  "version": "0.0.18",
+  "version": "0.0.19",
   "type": "module",
   "scripts": {
     "dev": "php webman start",

@@ -23,12 +23,6 @@
       "role": "Developer"
     }
   ],
-  "repositories": {
-    "packagist": {
-      "type": "composer",
-      "url": "https://mirrors.aliyun.com/composer/"
-    }
-  },
   "support": {
     "email": "1016683587@qq.com",
     "issues": "https://github.com/RenLoong/loong-admin/issues",
