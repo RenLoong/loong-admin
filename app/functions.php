@@ -1,6 +1,7 @@
 <?php
 function p()
 {
+    if (!config('app.debug')) return;
     $argv = func_get_args();
     if (count($argv) == 1) {
         $data = $argv[0];
