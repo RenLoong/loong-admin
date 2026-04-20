@@ -49,6 +49,9 @@ abstract class AbstractUploadManager implements Promise\PromisorInterface
     /** @var UploadState State used to manage the upload. */
     protected $state;
 
+    /** @var bool Configuration used to indicate if upload progress will be displayed. */
+    protected $displayProgress;
+
     /**
      * @param Client $client
      * @param array  $config
@@ -59,6 +62,12 @@ abstract class AbstractUploadManager implements Promise\PromisorInterface
         $this->info = $this->loadUploadWorkflowInfo();
         $this->config = $config + self::$defaultConfig;
         $this->state = $this->determineState();
+
+        if (isset($config['display_progress'])
+            && is_bool($config['display_progress'])
+        ) {
+            $this->displayProgress = $config['display_progress'];
+        }
     }
 
     /**
@@ -231,14 +240,14 @@ abstract class AbstractUploadManager implements Promise\PromisorInterface
         $id = [$required['upload_id'] => null];
         unset($required['upload_id']);
         foreach ($required as $key => $param) {
-            if (!$this->config[$key]) {
+            if (!isset($this->config[$key]) || $this->config[$key] === '') {
                 throw new IAE('You must provide a value for "' . $key . '" in '
                     . 'your config for the MultipartUploader for '
                     . $this->client->getApi()->getServiceFullName() . '.');
             }
             $id[$param] = $this->config[$key];
         }
-        $state = new UploadState($id);
+        $state = new UploadState($id, $this->config);
         $state->setPartSize($this->determinePartSize());
 
         return $state;
