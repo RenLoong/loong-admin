@@ -18,13 +18,13 @@ use Yansongda\Pay\Pay;
 class NotifyController
 {
     use Json;
-    public function wechat(Request $request,$plugin,$template_id)
+    public function wechat(Request $request, $plugin, $template_id)
     {
-        Log::info('微信支付回调',$request->post());
+        Log::info('微信支付回调', $request->post());
         try {
-            $D=$request->post();
-            if(PaymentNotifyWechat::where(['notify_id'=>$D['id']])->count()){
-                return $this->code('SUCCESS','成功');
+            $D = $request->post();
+            if (PaymentNotifyWechat::where(['notify_id' => $D['id']])->count()) {
+                return $this->code('SUCCESS', '成功');
             }
             $PaymentTemplate = PaymentTemplate::where(['id' => $template_id])->find();
             if (!$PaymentTemplate) {
@@ -54,7 +54,7 @@ class NotifyController
                 ],
                 'logger' => [
                     'enable' => true,
-                    'file' => runtime_path('logs/wechat-notify-'.date('Y-m-d').'.log'),
+                    'file' => runtime_path('logs/wechat-notify-' . date('Y-m-d') . '.log'),
                     'level' => 'info', // 建议生产环境等级调整为 info，开发环境为 debug
                     'type' => 'single', // optional, 可选 daily.
                     'max_file' => 30, // optional, 当 type 为 daily 时有效，默认 30 天
@@ -64,34 +64,39 @@ class NotifyController
                     'connect_timeout' => 5.0,
                 ],
             ];
-            $wxpay=Pay::wechat($config);
-            $data = $wxpay->callback($D);
-            $obj=null;
+            $wxpay = Pay::wechat($config);
+            $headers = $request->header();
+            $body = $request->rawBody();
+            $data = $wxpay->callback([
+                'body' => $body,
+                'headers' => $headers
+            ]);
+            $obj = null;
             Db::startTrans();
             try {
-                $PaymentNotifyWechat=new PaymentNotifyWechat;
-                $PaymentNotifyWechat->notify_id=$D['id'];
-                $PaymentNotifyWechat->resource_type=$D['resource_type'];
-                $PaymentNotifyWechat->event_type=$D['event_type'];
-                $PaymentNotifyWechat->summary=$D['summary'];
-                $PaymentNotifyWechat->resource_original_type=$D['resource']['original_type'];
-                $PaymentNotifyWechat->resource_algorithm=$D['resource']['algorithm'];
-                $PaymentNotifyWechat->resource_ciphertext=$D['resource']['ciphertext'];
-                $PaymentNotifyWechat->resource_associated_data=$D['resource']['associated_data'];
-                $PaymentNotifyWechat->resource_nonce=$D['resource']['nonce'];
-                $PaymentNotifyWechat->plugin=$plugin;
-                $PaymentNotifyWechat->template_id=$template_id;
+                $PaymentNotifyWechat = new PaymentNotifyWechat;
+                $PaymentNotifyWechat->notify_id = $D['id'];
+                $PaymentNotifyWechat->resource_type = $D['resource_type'];
+                $PaymentNotifyWechat->event_type = $D['event_type'];
+                $PaymentNotifyWechat->summary = $D['summary'];
+                $PaymentNotifyWechat->resource_original_type = $D['resource']['original_type'];
+                $PaymentNotifyWechat->resource_algorithm = $D['resource']['algorithm'];
+                $PaymentNotifyWechat->resource_ciphertext = $D['resource']['ciphertext'];
+                $PaymentNotifyWechat->resource_associated_data = $D['resource']['associated_data'];
+                $PaymentNotifyWechat->resource_nonce = $D['resource']['nonce'];
+                $PaymentNotifyWechat->plugin = $plugin;
+                $PaymentNotifyWechat->template_id = $template_id;
                 $PaymentNotifyWechat->save();
-                $class="plugin\\{$plugin}\\api\\notify\\Wechat";
-                if(class_exists($class)){
-                    $obj=new $class;
+                $class = "plugin\\{$plugin}\\api\\notify\\Wechat";
+                if (class_exists($class)) {
+                    $obj = new $class;
                     $obj->{$data->resource['original_type']}($data->resource['ciphertext']);
-                }else{
+                } else {
                     Event::emit(EventName::ORDERS_PAY['value'], [
-                        'data'=>$data->resource['ciphertext'],
-                        'payment_channel'=>PaymentChannels::WXPAY['value'],
-                        'plugin'=>$plugin,
-                        'template_id'=>$template_id
+                        'data' => $data->resource['ciphertext'],
+                        'payment_channel' => PaymentChannels::WXPAY['value'],
+                        'plugin' => $plugin,
+                        'template_id' => $template_id
                     ]);
                 }
                 Db::commit();
@@ -99,13 +104,13 @@ class NotifyController
                 Db::rollback();
                 throw $th;
             }
-            if($obj&&method_exists($obj,'finish')){
+            if ($obj && method_exists($obj, 'finish')) {
                 $obj->finish();
             }
         } catch (\Throwable $th) {
-            Log::error('微信支付回调错误:'.$th->getMessage(),$th->getTrace());
-            return $this->json(['code'=>'FAIL','message'=>$th->getMessage()],JSON_UNESCAPED_UNICODE,400);
+            Log::error('微信支付回调错误:' . $th->getMessage(), $th->getTrace());
+            return $this->json(['code' => 'FAIL', 'message' => $th->getMessage()], JSON_UNESCAPED_UNICODE, 400);
         }
-        return $this->code('SUCCESS','成功');
+        return $this->code('SUCCESS', '成功');
     }
 }
